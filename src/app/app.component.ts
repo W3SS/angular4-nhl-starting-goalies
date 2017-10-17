@@ -38,11 +38,15 @@ export class AppComponent implements OnInit {
   loadData() {
    this.http.get('/heroku-env').map(response => response)
     .subscribe(res => {
-        this.defineToken = res._body;
-        headers = new Headers({ "Authorization": "Basic " + btoa('ianposton' + ":" + this.defineToken) });
+        
+        headers = new Headers({ "Authorization": "Basic " + btoa('ianposton' + ":" + res['_body']) });
         options = new RequestOptions({ headers: headers }); 
+        this.getSchedule();
 
       })
+  }
+
+  getSchedule() {
 
     let url = 'https://api.mysportsfeeds.com/v1.1/pull/nhl/2017-2018-regular/daily_game_schedule.json?fordate=20171016';
     console.log('getting scheduled games for today from API...');
@@ -93,7 +97,7 @@ export class AppComponent implements OnInit {
                 });
               });
 
-              this.loadOtherData();
+              this.sortData();
 
             });
 
@@ -119,7 +123,7 @@ export class AppComponent implements OnInit {
       })
   }
 
-  loadOtherData() {
+  sortData() {
     console.log('trying to sort starters...');
 
     if (this.myData && this.dailySchedule) {
@@ -161,9 +165,6 @@ export class AppComponent implements OnInit {
           if (info.player.ID === data.player.ID) {
 
             data.player.image = info.player.officialImageSrc;
-
-                                    
-
 
             //STAT-DATA IS CALLED IN THE HTML
             //this.statData = this.myData;

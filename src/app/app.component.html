@@ -1,20 +1,45 @@
-<!--The content below is only a placeholder and can be replaced.-->
-<div style="text-align:center">
-  <h1>
-    Welcome to {{title}}!
-  </h1>
-  <img width="300" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNTAgMjUwIj4KICAgIDxwYXRoIGZpbGw9IiNERDAwMzEiIGQ9Ik0xMjUgMzBMMzEuOSA2My4ybDE0LjIgMTIzLjFMMTI1IDIzMGw3OC45LTQzLjcgMTQuMi0xMjMuMXoiIC8+CiAgICA8cGF0aCBmaWxsPSIjQzMwMDJGIiBkPSJNMTI1IDMwdjIyLjItLjFWMjMwbDc4LjktNDMuNyAxNC4yLTEyMy4xTDEyNSAzMHoiIC8+CiAgICA8cGF0aCAgZmlsbD0iI0ZGRkZGRiIgZD0iTTEyNSA1Mi4xTDY2LjggMTgyLjZoMjEuN2wxMS43LTI5LjJoNDkuNGwxMS43IDI5LjJIMTgzTDEyNSA1Mi4xem0xNyA4My4zaC0zNGwxNy00MC45IDE3IDQwLjl6IiAvPgogIDwvc3ZnPg==">
-</div>
-<h2>Here are some links to help you start: </h2>
-<ul>
-  <li>
-    <h2><a target="_blank" rel="noopener" href="https://angular.io/tutorial">Tour of Heroes</a></h2>
-  </li>
-  <li>
-    <h2><a target="_blank" rel="noopener" href="https://github.com/angular/angular-cli/wiki">CLI Documentation</a></h2>
-  </li>
-  <li>
-    <h2><a target="_blank" rel="noopener" href="https://blog.angular.io/">Angular blog</a></h2>
-  </li>
-</ul>
+  <mat-toolbar color="primary">Starting Goalies</mat-toolbar>
+  <h1 class="center"> {{ gameDate | date:'fullDate' }}</h1>
+ <div class="matchup-layout">
+     <div *ngFor="let data of showData">
+      <div *ngIf="data.player.gameLocation === 'home'" class="card-wrap">
+         <mat-card class="center">
+     
+            <div>
+              <div class="goalies-inline" *ngIf="data.player.startingToday === true">
+                <img src="{{ data.team.matchup[0].player.image }}"> <br>
+                {{ data.team.matchup[0].player.FirstName + ' ' + data.team.matchup[0].player.LastName + ' (' + data.team.matchup[0].team.Name + ' - ' + data.team.matchup[0].player.Position + ')'}} <br>
+                Wins - Losses: {{ data.team.matchup[0].stats.stats.Wins['#text'] + ' - ' +  data.team.matchup[0].stats.stats.Losses['#text'] }} 
+              </div>
+                
+               <div class="goalies-inline" *ngIf="data.player.startingToday === true">
+                 <img *ngIf="data.player.startingToday === true" src="{{ data.team.matchup[1].player.image }}"> <br>
+                  {{ data.team.matchup[1].player.FirstName + ' ' + data.team.matchup[1].player.LastName + ' (' + data.team.matchup[1].team.Name + ' - ' + data.team.matchup[1].player.Position + ')'}} <br>
+                  Wins - Losses: {{ data.team.matchup[1].stats.stats.Wins['#text'] + ' - ' +  data.team.matchup[1].stats.stats.Losses['#text'] }} 
+               </div>
+
+                <div class="goalies-inline" *ngIf="data.player.startingToday === false">
+                  <i class="material-icons md-48">person</i> <br>
+                no starter yet
+              </div>
+                
+               <div class="goalies-inline" *ngIf="data.player.startingToday === false">
+                  <i class="material-icons md-48">person</i> <br>
+                no starter yet
+               </div>
+            </div>
+            <p>
+            <img src="../assets/nhl-logos/{{ data.team.opponentId }}.jpg" alt="" style="width: 10%; margin: 0 5px 0 5px;"> VS  <img src="./assets/nhl-logos/{{ data.team.ID }}.jpg" alt="" style="width: 10%; margin: 0 5px 0 5px"> <br>  {{data.team.opponent}} @ {{data.team.City + ' ' + data.team.Name}} <br>
+            Puck drops: {{data.player.gameTime}} EST @ {{ data.team.gameIce }}
+            </p> 
+     
+       </mat-card> 
+      </div>
+     
+     </div>
+     </div>
+ 
+
+ 
+
 

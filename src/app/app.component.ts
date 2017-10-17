@@ -48,7 +48,7 @@ export class AppComponent implements OnInit {
 
   getSchedule() {
 
-    let url = 'https://api.mysportsfeeds.com/v1.1/pull/nhl/2017-2018-regular/daily_game_schedule.json?fordate=20171016';
+    let url = 'https://api.mysportsfeeds.com/v1.1/pull/nhl/2017-2018-regular/daily_game_schedule.json?fordate='+dailyDate;
     console.log('getting scheduled games for today from API...');
     this.http.get(url, options)
       .map(response => response.json())

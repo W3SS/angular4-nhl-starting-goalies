@@ -196,14 +196,7 @@ export class AppComponent implements OnInit {
            
           }
 
-          //STAT-DATA IS CALLED IN THE HTML
-          //this.statData = this.myData;
-
-
-        }
-      }
-       
-       //MAKE MATCHUPS BY GAME ID OF STARTERS AND NON STARTERS
+          //MAKE MATCHUPS BY GAME ID OF STARTERS AND NON STARTERS
        this.statData = this.startersData.reduce(function(r, a) {
               r[a.team.gameId] = r[a.team.gameId] || [];
 
@@ -212,6 +205,23 @@ export class AppComponent implements OnInit {
 
             }, Object.create(null));
             console.log(this.statData, 'made matchups of starting goalies by game ID...');
+
+          //STAT-DATA IS CALLED IN THE HTML
+          //this.statData = this.myData;
+
+
+        }
+      }
+       
+       this.makeMatchups();
+    
+
+    }
+
+  }
+
+  makeMatchups() {
+
 
       //THIS FOR LOOP GETS HOME STARTING HOCKEY GOALIES AND THERE STARTING OPPONENT 
       this.startersData.forEach((data) => {
@@ -223,11 +233,6 @@ export class AppComponent implements OnInit {
         }
 
       })
-
-    }
-
-
-
   }
 
   ngOnInit() {

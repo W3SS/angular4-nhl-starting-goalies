@@ -2,14 +2,43 @@ import { Component, ViewChild, Inject, OnInit } from '@angular/core';
 import { Http, Response, RequestOptions, Headers, Request, RequestMethod } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
 import { DatePipe } from '@angular/common';
+import { DataService } from './data.service';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/observable/forkJoin';
 
+//FOR TESTING TOMORROW
+// let testDate = new Date();
+// let thisDate = new Date(testDate.getTime() + (24 * 60 * 60 * 1000));
+// let tomorrowDate = new Date(thisDate.getTime() + (24 * 60 * 60 * 1000));
+// let yesterdayDate = new Date(thisDate.getTime() - (24 * 60 * 60 * 1000));
+
 let thisDate = new Date();
+let tomorrowDate = new Date(thisDate.getTime() + (24 * 60 * 60 * 1000));
+let yesterdayDate = new Date(thisDate.getTime() - (24 * 60 * 60 * 1000));
+
 let utcDate = new Date(thisDate.toUTCString());
+let tomorrowUtcDate = new Date(tomorrowDate.toUTCString());
+let yesterdayUtcDate = new Date(yesterdayDate.toUTCString());
+
 utcDate.setHours(utcDate.getHours() - 8);
+tomorrowUtcDate.setHours(tomorrowUtcDate.getHours() - 8);
+yesterdayUtcDate.setHours(tomorrowUtcDate.getHours() - 8);
+
+
 let myDate = new Date(utcDate);
+let tomorrowMyDate = new Date(tomorrowUtcDate);
+let yesterdayMyDate = new Date(yesterdayUtcDate);
+
+//DATE FORMAT FOR DAILY SCHEDULE API
 let dailyDate = myDate.toISOString().slice(0, 10).replace(/-/g, "");
+let tomorrowDailyDate = tomorrowMyDate.toISOString().slice(0, 10).replace(/-/g, "");
+let yesterdayDailyDate = yesterdayMyDate.toISOString().slice(0, 10).replace(/-/g, "");
+
+//DATE FORMAT FOR FULL SCHEDULE API COMPARE DATES FOR BACK TO BACK
+let today = myDate.toISOString().slice(0, 10);
+let tomorrow = tomorrowMyDate.toISOString().slice(0, 10);
+let yesterday = yesterdayMyDate.toISOString().slice(0, 10);
+
 let headers = null;
 let options = null;
 
@@ -22,6 +51,7 @@ export class AppComponent implements OnInit {
 
   starters: Array < any > ;
   dailySchedule: Array < any > ;
+  fullSchedule: Array < any > ;
   starterIdData: Array < any > = [];
   startersData: Array < any > = [];
   myData: Array < any > ;
@@ -33,28 +63,23 @@ export class AppComponent implements OnInit {
   noGamesToday: boolean;
   gamesToday: boolean;
 
-  constructor(private http: Http) {}
+  constructor(private http: Http, private dataService: DataService) {}
 
   loadData() {
-   this.http.get('/heroku-env').map(response => response)
-    .subscribe(res => {
-        
-        headers = new Headers({ "Authorization": "Basic " + btoa('ianposton' + ":" + res['_body']) });
-        options = new RequestOptions({ headers: headers }); 
-        this.getSchedule();
+  
+    this.dataService
+      .getEnv().subscribe(res => {
+        //this.defineToken = res._body;
+        headers = new Headers({ "Authorization": "Basic " + btoa('ianposton' + ":" + res._body) });
+        options = new RequestOptions({ headers: headers });
+        this.dataService
+          .sendHeaderOptions(headers, options);
 
-      })
-  }
-
-  getSchedule() {
-
-    let url = 'https://api.mysportsfeeds.com/v1.1/pull/nhl/2017-2018-regular/daily_game_schedule.json?fordate='+dailyDate;
-    console.log('getting scheduled games for today from API...');
-    this.http.get(url, options)
-      .map(response => response.json())
-      .subscribe(res => {
+        this.dataService
+          .getDailySchedule().subscribe(res => {
 
         console.log(res, "schedule...");
+        //console.log(tomorrowDailyDate, "get tomorrows schedule to find back to back games");
         this.dailySchedule = res['dailygameschedule'].gameentry;
         this.gameDate = res['dailygameschedule'].gameentry[0].date;
         if (res['dailygameschedule'].gameentry == null) {
@@ -84,7 +109,11 @@ export class AppComponent implements OnInit {
                 res2.forEach((item, index) => {
 
                   i2 = index;
-                  if (res2[i2].expected != null) {
+                  if (res2[i2].actual != null && res2[i2].expected != null) {
+                    console.log(res2[i2].actual.starter[0].player.ID, 'got player ID for goalie actualy starting!');
+                    this.starterIdData.push(res2[i2].actual.starter[0].player.ID);
+
+                  } else if (res2[i2].actual == null && res2[i2].expected != null) {
                     console.log(res2[i2].expected.starter[0].player.ID, 'got player ID for goalie expected to start!');
                     this.starterIdData.push(res2[i2].expected.starter[0].player.ID);
                   } else {
@@ -103,25 +132,31 @@ export class AppComponent implements OnInit {
 
         }
 
-      })
-    let url2 = 'https://api.mysportsfeeds.com/v1.1/pull/nhl/2017-2018-regular/cumulative_player_stats.json?position=G';
-    this.http.get(url2, options)
-      .map(response => response.json())
-      .subscribe(res => {
+          })
 
+     this.dataService
+      .getStats().subscribe(res => {
         console.log(res['cumulativeplayerstats'].playerstatsentry, "cumulative stats...");
         this.myData = res['cumulativeplayerstats'].playerstatsentry;
       })
 
-    let url3 = 'https://api.mysportsfeeds.com/v1.1/pull/nhl/2017-2018-regular/active_players.json?position=G';
-    this.http.get(url3, options)
-      .map(response => response.json())
-      .subscribe(res => {
-
+     this.dataService
+      .getInfo().subscribe(res => {
         console.log(res['activeplayers'].playerentry, "active players stats...");
         this.playerInfo = res['activeplayers'].playerentry;
       })
+
+     this.dataService
+      .getGameId().subscribe(res => {
+        console.log(res['fullgameschedule'].gameentry, "scheduled games for yesterday today and tomorrow...");
+        this.fullSchedule = res['fullgameschedule'].gameentry; 
+      })
+
+     })
+
   }
+
+
 
   sortData() {
     console.log('trying to sort starters...');
@@ -140,6 +175,9 @@ export class AppComponent implements OnInit {
             sdata.team.opponent = schedule.homeTeam.City + ' ' + schedule.homeTeam.Name;
             sdata.team.opponentId = schedule.homeTeam.ID;
             sdata.team.opponentCity = schedule.homeTeam.City;
+            sdata.team.today = today;
+            sdata.team.tomorrow = tomorrow;
+            sdata.team.yesterday = yesterday;
 
           }
           if (schedule.homeTeam.Name === sdata.team.Name) {
@@ -150,10 +188,49 @@ export class AppComponent implements OnInit {
             sdata.team.opponent = schedule.awayTeam.City + ' ' + schedule.awayTeam.Name;
             sdata.team.opponentId = schedule.awayTeam.ID;
             sdata.team.opponentCity = schedule.awayTeam.City;
+            sdata.team.today = today;
+            sdata.team.tomorrow = tomorrow;
+            sdata.team.yesterday = yesterday;
           }
         }
       }
     }
+
+       if (this.myData && this.fullSchedule) {
+      console.log('start sorting data for full schedule...');
+      for (let full of this.fullSchedule) {
+
+        for (let btb of this.myData) {
+          
+          if (full.awayTeam.ID === btb.team.ID || full.homeTeam.ID === btb.team.ID) {
+            //console.log(full.date + ' ' + full.awayTeam.Name + ' ' + today, 'teams that match ID away');
+            //console.log(full.date + ' ' + full.homeTeam.Name + ' ' + today, 'teams that match ID home');
+           
+              if (btb.team.yesterday === full.date) {
+                console.log(full.date + ' ' + full.awayTeam.Name + ' ' + today, 'teams that had a game yesterday');
+                btb.team.hadGameYesterday = true;
+                
+               
+              }
+              if (btb.team.today === full.date) {
+                console.log(full.date + ' ' + full.awayTeam.Name + ' ' + today, 'teams that have a game today');
+                   btb.team.haveGameToday = true;
+              }
+               
+           
+                if( btb.team.tomorrow === full.date) {
+                  console.log(full.date + ' ' + full.awayTeam.Name + ' ' + today, 'teams that have a game tomorrow');
+                  btb.team.haveGameTomorrow = true;
+                }
+                
+              
+               
+             
+            }
+          }
+        }
+      }
+    
 
     if (this.myData && this.playerInfo && this.gamesToday === true) {
       console.log('start sorting data for starters...');
@@ -184,9 +261,13 @@ export class AppComponent implements OnInit {
 
           if (startid === startdata.team.ID) {
             if (startdata.player.Position === "G" && startdata.stats.GamesPlayed['#text'] > 2) {
-              startdata.player.startingToday = false;
-              console.log(startdata.player.FirstName + " " + startdata.player.LastName, "this goalie is not starting yet. but he might start.");
-              this.startersData.push(startdata);
+              let mostGamesPlayed = Math.max(parseInt(startdata.stats.GamesPlayed['#text']));
+              if (startdata.stats.GamesPlayed['#text'] == mostGamesPlayed) {
+                 startdata.player.startingToday = false;
+                 startdata.player.likelyStartingToday = true;
+                 console.log(startdata.player.FirstName + " " + startdata.player.LastName, "this goalie is not starting yet. but he might start.");
+                 this.startersData.push(startdata);
+              } 
 
             }
           } else if (startid === startdata.player.ID) {
@@ -195,7 +276,7 @@ export class AppComponent implements OnInit {
             this.startersData.push(startdata);
            
           }
-
+           //IF STARTID AND PLAYER ID AND GAMEINPROGRESS THEN ACTUAL STARTER
 
 
           //STAT-DATA IS CALLED IN THE HTML
@@ -230,6 +311,33 @@ export class AppComponent implements OnInit {
         if (data.player.gameLocation === 'home') {
           data.team.matchup = this.statData[data.team.gameId];
           console.log(this.statData[data.team.gameId], 'show this');
+          this.statData[data.team.gameId][0].player.twoPossibleStarters = false;
+             this.statData[data.team.gameId][1].player.twoPossibleStarters = false;
+             
+          if(this.statData[data.team.gameId].length > 2) {
+             console.log(this.statData[data.team.gameId][0].team.Name + ' ' + this.statData[data.team.gameId][1].team.Name + ' ' + this.statData[data.team.gameId][2].team.Name, 'possible starters...');
+           // if(this.statData[data.team.gameId][0].team.ID === this.statData[data.team.gameId][1].team.ID) {
+           //   this.statData[data.team.gameId][0].twoPossibleStarters = true;
+           //   this.statData[data.team.gameId][1].twoPossibleStarters = true;
+           // } else {
+           //   this.statData[data.team.gameId][0].twoPossibleStarters = false;
+           //   this.statData[data.team.gameId][1].twoPossibleStarters = false;
+           // }
+           if(this.statData[data.team.gameId][1].team.ID === this.statData[data.team.gameId][2].team.ID) {
+             // this.statData[data.team.gameId][1].twoPossibleStarters = true;
+             this.statData[data.team.gameId][2].player.twoPossibleStarters = true;
+           } else {
+             // this.statData[data.team.gameId][1].twoPossibleStarters = false;
+             this.statData[data.team.gameId][2].player.twoPossibleStarters = false;
+           }
+           //  if(this.statData[data.team.gameId][2].team.ID === this.statData[data.team.gameId][3].team.ID) {
+           //   this.statData[data.team.gameId][2].twoPossibleStarters = true;
+           //   this.statData[data.team.gameId][3].twoPossibleStarters = true;
+           // } else {
+           //   this.statData[data.team.gameId][2].twoPossibleStarters = false;
+           //   this.statData[data.team.gameId][3].twoPossibleStarters = false;
+           // }
+          }
           this.showData = this.startersData;
          
         }

@@ -3,6 +3,18 @@ img {
   margin: 0 15px 0 15px;
 }
 
+.faded {
+  opacity: 0.5;
+}
+
+.faded2 img {
+  width: 22%;
+}
+
+.faded2 {
+  font-size: 11px;
+}
+
 .material-icons.md-18 { font-size: 18px; }
 .material-icons.md-24 { font-size: 24px; }
 .material-icons.md-36 { font-size: 36px; }
@@ -45,6 +57,11 @@ mat-card p {
   display: inline-block;
   width: 45%;
   font-size: 12px;
+}
+
+.game-info img {
+  width: 10%; 
+  margin: 0 5px 0 5px;
 }
 
 @media only screen and (max-width: 600px) {

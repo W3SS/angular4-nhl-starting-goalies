@@ -3,6 +3,7 @@ import { Http, Response, RequestOptions, Headers, Request, RequestMethod } from 
 import { Observable } from 'rxjs/Observable';
 import { DatePipe } from '@angular/common';
 import { DataService } from './data.service';
+import { MatSnackBar } from '@angular/material';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/observable/forkJoin';
 
@@ -36,7 +37,7 @@ export class AppComponent implements OnInit {
   noGamesToday: boolean;
   gamesToday: boolean;
 
-  constructor(private http: Http, private dataService: DataService) {
+  constructor(private http: Http, private dataService: DataService, public snackBar: MatSnackBar) {
     yesterday = this.dataService.getYesterday();
     tomorrow = this.dataService.getTomorrow();
     today = this.dataService.getToday();
@@ -208,7 +209,7 @@ export class AppComponent implements OnInit {
       }
     
 
-    if (this.myData && this.playerInfo && this.gamesToday === true) {
+    if (this.playerInfo.length > 0 && this.gamesToday === true) {
       console.log('start sorting data for starters...');
       for (let info of this.playerInfo) {
 
@@ -252,8 +253,6 @@ export class AppComponent implements OnInit {
             this.startersData.push(startdata);
            
           }
-           
-
 
         }
       }
@@ -274,8 +273,6 @@ export class AppComponent implements OnInit {
 
             this.showMatchups();
        }
-       
-    
 
     }
 
@@ -324,7 +321,33 @@ export class AppComponent implements OnInit {
       })
   }
 
+
+
   ngOnInit() {
     this.loadData()
   }
+
+  openSnackBar() {
+    this.snackBar.openFromComponent(Info, {
+      // duration: 500,
+    });
+   }
 }
+
+@Component({
+  selector: 'info',
+  template: `<i (click)="close()" class="material-icons md-48 close">close</i><br />
+<span style="color: #e74c3c;">back</span><span style="color: #ccc;"> to back</span><span> = The first game of a back to back scheduled game.</span><br />
+<span style="color: #ccc;">back to </span><span style="color: #e74c3c;">back</span><span> = The second game of a back to back scheduled game.</span>`,
+styles: [`.close { float:right; cursor:pointer; }`]
+})
+
+export class Info {
+  constructor(public snackBar: MatSnackBar) {}
+  close() {
+       this.snackBar.dismiss();
+    }
+}
+
+
+

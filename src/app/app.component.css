@@ -64,13 +64,19 @@ mat-card p {
   margin: 0 5px 0 5px;
 }
 
+.fixed-button {
+  position: fixed;
+  right: 12px;
+  bottom: 12px;
+}
+
 @media only screen and (max-width: 600px) {
 
   .card-wrap {
     display: inline-block;
     margin: 20px;
     vertical-align: top;
-    width: 300px;
+    width: 315px;
   }
 
 

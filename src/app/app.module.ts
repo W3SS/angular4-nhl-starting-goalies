@@ -1,15 +1,17 @@
 import { BrowserModule } from '@angular/platform-browser';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgModule } from '@angular/core';
 import { HttpModule } from '@angular/http';
 import { CommonModule } from '@angular/common';
-import { MatCardModule, MatGridListModule, MatToolbarModule } from '@angular/material';
+import { MatCardModule, MatGridListModule, MatToolbarModule, MatSnackBarModule, MatButtonModule } from '@angular/material';
 import { DataService } from './data.service';
 
-import { AppComponent } from './app.component';
+import { AppComponent, Info } from './app.component';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    Info
   ],
   imports: [
     BrowserModule,
@@ -17,9 +19,15 @@ import { AppComponent } from './app.component';
     CommonModule,
     MatCardModule,
     MatGridListModule,
-    MatToolbarModule
+    MatToolbarModule,
+    MatSnackBarModule,
+    MatButtonModule, 
+    BrowserAnimationsModule
   ],
   providers: [DataService],
+  entryComponents: [
+    Info
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

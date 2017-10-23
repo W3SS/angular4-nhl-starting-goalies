@@ -86,17 +86,21 @@ export class DataService {
     return this.env;
   }
 
-
-  sendStats(statsArray) {
-    console.log("sending stats to service...");
-    sending = statsArray;
+  getYesterday() {
+    console.log("send yesterday..."); 
+    return yesterday; 
   }
 
-  getSentStats() {
-    console.log("stats sent to component...");
-    sent = sending;
-    return sent;
+  getToday() {
+    console.log("send today..."); 
+    return today; 
   }
+
+  getTomorrow() {
+    console.log("send tomrrow..."); 
+    return tomorrow; 
+  }
+
 
 
   clearCache() {
@@ -138,26 +142,5 @@ export class DataService {
     return this.gameid;
   }
 
-  getDaily() {
-
-    if (!this.daily) {
-      let url4 = 'https://api.mysportsfeeds.com/v1.1/pull/mlb/2017-playoff/daily_player_stats.json?fordate='+dailyDate+'&position=P';
-      console.log('getting daily stats for pitchers from API...');
-      this.daily = this.http.get(url4, options)
-        .map(response => response.json())
-    }
-    return this.daily;
-  }
-
-  getScore() {
-
-    if (!this.score) {
-      let url5 = 'https://api.mysportsfeeds.com/v1.1/pull/mlb/2017-playoff/scoreboard.json?fordate='+dailyDate;
-      console.log('getting daily scores of todays games from API...');
-      this.score = this.http.get(url5, options)
-        .map(response => response.json())
-    }
-    return this.score;
-  }
 
 }

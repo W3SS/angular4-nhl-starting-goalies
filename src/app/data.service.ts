@@ -8,14 +8,14 @@ let sending;
 let sent;
 
 //FOR TESTING TOMORROW
-let testDate = new Date();
-let thisDate = new Date(testDate.getTime() + (24 * 60 * 60 * 1000));
-let tomorrowDate = new Date(thisDate.getTime() + (24 * 60 * 60 * 1000));
-let yesterdayDate = new Date(thisDate.getTime() - (24 * 60 * 60 * 1000));
-
-// let thisDate = new Date();
+// let testDate = new Date();
+// let thisDate = new Date(testDate.getTime() + (24 * 60 * 60 * 1000));
 // let tomorrowDate = new Date(thisDate.getTime() + (24 * 60 * 60 * 1000));
 // let yesterdayDate = new Date(thisDate.getTime() - (24 * 60 * 60 * 1000));
+
+let thisDate = new Date();
+let tomorrowDate = new Date(thisDate.getTime() + (24 * 60 * 60 * 1000));
+let yesterdayDate = new Date(thisDate.getTime() - (24 * 60 * 60 * 1000));
 
 let utcDate = new Date(thisDate.toUTCString());
 let tomorrowUtcDate = new Date(tomorrowDate.toUTCString());

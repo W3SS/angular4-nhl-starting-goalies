@@ -5,6 +5,7 @@ import { HttpModule } from '@angular/http';
 import { CommonModule } from '@angular/common';
 import { MatCardModule, MatGridListModule, MatToolbarModule, MatSnackBarModule, MatButtonModule } from '@angular/material';
 import { DataService } from './data.service';
+import { ShareModule } from 'ng2share/share.module'
 
 import { AppComponent, Info } from './app.component';
 
@@ -22,7 +23,8 @@ import { AppComponent, Info } from './app.component';
     MatToolbarModule,
     MatSnackBarModule,
     MatButtonModule, 
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    ShareModule
   ],
   providers: [DataService],
   entryComponents: [

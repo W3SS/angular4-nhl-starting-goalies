@@ -155,6 +155,7 @@ export class AppComponent implements OnInit {
             sdata.team.opponent = schedule.homeTeam.City + ' ' + schedule.homeTeam.Name;
             sdata.team.opponentId = schedule.homeTeam.ID;
             sdata.team.opponentCity = schedule.homeTeam.City;
+            sdata.team.opponentName = schedule.homeTeam.Name;
             sdata.team.today = today;
             sdata.team.tomorrow = tomorrow;
             sdata.team.yesterday = yesterday;
@@ -168,6 +169,7 @@ export class AppComponent implements OnInit {
             sdata.team.opponent = schedule.awayTeam.City + ' ' + schedule.awayTeam.Name;
             sdata.team.opponentId = schedule.awayTeam.ID;
             sdata.team.opponentCity = schedule.awayTeam.City;
+            sdata.team.opponentName = schedule.awayTeam.Name;
             sdata.team.today = today;
             sdata.team.tomorrow = tomorrow;
             sdata.team.yesterday = yesterday;

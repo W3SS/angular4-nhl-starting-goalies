@@ -191,7 +191,15 @@
         <p class="game-info">
           <img src="../assets/nhl-logos/{{ data.team.opponentId }}.jpg" alt=""> VS <img src="./assets/nhl-logos/{{ data.team.ID }}.jpg" alt="">
           <br> {{data.team.opponent}} @ {{data.team.City + ' ' + data.team.Name}}
-          <br> Puck drops: {{data.player.gameTime}} EST @ {{ data.team.gameIce }}
+          <br> Puck drops: {{data.player.gameTime}} EST @ {{ data.team.gameIce }} <br>
+            <share-container
+                        direction="horizontal"
+                        addedText=""
+                        [properties]="{title: data.team.matchup[0].player.FirstName +' '+ data.team.matchup[0].player.LastName +' VS '+ data.team.matchup[1].player.FirstName +' '+ data.team.matchup[1].player.LastName +' '+ data.player.gameTime +' EST @ '+  data.team.City , description:'starting goalies', img:' an image', via:'StartingGoalies', hashtags:'startingGoalies'+data.team.Name+data.team.opponentName}"
+                        [expandable]="false"
+                        [textEnabled]="true"
+                        [platforms]="['twitter']">
+    </share-container>
         </p>
       </mat-card>
     </div>
@@ -199,4 +207,5 @@
   <button mat-icon-button color="accent" class="fixed-button" (click)="openSnackBar()">
     <i class="material-icons md-48">info</i>
   </button>
+
 </div>

@@ -79,5 +79,11 @@ mat-card p {
     width: 315px;
   }
 
+  .material-icons.md-48 { font-size: 24px; }
+
+  .date-header {
+    font-size: 18px;
+  }
+
 
 }

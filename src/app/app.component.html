@@ -1,5 +1,5 @@
 <mat-toolbar color="primary">Starting Goalies</mat-toolbar>
-<h1 class="center"> {{ gameDate | date:'fullDate' }}</h1>
+<h1 class="center date-header"> {{ gameDate | date:'fullDate' }}</h1>
 <div class="matchup-layout">
   <div *ngFor="let data of showData">
     <div *ngIf="data.player.gameLocation === 'home' && data.player.twoPossibleStarters === false" class="card-wrap">
@@ -195,7 +195,7 @@
             <share-container
                         direction="horizontal"
                         addedText=""
-                        [properties]="{title: data.team.matchup[0].player.FirstName +' '+ data.team.matchup[0].player.LastName +' VS '+ data.team.matchup[1].player.FirstName +' '+ data.team.matchup[1].player.LastName +' '+ data.player.gameTime +' EST @ '+  data.team.City , description:'starting goalies', img:' an image', via:'StartingGoalies', hashtags:'startingGoalies'+data.team.Name+data.team.opponentName}"
+                        [properties]="{title: data.team.matchup[0].player.FirstName +' '+ data.team.matchup[0].player.LastName +' VS '+ data.team.matchup[1].player.FirstName +' '+ data.team.matchup[1].player.LastName +' '+ data.player.gameTime +' EST @ '+  data.team.City , description:'starting goalies', img:' an image', via:'GoaliesStarting', hashtags:'startingGoalies'+data.team.Name+data.team.opponentName}"
                         [expandable]="false"
                         [textEnabled]="true"
                         [platforms]="['twitter']">

@@ -4,7 +4,7 @@ const path = require('path');
 const Heroku = require('heroku-client')
 
 
-const heroku = new Heroku({ token: 'f51948a4-8f62-4cdc-9c83-66e123f37d81' })
+const heroku = new Heroku({ token: process.env.API_TOKEN })
 
 
 const api = require('./server/routes/api');
@@ -22,7 +22,7 @@ heroku.request({
   path: 'https://api.heroku.com/apps/nhl-starting-goalies-angular/config-vars',
   headers: {
     "Accept": "application/vnd.heroku+json; version=3",
-    "Authorization": "Bearer f51948a4-8f62-4cdc-9c83-66e123f37d81"
+    "Authorization": "Bearer "+process.env.API_TOKEN
   },
   parseJSON: true
 }).then(response => {

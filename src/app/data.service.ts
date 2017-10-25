@@ -60,7 +60,7 @@ export class DataService {
   constructor(private http: Http) {}
 
   sendHeaderOptions(h, o) {
-    console.log('got headers & options in info service...')
+    console.log('got headers & options in data service...')
     headers = h;
     options = o;
   }
@@ -112,7 +112,7 @@ export class DataService {
     if (!this.info) {
 
       let url2 = 'https://api.mysportsfeeds.com/v1.1/pull/nhl/2017-2018-regular/active_players.json?position=G';
-      console.log('getting player info data from API...');
+      console.log('getting active player data from API...');
       this.info = this.http.get(url2, options)
         .map(response => response.json())
     }
@@ -121,7 +121,7 @@ export class DataService {
 
   getStats() {
     if (!this.stats) {
-      console.log('getting stat data from API...');
+      console.log('getting cumulative player stats from API...');
 
       let url = 'https://api.mysportsfeeds.com/v1.1/pull/nhl/2017-2018-regular/cumulative_player_stats.json?position=G';
       this.stats = this.http.get(url, options)
@@ -133,7 +133,7 @@ export class DataService {
   getGameId() {
 
     if (!this.gameid) {
-      console.log('getting pitch speed data from API...');
+      console.log('getting yesterday, today, tomorrow from API...');
 
       let url3 = 'https://api.mysportsfeeds.com/v1.1/pull/nhl/2017-2018-regular/full_game_schedule.json?date=from-'+yesterdayDailyDate+'-to-'+tomorrowDailyDate;
       this.gameid = this.http.get(url3, options)

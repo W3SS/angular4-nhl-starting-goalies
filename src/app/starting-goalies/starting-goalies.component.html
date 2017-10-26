@@ -148,7 +148,7 @@
           <br> {{data.team.opponent}} @ {{data.team.City + ' ' + data.team.Name}}
           <br> Puck drops: {{data.player.gameTime}} EST @ {{ data.team.gameIce }}
           <br>
-          <share-container direction="horizontal" addedText="" [properties]="{title: data.team.matchup[0].player.FirstName +' '+ data.team.matchup[0].player.LastName +' VS '+ data.team.matchup[1].player.FirstName +' '+ data.team.matchup[1].player.LastName +' '+ data.player.gameTime +' @ '+  data.team.Abbreviation, description:'starting goalies', img:' an image', via:'GoaliesStarting', hashtags:'startingGoalies'+data.team.opponentName+data.team.Name}" [expandable]="false" [textEnabled]="true" [platforms]="['twitter']">
+          <share-container direction="horizontal" addedText="" [properties]="{title: data.team.matchup[0].player.FirstName +' '+ data.team.matchup[0].player.LastName +' VS '+ data.team.matchup[1].player.FirstName +' '+ data.team.matchup[1].player.LastName +' '+ data.player.gameTime +' @ '+  data.team.Abbreviation, description:'starting goalies', img:'https://raw.githubusercontent.com/iposton/angular4-nhl-starting-goalies/master/src/assets/nhl-logos/' +data.team.opponentId+ '.jpg', via:'GoaliesStarting', hashtags:'startingGoalies' +' #'+data.team.opponentName +' #'+data.team.Name}" [expandable]="false" [textEnabled]="true" [platforms]="['twitter']">
           </share-container>
         </p>
       </mat-card>

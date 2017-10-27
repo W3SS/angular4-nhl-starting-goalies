@@ -15,6 +15,7 @@ let yesterday = null;
 let headers = null;
 let options = null;
 
+
 @Component({
   selector: 'app-starting-goalies',
   templateUrl: './starting-goalies.component.html',
@@ -35,12 +36,29 @@ export class StartingGoaliesComponent implements OnInit {
   playerInfo: Array < any > ;
   noGamesToday: boolean;
   gamesToday: boolean;
+  twitterHandles: Array < any > ;
+
 
   constructor(private http: Http, private dataService: DataService, public snackBar: MatSnackBar) {
     yesterday = this.dataService.getYesterday();
     tomorrow = this.dataService.getTomorrow();
     today = this.dataService.getToday();
+    // this.getJSON().subscribe(res => {
+    //   console.log(res, 'twitter handles')
+    // })
   }
+
+   public getJSON() {
+         this.http.get("./assets/twitter.json")
+           .map(response => response.json())
+           .subscribe(res => {
+      console.log(res['twitterHandles']["0"], 'twitter handles');
+      this.twitterHandles = res['twitterHandles']["0"];
+    })
+                       
+                         
+
+     }
 
   loadData() {
 
@@ -323,6 +341,7 @@ export class StartingGoaliesComponent implements OnInit {
 
   ngOnInit() {
     this.loadData()
+    this.getJSON()
   }
 
   openSnackBar() {

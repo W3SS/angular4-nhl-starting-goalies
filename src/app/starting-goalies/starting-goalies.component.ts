@@ -43,9 +43,7 @@ export class StartingGoaliesComponent implements OnInit {
     yesterday = this.dataService.getYesterday();
     tomorrow = this.dataService.getTomorrow();
     today = this.dataService.getToday();
-    // this.getJSON().subscribe(res => {
-    //   console.log(res, 'twitter handles')
-    // })
+    console.log(yesterday + ' yesterday, ' + today +' today, ' + tomorrow +' tomorrow, ');
   }
 
    public getJSON() {
@@ -198,7 +196,29 @@ export class StartingGoaliesComponent implements OnInit {
 
             for (let btb of this.myData) {
 
-              if (full.awayTeam.ID === btb.team.ID || full.homeTeam.ID === btb.team.ID) {
+              if (full.awayTeam.ID === btb.team.ID) {
+                //console.log(full.date + ' ' + full.awayTeam.Name + ' ' + today, 'teams that match ID away');
+                //console.log(full.date + ' ' + full.homeTeam.Name + ' ' + today, 'teams that match ID home');
+
+                if (btb.team.yesterday === full.date) {
+                  //console.log(full.date + ' ' + full.awayTeam.Name + ' ' + today, 'teams that had a game yesterday');
+                  btb.team.hadGameYesterday = true;
+
+
+                }
+                if (btb.team.today === full.date) {
+                  //console.log(full.date + ' ' + full.awayTeam.Name + ' ' + today, 'teams that have a game today');
+                  btb.team.haveGameToday = true;
+                }
+
+
+                if (btb.team.tomorrow === full.date) {
+                  //console.log(full.date + ' ' + full.awayTeam.Name + ' ' + today, 'teams that have a game tomorrow');
+                  btb.team.haveGameTomorrow = true;
+                }
+
+              }
+               if (full.homeTeam.ID === btb.team.ID) {
                 //console.log(full.date + ' ' + full.awayTeam.Name + ' ' + today, 'teams that match ID away');
                 //console.log(full.date + ' ' + full.homeTeam.Name + ' ' + today, 'teams that match ID home');
 
@@ -254,7 +274,7 @@ export class StartingGoaliesComponent implements OnInit {
               for (let startdata of this.myData) {
 
                 if (startid === startdata.team.ID) {
-                  if (startdata.stats.GamesPlayed['#text'] > 2) {
+                  if (startdata.stats.GamesPlayed['#text'] > 3) {
 
                     startdata.player.startingToday = false;
                     startdata.player.likelyStartingToday = true;

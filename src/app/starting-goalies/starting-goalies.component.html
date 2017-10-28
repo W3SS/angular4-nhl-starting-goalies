@@ -87,7 +87,7 @@
                   <br>
                   <span class="faded">{{ data.team.matchup[1].player.FirstName + ' ' + data.team.matchup[1].player.LastName + ' (' + data.team.matchup[1].team.Name + ' - ' + data.team.matchup[1].player.Position + ')'}} <br>
                   Wins - Losses: {{ data.team.matchup[1].stats.stats.Wins['#text'] + ' - ' +  data.team.matchup[1].stats.stats.Losses['#text'] }}</span>
-            <br> Not official starter.
+            <br> Not official starter. back to back on rinne not working
             </span>
             <span *ngIf="data.team.matchup[2] != null && data.team.matchup[1].team.ID === data.team.matchup[2].team.ID">
 

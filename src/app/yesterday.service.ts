@@ -4,15 +4,12 @@ import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/do';
 
-//FOR TESTING TOMORROW
-// let testDate = new Date();
-// let thisDate = new Date(testDate.getTime() + (24 * 60 * 60 * 1000));
-// let tomorrowDate = new Date(thisDate.getTime() + (24 * 60 * 60 * 1000));
-// let yesterdayDate = new Date(thisDate.getTime() - (24 * 60 * 60 * 1000));
-
-let thisDate = new Date();
+//GET Yesteday
+let testDate = new Date();
+let thisDate = new Date(testDate.getTime() - (24 * 60 * 60 * 1000));
 let tomorrowDate = new Date(thisDate.getTime() + (24 * 60 * 60 * 1000));
 let yesterdayDate = new Date(thisDate.getTime() - (24 * 60 * 60 * 1000));
+
 
 let utcDate = new Date(thisDate.toUTCString());
 let tomorrowUtcDate = new Date(tomorrowDate.toUTCString());
@@ -39,13 +36,13 @@ let yesterday = yesterdayMyDate.toISOString().slice(0, 10);
 
 let headers = null;
 let options = null;
-let sending;
-let sent;
+let sendingYesterday;
+let sentYesterday;
 
 //console.log(dailyDate, 'today\'s date');
 
 @Injectable()
-export class DataService {
+export class YesterdayService {
 
   info: Observable < any > = null;
   stats: Observable < any > = null;
@@ -100,15 +97,15 @@ export class DataService {
     return tomorrow; 
   }
 
-  sendStats(statsArray) {
+   sendStats(statsArray) {
     console.log("sending stats to service...");
-    sending = statsArray;
+    sendingYesterday = statsArray;
   }
 
   getSentStats() {
     console.log("stats sent to component...");
-    sent = sending;
-    return sent;
+    sentYesterday = sendingYesterday;
+    return sentYesterday;
   }
 
 
@@ -147,8 +144,19 @@ export class DataService {
     return this.gameid;
   }
 
+  getScore() {
+
+    if (!this.score) {
+      let url5 = 'https://api.mysportsfeeds.com/v1.1/pull/nhl/2017-2018-regular/scoreboard.json?fordate='+dailyDate;
+      console.log('getting daily scores of todays games from API...');
+      this.score = this.http.get(url5, options)
+        .map(response => response.json())
+    }
+    return this.score;
+  }
+
+
   clearCache() {
     //this.info = null;
   }
-
 }

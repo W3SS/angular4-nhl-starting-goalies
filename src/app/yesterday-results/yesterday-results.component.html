@@ -1,9 +1,6 @@
-
-<router-outlet></router-outlet>
-<span><button mat-button color="accent" (click)="goYesterday()">Yesterday</button></span> <h1 class="center date-header"> {{ gameDate | date:'fullDate' }}</h1> <br>
-
+<span><button mat-button color="accent" (click)="goToday()">Today</button></span><h1 class="center date-header"> {{ gameDate | date:'fullDate' }}</h1>
 <div class="matchup-layout">
-  <div *ngFor="let data of showData">
+  <div *ngFor="let data of showDataYesterday">
     <div *ngIf="data.player.gameLocation === 'home' && data.player.twoPossibleStarters === false" class="card-wrap">
       <mat-card class="center">
         <div>
@@ -157,39 +154,11 @@
           </div>
         </div>
         <p class="game-info">
-          <img src="../assets/nhl-logos/{{ data.team.opponentId }}.jpg" alt=""> VS <img src="./assets/nhl-logos/{{ data.team.ID }}.jpg" alt="">
-          <br> {{data.team.opponent}} @ {{data.team.City + ' ' + data.team.Name}}
-          <br> Puck drops: {{data.player.gameTime}} EST @ {{ data.team.gameIce }}
-          <br>
-          <br>
-          <span *ngIf="data.player.startingToday === true">
-           <share-container direction="horizontal" addedText="" [properties]="{title: data.team.matchup[0].player.FirstName +' '+ data.team.matchup[0].player.LastName +' VS '+ data.team.matchup[1].player.FirstName +' '+ data.team.matchup[1].player.LastName +' '+ data.player.gameTime +' @ '+  data.team.Abbreviation, description:'starting goalies', img:'https://raw.githubusercontent.com/iposton/angular4-nhl-starting-goalies/master/src/assets/nhl-logos/' +data.team.opponentId+ '.jpg', via:'GoaliesStarting', hashtags:'startingGoalies '+twitterHandles[data.team.ID].twitterHashTag +' '+twitterHandles[data.team.opponentId].twitterHashTag}" [expandable]="false" [textEnabled]="true" [platforms]="['twitter']">
-          </share-container>
-         </span>
-          <span *ngIf="data.player.startingToday === false && data.player.likelyStartingToday === true">
-             <span *ngIf="data.team.matchup[2] == null">
-           <share-container direction="horizontal" addedText="" [properties]="{title: data.team.matchup[0].player.FirstName +' '+ data.team.matchup[0].player.LastName +' VS '+ data.team.matchup[1].player.FirstName +' '+ data.team.matchup[1].player.LastName +' '+ data.player.gameTime +' @ '+  data.team.Abbreviation, description:'starting goalies', img:'https://raw.githubusercontent.com/iposton/angular4-nhl-starting-goalies/master/src/assets/nhl-logos/' +data.team.opponentId+ '.jpg', via:'GoaliesStarting', hashtags:'projectedStarter #NHL '+twitterHandles[data.team.ID].twitterHashTag +' '+twitterHandles[data.team.opponentId].twitterHashTag}" [expandable]="false" [textEnabled]="true" [platforms]="['twitter']">
-          </share-container>
-         </span>
-          </span>
-          <span *ngIf="data.player.startingToday === false && data.player.likelyStartingToday === true">
-             <span *ngIf="data.team.matchup[2] != null && data.team.matchup[3] == null && data.team.matchup[0].team.ID === data.team.matchup[1].team.ID">
-           <share-container direction="horizontal" addedText="" [properties]="{title: data.team.matchup[0].player.LastName +' '+ data.team.matchup[1].player.LastName +' '+ data.team.matchup[2].player.LastName +' '+ data.player.gameTime +' @ '+  data.team.Abbreviation, description:'starting goalies', img:'https://raw.githubusercontent.com/iposton/angular4-nhl-starting-goalies/master/src/assets/nhl-logos/' +data.team.opponentId+ '.jpg', via:'GoaliesStarting', hashtags:'projectedStarter #NHL '+twitterHandles[data.team.ID].twitterHashTag +' '+twitterHandles[data.team.opponentId].twitterHashTag}" [expandable]="false" [textEnabled]="true" [platforms]="['twitter']">
-          </share-container>
-         </span>
-          </span>
-          <span *ngIf="data.player.startingToday === false && data.player.likelyStartingToday === true">
-             <span *ngIf="data.team.matchup[2] != null && data.team.matchup[3] == null && data.team.matchup[0].team.ID != data.team.matchup[1].team.ID">
-           <share-container direction="horizontal" addedText="" [properties]="{title: data.team.matchup[0].player.LastName +' '+ data.team.matchup[1].player.LastName +' '+ data.team.matchup[2].player.LastName +' '+ data.player.gameTime +' @ '+  data.team.Abbreviation, description:'starting goalies', img:'https://raw.githubusercontent.com/iposton/angular4-nhl-starting-goalies/master/src/assets/nhl-logos/' +data.team.opponentId+ '.jpg', via:'GoaliesStarting', hashtags:'projectedStarter #NHL '+twitterHandles[data.team.ID].twitterHashTag +' '+twitterHandles[data.team.opponentId].twitterHashTag}" [expandable]="false" [textEnabled]="true" [platforms]="['twitter']">
-          </share-container>
-         </span>
-          </span>
-          <span *ngIf="data.player.startingToday === false && data.player.likelyStartingToday === true">
-             <span *ngIf="data.team.matchup[3] != null && data.team.matchup[0].team.ID === data.team.matchup[1].team.ID && data.team.matchup[2].team.ID === data.team.matchup[3].team.ID">
-           <share-container direction="horizontal" addedText="" [properties]="{title: data.team.matchup[0].player.LastName +' '+ data.team.matchup[1].player.LastName +' '+ data.team.matchup[2].player.LastName +' '+ data.team.matchup[3].player.LastName +' '+ data.player.gameTime +' @ '+  data.team.Abbreviation, description:'starting goalies', img:'https://raw.githubusercontent.com/iposton/angular4-nhl-starting-goalies/master/src/assets/nhl-logos/' +data.team.opponentId+ '.jpg', via:'GoaliesStarting', hashtags:'projectedStarter #NHL '+twitterHandles[data.team.ID].twitterHashTag +' '+twitterHandles[data.team.opponentId].twitterHashTag}" [expandable]="false" [textEnabled]="true" [platforms]="['twitter']">
-          </share-container>
-         </span>
-          </span>
+          <img src="../assets/nhl-logos/{{ data.team.opponentId }}.jpg" alt="">Finale Score: {{data.team.opponentScore}} - {{data.team.teamScore}} <img src="./assets/nhl-logos/{{ data.team.ID }}.jpg" alt="">
+          <br> The <span *ngIf="data.team.opponentScore < data.team.teamScore; then home else away"></span><ng-template #home>{{data.team.Name}}</ng-template><ng-template #away>{{data.team.opponentName}}</ng-template> Win!
+          
+         
+         
         </p>
       </mat-card>
     </div>

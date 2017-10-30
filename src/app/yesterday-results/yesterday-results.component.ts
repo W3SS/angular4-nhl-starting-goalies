@@ -1,9 +1,9 @@
-import { Component, ViewChild, Inject, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Http, Response, RequestOptions, Headers, Request, RequestMethod } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
-import { ActivatedRoute, Router, ActivatedRouteSnapshot } from '@angular/router';
 import { DatePipe } from '@angular/common';
-import { DataService } from '../data.service';
+import { ActivatedRoute, Router, ActivatedRouteSnapshot } from '@angular/router';
+import { YesterdayService } from '../yesterday.service';
 import { MatSnackBar } from '@angular/material';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/observable/forkJoin';
@@ -16,22 +16,22 @@ let yesterday = null;
 let headers = null;
 let options = null;
 
-
 @Component({
-  selector: 'app-starting-goalies',
-  templateUrl: './starting-goalies.component.html',
-  styleUrls: ['./starting-goalies.component.css']
+  selector: 'app-yesterday-results',
+  templateUrl: './yesterday-results.component.html',
+  styleUrls: ['./yesterday-results.component.css']
 })
-export class StartingGoaliesComponent implements OnInit {
+export class YesterdayResultsComponent implements OnInit {
 
   starters: Array < any > ;
+  score: Array < any > ;
   dailySchedule: Array < any > ;
   fullSchedule: Array < any > ;
   starterIdData: Array < any > = [];
   startersData: Array < any > = [];
   myData: Array < any > ;
-  showData: Array < any > ;
-  sentData: Array < any > ;
+  showDataYesterday: Array < any > ;
+  sentYesterdayData: Array < any > ;
   gameDate: string = '';
   defineToken: string = '';
   statData: Array < any > = [];
@@ -41,13 +41,14 @@ export class StartingGoaliesComponent implements OnInit {
   twitterHandles: Array < any > ;
 
 
-  constructor(private http: Http, private dataService: DataService, public snackBar: MatSnackBar, public router: Router) {
+  constructor(private http: Http, private yesterdayService: YesterdayService, public snackBar: MatSnackBar, public router: Router) {
     this.getJSON();
-    yesterday = this.dataService.getYesterday();
-    tomorrow = this.dataService.getTomorrow();
-    today = this.dataService.getToday();
+    yesterday = this.yesterdayService.getYesterday();
+    tomorrow = this.yesterdayService.getTomorrow();
+    today = this.yesterdayService.getToday();
     console.log(yesterday + ' yesterday, ' + today +' today, ' + tomorrow +' tomorrow, ');
-    this.sentData = this.dataService.getSentStats();
+    this.sentYesterdayData = this.yesterdayService.getSentStats();
+
   }
 
    public getJSON() {
@@ -64,15 +65,15 @@ export class StartingGoaliesComponent implements OnInit {
 
   loadData() {
 
-    this.dataService
+    this.yesterdayService
       .getEnv().subscribe(res => {
         //this.defineToken = res._body;
         headers = new Headers({ "Authorization": "Basic " + btoa('ianposton' + ":" + res._body) });
         options = new RequestOptions({ headers: headers });
-        this.dataService
+        this.yesterdayService
           .sendHeaderOptions(headers, options);
 
-        this.dataService
+        this.yesterdayService
           .getDailySchedule().subscribe(res => {
 
             console.log(res, "schedule...");
@@ -132,13 +133,19 @@ export class StartingGoaliesComponent implements OnInit {
 
           })
 
-        this.dataService
+      this.yesterdayService
+        .getScore().subscribe(res => {
+          console.log(res['scoreboard'].gameScore, "Score...");
+          this.score = res['scoreboard'].gameScore;
+        })
+
+        this.yesterdayService
           .getInfo().subscribe(res => {
             console.log(res['activeplayers'].playerentry, "active players stats...");
             this.playerInfo = res['activeplayers'].playerentry;
          })
 
-        this.dataService
+        this.yesterdayService
           .getGameId().subscribe(res => {
             console.log(res['fullgameschedule'].gameentry, "scheduled games for yesterday today and tomorrow...");
             this.fullSchedule = res['fullgameschedule'].gameentry;
@@ -152,7 +159,7 @@ export class StartingGoaliesComponent implements OnInit {
 
   sortData() {
     
-    this.dataService
+    this.yesterdayService
       .getStats().subscribe(res => {
         console.log(res['cumulativeplayerstats'].playerstatsentry, "cumulative stats...");
         this.myData = res['cumulativeplayerstats'].playerstatsentry;
@@ -298,6 +305,33 @@ export class StartingGoaliesComponent implements OnInit {
             }
           }
 
+          if (this.myData && this.score) {
+            console.log('start sorting data for scoreboard stats...');
+            for (let sc of this.score) {
+              for (let pdata of this.myData) {
+                     
+                if (sc.game.awayTeam.ID === pdata.team.ID) {
+
+                  //console.log(sc, 'score items');
+                  pdata.team.awayGoalie = pdata.player.FirstName + ' ' + pdata.player.LastName;
+                  pdata.team.opponentAbbreviation = sc.game.homeTeam.Abbreviation;
+                  pdata.team.teamScore = sc.awayScore;
+                  pdata.team.opponentScore = sc.homeScore; 
+
+                }
+                if (sc.game.homeTeam.ID === pdata.team.ID) {
+
+                  pdata.team.homeGoalie = pdata.player.FirstName + ' ' + pdata.player.LastName;
+                  pdata.team.opponentAbbreviation = sc.game.awayTeam.Abbreviation;
+                  pdata.team.opponentScore = sc.awayScore;
+                  pdata.team.teamScore = sc.homeScore; 
+
+                }
+
+              }
+            }
+          }
+
 
           //MAKE MATCHUPS BY GAME ID OF STARTERS AND NON STARTERS
           if (this.startersData.length > 0) {
@@ -356,58 +390,42 @@ export class StartingGoaliesComponent implements OnInit {
           }
 
         }
+        
 
-          
-
-        this.showData = this.startersData;
+        this.showDataYesterday = this.startersData;
         
 
       }
 
     })
 
-    this.dataService
-              .sendStats(this.showData);
+    this.yesterdayService
+              .sendStats(this.showDataYesterday);
   }
 
   ngOnInit() {
-     if (this.sentData === undefined) {
+     if (this.sentYesterdayData === undefined) {
       this.loadData();
       
     } else {
        setInterval(() => {
-        this.showData = this.sentData;
-        //console.log(this.showData["0"].team.today, "get the date");
-        this.gameDate = this.showData["0"].team.today;
+        this.showDataYesterday = this.sentYesterdayData;
+        //console.log(this.showDataYesterday["0"].team.today, "get the date");
+        this.gameDate = this.showDataYesterday["0"].team.today;
       }, 200)
       
+
     }
-    
   }
 
-  openSnackBar() {
-    this.snackBar.openFromComponent(Info, {
-      // duration: 500,
-    });
+  public goToday() {
+    this.router.navigateByUrl('starting-goalies');
   }
 
-  public goYesterday() {
-    this.router.navigateByUrl('starting-goalies/yesterday');
-  }
+  // openSnackBar() {
+  //   this.snackBar.openFromComponent(Info, {
+  //     // duration: 500,
+  //   });
+  // }
 
-}
-
-@Component({
-  selector: 'info',
-  template: `<i (click)="close()" class="material-icons md-48 close">close</i><br />
-<span style="color: #e74c3c;">back</span><span style="color: #ccc;"> to back</span><span> = The first game of a back to back scheduled game.</span><br />
-<span style="color: #ccc;">back to </span><span style="color: #e74c3c;">back</span><span> = The second game of a back to back scheduled game.</span>`,
-  styles: [`.close { float:right; cursor:pointer; }`]
-})
-
-export class Info {
-  constructor(public snackBar: MatSnackBar) {}
-  close() {
-    this.snackBar.dismiss();
-  }
 }

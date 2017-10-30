@@ -5,17 +5,20 @@ import { HttpModule } from '@angular/http';
 import { CommonModule } from '@angular/common';
 import { MatCardModule, MatGridListModule, MatToolbarModule, MatSnackBarModule, MatButtonModule } from '@angular/material';
 import { DataService } from './data.service';
+import { YesterdayService } from './yesterday.service';
 import { ShareModule } from 'ng2share/share.module'
 import { RouterModule } from '@angular/router';
 
 import { AppComponent } from './app.component';
 import { StartingGoaliesComponent, Info } from './starting-goalies/starting-goalies.component';
+import { YesterdayResultsComponent } from './yesterday-results/yesterday-results.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     Info,
-    StartingGoaliesComponent
+    StartingGoaliesComponent,
+    YesterdayResultsComponent
   ],
   imports: [
     BrowserModule,
@@ -29,18 +32,24 @@ import { StartingGoaliesComponent, Info } from './starting-goalies/starting-goal
     BrowserAnimationsModule,
     ShareModule,
     RouterModule.forRoot([
-         {
-          path: '',
-          redirectTo: 'starting-goalies',
-          pathMatch: 'full'
-        },
+        
         {
           path: 'starting-goalies',
-          component: StartingGoaliesComponent
+           children: [
+                      {
+                  path: '',
+                  pathMatch: 'full',
+                  component: StartingGoaliesComponent,
+                },
+                {
+                  path: 'yesterday',
+                  component: YesterdayResultsComponent
+                }
+            ]
         }
     ])
   ],
-  providers: [DataService],
+  providers: [DataService, YesterdayService],
   entryComponents: [
     Info
   ],

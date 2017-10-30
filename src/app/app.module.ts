@@ -12,13 +12,15 @@ import { RouterModule } from '@angular/router';
 
 import { AppComponent } from './app.component';
 import { StartingGoaliesComponent, Info } from './starting-goalies/starting-goalies.component';
-import { YesterdayResultsComponent } from './yesterday-results/yesterday-results.component';
-import { TomorrowResultsComponent } from './tomorrow-results/tomorrow-results.component';
+import { YesterdayResultsComponent, InfoYesterday } from './yesterday-results/yesterday-results.component';
+import { TomorrowResultsComponent, InfoTomorrow } from './tomorrow-results/tomorrow-results.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     Info,
+    InfoYesterday,
+    InfoTomorrow,
     StartingGoaliesComponent,
     YesterdayResultsComponent,
     TomorrowResultsComponent
@@ -58,7 +60,7 @@ import { TomorrowResultsComponent } from './tomorrow-results/tomorrow-results.co
   ],
   providers: [DataService, YesterdayService, TomorrowService],
   entryComponents: [
-    Info
+    Info, InfoYesterday, InfoTomorrow
   ],
   bootstrap: [AppComponent]
 })

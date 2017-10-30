@@ -4,7 +4,7 @@ const path = require('path');
 const Heroku = require('heroku-client')
 
 
-const heroku = new Heroku({ token: process.env.API_TOKEN });
+const heroku = new Heroku({ token: process.env.API_TOKEN })
 
 
 const api = require('./server/routes/api');

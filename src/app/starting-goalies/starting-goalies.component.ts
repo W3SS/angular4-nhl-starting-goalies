@@ -403,10 +403,10 @@ export class StartingGoaliesComponent implements OnInit {
 
 @Component({
   selector: 'info',
-  template: `<i (click)="close()" class="material-icons md-48 close">close</i><br />
+  template: `<i (click)="close()" class="material-icons close">close</i><br />
 <span style="color: #e74c3c;">back</span><span style="color: #ccc;"> to back</span><span> = The first game of a back to back scheduled game.</span><br />
 <span style="color: #ccc;">back to </span><span style="color: #e74c3c;">back</span><span> = The second game of a back to back scheduled game.</span>`,
-  styles: [`.close { float:right; cursor:pointer; }`]
+  styles: [`.close { float:right; cursor:pointer; font-size: 20px; }`]
 })
 
 export class Info {

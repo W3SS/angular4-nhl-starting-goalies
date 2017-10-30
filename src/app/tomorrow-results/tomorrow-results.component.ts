@@ -384,7 +384,7 @@ starters: Array < any > ;
   }
 
   openSnackBar() {
-    this.snackBar.openFromComponent(Info, {
+    this.snackBar.openFromComponent(InfoTomorrow, {
       // duration: 500,
     });
   }
@@ -397,14 +397,14 @@ starters: Array < any > ;
 }
 
 @Component({
-  selector: 'info',
-  template: `<i (click)="close()" class="material-icons md-48 close">close</i><br />
+  selector: 'info-tomorrow',
+  template: `<i (click)="close()" class="material-icons close">close</i><br />
 <span style="color: #e74c3c;">back</span><span style="color: #ccc;"> to back</span><span> = The first game of a back to back scheduled game.</span><br />
 <span style="color: #ccc;">back to </span><span style="color: #e74c3c;">back</span><span> = The second game of a back to back scheduled game.</span>`,
-  styles: [`.close { float:right; cursor:pointer; }`]
+  styles: [`.close { float:right; cursor:pointer; font-size: 20px;}`]
 })
 
-export class Info {
+export class InfoTomorrow {
   constructor(public snackBar: MatSnackBar) {}
   close() {
     this.snackBar.dismiss();

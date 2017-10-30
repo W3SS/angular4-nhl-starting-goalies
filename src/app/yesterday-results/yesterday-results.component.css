@@ -3,3 +3,26 @@
   right: 12px;
   bottom: 12px;
 }
+
+.material-icons.md-18 { font-size: 18px; }
+.material-icons.md-24 { font-size: 24px; }
+.material-icons.md-36 { font-size: 36px; }
+.material-icons.md-48 { font-size: 48px; }
+
+@media only screen and (max-width: 600px) {
+
+  .card-wrap {
+    display: inline-block;
+    margin: 20px;
+    vertical-align: top;
+    width: 315px;
+  }
+
+  .material-icons.md-48 { font-size: 38px; }
+
+  .date-header {
+    font-size: 22px;
+  }
+
+
+}

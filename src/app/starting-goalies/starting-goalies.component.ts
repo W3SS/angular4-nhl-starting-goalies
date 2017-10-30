@@ -395,6 +395,10 @@ export class StartingGoaliesComponent implements OnInit {
     this.router.navigateByUrl('starting-goalies/yesterday');
   }
 
+   public goTomorrow() {
+    this.router.navigateByUrl('starting-goalies/tomorrow');
+  }
+
 }
 
 @Component({

@@ -6,19 +6,22 @@ import { CommonModule } from '@angular/common';
 import { MatCardModule, MatGridListModule, MatToolbarModule, MatSnackBarModule, MatButtonModule } from '@angular/material';
 import { DataService } from './data.service';
 import { YesterdayService } from './yesterday.service';
+import { TomorrowService } from './tomorrow.service';
 import { ShareModule } from 'ng2share/share.module'
 import { RouterModule } from '@angular/router';
 
 import { AppComponent } from './app.component';
 import { StartingGoaliesComponent, Info } from './starting-goalies/starting-goalies.component';
 import { YesterdayResultsComponent } from './yesterday-results/yesterday-results.component';
+import { TomorrowResultsComponent } from './tomorrow-results/tomorrow-results.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     Info,
     StartingGoaliesComponent,
-    YesterdayResultsComponent
+    YesterdayResultsComponent,
+    TomorrowResultsComponent
   ],
   imports: [
     BrowserModule,
@@ -44,12 +47,16 @@ import { YesterdayResultsComponent } from './yesterday-results/yesterday-results
                 {
                   path: 'yesterday',
                   component: YesterdayResultsComponent
+                },
+                {
+                  path: 'tomorrow',
+                  component: TomorrowResultsComponent
                 }
             ]
         }
     ])
   ],
-  providers: [DataService, YesterdayService],
+  providers: [DataService, YesterdayService, TomorrowService],
   entryComponents: [
     Info
   ],

@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Http, Response, RequestOptions, Headers, Request, RequestMethod } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
-import { DatePipe } from '@angular/common';
 import { ActivatedRoute, Router, ActivatedRouteSnapshot } from '@angular/router';
-import { YesterdayService } from '../yesterday.service';
+import { DatePipe } from '@angular/common';
+import { TomorrowService } from '../tomorrow.service';
 import { MatSnackBar } from '@angular/material';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/observable/forkJoin';
@@ -17,21 +17,19 @@ let headers = null;
 let options = null;
 
 @Component({
-  selector: 'app-yesterday-results',
-  templateUrl: './yesterday-results.component.html',
-  styleUrls: ['./yesterday-results.component.css']
+  selector: 'app-tomorrow-results',
+  templateUrl: './tomorrow-results.component.html',
+  styleUrls: ['./tomorrow-results.component.css']
 })
-export class YesterdayResultsComponent implements OnInit {
-
-  starters: Array < any > ;
-  score: Array < any > ;
+export class TomorrowResultsComponent implements OnInit {
+starters: Array < any > ;
   dailySchedule: Array < any > ;
   fullSchedule: Array < any > ;
   starterIdData: Array < any > = [];
   startersData: Array < any > = [];
   myData: Array < any > ;
-  showDataYesterday: Array < any > ;
-  sentYesterdayData: Array < any > ;
+  showDataTomorrow: Array < any > ;
+  sentDataTomorrow: Array < any > ;
   gameDate: string = '';
   defineToken: string = '';
   statData: Array < any > = [];
@@ -41,14 +39,13 @@ export class YesterdayResultsComponent implements OnInit {
   twitterHandles: Array < any > ;
 
 
-  constructor(private http: Http, private yesterdayService: YesterdayService, public snackBar: MatSnackBar, public router: Router) {
+  constructor(private http: Http, private tomorrowService: TomorrowService, public snackBar: MatSnackBar, public router: Router) {
     this.getJSON();
-    yesterday = this.yesterdayService.getYesterday();
-    tomorrow = this.yesterdayService.getTomorrow();
-    today = this.yesterdayService.getToday();
+    yesterday = this.tomorrowService.getYesterday();
+    tomorrow = this.tomorrowService.getTomorrow();
+    today = this.tomorrowService.getToday();
     console.log(yesterday + ' yesterday, ' + today +' today, ' + tomorrow +' tomorrow, ');
-    this.sentYesterdayData = this.yesterdayService.getSentStats();
-
+    this.sentDataTomorrow = this.tomorrowService.getSentStats();
   }
 
    public getJSON() {
@@ -65,15 +62,15 @@ export class YesterdayResultsComponent implements OnInit {
 
   loadData() {
 
-    this.yesterdayService
+    this.tomorrowService
       .getEnv().subscribe(res => {
         //this.defineToken = res._body;
         headers = new Headers({ "Authorization": "Basic " + btoa('ianposton' + ":" + res._body) });
         options = new RequestOptions({ headers: headers });
-        this.yesterdayService
+        this.tomorrowService
           .sendHeaderOptions(headers, options);
 
-        this.yesterdayService
+        this.tomorrowService
           .getDailySchedule().subscribe(res => {
 
             console.log(res, "schedule...");
@@ -133,19 +130,13 @@ export class YesterdayResultsComponent implements OnInit {
 
           })
 
-      this.yesterdayService
-        .getScore().subscribe(res => {
-          console.log(res['scoreboard'].gameScore, "Score...");
-          this.score = res['scoreboard'].gameScore;
-        })
-
-        this.yesterdayService
+        this.tomorrowService
           .getInfo().subscribe(res => {
             console.log(res['activeplayers'].playerentry, "active players stats...");
             this.playerInfo = res['activeplayers'].playerentry;
          })
 
-        this.yesterdayService
+        this.tomorrowService
           .getGameId().subscribe(res => {
             console.log(res['fullgameschedule'].gameentry, "scheduled games for yesterday today and tomorrow...");
             this.fullSchedule = res['fullgameschedule'].gameentry;
@@ -159,7 +150,7 @@ export class YesterdayResultsComponent implements OnInit {
 
   sortData() {
     
-    this.yesterdayService
+    this.tomorrowService
       .getStats().subscribe(res => {
         console.log(res['cumulativeplayerstats'].playerstatsentry, "cumulative stats...");
         this.myData = res['cumulativeplayerstats'].playerstatsentry;
@@ -305,33 +296,6 @@ export class YesterdayResultsComponent implements OnInit {
             }
           }
 
-          if (this.myData && this.score) {
-            console.log('start sorting data for scoreboard stats...');
-            for (let sc of this.score) {
-              for (let pdata of this.myData) {
-                     
-                if (sc.game.awayTeam.ID === pdata.team.ID) {
-
-                  //console.log(sc, 'score items');
-                  pdata.team.awayGoalie = pdata.player.FirstName + ' ' + pdata.player.LastName;
-                  pdata.team.opponentAbbreviation = sc.game.homeTeam.Abbreviation;
-                  pdata.team.teamScore = sc.awayScore;
-                  pdata.team.opponentScore = sc.homeScore; 
-
-                }
-                if (sc.game.homeTeam.ID === pdata.team.ID) {
-
-                  pdata.team.homeGoalie = pdata.player.FirstName + ' ' + pdata.player.LastName;
-                  pdata.team.opponentAbbreviation = sc.game.awayTeam.Abbreviation;
-                  pdata.team.opponentScore = sc.awayScore;
-                  pdata.team.teamScore = sc.homeScore; 
-
-                }
-
-              }
-            }
-          }
-
 
           //MAKE MATCHUPS BY GAME ID OF STARTERS AND NON STARTERS
           if (this.startersData.length > 0) {
@@ -390,36 +354,33 @@ export class YesterdayResultsComponent implements OnInit {
           }
 
         }
-        
 
-        this.showDataYesterday = this.startersData;
+          
+
+        this.showDataTomorrow = this.startersData;
         
 
       }
 
     })
 
-    this.yesterdayService
-              .sendStats(this.showDataYesterday);
+    this.tomorrowService
+              .sendStats(this.showDataTomorrow);
   }
 
   ngOnInit() {
-     if (this.sentYesterdayData === undefined) {
+     if (this.sentDataTomorrow === undefined) {
       this.loadData();
       
     } else {
        setInterval(() => {
-        this.showDataYesterday = this.sentYesterdayData;
-        //console.log(this.showDataYesterday["0"].team.today, "get the date");
-        this.gameDate = this.showDataYesterday["0"].team.today;
+        this.showDataTomorrow = this.sentDataTomorrow;
+        //console.log(this.showDataTomorrow["0"].team.today, "get the date");
+        this.gameDate = this.showDataTomorrow["0"].team.today;
       }, 200)
       
-
     }
-  }
-
-  public goToday() {
-    this.router.navigateByUrl('starting-goalies');
+    
   }
 
   openSnackBar() {
@@ -427,6 +388,11 @@ export class YesterdayResultsComponent implements OnInit {
       // duration: 500,
     });
   }
+
+  public goToday() {
+    this.router.navigateByUrl('starting-goalies');
+  }
+
 
 }
 

@@ -377,7 +377,7 @@ starters: Array < any > ;
         this.showDataTomorrow = this.sentDataTomorrow;
         //console.log(this.showDataTomorrow["0"].team.today, "get the date");
         this.gameDate = this.showDataTomorrow["0"].team.today;
-      }, 200)
+      }, 300)
       
     }
     

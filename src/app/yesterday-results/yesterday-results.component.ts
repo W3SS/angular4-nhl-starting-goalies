@@ -412,7 +412,7 @@ export class YesterdayResultsComponent implements OnInit {
         this.showDataYesterday = this.sentYesterdayData;
         //console.log(this.showDataYesterday["0"].team.today, "get the date");
         this.gameDate = this.showDataYesterday["0"].team.today;
-      }, 200)
+      }, 300)
       
 
     }

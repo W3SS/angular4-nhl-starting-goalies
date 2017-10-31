@@ -379,7 +379,7 @@ export class StartingGoaliesComponent implements OnInit {
         this.showData = this.sentData;
         //console.log(this.showData["0"].team.today, "get the date");
         this.gameDate = this.showData["0"].team.today;
-      }, 200)
+      }, 300)
       
     }
     

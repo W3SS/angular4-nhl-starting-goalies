@@ -37,7 +37,11 @@ import { TomorrowResultsComponent, InfoTomorrow } from './tomorrow-results/tomor
     BrowserAnimationsModule,
     ShareModule,
     RouterModule.forRoot([
-        
+        {
+           path: '',
+           redirectTo: 'starting-goalies',
+           pathMatch: 'full'
+        },
         {
           path: 'starting-goalies',
            children: [

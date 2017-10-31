@@ -133,7 +133,7 @@
                   Wins - Losses: {{ data.team.matchup[2].stats.stats.Wins['#text'] + ' - ' +  data.team.matchup[2].stats.stats.Losses['#text'] }}</span>
             <br> Not official starter.
             </span>
-            <span *ngIf="data.team.matchup[3] != null && data.team.matchup[2].team.ID === data.team.matchup[3].team.ID"> 
+            <span *ngIf="data.team.matchup[3] != null"> 
                <span *ngIf="data.team.matchup[2].team.haveGameToday === true && data.team.matchup[2].team.haveGameTomorrow === true;then y else n"></span>
             <ng-template #y><span style="color: #e74c3c;">back</span><span style="color: #ccc;"> to</span></ng-template>
             <ng-template #n><span style="color: #ccc;">back</span><span style="color: #ccc;"> to</span></ng-template><span *ngIf="data.team.matchup[2].team.hadGameYesterday === true && data.team.matchup[2].team.haveGameToday === true;then yes else no"></span>

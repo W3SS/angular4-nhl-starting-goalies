@@ -3,12 +3,13 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgModule } from '@angular/core';
 import { HttpModule } from '@angular/http';
 import { CommonModule } from '@angular/common';
-import { MatCardModule, MatGridListModule, MatToolbarModule, MatSnackBarModule, MatButtonModule } from '@angular/material';
+import { MatCardModule, MatGridListModule, MatToolbarModule, MatSnackBarModule, MatButtonModule, MatTabsModule, MatMenuModule } from '@angular/material';
 import { DataService } from './data.service';
 import { YesterdayService } from './yesterday.service';
 import { TomorrowService } from './tomorrow.service';
 import { ShareModule } from 'ng2share/share.module'
 import { RouterModule } from '@angular/router';
+import { FlexLayoutModule } from '@angular/flex-layout';
 
 import { AppComponent } from './app.component';
 import { StartingGoaliesComponent, Info } from './starting-goalies/starting-goalies.component';
@@ -34,8 +35,11 @@ import { TomorrowResultsComponent, InfoTomorrow } from './tomorrow-results/tomor
     MatToolbarModule,
     MatSnackBarModule,
     MatButtonModule, 
+    MatTabsModule,
+    MatMenuModule,
     BrowserAnimationsModule,
     ShareModule,
+    FlexLayoutModule,
     RouterModule.forRoot([
         {
            path: '',

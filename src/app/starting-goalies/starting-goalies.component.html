@@ -1,6 +1,7 @@
 
 <router-outlet></router-outlet>
-<span><button mat-button color="accent" (click)="goYesterday()">Yesterday</button><button mat-button color="accent" (click)="goTomorrow()" style="float: right;">Tomorrow</button></span> <h1 class="center date-header"> {{ gameDate | date:'fullDate' }}</h1> <br>
+<!-- <span><button mat-button color="accent" (click)="goYesterday()">Yesterday</button><button mat-button color="accent" (click)="goTomorrow()" style="float: right;">Tomorrow</button></span> --> 
+<h1 class="center date-header"> {{ gameDate | date:'fullDate' }}</h1> <br>
 
 <div class="matchup-layout">
   <div *ngFor="let data of showData">

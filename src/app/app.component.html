@@ -1,2 +1,20 @@
-<mat-toolbar color="primary">Starting NHL Goalies</mat-toolbar>
+<mat-toolbar color="primary">Starting NHL Goalies 
+  <span style="flex: 1 1 auto;"></span>
+  <nav mat-tab-nav-bar fxHide [fxHide.gt-xs]="isVisibleOnDesktop()">
+  <a mat-tab-link
+     *ngFor="let link of navLinks"
+     [routerLink]="link.path"
+     routerLinkActive #rla="routerLinkActive"
+     [active]="rla.isActive">
+    {{link.label}}
+  </a>
+</nav>
+<button mat-button [matMenuTriggerFor]="menu" fxHide [fxHide.xs]="isVisibleOnMobile()">Menu</button>
+<mat-menu #menu="matMenu">
+  <button mat-menu-item [routerLink]="['starting-goalies/yesterday']">Yesterday</button>
+  <button mat-menu-item [routerLink]="['starting-goalies']">Today</button>
+  <button mat-menu-item [routerLink]="['starting-goalies/tomorrow']">Tomorrow</button>
+</mat-menu>
+</mat-toolbar>
+
 <router-outlet></router-outlet>

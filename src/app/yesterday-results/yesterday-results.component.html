@@ -1,4 +1,5 @@
-<span><button mat-button color="accent" (click)="goToday()">Today</button></span><h1 class="center date-header"> {{ gameDate | date:'fullDate' }}</h1>
+<!-- <span><button mat-button color="accent" (click)="goToday()">Today</button></span> -->
+<h1 class="center date-header"> {{ gameDate | date:'fullDate' }}</h1>
 <div class="matchup-layout">
   <div *ngFor="let data of showDataYesterday">
     <div *ngIf="data.player.gameLocation === 'home' && data.player.twoPossibleStarters === false" class="card-wrap">

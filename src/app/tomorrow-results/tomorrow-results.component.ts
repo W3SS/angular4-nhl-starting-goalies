@@ -247,7 +247,7 @@ starters: Array < any > ;
         }
 
 
-        //if (this.gamesToday === true) {
+
           console.log('start sorting data for starters...');
           for (let info of this.playerInfo) {
 
@@ -257,16 +257,15 @@ starters: Array < any > ;
               if (info.player.ID === data.player.ID) {
 
                 data.player.image = info.player.officialImageSrc;
+                data.player.twitterHandle = this.twitterHandles[data.team.ID].twitterHashTag;
 
-                //STAT-DATA IS CALLED IN THE HTML
-                //this.statData = this.myData;
 
               }
 
             }
           }
 
-        //}
+        
 
         if (this.myData && this.gamesToday === true) {
           if (this.starterIdData.length > 0) {

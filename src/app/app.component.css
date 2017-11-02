@@ -1,3 +1,8 @@
 .mat-tab-link {
     color: #fff;
 }
+
+.mat-tab-header,
+.mat-tab-nav-bar {
+    border-bottom: none!important;
+}

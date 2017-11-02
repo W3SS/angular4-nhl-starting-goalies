@@ -1,4 +1,3 @@
-<!-- <span><button mat-button color="accent" (click)="goToday()">Today</button></span> -->
 <h1 class="center date-header"> {{ gameDate | date:'fullDate' }}</h1>
 <div class="matchup-layout">
   <div *ngFor="let data of showDataYesterday">
@@ -15,6 +14,21 @@
             <img src="{{ data.team.matchup[0].player.image }}" onError="this.src='https://nhl.bamcontent.com/images/headshots/current/168x168/goalie@2x.jpg'">
             <br> {{ data.team.matchup[0].player.FirstName + ' ' + data.team.matchup[0].player.LastName + ' (' + data.team.matchup[0].team.Name + ' - ' + data.team.matchup[0].player.Position + ')'}}
             <br> Wins - Losses: {{ data.team.matchup[0].stats.stats.Wins['#text'] + ' - ' + data.team.matchup[0].stats.stats.Losses['#text'] }}
+            <br>
+            <div class="stat-block">
+  
+               Saves: {{ data.team.matchup[0].player.saves +' Shots Faced: ' + data.team.matchup[0].player.ShotsAgainst }} <br>
+
+             <span *ngIf="data.team.matchup[0].player.wins == '1' && data.team.matchup[0].player.Shutouts != '1'">
+              {{ data.team.matchup[0].player.LastName }} takes the Win!
+            </span>
+            <span *ngIf="data.team.matchup[0].player.Shutouts == '1'">
+              {{ data.team.matchup[0].player.LastName }} had a SHUTOUT Victory!
+            </span>
+            <span *ngIf="data.team.matchup[0].player.losses == '1'">
+              {{ data.team.matchup[0].player.LastName }} takes the Loss!
+            </span>
+            </div>
           </div>
           <div class="goalies-inline" *ngIf="data.player.startingToday === true">
             <span *ngIf="data.team.matchup[1].team.haveGameToday === true && data.team.matchup[1].team.haveGameTomorrow === true;then y else n"></span>
@@ -26,140 +40,28 @@
             <img src="{{ data.team.matchup[1].player.image }}" onError="this.src='https://nhl.bamcontent.com/images/headshots/current/168x168/goalie@2x.jpg'">
             <br> {{ data.team.matchup[1].player.FirstName + ' ' + data.team.matchup[1].player.LastName + ' (' + data.team.matchup[1].team.Name + ' - ' + data.team.matchup[1].player.Position + ')'}}
             <br> Wins - Losses: {{ data.team.matchup[1].stats.stats.Wins['#text'] + ' - ' + data.team.matchup[1].stats.stats.Losses['#text'] }}
-          </div>
-          <div class="goalies-inline" *ngIf="data.player.startingToday === false && data.player.likelyStartingToday === true">
-            <span *ngIf="data.team.matchup[0].team.haveGameToday === true && data.team.matchup[0].team.haveGameTomorrow === true;then y else n"></span>
-            <ng-template #y><span style="color: #e74c3c;">back</span><span style="color: #ccc;"> to</span></ng-template>
-            <ng-template #n><span style="color: #ccc;">back</span><span style="color: #ccc;"> to</span></ng-template><span *ngIf="data.team.matchup[0].team.hadGameYesterday === true && data.team.matchup[0].team.haveGameToday === true;then yes else no"></span>
-            <ng-template #yes><span style="color: #e74c3c;">back</span></ng-template>
-            <ng-template #no><span style="color: #ccc;">back</span></ng-template>
             <br>
-            <span *ngIf="data.team.matchup[2] == null">
+            <div class="stat-block">
+  
+              Saves: {{ data.team.matchup[1].player.saves +' Shots Faced: ' + data.team.matchup[1].player.ShotsAgainst }} <br>
 
-             <img class="faded" src="{{ data.team.matchup[0].player.image }}" onError="this.src='https://nhl.bamcontent.com/images/headshots/current/168x168/goalie@2x.jpg'">
-            
-            <br>
-            <span class="faded">{{ data.team.matchup[0].player.FirstName + ' ' + data.team.matchup[0].player.LastName + ' (' + data.team.matchup[0].team.Name + ' - ' + data.team.matchup[0].player.Position + ')'}} <br>
-                Wins - Losses: {{ data.team.matchup[0].stats.stats.Wins['#text'] + ' - ' +  data.team.matchup[0].stats.stats.Losses['#text'] }}</span>
-            <br> Not official starter.
+             <span *ngIf="data.team.matchup[1].player.wins == '1' && data.team.matchup[1].player.Shutouts != '1'">
+              {{ data.team.matchup[1].player.LastName }} takes the Win!
             </span>
-            <span *ngIf="data.team.matchup[2] != null && data.team.matchup[0].team.ID === data.team.matchup[1].team.ID">
-               <span class="faded faded2">
-
-                       <img src="{{ data.team.matchup[0].player.image }}" onError="this.src='https://nhl.bamcontent.com/images/headshots/current/168x168/goalie@2x.jpg'">
-
-                      <br>
-                      {{ data.team.matchup[0].player.FirstName + ' ' + data.team.matchup[0].player.LastName + ' (' + data.team.matchup[0].team.Name + ' - ' + data.team.matchup[0].player.Position + ')'}} <br>
-                  Wins - Losses: {{ data.team.matchup[0].stats.stats.Wins['#text'] + ' - ' +  data.team.matchup[0].stats.stats.Losses['#text'] }}</span>
-            <br>
-            <span class="faded faded2">
-
-
-                  <img src="{{ data.team.matchup[1].player.image }}" onError="this.src='https://nhl.bamcontent.com/images/headshots/current/168x168/goalie@2x.jpg'">
-
-                <br>
-                  {{ data.team.matchup[1].player.FirstName + ' ' + data.team.matchup[1].player.LastName + ' (' + data.team.matchup[1].team.Name + ' - ' + data.team.matchup[1].player.Position + ')'}} <br>
-                  Wins - Losses: {{ data.team.matchup[1].stats.stats.Wins['#text'] + ' - ' +  data.team.matchup[1].stats.stats.Losses['#text'] }}</span>
-            <br> Not official starters. There are two possible starters for this game.
+            <span *ngIf="data.team.matchup[1].player.Shutouts == '1'">
+              {{ data.team.matchup[1].player.LastName }} had a SHUTOUT Victory!
             </span>
-            <span *ngIf="data.team.matchup[2] != null && data.team.matchup[0].team.ID != data.team.matchup[1].team.ID">
-                <span class="faded">
-
-                  <img src="{{ data.team.matchup[0].player.image }}" onError="this.src='https://nhl.bamcontent.com/images/headshots/current/168x168/goalie@2x.jpg'">
-
-                <br>
-                  {{ data.team.matchup[0].player.FirstName + ' ' + data.team.matchup[0].player.LastName + ' (' + data.team.matchup[0].team.Name + ' - ' + data.team.matchup[0].player.Position + ')'}} <br>
-                  Wins - Losses: {{ data.team.matchup[0].stats.stats.Wins['#text'] + ' - ' +  data.team.matchup[0].stats.stats.Losses['#text'] }}</span>
-            <br> Not official starter.
+            <span *ngIf="data.team.matchup[1].player.losses == '1'">
+              {{ data.team.matchup[1].player.LastName }} takes the Loss!
             </span>
-          </div>
-          <div class="goalies-inline" *ngIf="data.player.startingToday === false && data.player.likelyStartingToday === true ">
-            <span *ngIf="data.team.matchup[2] == null"> 
-
-               <span *ngIf="data.team.matchup[1].team.haveGameToday === true && data.team.matchup[1].team.haveGameTomorrow === true;then y else n"></span>
-            <ng-template #y><span style="color: #e74c3c;">back</span><span style="color: #ccc;"> to</span></ng-template>
-            <ng-template #n><span style="color: #ccc;">back</span><span style="color: #ccc;"> to</span></ng-template><span *ngIf="data.team.matchup[1].team.hadGameYesterday === true && data.team.matchup[1].team.haveGameToday === true;then yes else no"></span>
-            <ng-template #yes><span style="color: #e74c3c;">back</span></ng-template>
-            <ng-template #no><span style="color: #ccc;">back</span></ng-template>
-            <br>
-            <img class="faded" src="{{ data.team.matchup[1].player.image }}" onError="this.src='https://nhl.bamcontent.com/images/headshots/current/168x168/goalie@2x.jpg'">
-            <br>
-            <span class="faded">{{ data.team.matchup[1].player.FirstName + ' ' + data.team.matchup[1].player.LastName + ' (' + data.team.matchup[1].team.Name + ' - ' + data.team.matchup[1].player.Position + ')'}} <br>
-                  Wins - Losses: {{ data.team.matchup[1].stats.stats.Wins['#text'] + ' - ' +  data.team.matchup[1].stats.stats.Losses['#text'] }}</span>
-            <br> Not official starter.
-            </span>
-            <span *ngIf="data.team.matchup[2] != null && data.team.matchup[1].team.ID === data.team.matchup[2].team.ID">
-
-               <span *ngIf="data.team.matchup[1].team.haveGameToday === true && data.team.matchup[1].team.haveGameTomorrow === true;then y else n"></span>
-            <ng-template #y><span style="color: #e74c3c;">back</span><span style="color: #ccc;"> to</span></ng-template>
-            <ng-template #n><span style="color: #ccc;">back</span><span style="color: #ccc;"> to</span></ng-template><span *ngIf="data.team.matchup[1].team.hadGameYesterday === true && data.team.matchup[1].team.haveGameToday === true;then yes else no"></span>
-            <ng-template #yes><span style="color: #e74c3c;">back</span></ng-template>
-            <ng-template #no><span style="color: #ccc;">back</span></ng-template>
-            <br>
-            <span class="faded faded2">
-
-                       <img src="{{ data.team.matchup[1].player.image }}" onError="this.src='https://nhl.bamcontent.com/images/headshots/current/168x168/goalie@2x.jpg'">
-
-                      <br>
-                      {{ data.team.matchup[1].player.FirstName + ' ' + data.team.matchup[1].player.LastName + ' (' + data.team.matchup[1].team.Name + ' - ' + data.team.matchup[1].player.Position + ')'}} <br>
-                  Wins - Losses: {{ data.team.matchup[1].stats.stats.Wins['#text'] + ' - ' +  data.team.matchup[1].stats.stats.Losses['#text'] }}</span>
-            <br>
-            <span class="faded faded2">
-
-
-                  <img src="{{ data.team.matchup[2].player.image }}" onError="this.src='https://nhl.bamcontent.com/images/headshots/current/168x168/goalie@2x.jpg'">
-
-                <br>
-                  {{ data.team.matchup[2].player.FirstName + ' ' + data.team.matchup[2].player.LastName + ' (' + data.team.matchup[2].team.Name + ' - ' + data.team.matchup[2].player.Position + ')'}} <br>
-                  Wins - Losses: {{ data.team.matchup[2].stats.stats.Wins['#text'] + ' - ' +  data.team.matchup[2].stats.stats.Losses['#text'] }}</span>
-            <br> Not official starters. There are two possible starters for this game.
-            </span>
-            <span *ngIf="data.team.matchup[2] != null && data.team.matchup[3] == null && data.team.matchup[1].team.ID != data.team.matchup[2].team.ID">
-
-               <span *ngIf="data.team.matchup[1].team.haveGameToday === true && data.team.matchup[2].team.haveGameTomorrow === true;then y else n"></span>
-            <ng-template #y><span style="color: #e74c3c;">back</span><span style="color: #ccc;"> to</span></ng-template>
-            <ng-template #n><span style="color: #ccc;">back</span><span style="color: #ccc;"> to</span></ng-template><span *ngIf="data.team.matchup[2].team.hadGameYesterday === true && data.team.matchup[2].team.haveGameToday === true;then yes else no"></span>
-            <ng-template #yes><span style="color: #e74c3c;">back</span></ng-template>
-            <ng-template #no><span style="color: #ccc;">back</span></ng-template>
-            <br>
-            <span class="faded">
-
-                  <img src="{{ data.team.matchup[2].player.image }}" onError="this.src='https://nhl.bamcontent.com/images/headshots/current/168x168/goalie@2x.jpg'">
-
-                <br>
-                  {{ data.team.matchup[2].player.FirstName + ' ' + data.team.matchup[2].player.LastName + ' (' + data.team.matchup[2].team.Name + ' - ' + data.team.matchup[2].player.Position + ')'}} <br>
-                  Wins - Losses: {{ data.team.matchup[2].stats.stats.Wins['#text'] + ' - ' +  data.team.matchup[2].stats.stats.Losses['#text'] }}</span>
-            <br> Not official starter.
-            </span>
-            <span *ngIf="data.team.matchup[3] != null"> 
-                    
-                     <span class="faded faded2">
-
-
-                       <img src="{{ data.team.matchup[2].player.image }}" onError="this.src='https://nhl.bamcontent.com/images/headshots/current/168x168/goalie@2x.jpg'">
-
-                      <br>
-                      {{ data.team.matchup[2].player.FirstName + ' ' + data.team.matchup[2].player.LastName + ' (' + data.team.matchup[2].team.Name + ' - ' + data.team.matchup[2].player.Position + ')'}} <br>
-                  Wins - Losses: {{ data.team.matchup[2].stats.stats.Wins['#text'] + ' - ' +  data.team.matchup[2].stats.stats.Losses['#text'] }}</span>
-            <br>
-            <span class="faded faded2">
-
-
-                  <img src="{{ data.team.matchup[3].player.image }}" onError="this.src='https://nhl.bamcontent.com/images/headshots/current/168x168/goalie@3x.jpg'">
-
-                <br>
-                  {{ data.team.matchup[3].player.FirstName + ' ' + data.team.matchup[3].player.LastName + ' (' + data.team.matchup[3].team.Name + ' - ' + data.team.matchup[3].player.Position + ')'}} <br>
-                  Wins - Losses: {{ data.team.matchup[3].stats.stats.Wins['#text'] + ' - ' +  data.team.matchup[3].stats.stats.Losses['#text'] }}</span>
-            <br> Not official starters. There are two possible starters for this game.
-            </span>
+            </div>
           </div>
         </div>
         <p class="game-info">
           <img src="../assets/nhl-logos/{{ data.team.opponentId }}.jpg" alt="">Finale Score: {{data.team.opponentScore}} - {{data.team.teamScore}} <img src="./assets/nhl-logos/{{ data.team.ID }}.jpg" alt="">
-          <br> The <span *ngIf="data.team.opponentScore < data.team.teamScore; then home else away"></span><ng-template #home>{{data.team.Name}}</ng-template><ng-template #away>{{data.team.opponentName}}</ng-template> Win!
-          
-         
-         
+          <br> The <span *ngIf="data.team.opponentScore < data.team.teamScore; then home else away"></span>
+          <ng-template #home>{{data.team.Name}}</ng-template>
+          <ng-template #away>{{data.team.opponentName}}</ng-template> Win!
         </p>
       </mat-card>
     </div>

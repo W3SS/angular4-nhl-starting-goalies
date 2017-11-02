@@ -18,7 +18,7 @@ This app can help explain how to fetch data using [Angular's HttpClient Module](
 * Angular CLI (version 1.4.5)
 * Angular http (version 4.2.4)
 * Node.js (version 6.10.3)     
-* [angular material2](https://github.com/angular/material2) (version 2.0.0-beta.8)
+* [angular material2](https://github.com/angular/material2) (version 2.0.0-beta.12)
 * Heroku [Set up a free account ](https://www.heroku.com/)
 * [ng2share](https://github.com/cedvdb/ng2share) (version 1.3.6) 
 * NPM (version 5.2.0)

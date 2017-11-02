@@ -3,7 +3,16 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgModule } from '@angular/core';
 import { HttpModule } from '@angular/http';
 import { CommonModule } from '@angular/common';
-import { MatCardModule, MatGridListModule, MatToolbarModule, MatSnackBarModule, MatButtonModule, MatTabsModule, MatMenuModule } from '@angular/material';
+import { MatCardModule, 
+        MatGridListModule, 
+        MatToolbarModule, 
+        MatSnackBarModule, 
+        MatButtonModule, 
+        MatTabsModule, 
+        MatMenuModule,
+        MatListModule,
+        MatChipsModule,
+        MatDialogModule } from '@angular/material';
 import { DataService } from './data.service';
 import { YesterdayService } from './yesterday.service';
 import { TomorrowService } from './tomorrow.service';
@@ -12,7 +21,7 @@ import { RouterModule } from '@angular/router';
 import { FlexLayoutModule } from '@angular/flex-layout';
 
 import { AppComponent } from './app.component';
-import { StartingGoaliesComponent, Info } from './starting-goalies/starting-goalies.component';
+import { StartingGoaliesComponent, Info, TodayDialog } from './starting-goalies/starting-goalies.component';
 import { YesterdayResultsComponent, InfoYesterday } from './yesterday-results/yesterday-results.component';
 import { TomorrowResultsComponent, InfoTomorrow } from './tomorrow-results/tomorrow-results.component';
 
@@ -24,7 +33,8 @@ import { TomorrowResultsComponent, InfoTomorrow } from './tomorrow-results/tomor
     InfoTomorrow,
     StartingGoaliesComponent,
     YesterdayResultsComponent,
-    TomorrowResultsComponent
+    TomorrowResultsComponent,
+    TodayDialog
   ],
   imports: [
     BrowserModule,
@@ -37,6 +47,9 @@ import { TomorrowResultsComponent, InfoTomorrow } from './tomorrow-results/tomor
     MatButtonModule, 
     MatTabsModule,
     MatMenuModule,
+    MatDialogModule,
+    MatListModule,
+    MatChipsModule,
     BrowserAnimationsModule,
     ShareModule,
     FlexLayoutModule,
@@ -68,7 +81,7 @@ import { TomorrowResultsComponent, InfoTomorrow } from './tomorrow-results/tomor
   ],
   providers: [DataService, YesterdayService, TomorrowService],
   entryComponents: [
-    Info, InfoYesterday, InfoTomorrow
+    Info, InfoYesterday, InfoTomorrow, TodayDialog
   ],
   bootstrap: [AppComponent]
 })

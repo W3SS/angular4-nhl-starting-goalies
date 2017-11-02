@@ -28,6 +28,7 @@ export class YesterdayResultsComponent implements OnInit {
   dailySchedule: Array < any > ;
   fullSchedule: Array < any > ;
   starterIdData: Array < any > = [];
+  starterStatData: Array < any > = [];
   startersData: Array < any > = [];
   myData: Array < any > ;
   showDataYesterday: Array < any > ;
@@ -89,7 +90,7 @@ export class YesterdayResultsComponent implements OnInit {
               Observable.forkJoin(
                   res['dailygameschedule'].gameentry.map(
                     g =>
-                    this.http.get('https://api.mysportsfeeds.com/v1.1/pull/nhl/2017-2018-regular/game_startinglineup.json?gameid=' + g.id + '&position=Goalie-starter', options)
+                    this.http.get('https://api.mysportsfeeds.com/v1.1/pull/nhl/2017-2018-regular/game_boxscore.json?gameid='+g.id+'&playerstats=Sv,GA,GAA,GS,SO,MIN,W,L,SA', options)
                     .map(response => response.json())
                   )
                 )
@@ -98,29 +99,52 @@ export class YesterdayResultsComponent implements OnInit {
 
                   let i;
                   let i2;
+                  let i3;
                   let res2;
+                  let res3;
                   res.forEach((item, index) => {
                     i = index;
-                    //console.log(res[i]['gamestartinglineup'].teamLineup, 'got starting lineups data!');
-                    res2 = res[i]['gamestartinglineup'].teamLineup;
+                    //console.log(res[i]['gameboxscore'].awayTeam.awayPlayers['playerEntry'], 'got box score data for away team!');
+                    //console.log(res[i]['gameboxscore'].homeTeam.homePlayers['playerEntry'], 'got box score data for home team!');
+                    res2 = res[i]['gameboxscore'].awayTeam.awayPlayers['playerEntry'];
+                    res3 = res[i]['gameboxscore'].homeTeam.homePlayers['playerEntry'];
                     //this.gameTime =  res[i]['gamestartinglineup'].game.date;
                     res2.forEach((item, index) => {
 
                       i2 = index;
-                      if (res2[i2].actual != null && res2[i2].expected != null) {
+                      if (res2[i2].stats != null) {
+                        this.starterStatData.push(res2[i2]);
                         //console.log(res2[i2].actual.starter[0].player.ID, 'got player ID for goalie actualy starting!');
-                        this.starterIdData.push(res2[i2].actual.starter[0].player.ID);
+                        this.starterIdData.push(res2[i2].player.ID);
 
-                      } else if (res2[i2].actual == null && res2[i2].expected != null) {
-                        //console.log(res2[i2].expected.starter[0].player.ID, 'got player ID for goalie expected to start!');
-                        this.starterIdData.push(res2[i2].expected.starter[0].player.ID);
-                      } else {
-                        //console.log(res2[i2].team.City + " " + res2[i2].team.Name, 'no starters yet!');
-                        this.starterIdData.push(res2[i2].team.ID);
-                        //this.starterIdData.push(res2[i2].expected.starter[0].player.ID);
-                        //console.log(this.starterIdData, 'this array has ALL the IDs of todays starters');
+                      } 
 
-                      }
+                      // else {
+                      //   console.log(res2[i2], 'figuring out what this does!');
+                      //   //this.starterIdData.push(res2[i2].team.ID);
+                      //   //this.starterIdData.push(res2[i2].expected.starter[0].player.ID);
+                      //   //console.log(this.starterIdData, 'this array has ALL the IDs of todays starters');
+
+                      // }
+
+                    });
+                    res3.forEach((item, index) => {
+
+                      i3 = index;
+                      if (res3[i3].stats != null) {
+                        this.starterStatData.push(res3[i3]);
+                        //console.log(res2[i2].actual.starter[0].player.ID, 'got player ID for goalie actualy starting!');
+                        this.starterIdData.push(res3[i3].player.ID);
+
+                      } 
+
+                      // else {
+                      //   console.log(res3[i3], 'figuring out what this does!');
+                      //   //this.starterIdData.push(res2[i2].team.ID);
+                      //   //this.starterIdData.push(res2[i2].expected.starter[0].player.ID);
+                      //   //console.log(this.starterIdData, 'this array has ALL the IDs of todays starters');
+
+                      // }
 
                     });
                   });
@@ -133,6 +157,9 @@ export class YesterdayResultsComponent implements OnInit {
 
           })
 
+          // TO GET ACTUAL STARTER OF GAME CHECK FOR PLAYER.STATS.SAVES > 0 BY GAMEID. ITS THE ONLY WAY TO BE SURE. 
+          //https://api.mysportsfeeds.com/v1.1/pull/nhl/2017-2018-regular/game_boxscore.json?gameid=40953&playerstats=Sv
+//&sort=STATS.Pitching-NP
       this.yesterdayService
         .getScore().subscribe(res => {
           console.log(res['scoreboard'].gameScore, "Score...");
@@ -255,8 +282,30 @@ export class YesterdayResultsComponent implements OnInit {
           }
         }
 
+          console.log('start sorting data for starters stats Saves...');
+          for (let statinfo of this.starterStatData) {
 
-        //if (this.gamesToday === true) {
+            for (let maindata of this.myData) {
+
+
+              if (statinfo.player.ID === maindata.player.ID) {
+                //console.log(statinfo, "stats for starters");
+                maindata.player.saves = statinfo.stats.Saves['#text'];
+                maindata.player.wins = statinfo.stats.Wins['#text'];
+                maindata.player.losses = statinfo.stats.Losses['#text'];
+                maindata.player.GamesStarted = statinfo.stats.GamesStarted['#text'];
+                maindata.player.GoalsAgainstAverage = statinfo.stats.GoalsAgainstAverage['#text'];
+                maindata.player.MinutesPlayed = statinfo.stats.MinutesPlayed['#text'];
+                maindata.player.Shutouts = statinfo.stats.Shutouts['#text'];
+                maindata.player.ShotsAgainst = statinfo.stats.ShotsAgainst['#text'];
+                
+
+              }
+
+            }
+          }
+
+
           console.log('start sorting data for starters...');
           for (let info of this.playerInfo) {
 
@@ -266,16 +315,15 @@ export class YesterdayResultsComponent implements OnInit {
               if (info.player.ID === data.player.ID) {
 
                 data.player.image = info.player.officialImageSrc;
+                data.player.twitterHandle = this.twitterHandles[data.team.ID].twitterHashTag;
 
-                //STAT-DATA IS CALLED IN THE HTML
-                //this.statData = this.myData;
 
               }
 
             }
           }
 
-        //}
+    
 
         if (this.myData && this.gamesToday === true) {
           if (this.starterIdData.length > 0) {

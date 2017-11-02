@@ -1,5 +1,6 @@
 import { Component, ViewChild, Inject, OnInit } from '@angular/core';
 import { Http, Response, RequestOptions, Headers, Request, RequestMethod } from '@angular/http';
+import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { Observable } from 'rxjs/Observable';
 import { ActivatedRoute, Router, ActivatedRouteSnapshot } from '@angular/router';
 import { DatePipe } from '@angular/common';
@@ -38,11 +39,13 @@ export class StartingGoaliesComponent implements OnInit {
   playerInfo: Array < any > ;
   noGamesToday: boolean;
   gamesToday: boolean;
-  twitterHandles: Array < any > ;
+  twitterHandles: Array < any >;
+  selected: any;
+  test: any;
 
 
-  constructor(private http: Http, private dataService: DataService, public snackBar: MatSnackBar, public router: Router) {
-    this.getJSON();
+  constructor(private http: Http, private dataService: DataService, public snackBar: MatSnackBar, public router: Router, public dialog: MatDialog) {
+   
     yesterday = this.dataService.getYesterday();
     tomorrow = this.dataService.getTomorrow();
     today = this.dataService.getToday();
@@ -56,9 +59,7 @@ export class StartingGoaliesComponent implements OnInit {
            .subscribe(res => {
       console.log(res['twitterHandles']["0"], 'twitter handles');
       this.twitterHandles = res['twitterHandles']["0"];
-    })
-                       
-                         
+    })                     
 
      }
 
@@ -172,6 +173,7 @@ export class StartingGoaliesComponent implements OnInit {
                 sdata.team.opponentId = schedule.homeTeam.ID;
                 sdata.team.opponentCity = schedule.homeTeam.City;
                 sdata.team.opponentName = schedule.homeTeam.Name;
+                sdata.team.opponentAbbreviation = schedule.homeTeam.Abbreviation;
                 sdata.team.today = today;
                 sdata.team.tomorrow = tomorrow;
                 sdata.team.yesterday = yesterday;
@@ -186,6 +188,7 @@ export class StartingGoaliesComponent implements OnInit {
                 sdata.team.opponentId = schedule.awayTeam.ID;
                 sdata.team.opponentCity = schedule.awayTeam.City;
                 sdata.team.opponentName = schedule.awayTeam.Name;
+                sdata.team.opponentAbbreviation = schedule.awayTeam.Abbreviation;
                 sdata.team.today = today;
                 sdata.team.tomorrow = tomorrow;
                 sdata.team.yesterday = yesterday;
@@ -248,8 +251,10 @@ export class StartingGoaliesComponent implements OnInit {
           }
         }
 
+       
 
-        //if (this.gamesToday === true) {
+
+    
           console.log('start sorting data for starters...');
           for (let info of this.playerInfo) {
 
@@ -259,16 +264,14 @@ export class StartingGoaliesComponent implements OnInit {
               if (info.player.ID === data.player.ID) {
 
                 data.player.image = info.player.officialImageSrc;
-
-                //STAT-DATA IS CALLED IN THE HTML
-                //this.statData = this.myData;
+                data.player.twitterHandle = this.twitterHandles[data.team.ID].twitterHashTag;
 
               }
 
             }
           }
 
-        //}
+      
 
         if (this.myData && this.gamesToday === true) {
           if (this.starterIdData.length > 0) {
@@ -372,9 +375,11 @@ export class StartingGoaliesComponent implements OnInit {
 
   ngOnInit() {
      if (this.sentData === undefined) {
+      this.getJSON();
       this.loadData();
       
     } else {
+       this.getJSON();
        setInterval(() => {
         this.showData = this.sentData;
         //console.log(this.showData["0"].team.today, "get the date");
@@ -383,6 +388,15 @@ export class StartingGoaliesComponent implements OnInit {
       
     }
     
+  }
+
+   public open(event, data) {
+    this.selected = data;
+    console.log(data, 'ok you clicked on player img...');
+    this.dialog.open(TodayDialog, {
+      data: data,
+      width: '600px',
+    });
   }
 
   openSnackBar() {
@@ -402,10 +416,67 @@ export class StartingGoaliesComponent implements OnInit {
 }
 
 @Component({
+  selector: 'today-dialog',
+  template: `<i (click)="dialogRef.close()" style="float:right; cursor:pointer;" class="material-icons">close</i>
+  <span style="color:#00aced;">Twitter Updates!</span> 
+  <mat-dialog-content>
+  <span style="font-size: 26px; font-weight: light; color: #555; text-align: center;">{{ noPosts }}</span>
+  <ul *ngFor="let item of tweetsData" style="font-size:14px">
+    <li>{{item.text}}</li>
+</ul>
+</mat-dialog-content>`,
+})
+
+export class TodayDialog implements OnInit{
+  test: any;
+  noPosts: any;
+  tweetsData: Array < any >;
+  constructor(public dialogRef: MatDialogRef < TodayDialog > , @Inject(MAT_DIALOG_DATA) public data: any, private http: Http) {
+    
+  }
+
+  loadStuff() {
+     let headers = new Headers();
+    
+    headers.append('Content-Type', 'application/X-www-form-urlencoded');
+    
+    this.http.post('http://localhost:3001/authorize', {headers: headers}).subscribe((res) => {
+      console.log(res, 'twitter res');
+      this.searchCall();
+    })
+ 
+
+  }
+
+
+searchCall(){
+  console.log(this.data, 'data passed in')
+    let AND;
+    let headers = new Headers();
+    let searchterm = 'query='+this.data.player.twitterHandle+' #startingGoalies'; 
+    
+    headers.append('Content-Type', 'application/X-www-form-urlencoded');
+    
+    this.http.post('http://localhost:3001/search', searchterm, {headers: headers}).subscribe((res) => {
+      console.log(res.json().data.statuses, 'twitter stuff');
+      this.tweetsData = res.json().data.statuses;
+      if (this.tweetsData.length === 0) {
+        this.noPosts = "No Posts Yet.";
+      }
+    });
+  }
+
+  ngOnInit() {
+     this.loadStuff();
+   }
+}
+
+@Component({
   selector: 'info',
   template: `<i (click)="close()" class="material-icons close">close</i><br />
 <span style="color: #e74c3c;">back</span><span style="color: #ccc;"> to back</span><span> = The first game of a back to back scheduled game.</span><br />
-<span style="color: #ccc;">back to </span><span style="color: #e74c3c;">back</span><span> = The second game of a back to back scheduled game.</span>`,
+<span style="color: #ccc;">back to </span><span style="color: #e74c3c;">back</span><span> = The second game of a back to back scheduled game.</span> <br />
+<span>Click on player image for twitter updates!</span>`,
   styles: [`.close { float:right; cursor:pointer; font-size: 20px; }`]
 })
 

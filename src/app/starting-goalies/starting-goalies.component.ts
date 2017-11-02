@@ -422,7 +422,7 @@ export class StartingGoaliesComponent implements OnInit {
   <mat-dialog-content>
   <span style="font-size: 26px; font-weight: light; color: #555; text-align: center;">{{ noPosts }}</span>
   <ul *ngFor="let item of tweetsData" style="font-size:14px">
-    <li>{{item.text}}</li>
+    <li>{{item.text}} {{item.created_at | date:'fullDate'}}</li>
 </ul>
 </mat-dialog-content>`,
 })
@@ -441,7 +441,6 @@ export class TodayDialog implements OnInit{
     headers.append('Content-Type', 'application/X-www-form-urlencoded');
     
     this.http.post('/authorize', {headers: headers}).subscribe((res) => {
-      console.log(res, 'twitter res');
       this.searchCall();
     })
  

@@ -440,7 +440,7 @@ export class TodayDialog implements OnInit{
     
     headers.append('Content-Type', 'application/X-www-form-urlencoded');
     
-    this.http.post('http://localhost:3001/authorize', {headers: headers}).subscribe((res) => {
+    this.http.post('/authorize', {headers: headers}).subscribe((res) => {
       console.log(res, 'twitter res');
       this.searchCall();
     })
@@ -457,7 +457,7 @@ searchCall(){
     
     headers.append('Content-Type', 'application/X-www-form-urlencoded');
     
-    this.http.post('http://localhost:3001/search', searchterm, {headers: headers}).subscribe((res) => {
+    this.http.post('/search', searchterm, {headers: headers}).subscribe((res) => {
       console.log(res.json().data.statuses, 'twitter stuff');
       this.tweetsData = res.json().data.statuses;
       if (this.tweetsData.length === 0) {

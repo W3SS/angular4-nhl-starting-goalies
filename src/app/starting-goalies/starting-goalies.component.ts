@@ -30,6 +30,7 @@ export class StartingGoaliesComponent implements OnInit {
   fullSchedule: Array < any > ;
   starterIdData: Array < any > = [];
   startersData: Array < any > = [];
+  dailyStats: Array < any > = [];
   myData: Array < any > ;
   showData: Array < any > ;
   sentData: Array < any > ;
@@ -152,6 +153,16 @@ export class StartingGoaliesComponent implements OnInit {
 
 
   sortData() {
+
+    if (this.gamesToday === true) {
+      this.dataService
+        .getDaily().subscribe(res => {
+          console.log(res, "Daily stats...");
+          this.dailyStats = res['dailyplayerstats'].playerstatsentry;
+        })
+    } else {
+      console.log('No games then no daily stats either. :(');
+    }
     
     this.dataService
       .getStats().subscribe(res => {
@@ -196,6 +207,30 @@ export class StartingGoaliesComponent implements OnInit {
             }
           }
         }
+
+         if (this.myData && this.dailyStats) {
+            console.log('start sorting data for daily stats...');
+            for (let daily of this.dailyStats) {
+              for (let mdata of this.myData) {
+                if (daily.player.ID === mdata.player.ID) {
+
+                  if (daily.stats.GamesStarted['#text'] == '1') {
+                    mdata.player.startingGoalie = daily.player.FirstName + ' ' + daily.player.LastName;
+                  }
+
+                  mdata.player.playingRightNow = true;
+                  mdata.player.winToday = daily.stats.Wins['#text'];
+                  mdata.player.loseToday = daily.stats.Losses['#text'];
+                  mdata.player.saves = daily.stats.Saves['#text'];
+                  mdata.player.GamesStarted = daily.stats.GamesStarted['#text'];
+                  mdata.player.GoalsAgainstAverage = daily.stats.GoalsAgainstAverage['#text'];
+                  mdata.player.MinutesPlayed = daily.stats.MinutesPlayed['#text'];
+                  mdata.player.Shutouts = daily.stats.Shutouts['#text'];
+                  mdata.player.ShotsAgainst = daily.stats.ShotsAgainst['#text'];
+                } 
+              }
+            }
+          }
 
         if (this.myData && this.fullSchedule) {
           console.log('start sorting data for full schedule...');
@@ -448,11 +483,11 @@ export class TodayDialog implements OnInit{
   }
 
 
-searchCall(){
+searchCall() {
   console.log(this.data, 'data passed in')
     let AND;
     let headers = new Headers();
-    let searchterm = 'query='+this.data.player.twitterHandle+' #startingGoalies'; 
+    let searchterm = 'query=#startingGoalies #nhl'; 
     
     headers.append('Content-Type', 'application/X-www-form-urlencoded');
     
@@ -475,8 +510,9 @@ searchCall(){
   template: `<i (click)="close()" class="material-icons close">close</i><br />
 <span style="color: #e74c3c;">back</span><span style="color: #ccc;"> to back</span><span> = The first game of a back to back scheduled game.</span><br />
 <span style="color: #ccc;">back to </span><span style="color: #e74c3c;">back</span><span> = The second game of a back to back scheduled game.</span> <br />
+<span class="green-dot"></span> = This game is in progress. <br />
 <span>Click on player image for twitter updates!</span>`,
-  styles: [`.close { float:right; cursor:pointer; font-size: 20px; }`]
+  styles: [`.close { float:right; cursor:pointer; font-size: 20px; } .green-dot { height: 10px; width: 10px; background:#2ecc71; border-radius: 50%; display: inline-block; }`]
 })
 
 export class Info {

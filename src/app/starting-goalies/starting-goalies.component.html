@@ -166,7 +166,9 @@
         <p class="game-info">
           <img src="../assets/nhl-logos/{{ data.team.opponentId }}.jpg" alt=""> VS <img src="./assets/nhl-logos/{{ data.team.ID }}.jpg" alt="">
           <br> {{data.team.opponent}} @ {{data.team.City + ' ' + data.team.Name}}
-          <br> Puck drops: {{data.player.gameTime}} EST @ {{ data.team.gameIce }}
+          <br> <span class="green-dot" *ngIf="data.player.playingRightNow === true"></span> Puck drops: {{data.player.gameTime}} EST @ {{ data.team.gameIce }} <br>
+        <span *ngIf="data.player.playingRightNow === true">Starting Goalie Away: {{ data.team.matchup[0].player.startingGoalie }}</span>  <br>
+          <span *ngIf="data.player.playingRightNow === true">Starting Goalie Home: {{ data.team.matchup[1].player.startingGoalie }}</span>
           <br>
           <br>
           <span *ngIf="data.player.startingToday === true">

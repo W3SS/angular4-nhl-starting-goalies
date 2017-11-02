@@ -147,6 +147,17 @@ export class DataService {
     return this.gameid;
   }
 
+   getDaily() {
+
+    if (!this.daily) {
+      let url4 = 'https://api.mysportsfeeds.com/v1.1/pull/nhl/2017-2018-regular/daily_player_stats.json?fordate='+dailyDate+'&position=G';
+      console.log('getting daily stats for pitchers from API...');
+      this.daily = this.http.get(url4, options)
+        .map(response => response.json())
+    }
+    return this.daily;
+  }
+
   clearCache() {
     //this.info = null;
   }

@@ -90,7 +90,7 @@ export class YesterdayResultsComponent implements OnInit {
               Observable.forkJoin(
                   res['dailygameschedule'].gameentry.map(
                     g =>
-                    this.http.get('https://api.mysportsfeeds.com/v1.1/pull/nhl/2017-2018-regular/game_boxscore.json?gameid='+g.id+'&playerstats=Sv,GA,GAA,GS,SO,MIN,W,L,SA', options)
+                    this.http.get('https://api.mysportsfeeds.com/v1.1/pull/nhl/2017-2018-regular/game_boxscore.json?gameid='+g.id+'&playerstats=Sv,GA,GAA,GS,SO,MIN,W,L,SA,OTL,OTW', options)
                     .map(response => response.json())
                   )
                 )
@@ -119,13 +119,6 @@ export class YesterdayResultsComponent implements OnInit {
 
                       } 
 
-                      // else {
-                      //   console.log(res2[i2], 'figuring out what this does!');
-                      //   //this.starterIdData.push(res2[i2].team.ID);
-                      //   //this.starterIdData.push(res2[i2].expected.starter[0].player.ID);
-                      //   //console.log(this.starterIdData, 'this array has ALL the IDs of todays starters');
-
-                      // }
 
                     });
                     res3.forEach((item, index) => {
@@ -137,14 +130,6 @@ export class YesterdayResultsComponent implements OnInit {
                         this.starterIdData.push(res3[i3].player.ID);
 
                       } 
-
-                      // else {
-                      //   console.log(res3[i3], 'figuring out what this does!');
-                      //   //this.starterIdData.push(res2[i2].team.ID);
-                      //   //this.starterIdData.push(res2[i2].expected.starter[0].player.ID);
-                      //   //console.log(this.starterIdData, 'this array has ALL the IDs of todays starters');
-
-                      // }
 
                     });
                   });
@@ -158,8 +143,7 @@ export class YesterdayResultsComponent implements OnInit {
           })
 
           // TO GET ACTUAL STARTER OF GAME CHECK FOR PLAYER.STATS.SAVES > 0 BY GAMEID. ITS THE ONLY WAY TO BE SURE. 
-          //https://api.mysportsfeeds.com/v1.1/pull/nhl/2017-2018-regular/game_boxscore.json?gameid=40953&playerstats=Sv
-//&sort=STATS.Pitching-NP
+          
       this.yesterdayService
         .getScore().subscribe(res => {
           console.log(res['scoreboard'].gameScore, "Score...");
@@ -298,7 +282,8 @@ export class YesterdayResultsComponent implements OnInit {
                 maindata.player.MinutesPlayed = statinfo.stats.MinutesPlayed['#text'];
                 maindata.player.Shutouts = statinfo.stats.Shutouts['#text'];
                 maindata.player.ShotsAgainst = statinfo.stats.ShotsAgainst['#text'];
-                
+                maindata.player.OvertimeLosses = statinfo.stats.OvertimeLosses['#text'];
+                maindata.player.OvertimeWins = statinfo.stats.OvertimeWins['#text'];
 
               }
 
@@ -324,7 +309,6 @@ export class YesterdayResultsComponent implements OnInit {
           }
 
     
-
         if (this.myData && this.gamesToday === true) {
           if (this.starterIdData.length > 0) {
             console.log('start sorting data for starters matchups...');
@@ -409,7 +393,7 @@ export class YesterdayResultsComponent implements OnInit {
     this.startersData.forEach((data) => {
       if (data.player.gameLocation === 'home') {
         data.team.matchup = this.statData[data.team.gameId];
-        //console.log(this.statData[data.team.gameId], 'show this');
+        console.log(this.statData[data.team.gameId], 'show this');
         this.statData[data.team.gameId][0].player.twoPossibleStarters = false;
         this.statData[data.team.gameId][1].player.twoPossibleStarters = false;
 

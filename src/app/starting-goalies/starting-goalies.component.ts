@@ -214,8 +214,8 @@ export class StartingGoaliesComponent implements OnInit {
               for (let mdata of this.myData) {
                 if (daily.player.ID === mdata.player.ID) {
 
-                  if (daily.stats.MinutesPlayed['#text'] > 0) {
-                    mdata.player.startingGoalie = mdata.player.FirstName + ' ' + mdata.player.LastName;
+                  if (daily.stats.Saves['#text'] > 0) {
+                    mdata.player.startingGoalie = daily.player.FirstName + ' ' + daily.player.LastName;
                   }
 
                   mdata.player.playingRightNow = true;

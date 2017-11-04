@@ -214,8 +214,8 @@ export class StartingGoaliesComponent implements OnInit {
               for (let mdata of this.myData) {
                 if (daily.player.ID === mdata.player.ID) {
 
-                  if (daily.stats.MinutesPlayed['#text'] >= '1') {
-                    mdata.player.startingGoalie = daily.player.FirstName + ' ' + daily.player.LastName;
+                  if (daily.stats.MinutesPlayed['#text'] > 0) {
+                    mdata.player.startingGoalie = mdata.player.FirstName + ' ' + mdata.player.LastName;
                   }
 
                   mdata.player.playingRightNow = true;
@@ -285,10 +285,6 @@ export class StartingGoaliesComponent implements OnInit {
             }
           }
         }
-
-       
-
-
     
           console.log('start sorting data for starters...');
           for (let info of this.playerInfo) {
@@ -300,6 +296,7 @@ export class StartingGoaliesComponent implements OnInit {
 
                 data.player.image = info.player.officialImageSrc;
                 data.player.twitterHandle = this.twitterHandles[data.team.ID].twitterHashTag;
+                 
 
               }
 
@@ -365,7 +362,7 @@ export class StartingGoaliesComponent implements OnInit {
     this.startersData.forEach((data) => {
       if (data.player.gameLocation === 'home') {
         data.team.matchup = this.statData[data.team.gameId];
-        //console.log(this.statData[data.team.gameId], 'show this');
+        console.log(this.statData[data.team.gameId], 'show this');
         this.statData[data.team.gameId][0].player.twoPossibleStarters = false;
         this.statData[data.team.gameId][1].player.twoPossibleStarters = false;
 

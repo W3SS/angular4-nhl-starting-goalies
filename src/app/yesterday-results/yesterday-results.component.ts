@@ -315,20 +315,15 @@ export class YesterdayResultsComponent implements OnInit {
             for (let startid of this.starterIdData) {
 
               for (let startdata of this.myData) {
-
-                if (startid === startdata.team.ID) {
-                  if (startdata.stats.GamesPlayed['#text'] > 3) {
-
-                    startdata.player.startingToday = false;
-                    startdata.player.likelyStartingToday = true;
-                    //console.log(startdata.player.FirstName + " " + startdata.player.LastName, "this goalie is not starting yet. but he might start.");
-                    this.startersData.push(startdata);
-
-
-                  }
-                } else if (startid === startdata.player.ID) {
+              if (startid === startdata.player.ID && startdata.player.GamesStarted == '1') {
                   startdata.player.startingToday = true;
+                  startdata.player.subedInToday = false;
                   //console.log(startdata, 'player data');
+                  this.startersData.push(startdata);
+
+                } else if (startid === startdata.player.ID && startdata.player.GamesStarted == '0') {
+                  startdata.player.subedInToday = true;
+                  startdata.player.startingToday = false;
                   this.startersData.push(startdata);
 
                 }

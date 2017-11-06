@@ -37,6 +37,7 @@ starters: Array < any > ;
   noGamesToday: boolean;
   gamesToday: boolean;
   twitterHandles: Array < any > ;
+  tweetDay: any;
 
 
   constructor(private http: Http, private tomorrowService: TomorrowService, public snackBar: MatSnackBar, public router: Router) {
@@ -77,6 +78,11 @@ starters: Array < any > ;
             //console.log(tomorrowDailyDate, "get tomorrows schedule to find back to back games");
             this.dailySchedule = res['dailygameschedule'].gameentry;
             this.gameDate = res['dailygameschedule'].gameentry[0].date;
+            
+               let dPipe = new DatePipe("en-US");
+               this.tweetDay = dPipe.transform(this.gameDate, 'EEEE');
+            
+           
             if (res['dailygameschedule'].gameentry == null) {
               this.noGamesToday = true;
               console.log('There are no games being played today.');
@@ -173,6 +179,7 @@ starters: Array < any > ;
                 sdata.team.today = today;
                 sdata.team.tomorrow = tomorrow;
                 sdata.team.yesterday = yesterday;
+                sdata.team.day = this.tweetDay;
 
               }
               if (schedule.homeTeam.Name === sdata.team.Name) {
@@ -187,6 +194,7 @@ starters: Array < any > ;
                 sdata.team.today = today;
                 sdata.team.tomorrow = tomorrow;
                 sdata.team.yesterday = yesterday;
+                sdata.team.day = this.tweetDay;
               }
             }
           }

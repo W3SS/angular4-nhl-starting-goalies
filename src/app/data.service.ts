@@ -10,6 +10,12 @@ import 'rxjs/add/operator/do';
 // let tomorrowDate = new Date(thisDate.getTime() + (24 * 60 * 60 * 1000));
 // let yesterdayDate = new Date(thisDate.getTime() - (24 * 60 * 60 * 1000));
 
+//FOR TESTING YESTERDAY
+// let testDate = new Date();
+// let thisDate = new Date(testDate.getTime() - (48 * 60 * 60 * 1000));
+// let tomorrowDate = new Date(thisDate.getTime() + (24 * 60 * 60 * 1000));
+// let yesterdayDate = new Date(thisDate.getTime() - (24 * 60 * 60 * 1000));
+
 let thisDate = new Date();
 let tomorrowDate = new Date(thisDate.getTime() + (24 * 60 * 60 * 1000));
 let yesterdayDate = new Date(thisDate.getTime() - (24 * 60 * 60 * 1000));

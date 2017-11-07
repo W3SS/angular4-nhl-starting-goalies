@@ -22,7 +22,7 @@ let options = null;
   styleUrls: ['./tomorrow-results.component.css']
 })
 export class TomorrowResultsComponent implements OnInit {
-starters: Array < any > ;
+  starters: Array < any > ;
   dailySchedule: Array < any > ;
   fullSchedule: Array < any > ;
   starterIdData: Array < any > = [];
@@ -45,21 +45,19 @@ starters: Array < any > ;
     yesterday = this.tomorrowService.getYesterday();
     tomorrow = this.tomorrowService.getTomorrow();
     today = this.tomorrowService.getToday();
-    console.log(yesterday + ' yesterday, ' + today +' today, ' + tomorrow +' tomorrow, ');
+    console.log(yesterday + ' yesterday, ' + today + ' today, ' + tomorrow + ' tomorrow, ');
     this.sentDataTomorrow = this.tomorrowService.getSentStats();
   }
 
-   public getJSON() {
-         this.http.get("./assets/twitter.json")
-           .map(response => response.json())
-           .subscribe(res => {
-      console.log(res['twitterHandles']["0"], 'twitter handles');
-      this.twitterHandles = res['twitterHandles']["0"];
-    })
-                       
-                         
+  public getJSON() {
+    this.http.get("./assets/twitter.json")
+      .map(response => response.json())
+      .subscribe(res => {
+        console.log(res['twitterHandles']["0"], 'twitter handles');
+        this.twitterHandles = res['twitterHandles']["0"];
+      })
 
-     }
+  }
 
   loadData() {
 
@@ -78,11 +76,11 @@ starters: Array < any > ;
             //console.log(tomorrowDailyDate, "get tomorrows schedule to find back to back games");
             this.dailySchedule = res['dailygameschedule'].gameentry;
             this.gameDate = res['dailygameschedule'].gameentry[0].date;
-            
-               let dPipe = new DatePipe("en-US");
-               this.tweetDay = dPipe.transform(this.gameDate, 'EEEE');
-            
-           
+
+            let dPipe = new DatePipe("en-US");
+            this.tweetDay = dPipe.transform(this.gameDate, 'EEEE');
+
+
             if (res['dailygameschedule'].gameentry == null) {
               this.noGamesToday = true;
               console.log('There are no games being played today.');
@@ -140,7 +138,7 @@ starters: Array < any > ;
           .getInfo().subscribe(res => {
             console.log(res['activeplayers'].playerentry, "active players stats...");
             this.playerInfo = res['activeplayers'].playerentry;
-         })
+          })
 
         this.tomorrowService
           .getGameId().subscribe(res => {
@@ -152,15 +150,13 @@ starters: Array < any > ;
 
   }
 
-
-
   sortData() {
-    
+
     this.tomorrowService
       .getStats().subscribe(res => {
         console.log(res['cumulativeplayerstats'].playerstatsentry, "cumulative stats...");
         this.myData = res['cumulativeplayerstats'].playerstatsentry;
-      
+
         if (this.myData && this.dailySchedule) {
           console.log('start sorting data for daily schedule...');
           for (let schedule of this.dailySchedule) {
@@ -207,45 +203,39 @@ starters: Array < any > ;
             for (let btb of this.myData) {
 
               if (full.awayTeam.ID === btb.team.ID) {
-                //console.log(full.date + ' ' + full.awayTeam.Name + ' ' + today, 'teams that match ID away');
-                //console.log(full.date + ' ' + full.homeTeam.Name + ' ' + today, 'teams that match ID home');
 
                 if (btb.team.yesterday === full.date) {
-                  //console.log(full.date + ' ' + full.awayTeam.Name + ' ' + today, 'teams that had a game yesterday');
-                  btb.team.hadGameYesterday = true;
 
+                  btb.team.hadGameYesterday = true;
 
                 }
                 if (btb.team.today === full.date) {
-                  //console.log(full.date + ' ' + full.awayTeam.Name + ' ' + today, 'teams that have a game today');
                   btb.team.haveGameToday = true;
                 }
 
 
                 if (btb.team.tomorrow === full.date) {
-                  //console.log(full.date + ' ' + full.awayTeam.Name + ' ' + today, 'teams that have a game tomorrow');
+
                   btb.team.haveGameTomorrow = true;
                 }
 
               }
-               if (full.homeTeam.ID === btb.team.ID) {
-                //console.log(full.date + ' ' + full.awayTeam.Name + ' ' + today, 'teams that match ID away');
-                //console.log(full.date + ' ' + full.homeTeam.Name + ' ' + today, 'teams that match ID home');
+              if (full.homeTeam.ID === btb.team.ID) {
+
 
                 if (btb.team.yesterday === full.date) {
-                  //console.log(full.date + ' ' + full.awayTeam.Name + ' ' + today, 'teams that had a game yesterday');
+
                   btb.team.hadGameYesterday = true;
 
 
                 }
                 if (btb.team.today === full.date) {
-                  //console.log(full.date + ' ' + full.awayTeam.Name + ' ' + today, 'teams that have a game today');
                   btb.team.haveGameToday = true;
                 }
 
 
                 if (btb.team.tomorrow === full.date) {
-                  //console.log(full.date + ' ' + full.awayTeam.Name + ' ' + today, 'teams that have a game tomorrow');
+
                   btb.team.haveGameTomorrow = true;
                 }
 
@@ -254,26 +244,44 @@ starters: Array < any > ;
           }
         }
 
+        console.log('start sorting data for starters...');
+        for (let info of this.playerInfo) {
+
+          for (let data of this.myData) {
 
 
-          console.log('start sorting data for starters...');
-          for (let info of this.playerInfo) {
+            if (info.player.ID === data.player.ID) {
 
-            for (let data of this.myData) {
+              data.player.image = info.player.officialImageSrc;
+              data.player.twitterHandle = this.twitterHandles[data.team.ID].twitterHashTag;
 
-
-              if (info.player.ID === data.player.ID) {
-
-                data.player.image = info.player.officialImageSrc;
-                data.player.twitterHandle = this.twitterHandles[data.team.ID].twitterHashTag;
-
-
+              if (data.team.hadGameYesterday === true) {
+                //console.log(data, 'game yesterday');
+                if (data.team.haveGameToday === true) {
+                  data.team.secondBacktoBack = "2ndB2B";
+                } else {
+                  data.team.secondBacktoBack = "";
+                }
+              } else {
+                data.team.secondBacktoBack = "";
               }
 
-            }
-          }
+              if (data.team.haveGameToday === true) {
+                //console.log(data, 'game today');
+                if (data.team.haveGameTomorrow === true) {
+                  data.team.firstBacktoBack = "1stB2B";
+                } else {
+                  data.team.firstBacktoBack = "";
+                }
+              }
 
-        
+
+            }
+
+          }
+        }
+
+
 
         if (this.myData && this.gamesToday === true) {
           if (this.starterIdData.length > 0) {
@@ -362,32 +370,32 @@ starters: Array < any > ;
 
         }
 
-          
+
 
         this.showDataTomorrow = this.startersData;
-        
+
 
       }
 
     })
 
     this.tomorrowService
-              .sendStats(this.showDataTomorrow);
+      .sendStats(this.showDataTomorrow);
   }
 
   ngOnInit() {
-     if (this.sentDataTomorrow === undefined) {
+    if (this.sentDataTomorrow === undefined) {
       this.loadData();
-      
+
     } else {
-       setInterval(() => {
+      setInterval(() => {
         this.showDataTomorrow = this.sentDataTomorrow;
         //console.log(this.showDataTomorrow["0"].team.today, "get the date");
         this.gameDate = this.showDataTomorrow["0"].team.today;
       }, 300)
-      
+
     }
-    
+
   }
 
   openSnackBar() {

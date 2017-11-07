@@ -40,44 +40,44 @@ export class StartingGoaliesComponent implements OnInit {
   playerInfo: Array < any > ;
   noGamesToday: boolean;
   gamesToday: boolean;
-  twitterHandles: Array < any >;
+  twitterHandles: Array < any > ;
   selected: any;
   test: any;
   startingGoaliesToday: Array < any > = [];
 
-  startingGoalieTruth: { 
-                        startingGoalieTeamId: string, 
-                        startingGoalieId: string, 
-                        startingGoalie: string,
-                        winToday: string,
-                        loseToday:  string,
-                        saves: string,
-                        GamesStarted: string,
-                        GoalsAgainstAverage: string,
-                        MinutesPlayed: string,
-                        Shutouts: string,
-                        ShotsAgainst: string 
-                       };
+  startingGoalieTruth: {
+    startingGoalieTeamId: string,
+    startingGoalieId: string,
+    startingGoalie: string,
+    winToday: string,
+    loseToday: string,
+    saves: string,
+    GamesStarted: string,
+    GoalsAgainstAverage: string,
+    MinutesPlayed: string,
+    Shutouts: string,
+    ShotsAgainst: string
+  };
 
 
   constructor(private http: Http, private dataService: DataService, public snackBar: MatSnackBar, public router: Router, public dialog: MatDialog) {
-   
+
     yesterday = this.dataService.getYesterday();
     tomorrow = this.dataService.getTomorrow();
     today = this.dataService.getToday();
-    console.log(yesterday + ' yesterday, ' + today +' today, ' + tomorrow +' tomorrow, ');
+    console.log(yesterday + ' yesterday, ' + today + ' today, ' + tomorrow + ' tomorrow, ');
     this.sentData = this.dataService.getSentStats();
   }
 
-   public getJSON() {
-         this.http.get("./assets/twitter.json")
-           .map(response => response.json())
-           .subscribe(res => {
-      console.log(res['twitterHandles']["0"], 'twitter handles');
-      this.twitterHandles = res['twitterHandles']["0"];
-    })                     
+  public getJSON() {
+    this.http.get("./assets/twitter.json")
+      .map(response => response.json())
+      .subscribe(res => {
+        console.log(res['twitterHandles']["0"], 'twitter handles');
+        this.twitterHandles = res['twitterHandles']["0"];
+      })
 
-     }
+  }
 
   loadData() {
 
@@ -153,7 +153,7 @@ export class StartingGoaliesComponent implements OnInit {
           .getInfo().subscribe(res => {
             console.log(res['activeplayers'].playerentry, "active players stats...");
             this.playerInfo = res['activeplayers'].playerentry;
-         })
+          })
 
         this.dataService
           .getGameId().subscribe(res => {
@@ -164,8 +164,6 @@ export class StartingGoaliesComponent implements OnInit {
       })
 
   }
-
-
 
   sortData() {
 
@@ -178,12 +176,12 @@ export class StartingGoaliesComponent implements OnInit {
     } else {
       console.log('No games then no daily stats either. :(');
     }
-    
+
     this.dataService
       .getStats().subscribe(res => {
         console.log(res['cumulativeplayerstats'].playerstatsentry, "cumulative stats...");
         this.myData = res['cumulativeplayerstats'].playerstatsentry;
-      
+
         if (this.myData && this.dailySchedule) {
           console.log('start sorting data for daily schedule...');
           for (let schedule of this.dailySchedule) {
@@ -225,33 +223,33 @@ export class StartingGoaliesComponent implements OnInit {
 
 
 
-         if (this.myData && this.dailyStats) {
-            console.log('start sorting data for daily stats...');
-            for (let daily of this.dailyStats) {
-              for (let mdata of this.myData) {
+        if (this.myData && this.dailyStats) {
+          console.log('start sorting data for daily stats...');
+          for (let daily of this.dailyStats) {
+            for (let mdata of this.myData) {
 
 
-                if (daily.stats.Saves['#text'] > 0) {
-                    this.startingGoalieTruth = {
-                      startingGoalieTeamId: daily.team.ID,
-                      startingGoalieId: daily.player.ID,
-                      startingGoalie: daily.player.FirstName + ' ' + daily.player.LastName,
-                      winToday: daily.stats.Wins['#text'],
-                      loseToday: daily.stats.Losses['#text'],
-                      saves: daily.stats.Saves['#text'],
-                      GamesStarted: daily.stats.GamesStarted['#text'],
-                      GoalsAgainstAverage: daily.stats.GoalsAgainstAverage['#text'],
-                      MinutesPlayed: daily.stats.MinutesPlayed['#text'],
-                      Shutouts: daily.stats.Shutouts['#text'],
-                      ShotsAgainst: daily.stats.ShotsAgainst['#text']
-                   }
+              if (daily.stats.Saves['#text'] > 0) {
+                this.startingGoalieTruth = {
+                  startingGoalieTeamId: daily.team.ID,
+                  startingGoalieId: daily.player.ID,
+                  startingGoalie: daily.player.FirstName + ' ' + daily.player.LastName,
+                  winToday: daily.stats.Wins['#text'],
+                  loseToday: daily.stats.Losses['#text'],
+                  saves: daily.stats.Saves['#text'],
+                  GamesStarted: daily.stats.GamesStarted['#text'],
+                  GoalsAgainstAverage: daily.stats.GoalsAgainstAverage['#text'],
+                  MinutesPlayed: daily.stats.MinutesPlayed['#text'],
+                  Shutouts: daily.stats.Shutouts['#text'],
+                  ShotsAgainst: daily.stats.ShotsAgainst['#text']
+                }
 
-                   this.startingGoaliesToday.push(this.startingGoalieTruth);
-                 }
-                
+                this.startingGoaliesToday.push(this.startingGoalieTruth);
               }
+
             }
           }
+        }
 
         if (this.myData && this.fullSchedule) {
           console.log('start sorting data for full schedule...');
@@ -260,45 +258,39 @@ export class StartingGoaliesComponent implements OnInit {
             for (let btb of this.myData) {
 
               if (full.awayTeam.ID === btb.team.ID) {
-                //console.log(full.date + ' ' + full.awayTeam.Name + ' ' + today, 'teams that match ID away');
-                //console.log(full.date + ' ' + full.homeTeam.Name + ' ' + today, 'teams that match ID home');
 
                 if (btb.team.yesterday === full.date) {
-                  //console.log(full.date + ' ' + full.awayTeam.Name + ' ' + today, 'teams that had a game yesterday');
-                  btb.team.hadGameYesterday = true;
 
+                  btb.team.hadGameYesterday = true;
 
                 }
                 if (btb.team.today === full.date) {
-                  //console.log(full.date + ' ' + full.awayTeam.Name + ' ' + today, 'teams that have a game today');
                   btb.team.haveGameToday = true;
                 }
 
 
                 if (btb.team.tomorrow === full.date) {
-                  //console.log(full.date + ' ' + full.awayTeam.Name + ' ' + today, 'teams that have a game tomorrow');
+
                   btb.team.haveGameTomorrow = true;
                 }
 
               }
-               if (full.homeTeam.ID === btb.team.ID) {
-                //console.log(full.date + ' ' + full.awayTeam.Name + ' ' + today, 'teams that match ID away');
-                //console.log(full.date + ' ' + full.homeTeam.Name + ' ' + today, 'teams that match ID home');
+              if (full.homeTeam.ID === btb.team.ID) {
+
 
                 if (btb.team.yesterday === full.date) {
-                  //console.log(full.date + ' ' + full.awayTeam.Name + ' ' + today, 'teams that had a game yesterday');
+
                   btb.team.hadGameYesterday = true;
 
 
                 }
                 if (btb.team.today === full.date) {
-                  //console.log(full.date + ' ' + full.awayTeam.Name + ' ' + today, 'teams that have a game today');
                   btb.team.haveGameToday = true;
                 }
 
 
                 if (btb.team.tomorrow === full.date) {
-                  //console.log(full.date + ' ' + full.awayTeam.Name + ' ' + today, 'teams that have a game tomorrow');
+
                   btb.team.haveGameTomorrow = true;
                 }
 
@@ -306,39 +298,63 @@ export class StartingGoaliesComponent implements OnInit {
             }
           }
         }
-    
-          console.log('start sorting data for starters...');
-          for (let info of this.playerInfo) {
 
-            for (let data of this.myData) {
+        console.log('start sorting data for starters...');
+        for (let info of this.playerInfo) {
+
+          for (let data of this.myData) {
 
 
-              if (info.player.ID === data.player.ID) {
+            if (info.player.ID === data.player.ID) {
 
-                data.player.image = info.player.officialImageSrc;
-                data.player.twitterHandle = this.twitterHandles[data.team.ID].twitterHashTag;
-                 
+              data.player.image = info.player.officialImageSrc;
+              data.player.twitterHandle = this.twitterHandles[data.team.ID].twitterHashTag;
 
+              if (data.team.hadGameYesterday === true) {
+                //console.log(data, 'game yesterday');
+                if (data.team.haveGameToday === true) {
+                  data.team.secondBacktoBack = "2ndB2B";
+                } else {
+                  data.team.secondBacktoBack = "";
+                }
+              } else {
+                data.team.secondBacktoBack = "";
               }
 
-            }
-          }
+              if (data.team.haveGameToday === true) {
+                //console.log(data, 'game today');
+                if (data.team.haveGameTomorrow === true) {
+                  data.team.firstBacktoBack = "1stB2B";
+                } else {
+                  data.team.firstBacktoBack = "";
+                }
+              }
 
-      
+
+            }
+
+          }
+        }
+
+
 
         if (this.myData && this.gamesToday === true) {
-             if (this.startingGoaliesToday.length > 0) {
+          if (this.startingGoaliesToday.length > 0) {
             console.log('start sorting data for starters of games in progress...');
             for (let startinprogress of this.startingGoaliesToday) {
 
               for (let progressdata of this.myData) {
 
                 if (startinprogress.startingGoalieTeamId === progressdata.team.ID) {
-                 
 
-                    progressdata.player.startingGoalieTruth = startinprogress;
-     
-                } 
+
+                  progressdata.player.startingGoalieTruth = startinprogress;
+
+                }
+
+
+
+
 
               }
             }
@@ -411,7 +427,7 @@ export class StartingGoaliesComponent implements OnInit {
     this.startersData.forEach((data) => {
       if (data.player.gameLocation === 'home') {
         data.team.matchup = this.statData[data.team.gameId];
-        //console.log(this.statData[data.team.gameId], 'show this');
+        console.log(this.statData[data.team.gameId], 'show this');
         this.statData[data.team.gameId][0].player.twoPossibleStarters = false;
         this.statData[data.team.gameId][1].player.twoPossibleStarters = false;
 
@@ -441,37 +457,37 @@ export class StartingGoaliesComponent implements OnInit {
 
         }
 
-          
+
 
         this.showData = this.startersData;
-        
+
 
       }
 
     })
 
     this.dataService
-              .sendStats(this.showData);
+      .sendStats(this.showData);
   }
 
   ngOnInit() {
-     if (this.sentData === undefined) {
+    if (this.sentData === undefined) {
       this.getJSON();
       this.loadData();
-      
+
     } else {
-       this.getJSON();
-       setInterval(() => {
+      this.getJSON();
+      setInterval(() => {
         this.showData = this.sentData;
         //console.log(this.showData["0"].team.today, "get the date");
         this.gameDate = this.showData["0"].team.today;
       }, 300)
-      
+
     }
-    
+
   }
 
-   public open(event, data) {
+  public open(event, data) {
     this.selected = data;
     console.log(data, 'ok you clicked on player img...');
     this.dialog.open(TodayDialog, {
@@ -490,7 +506,7 @@ export class StartingGoaliesComponent implements OnInit {
     this.router.navigateByUrl('starting-goalies/yesterday');
   }
 
-   public goTomorrow() {
+  public goTomorrow() {
     this.router.navigateByUrl('starting-goalies/tomorrow');
   }
 
@@ -508,36 +524,36 @@ export class StartingGoaliesComponent implements OnInit {
 </mat-dialog-content>`,
 })
 
-export class TodayDialog implements OnInit{
+export class TodayDialog implements OnInit {
   test: any;
   noPosts: any;
-  tweetsData: Array < any >;
+  tweetsData: Array < any > ;
   constructor(public dialogRef: MatDialogRef < TodayDialog > , @Inject(MAT_DIALOG_DATA) public data: any, private http: Http) {
-    
+
   }
 
   loadStuff() {
-     let headers = new Headers();
-    
+    let headers = new Headers();
+
     headers.append('Content-Type', 'application/X-www-form-urlencoded');
-    
-    this.http.post('/authorize', {headers: headers}).subscribe((res) => {
+
+    this.http.post('/authorize', { headers: headers }).subscribe((res) => {
       this.searchCall();
     })
- 
+
 
   }
 
 
-searchCall() {
-  console.log(this.data, 'data passed in')
+  searchCall() {
+    console.log(this.data, 'data passed in')
     let AND;
     let headers = new Headers();
-    let searchterm = 'query=#startingGoalies #nhl'; 
-    
+    let searchterm = 'query=#startingGoalies #nhl';
+
     headers.append('Content-Type', 'application/X-www-form-urlencoded');
-    
-    this.http.post('/search', searchterm, {headers: headers}).subscribe((res) => {
+
+    this.http.post('/search', searchterm, { headers: headers }).subscribe((res) => {
       console.log(res.json().data.statuses, 'twitter stuff');
       this.tweetsData = res.json().data.statuses;
       if (this.tweetsData.length === 0) {
@@ -547,8 +563,8 @@ searchCall() {
   }
 
   ngOnInit() {
-     this.loadStuff();
-   }
+    this.loadStuff();
+  }
 }
 
 @Component({

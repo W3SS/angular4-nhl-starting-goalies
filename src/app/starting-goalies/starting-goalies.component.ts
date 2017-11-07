@@ -411,7 +411,7 @@ export class StartingGoaliesComponent implements OnInit {
     this.startersData.forEach((data) => {
       if (data.player.gameLocation === 'home') {
         data.team.matchup = this.statData[data.team.gameId];
-        console.log(this.statData[data.team.gameId], 'show this');
+        //console.log(this.statData[data.team.gameId], 'show this');
         this.statData[data.team.gameId][0].player.twoPossibleStarters = false;
         this.statData[data.team.gameId][1].player.twoPossibleStarters = false;
 

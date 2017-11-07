@@ -6,7 +6,7 @@ import 'rxjs/add/operator/do';
 
 //GET Yesteday
 let testDate = new Date();
-let thisDate = new Date(testDate.getTime() - (48 * 60 * 60 * 1000));
+let thisDate = new Date(testDate.getTime() - (24 * 60 * 60 * 1000));
 let tomorrowDate = new Date(thisDate.getTime() + (24 * 60 * 60 * 1000));
 let yesterdayDate = new Date(thisDate.getTime() - (24 * 60 * 60 * 1000));
 

@@ -315,18 +315,20 @@ export class YesterdayResultsComponent implements OnInit {
             for (let startid of this.starterIdData) {
 
               for (let startdata of this.myData) {
-              if (startid === startdata.player.ID && startdata.player.GamesStarted == '1') {
+              if (startid === startdata.player.ID && startdata.player.saves > 0) {
                   startdata.player.startingToday = true;
                   startdata.player.subedInToday = false;
                   //console.log(startdata, 'player data');
                   this.startersData.push(startdata);
 
-                } else if (startid === startdata.player.ID && startdata.player.GamesStarted == '0') {
-                  startdata.player.subedInToday = true;
-                  startdata.player.startingToday = false;
-                  this.startersData.push(startdata);
+                } 
 
-                }
+                // else if (startid === startdata.player.ID && startdata.player.GamesStarted == '0') {
+                //   startdata.player.subedInToday = true;
+                //   startdata.player.startingToday = false;
+                //   this.startersData.push(startdata);
+
+                // }
 
               }
             }

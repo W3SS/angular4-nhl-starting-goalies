@@ -26,7 +26,7 @@ let yesterdayUtcDate = new Date(yesterdayDate.toUTCString());
 
 utcDate.setHours(utcDate.getHours() - 8);
 tomorrowUtcDate.setHours(tomorrowUtcDate.getHours() - 0);
-yesterdayUtcDate.setHours(tomorrowUtcDate.getHours() - 0);
+yesterdayUtcDate.setHours(tomorrowUtcDate.getHours() - 8);
 
 
 let myDate = new Date(utcDate);

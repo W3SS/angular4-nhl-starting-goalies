@@ -229,7 +229,7 @@ export class StartingGoaliesComponent implements OnInit {
             console.log('start sorting data for daily stats...');
             for (let daily of this.dailyStats) {
               for (let mdata of this.myData) {
- 
+
 
                 if (daily.stats.Saves['#text'] > 0) {
                     this.startingGoalieTruth = {
@@ -245,11 +245,10 @@ export class StartingGoaliesComponent implements OnInit {
                       Shutouts: daily.stats.Shutouts['#text'],
                       ShotsAgainst: daily.stats.ShotsAgainst['#text']
                    }
+
+                   this.startingGoaliesToday.push(this.startingGoalieTruth);
                  }
-
-
-
-                this.startingGoaliesToday.push(this.startingGoalieTruth);
+                
               }
             }
           }

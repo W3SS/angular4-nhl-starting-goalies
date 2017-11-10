@@ -48,19 +48,6 @@ export class StartingGoaliesComponent implements OnInit {
   test: any;
   startingGoaliesToday: Array < any > = [];
 
-  // startingGoalieTruth: {
-  //   startingGoalieTeamId: string,
-  //   startingGoalieId: string,
-  //   startingGoalie: string
-  //   // winToday: string,
-  //   // loseToday: string,
-  //   // saves: string,
-  //   // GamesStarted: string,
-  //   // GoalsAgainstAverage: string,
-  //   // MinutesPlayed: string,
-  //   // Shutouts: string,
-  //   // ShotsAgainst: string
-  // };
 
 
   constructor(private http: Http, private dataService: DataService, public snackBar: MatSnackBar, public router: Router, public dialog: MatDialog) {
@@ -237,8 +224,10 @@ export class StartingGoaliesComponent implements OnInit {
                
                  mdata.player.saves = daily.stats.Saves['#text'];
                  mdata.player.shotsFaced = daily.stats.ShotsAgainst['#text'];
-                 mdata.player.winToday = daily.stats.Wins['#text'];
-                 mdata.player.loseToday = daily.stats.Losses['#text'];
+                 mdata.player.wins = daily.stats.Wins['#text'];
+                 mdata.player.losses = daily.stats.Losses['#text'];
+                 mdata.player.OvertimeLosses = daily.stats.OvertimeLosses['#text'];
+                 mdata.player.Shutouts = daily.stats.Shutouts['#text'];
                   if (daily.stats.Saves['#text'] > 0) {  
                    // this.starterIdData.push(daily.player.ID);
                    this.startingGoaliesToday.push(daily.player.ID);
@@ -246,29 +235,6 @@ export class StartingGoaliesComponent implements OnInit {
                
               
              }
-
-            
-
-              // if (daily.stats.Saves['#text'] > 0) {
-                
-              //   this.startingGoalieTruth = {
-              //     startingGoalieTeamId: daily.team.ID,
-              //     startingGoalieId: daily.player.ID,
-              //     startingGoalie: daily.player.FirstName + ' ' + daily.player.LastName
-               
-              //   }
-
-              //   // winToday: daily.stats.Wins['#text'],
-              //     // loseToday: daily.stats.Losses['#text'],
-              //     // saves: daily.stats.Saves['#text'],
-              //     // GamesStarted: daily.stats.GamesStarted['#text'],
-              //     // GoalsAgainstAverage: daily.stats.GoalsAgainstAverage['#text'],
-              //     // MinutesPlayed: daily.stats.MinutesPlayed['#text'],
-              //     // Shutouts: daily.stats.Shutouts['#text'],
-              //     // ShotsAgainst: daily.stats.ShotsAgainst['#text']
-
-              //   this.startingGoaliesToday.push(this.startingGoalieTruth);
-              // }
 
             }
           }
@@ -462,6 +428,10 @@ export class StartingGoaliesComponent implements OnInit {
           if (this.statData[data.team.gameId][0].team.ID === this.statData[data.team.gameId][2].team.ID) {
             this.statData[data.team.gameId][0].player.twoPossibleStarters = true;
             this.statData[data.team.gameId][0].twoPossibleStarters = true;
+            if (this.statData[data.team.gameId][2].player.saves == null && this.statData[data.team.gameId][0].player.saves > '0') {
+               console.log(this.statData[data.team.gameId][2].player, 'this is not a starter. api got it wrong');
+               this.statData[data.team.gameId][2].player.wrongStarter = true;
+            }
           } else {
             this.statData[data.team.gameId][0].twoPossibleStarters = false;
           }

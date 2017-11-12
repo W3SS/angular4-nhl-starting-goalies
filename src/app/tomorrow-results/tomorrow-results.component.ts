@@ -4,6 +4,7 @@ import { Observable } from 'rxjs/Observable';
 import { ActivatedRoute, Router, ActivatedRouteSnapshot } from '@angular/router';
 import { DatePipe } from '@angular/common';
 import { TomorrowService } from '../tomorrow.service';
+import { DataService } from '../data.service';
 import { MatSnackBar } from '@angular/material';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/observable/forkJoin';
@@ -30,23 +31,26 @@ export class TomorrowResultsComponent implements OnInit {
   myData: Array < any > ;
   showDataTomorrow: Array < any > ;
   sentDataTomorrow: Array < any > ;
+  sentDataToday: Array < any > ;
   gameDate: string = '';
   defineToken: string = '';
   statData: Array < any > = [];
   playerInfo: Array < any > ;
+  playerInjuries: Array < any > ;
   noGamesToday: boolean;
   gamesToday: boolean;
   twitterHandles: Array < any > ;
   tweetDay: any;
 
 
-  constructor(private http: Http, private tomorrowService: TomorrowService, public snackBar: MatSnackBar, public router: Router) {
+  constructor(private http: Http, private tomorrowService: TomorrowService, private todayService: DataService, public snackBar: MatSnackBar, public router: Router) {
     this.getJSON();
     yesterday = this.tomorrowService.getYesterday();
     tomorrow = this.tomorrowService.getTomorrow();
     today = this.tomorrowService.getToday();
     console.log(yesterday + ' yesterday, ' + today + ' today, ' + tomorrow + ' tomorrow, ');
     this.sentDataTomorrow = this.tomorrowService.getSentStats();
+    this.sentDataToday = this.todayService.getSentStats();
   }
 
   public getJSON() {
@@ -134,6 +138,12 @@ export class TomorrowResultsComponent implements OnInit {
 
           })
 
+          this.tomorrowService
+            .getInjured().subscribe(res => {
+              console.log(res['playerinjuries'].playerentry, "injured players...");
+              this.playerInjuries = res['playerinjuries'].playerentry;
+          })
+
         this.tomorrowService
           .getInfo().subscribe(res => {
             console.log(res['activeplayers'].playerentry, "active players stats...");
@@ -176,6 +186,13 @@ export class TomorrowResultsComponent implements OnInit {
                 sdata.team.tomorrow = tomorrow;
                 sdata.team.yesterday = yesterday;
                 sdata.team.day = this.tweetDay;
+                sdata.player.injured = false;
+                sdata.player.injury = 'none';
+                sdata.player.playedYesterday = false;
+                sdata.player.savesYesterday = '0';
+                sdata.player.winsYesterday = '0';
+                sdata.player.lossesYesterday = '0';
+
 
               }
               if (schedule.homeTeam.Name === sdata.team.Name) {
@@ -191,6 +208,12 @@ export class TomorrowResultsComponent implements OnInit {
                 sdata.team.tomorrow = tomorrow;
                 sdata.team.yesterday = yesterday;
                 sdata.team.day = this.tweetDay;
+                sdata.player.injured = false;
+                sdata.player.injury = 'none';
+                sdata.player.playedYesterday = false;
+                sdata.player.savesYesterday = '0';
+                sdata.player.winsYesterday = '0';
+                sdata.player.lossesYesterday = '0';
               }
             }
           }
@@ -281,9 +304,56 @@ export class TomorrowResultsComponent implements OnInit {
           }
         }
 
+        if (this.sentDataToday != null) {
+            console.log('start sorting data from yesterday...');
+            for (let today of this.sentDataToday) {
+
+              for (let tomdata of this.myData) {
+
+                if (today.player.saves > 0 && today.player.ID === tomdata.player.ID) {
+                  
+
+                    tomdata.player.playedYesterday = true;
+                    tomdata.player.savesYesterday = today.player.saves;
+                    tomdata.player.winsYesterday = today.player.wins;
+                    tomdata.player.lossesYesterday = today.player.losses;
+                    tomdata.player.saYesterday = today.player.shotsFaced;
+                    tomdata.player.olYesterday = today.player.OvertimeLosses;
+                    tomdata.player.shYesterday = today.player.Shutouts;
+
+                } 
+
+              }
+            }
+          }
+
+        if (this.playerInjuries.length > 0) {
+            console.log('start sorting data for starters matchups...');
+            for (let inj of this.playerInjuries) {
+
+              for (let injdata of this.myData) {
+
+                if (inj.player.ID === injdata.player.ID) {
+                  
+
+                    injdata.player.injured = true;
+                    injdata.player.injury = inj.injury;
+                    
+                    if (inj.injury.substr(inj.injury.length - 5) === '(Out)') {
+                      console.log(inj.injury.substr(inj.injury.length - 5), 'injuries that say OUT!');
+                       injdata.player.injuryOut = true;
+                    } 
+                    
+                } 
+
+              }
+            }
+          }
+
 
 
         if (this.myData && this.gamesToday === true) {
+
           if (this.starterIdData.length > 0) {
             console.log('start sorting data for starters matchups...');
             for (let startid of this.starterIdData) {
@@ -291,7 +361,7 @@ export class TomorrowResultsComponent implements OnInit {
               for (let startdata of this.myData) {
 
                 if (startid === startdata.team.ID) {
-                  if (startdata.stats.GamesPlayed['#text'] > 3) {
+                  if (startdata.stats.GamesPlayed['#text'] > 3 && startdata.player.injuryOut == null) {
 
                     startdata.player.startingToday = false;
                     startdata.player.likelyStartingToday = true;

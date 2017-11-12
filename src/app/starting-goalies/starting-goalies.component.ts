@@ -30,16 +30,13 @@ export class StartingGoaliesComponent implements OnInit {
   fullSchedule: Array < any > ;
   starterIdData: Array < any > = [];
   startersData: Array < any > = [];
-  startersDataNow: Array < any > = [];
   dailyStats: Array < any > = [];
   myData: Array < any > ;
   showData: Array < any > ;
-  showDataNow: Array < any > ;
   sentData: Array < any > ;
   gameDate: string = '';
   defineToken: string = '';
   statData: Array < any > = [];
-  statDataNow: Array < any > = [];
   playerInfo: Array < any > ;
   noGamesToday: boolean;
   gamesToday: boolean;

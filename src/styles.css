@@ -77,15 +77,23 @@ mat-card p {
 
   .card-wrap {
     display: inline-block;
-    margin: 20px;
+    margin: 0 0 20px 0;
     vertical-align: top;
-    width: 350px;
+    width: 400px;
   }
 
   .material-icons.md-48 { font-size: 38px; }
 
   .date-header {
     font-size: 22px;
+  }
+
+  .matchup-layout {
+    padding: 0;
+  }
+
+  .mat-card {
+    margin: 0;
   }
 
 

@@ -38,6 +38,7 @@ export class StartingGoaliesComponent implements OnInit {
   defineToken: string = '';
   statData: Array < any > = [];
   playerInfo: Array < any > ;
+  playerInjuries: Array < any > ;
   noGamesToday: boolean;
   gamesToday: boolean;
   twitterHandles: Array < any > ;
@@ -136,6 +137,12 @@ export class StartingGoaliesComponent implements OnInit {
 
           })
 
+         this.dataService
+            .getInjured().subscribe(res => {
+              console.log(res['playerinjuries'].playerentry, "injured players...");
+              this.playerInjuries = res['playerinjuries'].playerentry;
+          })
+
         this.dataService
           .getInfo().subscribe(res => {
             console.log(res['activeplayers'].playerentry, "active players stats...");
@@ -188,6 +195,8 @@ export class StartingGoaliesComponent implements OnInit {
                 sdata.team.today = today;
                 sdata.team.tomorrow = tomorrow;
                 sdata.team.yesterday = yesterday;
+                sdata.player.injured = false;
+                sdata.player.injury = 'none';
                
 
               }
@@ -204,6 +213,8 @@ export class StartingGoaliesComponent implements OnInit {
                 sdata.team.today = today;
                 sdata.team.tomorrow = tomorrow;
                 sdata.team.yesterday = yesterday;
+                sdata.player.injured = false;
+                sdata.player.injury = 'none';
                
               }
             }
@@ -321,6 +332,29 @@ export class StartingGoaliesComponent implements OnInit {
 
           }
         }
+
+        if (this.playerInjuries.length > 0) {
+            console.log('start sorting data for starters matchups...');
+            for (let inj of this.playerInjuries) {
+
+              for (let injdata of this.myData) {
+
+                if (inj.player.ID === injdata.player.ID) {
+                  
+
+                    injdata.player.injured = true;
+                    injdata.player.injury = inj.injury;
+                    
+                    if (inj.injury.substr(inj.injury.length - 5) === '(Out)') {
+                      console.log(inj.injury.substr(inj.injury.length - 5), 'injuries that say OUT!');
+                       injdata.player.injuryOut = true;
+                    } 
+                    
+                } 
+
+              }
+            }
+          }
 
 
 

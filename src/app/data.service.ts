@@ -61,7 +61,8 @@ export class DataService {
   schedule: Observable < any > = null;
   score: Observable < any > = null;
   play: Observable <any> = null;
-
+  injured: Observable <any> = null;
+  
   constructor(private http: Http) {}
 
   sendHeaderOptions(h, o) {
@@ -162,6 +163,18 @@ export class DataService {
         .map(response => response.json())
     }
     return this.daily;
+  }
+
+   getInjured() {
+
+    if (!this.injured) {
+      console.log('getting yesterday, today, tomorrow from API...');
+
+      let url9 = 'https://api.mysportsfeeds.com/v1.1/pull/nhl/2017-2018-regular/player_injuries.json?position=G';
+      this.injured = this.http.get(url9, options)
+        .map(response => response.json())
+    }
+    return this.injured;
   }
 
   clearCache() {

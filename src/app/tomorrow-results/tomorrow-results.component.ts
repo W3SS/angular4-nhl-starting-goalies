@@ -23,6 +23,7 @@ let options = null;
   styleUrls: ['./tomorrow-results.component.css']
 })
 export class TomorrowResultsComponent implements OnInit {
+
   starters: Array < any > ;
   dailySchedule: Array < any > ;
   fullSchedule: Array < any > ;
@@ -192,6 +193,9 @@ export class TomorrowResultsComponent implements OnInit {
                 sdata.player.savesYesterday = '0';
                 sdata.player.winsYesterday = '0';
                 sdata.player.lossesYesterday = '0';
+                sdata.player.saYesterday = '0';
+                sdata.player.olYesterday = '0';
+                sdata.player.shYesterday = '0';
 
 
               }
@@ -214,6 +218,9 @@ export class TomorrowResultsComponent implements OnInit {
                 sdata.player.savesYesterday = '0';
                 sdata.player.winsYesterday = '0';
                 sdata.player.lossesYesterday = '0';
+                sdata.player.saYesterday = '0';
+                sdata.player.olYesterday = '0';
+                sdata.player.shYesterday = '0';
               }
             }
           }
@@ -361,7 +368,7 @@ export class TomorrowResultsComponent implements OnInit {
               for (let startdata of this.myData) {
 
                 if (startid === startdata.team.ID) {
-                  if (startdata.stats.GamesPlayed['#text'] > 3 && startdata.player.injuryOut == null) {
+                  if (startdata.stats.GamesPlayed['#text'] > 4 && startdata.player.injuryOut == null && startdata.player.ID != '4493' &&  startdata.player.winsYesterday == '0' && startdata.player.lossesYesterday == '0' && startdata.player.olYesterday == '0') {
 
                     startdata.player.startingToday = false;
                     startdata.player.likelyStartingToday = true;
@@ -410,7 +417,7 @@ export class TomorrowResultsComponent implements OnInit {
     this.startersData.forEach((data) => {
       if (data.player.gameLocation === 'home') {
         data.team.matchup = this.statData[data.team.gameId];
-        //console.log(this.statData[data.team.gameId], 'show this');
+        console.log(this.statData[data.team.gameId], 'show this');
         this.statData[data.team.gameId][0].player.twoPossibleStarters = false;
         this.statData[data.team.gameId][1].player.twoPossibleStarters = false;
 

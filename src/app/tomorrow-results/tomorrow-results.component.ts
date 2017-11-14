@@ -327,6 +327,12 @@ export class TomorrowResultsComponent implements OnInit {
                     tomdata.player.saYesterday = today.player.shotsFaced;
                     tomdata.player.olYesterday = today.player.OvertimeLosses;
                     tomdata.player.shYesterday = today.player.Shutouts;
+                  if (today.player.wins == '1') {
+                    tomdata.player.resultYesterday = today.player.FirstName +' '+ today.player.LastName + ' got the Win tonight with ' + today.player.saves + ' saves against ' + today.player.shotsFaced + ' shots.'
+                   } else if (today.player.losses == '1' || today.player.OvertimeLosses == '1') {
+                      tomdata.player.resultYesterday = today.player.FirstName +' '+ today.player.LastName + ' got the Loss tonight with ' + today.player.saves + ' saves against ' + today.player.shotsFaced + ' shots.'
+                   }
+                  
 
                 } 
 
@@ -368,7 +374,7 @@ export class TomorrowResultsComponent implements OnInit {
               for (let startdata of this.myData) {
 
                 if (startid === startdata.team.ID) {
-                  if (startdata.stats.GamesPlayed['#text'] > 4 && startdata.player.injuryOut == null && startdata.player.ID != '4493' &&  startdata.player.winsYesterday == '0' && startdata.player.lossesYesterday == '0' && startdata.player.olYesterday == '0') {
+                  if (startdata.stats.GamesPlayed['#text'] > 4 && startdata.player.injuryOut == null &&  startdata.player.winsYesterday == '0' && startdata.player.lossesYesterday == '0' && startdata.player.olYesterday == '0') {
 
                     startdata.player.startingToday = false;
                     startdata.player.likelyStartingToday = true;

@@ -197,6 +197,13 @@ export class StartingGoaliesComponent implements OnInit {
                 sdata.team.yesterday = yesterday;
                 sdata.player.injured = false;
                 sdata.player.injury = 'none';
+
+                // sdata.player.saves = '0';
+                // sdata.player.shotsFaced = '0';
+                // sdata.player.wins = '0';
+                // sdata.player.losses = '0';
+                // sdata.player.OvertimeLosses = '0';
+                // sdata.player.Shutouts = '0';
                
 
               }
@@ -215,6 +222,13 @@ export class StartingGoaliesComponent implements OnInit {
                 sdata.team.yesterday = yesterday;
                 sdata.player.injured = false;
                 sdata.player.injury = 'none';
+                
+                // sdata.player.saves = '0';
+                // sdata.player.shotsFaced = '0';
+                // sdata.player.wins = '0';
+                // sdata.player.losses = '0';
+                // sdata.player.OvertimeLosses = '0';
+                // sdata.player.Shutouts = '0';
                
               }
             }
@@ -375,9 +389,6 @@ export class StartingGoaliesComponent implements OnInit {
                 }
 
 
-
-
-
               }
             }
           }
@@ -390,7 +401,7 @@ export class StartingGoaliesComponent implements OnInit {
               for (let startdata of this.myData) {
 
                 if (startid === startdata.team.ID) {
-                  if (startdata.stats.GamesPlayed['#text'] > 3) {
+                  if (startdata.stats.GamesPlayed['#text'] > 4 && startdata.player.injuryOut == null) {
 
                     startdata.player.startingToday = false;
                     startdata.player.likelyStartingToday = true;

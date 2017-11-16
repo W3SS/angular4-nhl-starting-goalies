@@ -4,13 +4,15 @@
   {
     "twitterHashTag": "#GoBolts",
     "City": "TampaBay",
-    "Name": "Lightning" 
+    "Name": "Lightning",
+    "5420": "@Vasilevskiy88" 
   },
   "17":
   {
     "twitterHashTag": "#AllTogetherNowSTL",
     "City": "StLouis",
-    "Name": "Blues"
+    "Name": "Blues",
+    "5107": "@34jallen"
   },
   "142":
   {
@@ -22,19 +24,22 @@
   {
     "twitterHashTag": "#TMLtalk",
     "City": "Toronto",
-    "Name": "MapleLeafs"
+    "Name": "MapleLeafs",
+    "5109": "@f_andersen30"
   },
   "28":
   {
     "twitterHashTag": "#GoKingsGo",
     "City": "LosAngeles",
-    "Name": "Kings"
+    "Name": "Kings",
+    "4333": "@JonathanQuick32"
   },
   "10":
   {
     "twitterHashTag": "#LetsGoPens",
     "City": "Pittsburgh",
-    "Name": "Penguins"
+    "Name": "Penguins",
+    "5894": "@mattmurray_30"
   },
   "7":
   {
@@ -53,7 +58,8 @@
   {
     "twitterHashTag": "#Sens",
     "City": "Ottawa",
-    "Name": "Senators"
+    "Name": "Senators",
+    "757": "@CraigAnderson41"
   },
   "20":
   {
@@ -78,7 +84,8 @@
   {
     "twitterHashTag": "#LetsGoFlyers",
     "City": "Philadelphia",
-    "Name": "Flyers"
+    "Name": "Flyers",
+    "4305": "@KidElls1"
   },
   "22":
   {
@@ -97,7 +104,8 @@
   {
     "twitterHashTag": "#Preds",
     "City": "Nashville",
-    "Name": "Predators"
+    "Name": "Predators",
+    "3810": "@Pekka_Rinne"
   },
   "23":
   {
@@ -153,7 +161,8 @@
   {
     "twitterHashTag": "#Redvolution",
     "City": "Carolina",
-    "Name": "Hurricanes"
+    "Name": "Hurricanes",
+    "5475": "@SDarling_33"
   },
   "25":
   {
@@ -172,19 +181,22 @@
   {
     "twitterHashTag": "#LetsGoOilers",
     "City": "Edmonton",
-    "Name": "Oilers"
+    "Name": "Oilers",
+    "5277": "@ctalbot33"
   },
   "14":
   {
     "twitterHashTag": "#GoHabsGo",
     "City": "Montreal",
-    "Name": "Canadiens"
+    "Name": "Canadiens",
+    "9072": "@CharlieLindgren"
   },
   "30":
   {
     "twitterHashTag": "#Yotes",
     "City": "Arizona",
-    "Name": "Coyotes"
+    "Name": "Coyotes",
+    "5296": "@ARaanta31"
   },
   "4":
   {

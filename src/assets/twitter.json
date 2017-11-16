@@ -18,7 +18,8 @@
   {
     "twitterHashTag": "#VegasBorn",
     "City": "Vegas",
-    "Name": "GoldenKnights"
+    "Name": "GoldenKnights",
+    "ID": "Maxime Lagace"
   },
   "12":
   {
@@ -45,7 +46,8 @@
   {
     "twitterHashTag": "#NJDevils",
     "City": "NewJersey",
-    "Name": "Devils"
+    "Name": "Devils",
+    "ID": "Cory Schneider"
   },
   "19":
   {

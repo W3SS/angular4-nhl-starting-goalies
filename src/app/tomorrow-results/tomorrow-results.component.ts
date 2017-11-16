@@ -319,7 +319,7 @@ export class TomorrowResultsComponent implements OnInit {
 
                 if (today.player.saves > 0 && today.player.ID === tomdata.player.ID) {
                   
-
+                    tomdata.player.finishedYesterday = false;
                     tomdata.player.playedYesterday = true;
                     tomdata.player.savesYesterday = today.player.saves;
                     tomdata.player.winsYesterday = today.player.wins;
@@ -330,10 +330,9 @@ export class TomorrowResultsComponent implements OnInit {
                   if (today.player.wins == '1') {
                     tomdata.player.resultYesterday = today.player.FirstName +' '+ today.player.LastName + ' got the Win tonight with ' + today.player.saves + ' saves against ' + today.player.shotsFaced + ' shots.'
                    } else if (today.player.losses == '1' || today.player.OvertimeLosses == '1') {
-                      tomdata.player.resultYesterday = today.player.FirstName +' '+ today.player.LastName + ' got the Loss tonight with ' + today.player.saves + ' saves against ' + today.player.shotsFaced + ' shots.'
+                    tomdata.player.resultYesterday = today.player.FirstName +' '+ today.player.LastName + ' got the Loss tonight with ' + today.player.saves + ' saves against ' + today.player.shotsFaced + ' shots.'
                    }
                   
-
                 } 
 
               }
@@ -374,8 +373,8 @@ export class TomorrowResultsComponent implements OnInit {
               for (let startdata of this.myData) {
 
                 if (startid === startdata.team.ID) {
-                  if (startdata.stats.GamesPlayed['#text'] > 4 && startdata.player.injuryOut == null &&  startdata.player.winsYesterday == '0' && startdata.player.lossesYesterday == '0' && startdata.player.olYesterday == '0') {
-
+                  if (startdata.stats.GamesPlayed['#text'] > 4 && startdata.player.injuryOut == null) {
+//&&  startdata.player.winsYesterday == '0' && startdata.player.lossesYesterday == '0' && startdata.player.olYesterday == '0'
                     startdata.player.startingToday = false;
                     startdata.player.likelyStartingToday = true;
                     //console.log(startdata.player.FirstName + " " + startdata.player.LastName, "this goalie is not starting yet. but he might start.");
@@ -431,12 +430,24 @@ export class TomorrowResultsComponent implements OnInit {
           //console.log(this.statData[data.team.gameId][0].team.Name + ' ' + this.statData[data.team.gameId][1].team.Name + ' ' + this.statData[data.team.gameId][2].team.Name, 'possible starters...');
           if (this.statData[data.team.gameId][0].team.ID === this.statData[data.team.gameId][1].team.ID) {
             this.statData[data.team.gameId][1].twoPossibleStarters = true;
+            if (this.statData[data.team.gameId][0].player.resultYesterday != null) {
+              this.statData[data.team.gameId][0].player.finishedYesterday = true;
+            } 
+            if (this.statData[data.team.gameId][1].player.resultYesterday != null) {
+              this.statData[data.team.gameId][1].player.finishedYesterday = true;
+            }
           } else {
             this.statData[data.team.gameId][1].twoPossibleStarters = false;
           }
           if (this.statData[data.team.gameId][1].team.ID === this.statData[data.team.gameId][2].team.ID) {
             // this.statData[data.team.gameId][1].twoPossibleStarters = true;
             this.statData[data.team.gameId][2].player.twoPossibleStarters = true;
+              if (this.statData[data.team.gameId][2].player.resultYesterday != null) {
+              this.statData[data.team.gameId][2].player.finishedYesterday = true;
+            } 
+            if (this.statData[data.team.gameId][1].player.resultYesterday != null) {
+              this.statData[data.team.gameId][1].player.finishedYesterday = true;
+            }
           } else {
             // this.statData[data.team.gameId][1].twoPossibleStarters = false;
             this.statData[data.team.gameId][2].player.twoPossibleStarters = false;
@@ -445,6 +456,12 @@ export class TomorrowResultsComponent implements OnInit {
             if (this.statData[data.team.gameId][2].team.ID === this.statData[data.team.gameId][3].team.ID) {
               this.statData[data.team.gameId][2].twoPossibleStarters = true;
               this.statData[data.team.gameId][3].twoPossibleStarters = true;
+                if (this.statData[data.team.gameId][2].player.resultYesterday != null) {
+              this.statData[data.team.gameId][2].player.finishedYesterday = true;
+            } 
+            if (this.statData[data.team.gameId][3].player.resultYesterday != null) {
+              this.statData[data.team.gameId][3].player.finishedYesterday = true;
+            }
             } else {
               this.statData[data.team.gameId][2].twoPossibleStarters = false;
               this.statData[data.team.gameId][3].twoPossibleStarters = false;

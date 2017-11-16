@@ -13,7 +13,9 @@
             <ng-template #no><span style="color: #ccc;">back</span></ng-template>
             <br>
             <img src="{{ data.team.matchup[0].player.image }}" onError="this.src='https://nhl.bamcontent.com/images/headshots/current/168x168/goalie@2x.jpg'">
-            <br> {{ data.team.matchup[0].player.FirstName + ' ' + data.team.matchup[0].player.LastName + ' (' + data.team.matchup[0].team.Name + ' - ' + data.team.matchup[0].player.Position + ')'}}
+            <br>  <span style="font-weight: bold;">{{ data.team.matchup[0].player.FirstName + ' ' + data.team.matchup[0].player.LastName }}</span> <span fxHide [fxHide.gt-xs]="isVisibleOnDesktop()">
+              ({{ data.team.matchup[0].team.Name + ' - ' + data.team.matchup[0].player.Position }})
+            </span>
             <br> Wins - Losses: {{ data.team.matchup[0].stats.stats.Wins['#text'] + ' - ' + data.team.matchup[0].stats.stats.Losses['#text'] }} <span *ngIf="data.team.matchup[1].player.saves == null"><br> 
               {{data.team.matchup[1].stats.stats.GoalsAgainst['#text']}} Goals given up <br>
               Season GAA: {{data.team.matchup[1].stats.stats.GoalsAgainstAverage['#text']}}</span> <br>
@@ -30,7 +32,9 @@
             <ng-template #no><span style="color: #ccc;">back</span></ng-template>
             <br>
             <img src="{{ data.team.matchup[1].player.image }}" onError="this.src='https://nhl.bamcontent.com/images/headshots/current/168x168/goalie@2x.jpg'">
-            <br> {{ data.team.matchup[1].player.FirstName + ' ' + data.team.matchup[1].player.LastName + ' (' + data.team.matchup[1].team.Name + ' - ' + data.team.matchup[1].player.Position + ')'}}
+            <br>   <span style="font-weight: bold;">{{ data.team.matchup[1].player.FirstName + ' ' + data.team.matchup[1].player.LastName }}</span> <span fxHide [fxHide.gt-xs]="isVisibleOnDesktop()">
+              ({{ data.team.matchup[1].team.Name + ' - ' + data.team.matchup[1].player.Position }})
+            </span>
             <br> Wins - Losses: {{ data.team.matchup[1].stats.stats.Wins['#text'] + ' - ' + data.team.matchup[1].stats.stats.Losses['#text'] }} <span *ngIf="data.team.matchup[1].player.saves == null"><br> 
               {{data.team.matchup[1].stats.stats.GoalsAgainst['#text']}} Goals given up <br>
               Season GAA: {{data.team.matchup[1].stats.stats.GoalsAgainstAverage['#text']}}</span> <br>
@@ -51,7 +55,9 @@
              <img class="faded" src="{{ data.team.matchup[0].player.image }}" onError="this.src='https://nhl.bamcontent.com/images/headshots/current/168x168/goalie@2x.jpg'">
             
             <br>
-            <span class="faded">{{ data.team.matchup[0].player.FirstName + ' ' + data.team.matchup[0].player.LastName + ' (' + data.team.matchup[0].team.Name + ' - ' + data.team.matchup[0].player.Position + ')'}} <br>
+            <span class="faded"> <span style="font-weight: bold;">{{ data.team.matchup[0].player.FirstName + ' ' + data.team.matchup[0].player.LastName }}</span> <span fxHide [fxHide.gt-xs]="isVisibleOnDesktop()">
+              ({{ data.team.matchup[0].team.Name + ' - ' + data.team.matchup[0].player.Position }})
+            </span> <br>
                 Wins - Losses: {{ data.team.matchup[0].stats.stats.Wins['#text'] + ' - ' +  data.team.matchup[0].stats.stats.Losses['#text'] }} <span *ngIf="data.team.matchup[1].player.saves == null"><br> 
               {{data.team.matchup[1].stats.stats.GoalsAgainst['#text']}} Goals given up <br>
               Season GAA: {{data.team.matchup[1].stats.stats.GoalsAgainstAverage['#text']}}</span> <br>
@@ -68,7 +74,9 @@
                        <img src="{{ data.team.matchup[0].player.image }}" onError="this.src='https://nhl.bamcontent.com/images/headshots/current/168x168/goalie@2x.jpg'">
 
                       <br>
-                      {{ data.team.matchup[0].player.FirstName + ' ' + data.team.matchup[0].player.LastName + ' (' + data.team.matchup[0].team.Name + ' - ' + data.team.matchup[0].player.Position + ')'}} <br>
+                       <span style="font-weight: bold;">{{ data.team.matchup[0].player.FirstName + ' ' + data.team.matchup[0].player.LastName }}</span> <span fxHide [fxHide.gt-xs]="isVisibleOnDesktop()">
+              ({{ data.team.matchup[0].team.Name + ' - ' + data.team.matchup[0].player.Position }})
+            </span> <br>
                   Wins - Losses: {{ data.team.matchup[0].stats.stats.Wins['#text'] + ' - ' +  data.team.matchup[0].stats.stats.Losses['#text'] }} <span *ngIf="data.team.matchup[1].player.saves == null"><br> 
               {{data.team.matchup[1].stats.stats.GoalsAgainst['#text']}} Goals given up <br>
               Season GAA: {{data.team.matchup[1].stats.stats.GoalsAgainstAverage['#text']}}</span> <br>
@@ -84,7 +92,9 @@
                   <img src="{{ data.team.matchup[1].player.image }}" onError="this.src='https://nhl.bamcontent.com/images/headshots/current/168x168/goalie@2x.jpg'">
 
                 <br>
-                  {{ data.team.matchup[1].player.FirstName + ' ' + data.team.matchup[1].player.LastName + ' (' + data.team.matchup[1].team.Name + ' - ' + data.team.matchup[1].player.Position + ')'}} <br>
+                    <span style="font-weight: bold;">{{ data.team.matchup[1].player.FirstName + ' ' + data.team.matchup[1].player.LastName }}</span> <span fxHide [fxHide.gt-xs]="isVisibleOnDesktop()">
+              ({{ data.team.matchup[1].team.Name + ' - ' + data.team.matchup[1].player.Position }})
+            </span> <br>
                   Wins - Losses: {{ data.team.matchup[1].stats.stats.Wins['#text'] + ' - ' +  data.team.matchup[1].stats.stats.Losses['#text'] }} <span *ngIf="data.team.matchup[1].player.saves == null"><br> 
               {{data.team.matchup[1].stats.stats.GoalsAgainst['#text']}} Goals given up <br>
               Season GAA: {{data.team.matchup[1].stats.stats.GoalsAgainstAverage['#text']}}</span> <br>
@@ -101,7 +111,9 @@
                   <img src="{{ data.team.matchup[0].player.image }}" onError="this.src='https://nhl.bamcontent.com/images/headshots/current/168x168/goalie@2x.jpg'">
 
                 <br>
-                  {{ data.team.matchup[0].player.FirstName + ' ' + data.team.matchup[0].player.LastName + ' (' + data.team.matchup[0].team.Name + ' - ' + data.team.matchup[0].player.Position + ')'}} <br>
+                    <span style="font-weight: bold;">{{ data.team.matchup[0].player.FirstName + ' ' + data.team.matchup[0].player.LastName }}</span> <span fxHide [fxHide.gt-xs]="isVisibleOnDesktop()">
+              ({{ data.team.matchup[0].team.Name + ' - ' + data.team.matchup[0].player.Position }})
+            </span> <br>
                   Wins - Losses: {{ data.team.matchup[0].stats.stats.Wins['#text'] + ' - ' +  data.team.matchup[0].stats.stats.Losses['#text'] }} <span *ngIf="data.team.matchup[0].player.saves == null"><br> 
               {{data.team.matchup[0].stats.stats.GoalsAgainst['#text']}} Goals given up <br>
               Season GAA: {{data.team.matchup[0].stats.stats.GoalsAgainstAverage['#text']}}</span> <br>
@@ -124,7 +136,9 @@
             <br>
             <img class="faded" src="{{ data.team.matchup[1].player.image }}" onError="this.src='https://nhl.bamcontent.com/images/headshots/current/168x168/goalie@2x.jpg'">
             <br>
-            <span class="faded">{{ data.team.matchup[1].player.FirstName + ' ' + data.team.matchup[1].player.LastName + ' (' + data.team.matchup[1].team.Name + ' - ' + data.team.matchup[1].player.Position + ')'}} <br>
+            <span class="faded">  <span style="font-weight: bold;">{{ data.team.matchup[1].player.FirstName + ' ' + data.team.matchup[1].player.LastName }}</span> <span fxHide [fxHide.gt-xs]="isVisibleOnDesktop()">
+              ({{ data.team.matchup[1].team.Name + ' - ' + data.team.matchup[1].player.Position }})
+            </span> <br>
                   Wins - Losses: {{ data.team.matchup[1].stats.stats.Wins['#text'] + ' - ' +  data.team.matchup[1].stats.stats.Losses['#text'] }} <span *ngIf="data.team.matchup[1].player.saves == null"><br> 
               {{data.team.matchup[1].stats.stats.GoalsAgainst['#text']}} Goals given up <br>
               Season GAA: {{data.team.matchup[1].stats.stats.GoalsAgainstAverage['#text']}}</span> <br>
@@ -150,7 +164,9 @@
                        <img src="{{ data.team.matchup[1].player.image }}" onError="this.src='https://nhl.bamcontent.com/images/headshots/current/168x168/goalie@2x.jpg'">
 
                       <br>
-                      {{ data.team.matchup[1].player.FirstName + ' ' + data.team.matchup[1].player.LastName + ' (' + data.team.matchup[1].team.Name + ' - ' + data.team.matchup[1].player.Position + ')'}} <br>
+                      <span style="font-weight: bold;">{{ data.team.matchup[1].player.FirstName + ' ' + data.team.matchup[1].player.LastName }}</span> <span fxHide [fxHide.gt-xs]="isVisibleOnDesktop()">
+              ({{ data.team.matchup[1].team.Name + ' - ' + data.team.matchup[1].player.Position }})
+            </span> <br>
                   Wins - Losses: {{ data.team.matchup[1].stats.stats.Wins['#text'] + ' - ' +  data.team.matchup[1].stats.stats.Losses['#text'] }} <span *ngIf="data.team.matchup[1].player.saves == null"><br> 
               {{data.team.matchup[1].stats.stats.GoalsAgainst['#text']}} Goals given up <br>
               Season GAA: {{data.team.matchup[1].stats.stats.GoalsAgainstAverage['#text']}}</span> <br>
@@ -166,7 +182,9 @@
                   <img src="{{ data.team.matchup[2].player.image }}" onError="this.src='https://nhl.bamcontent.com/images/headshots/current/168x168/goalie@2x.jpg'">
 
                 <br>
-                  {{ data.team.matchup[2].player.FirstName + ' ' + data.team.matchup[2].player.LastName + ' (' + data.team.matchup[2].team.Name + ' - ' + data.team.matchup[2].player.Position + ')'}} <br>
+                  <span style="font-weight: bold;">{{ data.team.matchup[2].player.FirstName + ' ' + data.team.matchup[2].player.LastName }}</span> <span fxHide [fxHide.gt-xs]="isVisibleOnDesktop()">
+              ({{ data.team.matchup[2].team.Name + ' - ' + data.team.matchup[2].player.Position }})
+            </span> <br>
                   Wins - Losses: {{ data.team.matchup[2].stats.stats.Wins['#text'] + ' - ' +  data.team.matchup[2].stats.stats.Losses['#text'] }} <span *ngIf="data.team.matchup[2].player.saves == null"><br> 
               {{data.team.matchup[2].stats.stats.GoalsAgainst['#text']}} Goals given up <br>
               Season GAA: {{data.team.matchup[2].stats.stats.GoalsAgainstAverage['#text']}}</span> <br>
@@ -190,7 +208,9 @@
                   <img src="{{ data.team.matchup[2].player.image }}" onError="this.src='https://nhl.bamcontent.com/images/headshots/current/168x168/goalie@2x.jpg'">
 
                 <br>
-                  {{ data.team.matchup[2].player.FirstName + ' ' + data.team.matchup[2].player.LastName + ' (' + data.team.matchup[2].team.Name + ' - ' + data.team.matchup[2].player.Position + ')'}} <br>
+              <span style="font-weight: bold;">{{ data.team.matchup[2].player.FirstName + ' ' + data.team.matchup[2].player.LastName }}</span> <span fxHide [fxHide.gt-xs]="isVisibleOnDesktop()">
+              ({{ data.team.matchup[2].team.Name + ' - ' + data.team.matchup[2].player.Position }})
+            </span> <br>
                   Wins - Losses: {{ data.team.matchup[2].stats.stats.Wins['#text'] + ' - ' +  data.team.matchup[2].stats.stats.Losses['#text'] }} <span *ngIf="data.team.matchup[2].player.saves == null"><br> 
               {{data.team.matchup[2].stats.stats.GoalsAgainst['#text']}} Goals given up <br>
               Season GAA: {{data.team.matchup[2].stats.stats.GoalsAgainstAverage['#text']}}</span> <br>
@@ -214,7 +234,9 @@
                        <img src="{{ data.team.matchup[2].player.image }}" onError="this.src='https://nhl.bamcontent.com/images/headshots/current/168x168/goalie@2x.jpg'">
 
                       <br>
-                      {{ data.team.matchup[2].player.FirstName + ' ' + data.team.matchup[2].player.LastName + ' (' + data.team.matchup[2].team.Name + ' - ' + data.team.matchup[2].player.Position + ')'}} <br>
+                      <span style="font-weight: bold;">{{ data.team.matchup[2].player.FirstName + ' ' + data.team.matchup[2].player.LastName }}</span> <span fxHide [fxHide.gt-xs]="isVisibleOnDesktop()">
+              ({{ data.team.matchup[2].team.Name + ' - ' + data.team.matchup[2].player.Position }})
+            </span><br>
                   Wins - Losses: {{ data.team.matchup[2].stats.stats.Wins['#text'] + ' - ' +  data.team.matchup[2].stats.stats.Losses['#text'] }} <span *ngIf="data.team.matchup[2].player.saves == null"><br> 
               {{data.team.matchup[2].stats.stats.GoalsAgainst['#text']}} Goals given up <br>
               Season GAA: {{data.team.matchup[2].stats.stats.GoalsAgainstAverage['#text']}}</span> <br>
@@ -230,7 +252,9 @@
                   <img src="{{ data.team.matchup[3].player.image }}" onError="this.src='https://nhl.bamcontent.com/images/headshots/current/168x168/goalie@3x.jpg'">
 
                 <br>
-                  {{ data.team.matchup[3].player.FirstName + ' ' + data.team.matchup[3].player.LastName + ' (' + data.team.matchup[3].team.Name + ' - ' + data.team.matchup[3].player.Position + ')'}} <br>
+                  <span style="font-weight: bold;">{{ data.team.matchup[3].player.FirstName + ' ' + data.team.matchup[3].player.LastName }}</span> <span fxHide [fxHide.gt-xs]="isVisibleOnDesktop()">
+              ({{ data.team.matchup[3].team.Name + ' - ' + data.team.matchup[3].player.Position }})
+            </span> <br>
                   Wins - Losses: {{ data.team.matchup[3].stats.stats.Wins['#text'] + ' - ' +  data.team.matchup[3].stats.stats.Losses['#text'] }} <span *ngIf="data.team.matchup[3].player.saves == null"><br> 
               {{data.team.matchup[3].stats.stats.GoalsAgainst['#text']}} Goals given up <br>
               Season GAA: {{data.team.matchup[3].stats.stats.GoalsAgainstAverage['#text']}}</span> <br>

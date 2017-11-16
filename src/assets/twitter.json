@@ -59,7 +59,8 @@
   {
     "twitterHashTag": "#Blackhawks",
     "City": "Chicago",
-    "Name": "Blackhawks"
+    "Name": "Blackhawks",
+    "3855": "#crOwMG"
   },
   "8":
   {
@@ -90,7 +91,7 @@
     "twitterHashTag": "#GoStars",
     "City": "Dallas",
     "Name": "Stars",
-    "GoalieStarter": "@Benbishop30"
+    "4561": "@Benbishop30"
   },
   "18":
   {
@@ -108,7 +109,8 @@
   {
     "twitterHashTag": "#LetsGoDucks",
     "City": "Anaheim",
-    "Name": "Ducks"
+    "Name": "Ducks",
+    "5227": "@JohnGibson35"
   },
   "5":
   {
@@ -144,7 +146,8 @@
   {
     "twitterHashTag": "#NHLBruins",
     "City": "Boston",
-    "Name": "Bruins"
+    "Name": "Bruins",
+    "4326": "@tuukkarask"
   },
   "3":
   {
@@ -162,7 +165,8 @@
   {
     "twitterHashTag": "#NYR",
     "City": "NewYork",
-    "Name": "Rangers"
+    "Name": "Rangers",
+    "3647": "@HLundqvist30"
   },
   "24":
   {

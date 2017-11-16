@@ -481,6 +481,10 @@ export class TomorrowResultsComponent implements OnInit {
 
   }
 
+   public isVisibleOnDesktop() {
+    // console.log('width over 600px');
+  }
+
   openSnackBar() {
     this.snackBar.openFromComponent(InfoTomorrow, {
       // duration: 500,

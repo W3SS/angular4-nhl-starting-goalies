@@ -198,12 +198,7 @@ export class StartingGoaliesComponent implements OnInit {
                 sdata.player.injured = false;
                 sdata.player.injury = 'none';
 
-                // sdata.player.saves = '0';
-                // sdata.player.shotsFaced = '0';
-                // sdata.player.wins = '0';
-                // sdata.player.losses = '0';
-                // sdata.player.OvertimeLosses = '0';
-                // sdata.player.Shutouts = '0';
+               
                
 
               }
@@ -222,13 +217,8 @@ export class StartingGoaliesComponent implements OnInit {
                 sdata.team.yesterday = yesterday;
                 sdata.player.injured = false;
                 sdata.player.injury = 'none';
-                
-                // sdata.player.saves = '0';
-                // sdata.player.shotsFaced = '0';
-                // sdata.player.wins = '0';
-                // sdata.player.losses = '0';
-                // sdata.player.OvertimeLosses = '0';
-                // sdata.player.Shutouts = '0';
+
+               
                
               }
             }
@@ -478,7 +468,7 @@ export class StartingGoaliesComponent implements OnInit {
             this.statData[data.team.gameId][0].twoPossibleStarters = false;
           }
           if (this.statData[data.team.gameId][1].team.ID === this.statData[data.team.gameId][2].team.ID) {
-            // this.statData[data.team.gameId][1].twoPossibleStarters = true;
+            this.statData[data.team.gameId][1].twoPossibleStarters = true;
             this.statData[data.team.gameId][2].player.twoPossibleStarters = true;
             if (this.statData[data.team.gameId][2].player.saves == null && this.statData[data.team.gameId][1].player.saves > '0') {
                console.log(this.statData[data.team.gameId][2].player, 'this is not a starter. api got it wrong');
@@ -531,6 +521,10 @@ export class StartingGoaliesComponent implements OnInit {
 
     }
 
+  }
+
+   public isVisibleOnDesktop() {
+    // console.log('width over 600px');
   }
 
   public open(event, data) {

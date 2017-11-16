@@ -441,6 +441,10 @@ export class YesterdayResultsComponent implements OnInit {
     }
   }
 
+   public isVisibleOnDesktop() {
+    // console.log('width over 600px');
+  }
+
   public goToday() {
     this.router.navigateByUrl('starting-goalies');
   }

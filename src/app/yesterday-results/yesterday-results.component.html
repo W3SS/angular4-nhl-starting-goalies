@@ -273,7 +273,15 @@
           <br> The <span *ngIf="data.team.opponentScore < data.team.teamScore; then home else away"></span>
           <ng-template #home>{{data.team.Name}}</ng-template>
           <ng-template #away>{{data.team.opponentName}}</ng-template> Win!
-        </p>
+        </p> <br> <br>
+             <span *ngIf="data.team.matchup[0].player.Shutouts == '1'">
+           <share-container direction="horizontal" addedText="" [properties]="{title: data.team.matchup[0].team.City +' '+ data.team.matchup[0].team.Name +' '+ data.team.matchup[0].player.FirstName +' '+ data.team.matchup[0].player.LastName + ' had a '+ data.team.matchup[0].player.saves +' save SHUTOUT last-night against the '+ data.team.matchup[1].team.City + ' ' + data.team.matchup[1].team.Name +' @ '+  data.team.matchup[1].team.City, description:'starting goalies', img:'img', via:'GoaliesStarting', hashtags:'startingGoalies #SHUTOUT #Stats #NHL #FantasyHockey '+data.team.matchup[0].player.twitterHandle +' '+data.team.matchup[1].player.twitterHandle}" [expandable]="false" [textEnabled]="true" [platforms]="['twitter']">
+          </share-container>
+         </span>
+             <span *ngIf="data.team.matchup[1].player.Shutouts == '1'">
+           <share-container direction="horizontal" addedText="" [properties]="{title: data.team.matchup[1].team.City +' '+ data.team.matchup[1].team.Name +' '+ data.team.matchup[1].player.FirstName +' '+ data.team.matchup[1].player.LastName + ' had a '+ data.team.matchup[1].player.saves +' save SHUTOUT last-night against the '+ data.team.matchup[0].team.City + ' ' + data.team.matchup[0].team.Name +' @ '+  data.team.matchup[1].team.City, description:'starting goalies', img:'img', via:'GoaliesStarting', hashtags:'startingGoalies #SHUTOUT #Stats #NHL #FantasyHockey '+data.team.matchup[0].player.twitterHandle +' '+data.team.matchup[1].player.twitterHandle}" [expandable]="false" [textEnabled]="true" [platforms]="['twitter']">
+          </share-container>
+         </span>
       </mat-card>
     </div>
   </div>

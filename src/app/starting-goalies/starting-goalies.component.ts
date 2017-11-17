@@ -240,6 +240,14 @@ export class StartingGoaliesComponent implements OnInit {
                  mdata.player.losses = daily.stats.Losses['#text'];
                  mdata.player.OvertimeLosses = daily.stats.OvertimeLosses['#text'];
                  mdata.player.Shutouts = daily.stats.Shutouts['#text'];
+                 mdata.player.ga = daily.stats.GoalsAgainst['#text']
+                 if (daily.stats.GoalsAgainst['#text'] == '1') {
+                   mdata.player.GoalsAgainst = daily.stats.GoalsAgainst['#text']+ ' goal';
+                 } else {
+                   mdata.player.GoalsAgainst = daily.stats.GoalsAgainst['#text']+ ' goals';
+                 }
+                     
+
                   if (daily.stats.Saves['#text'] > 0) {  
                    // this.starterIdData.push(daily.player.ID);
                    this.startingGoaliesToday.push(daily.player.ID);

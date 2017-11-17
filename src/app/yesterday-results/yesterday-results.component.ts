@@ -278,6 +278,12 @@ export class YesterdayResultsComponent implements OnInit {
               maindata.player.ShotsAgainst = statinfo.stats.ShotsAgainst['#text'];
               maindata.player.OvertimeLosses = statinfo.stats.OvertimeLosses['#text'];
               maindata.player.OvertimeWins = statinfo.stats.OvertimeWins['#text'];
+               maindata.player.ga = statinfo.stats.GoalsAgainst['#text']
+                 if (statinfo.stats.GoalsAgainst['#text'] == '1') {
+                   maindata.player.GoalsAgainst = statinfo.stats.GoalsAgainst['#text']+ ' goal';
+                 } else {
+                   maindata.player.GoalsAgainst = statinfo.stats.GoalsAgainst['#text']+ ' goals';
+                 }
 
             }
 

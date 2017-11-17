@@ -137,7 +137,7 @@ export class StartingGoaliesComponent implements OnInit {
 
           })
 
-         this.dataService
+        this.dataService
             .getInjured().subscribe(res => {
               console.log(res['playerinjuries'].playerentry, "injured players...");
               this.playerInjuries = res['playerinjuries'].playerentry;
@@ -461,6 +461,9 @@ export class StartingGoaliesComponent implements OnInit {
             this.statData[data.team.gameId][0].player.twoPossibleStarters = true;
             this.statData[data.team.gameId][0].twoPossibleStarters = true;
             if (this.statData[data.team.gameId][2].player.saves == null && this.statData[data.team.gameId][0].player.saves > '0') {
+               console.log(this.statData[data.team.gameId][2].player, 'this is not a starter. api got it wrong');
+               this.statData[data.team.gameId][2].player.wrongStarter = true;
+            } else if (this.statData[data.team.gameId][2].player.saves == '0' && this.statData[data.team.gameId][0].player.saves > '0') {
                console.log(this.statData[data.team.gameId][2].player, 'this is not a starter. api got it wrong');
                this.statData[data.team.gameId][2].player.wrongStarter = true;
             }

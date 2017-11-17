@@ -394,6 +394,10 @@ export class YesterdayResultsComponent implements OnInit {
             this.statData[data.team.gameId][1].twoPossibleStarters = true;
           } else {
             this.statData[data.team.gameId][1].twoPossibleStarters = false;
+            if (this.statData[data.team.gameId][1].player.saves > '39') {
+              this.statData[data.team.gameId][1].player.bigStat = true;
+              this.statData[data.team.gameId][1].player.importantStat = this.statData[data.team.gameId][1].player.FirstName +' '+ this.statData[data.team.gameId][1].player.LastName + " made a lot of saves last night";
+            }
           }
           if (this.statData[data.team.gameId][1].team.ID === this.statData[data.team.gameId][2].team.ID) {
             // this.statData[data.team.gameId][1].twoPossibleStarters = true;

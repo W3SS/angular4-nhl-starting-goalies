@@ -188,7 +188,7 @@ export class TomorrowResultsComponent implements OnInit {
                 sdata.team.yesterday = yesterday;
                 sdata.team.day = this.tweetDay;
                 sdata.player.injured = false;
-                sdata.player.injury = 'none';
+                sdata.player.injury = '';
                 sdata.player.playedYesterday = false;
                 sdata.player.savesYesterday = '0';
                 sdata.player.winsYesterday = '0';
@@ -213,7 +213,7 @@ export class TomorrowResultsComponent implements OnInit {
                 sdata.team.yesterday = yesterday;
                 sdata.team.day = this.tweetDay;
                 sdata.player.injured = false;
-                sdata.player.injury = 'none';
+                sdata.player.injury = '';
                 sdata.player.playedYesterday = false;
                 sdata.player.savesYesterday = '0';
                 sdata.player.winsYesterday = '0';
@@ -288,7 +288,7 @@ export class TomorrowResultsComponent implements OnInit {
               if (data.team.hadGameYesterday === true) {
                 //console.log(data, 'game yesterday');
                 if (data.team.haveGameToday === true) {
-                  data.team.secondBacktoBack = "2ndB2B";
+                  data.team.secondBacktoBack = "2nd game of Back-to-Back";
                 } else {
                   data.team.secondBacktoBack = "";
                 }
@@ -299,7 +299,7 @@ export class TomorrowResultsComponent implements OnInit {
               if (data.team.haveGameToday === true) {
                 //console.log(data, 'game today');
                 if (data.team.haveGameTomorrow === true) {
-                  data.team.firstBacktoBack = "1stB2B";
+                  data.team.firstBacktoBack = "1st game of Back-to-Back";
                 } else {
                   data.team.firstBacktoBack = "";
                 }
@@ -373,7 +373,7 @@ export class TomorrowResultsComponent implements OnInit {
               for (let startdata of this.myData) {
 
                 if (startid === startdata.team.ID) {
-                  if (startdata.stats.GamesPlayed['#text'] > 4 && startdata.player.injuryOut == null) {
+                  if (startdata.stats.GamesPlayed['#text'] > 5 && startdata.player.injuryOut == null) {
 //&&  startdata.player.winsYesterday == '0' && startdata.player.lossesYesterday == '0' && startdata.player.olYesterday == '0'
                     startdata.player.startingToday = false;
                     startdata.player.likelyStartingToday = true;

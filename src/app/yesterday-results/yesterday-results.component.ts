@@ -40,6 +40,7 @@ export class YesterdayResultsComponent implements OnInit {
   noGamesToday: boolean;
   gamesToday: boolean;
   twitterHandles: Array < any > ;
+  tweetDay: any;
 
 
   constructor(private http: Http, private yesterdayService: YesterdayService, public snackBar: MatSnackBar, public router: Router) {
@@ -81,6 +82,8 @@ export class YesterdayResultsComponent implements OnInit {
             //console.log(tomorrowDailyDate, "get tomorrows schedule to find back to back games");
             this.dailySchedule = res['dailygameschedule'].gameentry;
             this.gameDate = res['dailygameschedule'].gameentry[0].date;
+            let dPipe = new DatePipe("en-US");
+            this.tweetDay = dPipe.transform(this.gameDate, 'EEEE');
             if (res['dailygameschedule'].gameentry == null) {
               this.noGamesToday = true;
               console.log('There are no games being played today.');
@@ -186,6 +189,7 @@ export class YesterdayResultsComponent implements OnInit {
                 sdata.team.gameIce = schedule.location;
                 sdata.team.gameId = schedule.id;
                 sdata.player.gameLocation = "away";
+                sdata.team.day = this.tweetDay;
                 sdata.team.opponent = schedule.homeTeam.City + ' ' + schedule.homeTeam.Name;
                 sdata.team.opponentId = schedule.homeTeam.ID;
                 sdata.team.opponentCity = schedule.homeTeam.City;
@@ -200,6 +204,7 @@ export class YesterdayResultsComponent implements OnInit {
                 sdata.team.gameIce = schedule.location;
                 sdata.team.gameId = schedule.id;
                 sdata.player.gameLocation = "home";
+                sdata.team.day = this.tweetDay;
                 sdata.team.opponent = schedule.awayTeam.City + ' ' + schedule.awayTeam.Name;
                 sdata.team.opponentId = schedule.awayTeam.ID;
                 sdata.team.opponentCity = schedule.awayTeam.City;

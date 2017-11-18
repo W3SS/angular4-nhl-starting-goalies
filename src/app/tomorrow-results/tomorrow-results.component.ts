@@ -349,7 +349,7 @@ export class TomorrowResultsComponent implements OnInit {
                   
 
                     injdata.player.injured = true;
-                    injdata.player.injury = inj.injury;
+                    injdata.player.injury = +' '+inj.injury;
                     
                     if (inj.injury.substr(inj.injury.length - 5) === '(Out)') {
                       console.log(inj.injury.substr(inj.injury.length - 5), 'injuries that say OUT!');

@@ -5,6 +5,7 @@ import { Observable } from 'rxjs/Observable';
 import { ActivatedRoute, Router, ActivatedRouteSnapshot } from '@angular/router';
 import { DatePipe } from '@angular/common';
 import { DataService } from '../data.service';
+import { YesterdayService } from '../yesterday.service';
 import { MatSnackBar } from '@angular/material';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/observable/forkJoin';
@@ -34,6 +35,7 @@ export class StartingGoaliesComponent implements OnInit {
   myData: Array < any > ;
   showData: Array < any > ;
   sentData: Array < any > ;
+  sentYesterdayData: Array < any > ;
   gameDate: string = '';
   defineToken: string = '';
   statData: Array < any > = [];
@@ -45,16 +47,18 @@ export class StartingGoaliesComponent implements OnInit {
   selected: any;
   test: any;
   startingGoaliesToday: Array < any > = [];
+  tweetDay: any;
 
 
 
-  constructor(private http: Http, private dataService: DataService, public snackBar: MatSnackBar, public router: Router, public dialog: MatDialog) {
+  constructor(private http: Http, private dataService: DataService, private yesterdayService: YesterdayService, public snackBar: MatSnackBar, public router: Router, public dialog: MatDialog) {
 
     yesterday = this.dataService.getYesterday();
     tomorrow = this.dataService.getTomorrow();
     today = this.dataService.getToday();
     console.log(yesterday + ' yesterday, ' + today + ' today, ' + tomorrow + ' tomorrow, ');
     this.sentData = this.dataService.getSentStats();
+    this.sentYesterdayData = this.yesterdayService.getSentStats();
   }
 
   public getJSON() {
@@ -84,6 +88,8 @@ export class StartingGoaliesComponent implements OnInit {
             //console.log(tomorrowDailyDate, "get tomorrows schedule to find back to back games");
             this.dailySchedule = res['dailygameschedule'].gameentry;
             this.gameDate = res['dailygameschedule'].gameentry[0].date;
+            let dPipe = new DatePipe("en-US");
+            this.tweetDay = dPipe.transform(this.gameDate, 'EEEE');
             if (res['dailygameschedule'].gameentry == null) {
               this.noGamesToday = true;
               console.log('There are no games being played today.');
@@ -187,6 +193,7 @@ export class StartingGoaliesComponent implements OnInit {
                 sdata.team.gameIce = schedule.location;
                 sdata.team.gameId = schedule.id;
                 sdata.player.gameLocation = "away";
+                sdata.team.day = this.tweetDay;
                 sdata.team.opponent = schedule.homeTeam.City + ' ' + schedule.homeTeam.Name;
                 sdata.team.opponentId = schedule.homeTeam.ID;
                 sdata.team.opponentCity = schedule.homeTeam.City;
@@ -196,17 +203,16 @@ export class StartingGoaliesComponent implements OnInit {
                 sdata.team.tomorrow = tomorrow;
                 sdata.team.yesterday = yesterday;
                 sdata.player.injured = false;
-                sdata.player.injury = 'none';
+                sdata.player.injury = '';
 
-               
-               
-
+           
               }
               if (schedule.homeTeam.Name === sdata.team.Name) {
                 sdata.player.gameTime = schedule.time;
                 sdata.team.gameIce = schedule.location;
                 sdata.team.gameId = schedule.id;
                 sdata.player.gameLocation = "home";
+                sdata.team.day = this.tweetDay;
                 sdata.team.opponent = schedule.awayTeam.City + ' ' + schedule.awayTeam.Name;
                 sdata.team.opponentId = schedule.awayTeam.ID;
                 sdata.team.opponentCity = schedule.awayTeam.City;
@@ -216,7 +222,7 @@ export class StartingGoaliesComponent implements OnInit {
                 sdata.team.tomorrow = tomorrow;
                 sdata.team.yesterday = yesterday;
                 sdata.player.injured = false;
-                sdata.player.injury = 'none';
+                sdata.player.injury = '';
 
                
                
@@ -322,7 +328,7 @@ export class StartingGoaliesComponent implements OnInit {
               if (data.team.hadGameYesterday === true) {
                 //console.log(data, 'game yesterday');
                 if (data.team.haveGameToday === true) {
-                  data.team.secondBacktoBack = "2ndB2B";
+                  data.team.secondBacktoBack = "2nd game of Back-to-Back";
                 } else {
                   data.team.secondBacktoBack = "";
                 }
@@ -333,7 +339,7 @@ export class StartingGoaliesComponent implements OnInit {
               if (data.team.haveGameToday === true) {
                 //console.log(data, 'game today');
                 if (data.team.haveGameTomorrow === true) {
-                  data.team.firstBacktoBack = "1stB2B";
+                  data.team.firstBacktoBack = "1st game of Back-to-Back";
                 } else {
                   data.team.firstBacktoBack = "";
                 }
@@ -345,6 +351,36 @@ export class StartingGoaliesComponent implements OnInit {
           }
         }
 
+         if (this.sentYesterdayData != null) {
+            console.log('start sorting data from yesterday...');
+            for (let yesterday of this.sentYesterdayData) {
+
+              for (let tomdata of this.myData) {
+
+                if (yesterday.player.saves > 1 && yesterday.player.ID === tomdata.player.ID) {
+                  
+                    tomdata.player.finishedYesterday = false;
+                    tomdata.player.playedYesterday = true;
+                    tomdata.player.savesYesterday = yesterday.player.saves;
+                    tomdata.player.winsYesterday = yesterday.player.wins;
+                    tomdata.player.lossesYesterday = yesterday.player.losses;
+                    tomdata.player.saYesterday = yesterday.player.ShotsAgainst;
+                    tomdata.player.olYesterday = yesterday.player.OvertimeLosses;
+                    tomdata.player.shYesterday = yesterday.player.Shutouts;
+                    tomdata.player.yday = yesterday.team.day;
+
+                  if (yesterday.player.wins == '1') {
+                    tomdata.player.resultYesterday = yesterday.player.FirstName +' '+ yesterday.player.LastName + ' got the Win '+yesterday.team.day+' with ' + yesterday.player.saves + ' saves against ' + yesterday.player.ShotsAgainst + ' shots.'
+                   } else if (yesterday.player.losses == '1' || yesterday.player.OvertimeLosses == '1') {
+                    tomdata.player.resultYesterday = yesterday.player.FirstName +' '+ yesterday.player.LastName + ' got the Loss '+yesterday.team.day+' with ' + yesterday.player.saves + ' saves against ' + yesterday.player.ShotsAgainst + ' shots.'
+                   }
+                  
+                } 
+
+              }
+            }
+          }
+
         if (this.playerInjuries.length > 0) {
             console.log('start sorting data for starters matchups...');
             for (let inj of this.playerInjuries) {
@@ -355,7 +391,7 @@ export class StartingGoaliesComponent implements OnInit {
                   
 
                     injdata.player.injured = true;
-                    injdata.player.injury = inj.injury;
+                    injdata.player.injury = ' '+inj.injury;
                     
                     if (inj.injury.substr(inj.injury.length - 5) === '(Out)') {
                       console.log(inj.injury.substr(inj.injury.length - 5), 'injuries that say OUT!');
@@ -399,7 +435,7 @@ export class StartingGoaliesComponent implements OnInit {
               for (let startdata of this.myData) {
 
                 if (startid === startdata.team.ID) {
-                  if (startdata.stats.GamesPlayed['#text'] > 4 && startdata.player.injuryOut == null) {
+                  if (startdata.stats.GamesPlayed['#text'] > 5 && startdata.player.injuryOut == null) {
 
                     startdata.player.startingToday = false;
                     startdata.player.likelyStartingToday = true;
@@ -487,6 +523,12 @@ export class StartingGoaliesComponent implements OnInit {
             }  else if ((this.statData[data.team.gameId][1].player.saves == '0' || this.statData[data.team.gameId][1].player.saves == '1') && this.statData[data.team.gameId][2].player.saves > '0') {
                console.log(this.statData[data.team.gameId][1].player, 'this is not a starter. api got it wrong');
                this.statData[data.team.gameId][1].player.wrongStarter = true;
+            }
+               if (this.statData[data.team.gameId][2].player.resultYesterday != null) {
+              this.statData[data.team.gameId][2].player.finishedYesterday = true;
+            } 
+            if (this.statData[data.team.gameId][1].player.resultYesterday != null) {
+              this.statData[data.team.gameId][1].player.finishedYesterday = true;
             }
           } else {
             // this.statData[data.team.gameId][1].twoPossibleStarters = false;

@@ -104,7 +104,36 @@
               </span>
             
             </span>
-            <span *ngIf="data.team.matchup[0].team.ID === data.team.matchup[1].team.ID">
+                <span *ngIf="data.team.matchup[0].team.ID === data.team.matchup[1].team.ID && data.team.matchup[0].player.wrongStarter != null">
+
+             <img src="{{ data.team.matchup[1].player.image }}" onError="this.src='https://nhl.bamcontent.com/images/headshots/current/168x168/goalie@2x.jpg'">
+            
+            <br>
+            <span><span style="font-weight: bold;">{{ data.team.matchup[1].player.FirstName + ' ' + data.team.matchup[1].player.LastName }}</span> <span fxHide [fxHide.gt-xs]="isVisibleOnDesktop()">
+              ({{ data.team.matchup[1].team.Name + ' - ' + data.team.matchup[1].player.Position }})
+            </span> <br>
+                Wins - Losses: {{ data.team.matchup[1].stats.stats.Wins['#text'] + ' - ' +  data.team.matchup[1].stats.stats.Losses['#text'] }} <br>
+                <div class="stat-block">
+  
+               Saves: {{ data.team.matchup[1].player.saves +' Shots Faced: ' + data.team.matchup[1].player.ShotsAgainst }} <br>
+
+             <span *ngIf="data.team.matchup[1].player.wins == '1' && data.team.matchup[1].player.Shutouts != '1'">
+              {{ data.team.matchup[1].player.LastName }} takes the Win!
+            </span>
+            <span *ngIf="data.team.matchup[1].player.Shutouts == '1'">
+              {{ data.team.matchup[1].player.LastName }} had a SHUTOUT Victory!
+            </span>
+            <span *ngIf="data.team.matchup[1].player.losses == '1'">
+              {{ data.team.matchup[1].player.LastName }} takes the Loss!
+            </span>
+            <span *ngIf="data.team.matchup[1].player.OvertimeLosses == '1'">
+              {{ data.team.matchup[1].player.LastName }} takes the Loss in OT!
+            </span>
+            </div>
+              </span>
+            
+            </span>
+            <span *ngIf="data.team.matchup[0].team.ID === data.team.matchup[1].team.ID && data.team.matchup[0].player.wrongStarter == null">
                <span class="faded2">
 
                        <img src="{{ data.team.matchup[0].player.image }}" onError="this.src='https://nhl.bamcontent.com/images/headshots/current/168x168/goalie@2x.jpg'">
@@ -205,7 +234,36 @@
               </span>
             
             </span>
-            <span *ngIf="data.team.matchup[1].team.ID === data.team.matchup[2].team.ID">
+                   <span *ngIf="data.team.matchup[1].team.ID === data.team.matchup[2].team.ID && data.team.matchup[1].player.wrongStarter != null">
+
+             <img src="{{ data.team.matchup[2].player.image }}" onError="this.src='https://nhl.bamcontent.com/images/headshots/current/168x168/goalie@2x.jpg'">
+            
+            <br>
+            <span><span style="font-weight: bold;">{{ data.team.matchup[2].player.FirstName + ' ' + data.team.matchup[2].player.LastName }}</span> <span fxHide [fxHide.gt-xs]="isVisibleOnDesktop()">
+              ({{ data.team.matchup[2].team.Name + ' - ' + data.team.matchup[2].player.Position }})
+            </span> <br>
+                Wins - Losses: {{ data.team.matchup[2].stats.stats.Wins['#text'] + ' - ' +  data.team.matchup[2].stats.stats.Losses['#text'] }} <br>
+                <div class="stat-block">
+  
+               Saves: {{ data.team.matchup[2].player.saves +' Shots Faced: ' + data.team.matchup[2].player.ShotsAgainst }} <br>
+
+             <span *ngIf="data.team.matchup[2].player.wins == '1' && data.team.matchup[2].player.Shutouts != '1'">
+              {{ data.team.matchup[2].player.LastName }} takes the Win!
+            </span>
+            <span *ngIf="data.team.matchup[2].player.Shutouts == '1'">
+              {{ data.team.matchup[2].player.LastName }} had a SHUTOUT Victory!
+            </span>
+            <span *ngIf="data.team.matchup[2].player.losses == '1'">
+              {{ data.team.matchup[2].player.LastName }} takes the Loss!
+            </span>
+            <span *ngIf="data.team.matchup[2].player.OvertimeLosses == '1'">
+              {{ data.team.matchup[2].player.LastName }} takes the Loss in OT!
+            </span>
+            </div>
+              </span>
+            
+            </span>
+            <span *ngIf="data.team.matchup[1].team.ID === data.team.matchup[2].team.ID && data.team.matchup[1].player.wrongStarter == null">
                  <span class="faded2">
 
                        <img src="{{ data.team.matchup[1].player.image }}" onError="this.src='https://nhl.bamcontent.com/images/headshots/current/168x168/goalie@2x.jpg'">

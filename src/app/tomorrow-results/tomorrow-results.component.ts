@@ -317,7 +317,7 @@ export class TomorrowResultsComponent implements OnInit {
 
               for (let tomdata of this.myData) {
 
-                if (today.player.saves > 0 && today.player.ID === tomdata.player.ID) {
+                if (today.player.saves > 1 && today.player.ID === tomdata.player.ID) {
                   
                     tomdata.player.finishedYesterday = false;
                     tomdata.player.playedYesterday = true;

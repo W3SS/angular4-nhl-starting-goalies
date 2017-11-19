@@ -348,6 +348,11 @@
            <share-container direction="horizontal" addedText="" [properties]="{title: data.team.matchup[0].team.City +' '+ data.team.matchup[0].team.Name +' '+ data.team.matchup[0].player.FirstName +' '+ data.team.matchup[0].player.LastName + ' only let '+ data.team.matchup[0].player.GoalsAgainst +' hit the back of the net for a nice Win against the '+ data.team.matchup[0].team.City + ' ' + data.team.matchup[0].team.Name +' @ '+  data.team.matchup[1].team.City +' '+data.team.day, description:'starting goalies', img:'img', via:'GoaliesStarting', hashtags:'startingGoalies #Stats #NHL #FantasyHockey '+data.team.matchup[0].player.twitterHandle +' '+data.team.matchup[1].player.twitterHandle}" [expandable]="false" [textEnabled]="true" [platforms]="['twitter']">
           </share-container>
          </span>
+           <span *ngIf="data.team.matchup[2] != null && data.team.matchup[2].player.wins == '1' &&  data.team.matchup[2].player.Shutouts != '1'">
+           <share-container direction="horizontal" addedText="" [properties]="{title: data.team.matchup[2].team.City +' '+ data.team.matchup[2].team.Name +' '+ data.team.matchup[2].player.FirstName +' '+ data.team.matchup[2].player.LastName + ' only let '+ data.team.matchup[2].player.GoalsAgainst +' hit the back of the net for a nice Win against the '+ data.team.matchup[2].team.City + ' ' + data.team.matchup[2].team.Name +' @ '+  data.team.matchup[1].team.City +' '+data.team.day, description:'starting goalies', img:'img', via:'GoaliesStarting', hashtags:'startingGoalies #Stats #NHL #FantasyHockey '+data.team.matchup[2].player.twitterHandle +' '+data.team.matchup[1].player.twitterHandle}" [expandable]="false" [textEnabled]="true" [platforms]="['twitter']">
+          </share-container>
+         </span>
+
       </mat-card>
     </div>
   </div>

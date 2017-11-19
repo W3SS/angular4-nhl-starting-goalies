@@ -252,6 +252,15 @@ export class StartingGoaliesComponent implements OnInit {
                  } else {
                    mdata.player.GoalsAgainst = daily.stats.GoalsAgainst['#text']+ ' goals';
                  }
+
+                 if (daily.stats.Saves['#text'] >= '20' && daily.stats.GoalsAgainst['#text'] == '0') {
+                   mdata.player.twentySavesPlusShutout = true;
+                   mdata.player.twentySavesPlusResult = mdata.player.FirstName +' '+ mdata.player.LastName + ' has '+daily.stats.Saves['#text']+' and has not given up a goal! ';
+                 } else if (daily.stats.Saves['#text'] >= '20' && daily.stats.GoalsAgainst['#text'] > '0') {
+                   mdata.player.twentySavesPlus = true;
+                   mdata.player.twentySavesPlusShutout = false;
+                   mdata.player.twentySavesPlusResult = mdata.player.FirstName +' '+ mdata.player.LastName + ' has '+daily.stats.Saves['#text']+'against '+ daily.stats.ShotsAgainst['#text'] +' shots and has let '+mdata.player.GoalsAgainst+' light the lamp!';
+                 }
                      
 
                   if (daily.stats.Saves['#text'] > 0) {  

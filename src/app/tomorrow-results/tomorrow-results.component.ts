@@ -285,6 +285,12 @@ export class TomorrowResultsComponent implements OnInit {
               data.player.image = info.player.officialImageSrc;
               data.player.twitterHandle = this.twitterHandles[data.team.ID].twitterHashTag;
 
+              if (this.twitterHandles[data.team.ID][data.player.ID] != null) {
+                data.player.atHandle = this.twitterHandles[data.team.ID][data.player.ID]+' ';
+              } else {
+                data.player.atHandle = '';
+              }
+
               if (data.team.hadGameYesterday === true) {
                 //console.log(data, 'game yesterday');
                 if (data.team.haveGameToday === true) {

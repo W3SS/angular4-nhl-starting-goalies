@@ -18,8 +18,7 @@
   {
     "twitterHashTag": "#VegasBorn",
     "City": "Vegas",
-    "Name": "GoldenKnights",
-    "ID": "Maxime Lagace"
+    "Name": "GoldenKnights"
   },
   "12":
   {
@@ -46,8 +45,7 @@
   {
     "twitterHashTag": "#NJDevils",
     "City": "NewJersey",
-    "Name": "Devils",
-    "ID": "Cory Schneider"
+    "Name": "Devils"
   },
   "19":
   {
@@ -80,7 +78,8 @@
   {
     "twitterHashTag": "#Canucks",
     "City": "Vancouver",
-    "Name": "Canucks"
+    "Name": "Canucks",
+    "ID": "@j_markstrom"
   },
   "6":
   {

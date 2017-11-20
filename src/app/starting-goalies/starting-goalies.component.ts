@@ -334,6 +334,13 @@ export class StartingGoaliesComponent implements OnInit {
               data.player.image = info.player.officialImageSrc;
               data.player.twitterHandle = this.twitterHandles[data.team.ID].twitterHashTag;
 
+              if (this.twitterHandles[data.team.ID][data.player.ID] != null) {
+                data.player.atHandle = this.twitterHandles[data.team.ID][data.player.ID]+' ';
+              } else {
+                data.player.atHandle = '';
+              }
+              
+
               if (data.team.hadGameYesterday === true) {
                 //console.log(data, 'game yesterday');
                 if (data.team.haveGameToday === true) {
@@ -624,7 +631,7 @@ export class StartingGoaliesComponent implements OnInit {
   <mat-dialog-content>
   <span style="font-size: 26px; font-weight: light; color: #555; text-align: center;">{{ noPosts }}</span>
   <ul *ngFor="let item of tweetsData" style="font-size:14px">
-    <li>{{item.text}} {{item.created_at | date:'fullDate'}}</li>
+    <li>{{item.text}} <span style="color:#6740B4; font-weight: bold;">{{item.created_at | date:'fullDate'}}</span></li>
 </ul>
 </mat-dialog-content>`,
 })
@@ -654,7 +661,7 @@ export class TodayDialog implements OnInit {
     console.log(this.data, 'data passed in')
     let AND;
     let headers = new Headers();
-    let searchterm = 'query=#startingGoalies #nhl';
+    let searchterm = 'query=#startingGoalies #nhl ' + this.data.player.FirstName + ' ' + this.data.player.LastName;
 
     headers.append('Content-Type', 'application/X-www-form-urlencoded');
 

@@ -246,7 +246,13 @@ export class StartingGoaliesComponent implements OnInit {
                  mdata.player.losses = daily.stats.Losses['#text'];
                  mdata.player.OvertimeLosses = daily.stats.OvertimeLosses['#text'];
                  mdata.player.Shutouts = daily.stats.Shutouts['#text'];
-                 mdata.player.ga = daily.stats.GoalsAgainst['#text']
+                 mdata.player.ga = daily.stats.GoalsAgainst['#text'];
+
+                 if (daily.stats.Saves['#text'] > 0 || daily.stats.Wins['#text'] == '1') {  
+                   // this.starterIdData.push(daily.player.ID);
+                   this.startingGoaliesToday.push(daily.player.ID);
+                 }
+
                  if (daily.stats.GoalsAgainst['#text'] == '1') {
                    mdata.player.GoalsAgainst = daily.stats.GoalsAgainst['#text']+ ' goal';
                  } else {
@@ -261,13 +267,7 @@ export class StartingGoaliesComponent implements OnInit {
                    mdata.player.twentySavesPlusShutout = false;
                    mdata.player.twentySavesPlusResult = mdata.player.FirstName +' '+ mdata.player.LastName + ' has '+daily.stats.Saves['#text']+'against '+ daily.stats.ShotsAgainst['#text'] +' shots and has let '+mdata.player.GoalsAgainst+' light the lamp!';
                  }
-                     
-
-                  if (daily.stats.Saves['#text'] > 0) {  
-                   // this.starterIdData.push(daily.player.ID);
-                   this.startingGoaliesToday.push(daily.player.ID);
-               }
-               
+        
               
              }
 

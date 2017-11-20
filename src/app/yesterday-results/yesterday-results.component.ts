@@ -283,7 +283,7 @@ export class YesterdayResultsComponent implements OnInit {
               maindata.player.ShotsAgainst = statinfo.stats.ShotsAgainst['#text'];
               maindata.player.OvertimeLosses = statinfo.stats.OvertimeLosses['#text'];
               maindata.player.OvertimeWins = statinfo.stats.OvertimeWins['#text'];
-               maindata.player.ga = statinfo.stats.GoalsAgainst['#text']
+              maindata.player.ga = statinfo.stats.GoalsAgainst['#text']
                  if (statinfo.stats.GoalsAgainst['#text'] == '1') {
                    maindata.player.GoalsAgainst = statinfo.stats.GoalsAgainst['#text']+ ' goal';
                  } else {
@@ -320,7 +320,7 @@ export class YesterdayResultsComponent implements OnInit {
             for (let startid of this.starterIdData) {
 
               for (let startdata of this.myData) {
-                if (startid === startdata.player.ID && startdata.player.saves > 0) {
+                if (startid === startdata.player.ID && startdata.player.saves > 0 || startid === startdata.player.ID && startdata.player.wins =='1') {
                   startdata.player.startingToday = true;
                   startdata.player.subedInToday = false;
                   //console.log(startdata, 'player data');

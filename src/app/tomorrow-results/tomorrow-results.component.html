@@ -16,9 +16,9 @@
             <br>  <span style="font-weight: bold;">{{ data.team.matchup[0].player.FirstName + ' ' + data.team.matchup[0].player.LastName }}</span> <span fxHide [fxHide.gt-xs]="isVisibleOnDesktop()">
               ({{ data.team.matchup[0].team.Name + ' - ' + data.team.matchup[0].player.Position }})
             </span>
-            <br> Wins - Losses: {{ data.team.matchup[0].stats.stats.Wins['#text'] + ' - ' + data.team.matchup[0].stats.stats.Losses['#text'] }} <span *ngIf="data.team.matchup[1].player.saves == null"><br> 
-              {{data.team.matchup[1].stats.stats.GoalsAgainst['#text']}} Goals given up <br>
-              Season GAA: {{data.team.matchup[1].stats.stats.GoalsAgainstAverage['#text']}}</span> <br>
+            <br> Wins - Losses: {{ data.team.matchup[0].stats.stats.Wins['#text'] + ' - ' + data.team.matchup[0].stats.stats.Losses['#text']+ ' - ' + data.team.matchup[0].stats.stats.OvertimeLosses['#text'] }} <span *ngIf="data.team.matchup[1].player.saves == null"><br> 
+              {{ data.team.matchup[0].stats.stats.GoalsAgainst['#text']}} Goals given up <br>
+              Season GAA: {{data.team.matchup[0].stats.stats.GoalsAgainstAverage['#text'] }}</span> <br>
             <span *ngIf="data.team.matchup[0].player.injured === true" style="color:red;">{{data.team.matchup[0].player.injury}}</span>
             <br>
              <span *ngIf="data.team.matchup[0].player.playedYesterday === true" style="color:#6740B4;">{{data.team.matchup[0].player.LastName}} played yesterday and {{ data.team.matchup[0].player.saYesterday - data.team.matchup[0].player.savesYesterday}} goals hit the back of the net. <span *ngIf="data.team.matchup[0].player.winsYesterday === '1'">And won the game.</span><span *ngIf="data.team.matchup[0].player.lossesYesterday === '1'">And lost the game.</span>
@@ -35,7 +35,7 @@
             <br>   <span style="font-weight: bold;">{{ data.team.matchup[1].player.FirstName + ' ' + data.team.matchup[1].player.LastName }}</span> <span fxHide [fxHide.gt-xs]="isVisibleOnDesktop()">
               ({{ data.team.matchup[1].team.Name + ' - ' + data.team.matchup[1].player.Position }})
             </span>
-            <br> Wins - Losses: {{ data.team.matchup[1].stats.stats.Wins['#text'] + ' - ' + data.team.matchup[1].stats.stats.Losses['#text'] }} <span *ngIf="data.team.matchup[1].player.saves == null"><br> 
+            <br> Wins - Losses: {{ data.team.matchup[1].stats.stats.Wins['#text'] + ' - ' + data.team.matchup[1].stats.stats.Losses['#text'] + ' - ' + data.team.matchup[1].stats.stats.OvertimeLosses['#text'] }} <span *ngIf="data.team.matchup[1].player.saves == null"><br> 
               {{data.team.matchup[1].stats.stats.GoalsAgainst['#text']}} Goals given up <br>
               Season GAA: {{data.team.matchup[1].stats.stats.GoalsAgainstAverage['#text']}}</span> <br>
             <span *ngIf="data.team.matchup[1].player.injured === true" style="color:red;">{{data.team.matchup[1].player.injury}}</span>
@@ -58,7 +58,7 @@
             <span class="faded"> <span style="font-weight: bold;">{{ data.team.matchup[0].player.FirstName + ' ' + data.team.matchup[0].player.LastName }}</span> <span fxHide [fxHide.gt-xs]="isVisibleOnDesktop()">
               ({{ data.team.matchup[0].team.Name + ' - ' + data.team.matchup[0].player.Position }})
             </span> <br>
-                Wins - Losses: {{ data.team.matchup[0].stats.stats.Wins['#text'] + ' - ' +  data.team.matchup[0].stats.stats.Losses['#text'] }} <span *ngIf="data.team.matchup[1].player.saves == null"><br> 
+                Wins - Losses: {{ data.team.matchup[0].stats.stats.Wins['#text'] + ' - ' +  data.team.matchup[0].stats.stats.Losses['#text']+ ' - ' + data.team.matchup[0].stats.stats.OvertimeLosses['#text'] }} <span *ngIf="data.team.matchup[1].player.saves == null"><br> 
               {{data.team.matchup[0].stats.stats.GoalsAgainst['#text']}} Goals given up <br>
               Season GAA: {{data.team.matchup[0].stats.stats.GoalsAgainstAverage['#text']}}</span> <br>
             <span *ngIf="data.team.matchup[0].player.injured === true" style="color:red;">{{data.team.matchup[0].player.injury}}</span>
@@ -77,7 +77,7 @@
                        <span style="font-weight: bold;">{{ data.team.matchup[0].player.FirstName + ' ' + data.team.matchup[0].player.LastName }}</span> <span fxHide [fxHide.gt-xs]="isVisibleOnDesktop()">
               ({{ data.team.matchup[0].team.Name + ' - ' + data.team.matchup[0].player.Position }})
             </span> <br>
-                  Wins - Losses: {{ data.team.matchup[0].stats.stats.Wins['#text'] + ' - ' +  data.team.matchup[0].stats.stats.Losses['#text'] }} <span *ngIf="data.team.matchup[1].player.saves == null"><br> 
+                  Wins - Losses: {{ data.team.matchup[0].stats.stats.Wins['#text'] + ' - ' +  data.team.matchup[0].stats.stats.Losses['#text']+ ' - ' + data.team.matchup[0].stats.stats.OvertimeLosses['#text'] }} <span *ngIf="data.team.matchup[1].player.saves == null"><br> 
               {{data.team.matchup[0].stats.stats.GoalsAgainst['#text']}} Goals given up <br>
               Season GAA: {{data.team.matchup[0].stats.stats.GoalsAgainstAverage['#text']}}</span> <br>
             <span *ngIf="data.team.matchup[0].player.injured === true" style="color:red;">{{data.team.matchup[0].player.injury}}</span>
@@ -95,7 +95,7 @@
                     <span style="font-weight: bold;">{{ data.team.matchup[1].player.FirstName + ' ' + data.team.matchup[1].player.LastName }}</span> <span fxHide [fxHide.gt-xs]="isVisibleOnDesktop()">
               ({{ data.team.matchup[1].team.Name + ' - ' + data.team.matchup[1].player.Position }})
             </span> <br>
-                  Wins - Losses: {{ data.team.matchup[1].stats.stats.Wins['#text'] + ' - ' +  data.team.matchup[1].stats.stats.Losses['#text'] }} <span *ngIf="data.team.matchup[1].player.saves == null"><br> 
+                  Wins - Losses: {{ data.team.matchup[1].stats.stats.Wins['#text'] + ' - ' +  data.team.matchup[1].stats.stats.Losses['#text'] + ' - ' + data.team.matchup[1].stats.stats.OvertimeLosses['#text'] }} <span *ngIf="data.team.matchup[1].player.saves == null"><br> 
               {{data.team.matchup[1].stats.stats.GoalsAgainst['#text']}} Goals given up <br>
               Season GAA: {{data.team.matchup[1].stats.stats.GoalsAgainstAverage['#text']}}</span> <br>
             <span *ngIf="data.team.matchup[1].player.injured === true" style="color:red;">{{data.team.matchup[1].player.injury}}</span>
@@ -114,7 +114,7 @@
                     <span style="font-weight: bold;">{{ data.team.matchup[0].player.FirstName + ' ' + data.team.matchup[0].player.LastName }}</span> <span fxHide [fxHide.gt-xs]="isVisibleOnDesktop()">
               ({{ data.team.matchup[0].team.Name + ' - ' + data.team.matchup[0].player.Position }})
             </span> <br>
-                  Wins - Losses: {{ data.team.matchup[0].stats.stats.Wins['#text'] + ' - ' +  data.team.matchup[0].stats.stats.Losses['#text'] }} <span *ngIf="data.team.matchup[0].player.saves == null"><br> 
+                  Wins - Losses: {{ data.team.matchup[0].stats.stats.Wins['#text'] + ' - ' +  data.team.matchup[0].stats.stats.Losses['#text']+ ' - ' + data.team.matchup[0].stats.stats.OvertimeLosses['#text'] }} <span *ngIf="data.team.matchup[0].player.saves == null"><br> 
               {{data.team.matchup[0].stats.stats.GoalsAgainst['#text']}} Goals given up <br>
               Season GAA: {{data.team.matchup[0].stats.stats.GoalsAgainstAverage['#text']}}</span> <br>
             <span *ngIf="data.team.matchup[0].player.injured === true" style="color:red;">{{data.team.matchup[0].player.injury}}</span>
@@ -139,7 +139,7 @@
             <span class="faded">  <span style="font-weight: bold;">{{ data.team.matchup[1].player.FirstName + ' ' + data.team.matchup[1].player.LastName }}</span> <span fxHide [fxHide.gt-xs]="isVisibleOnDesktop()">
               ({{ data.team.matchup[1].team.Name + ' - ' + data.team.matchup[1].player.Position }})
             </span> <br>
-                  Wins - Losses: {{ data.team.matchup[1].stats.stats.Wins['#text'] + ' - ' +  data.team.matchup[1].stats.stats.Losses['#text'] }} <span *ngIf="data.team.matchup[1].player.saves == null"><br> 
+                  Wins - Losses: {{ data.team.matchup[1].stats.stats.Wins['#text'] + ' - ' +  data.team.matchup[1].stats.stats.Losses['#text'] + ' - ' + data.team.matchup[1].stats.stats.OvertimeLosses['#text'] }} <span *ngIf="data.team.matchup[1].player.saves == null"><br> 
               {{data.team.matchup[1].stats.stats.GoalsAgainst['#text']}} Goals given up <br>
               Season GAA: {{data.team.matchup[1].stats.stats.GoalsAgainstAverage['#text']}}</span> <br>
             <span *ngIf="data.team.matchup[1].player.injured === true" style="color:red;">{{data.team.matchup[1].player.injury}}</span>
@@ -165,7 +165,7 @@
             <span class="faded">  <span style="font-weight: bold;">{{ data.team.matchup[1].player.FirstName + ' ' + data.team.matchup[1].player.LastName }}</span> <span fxHide [fxHide.gt-xs]="isVisibleOnDesktop()">
               ({{ data.team.matchup[1].team.Name + ' - ' + data.team.matchup[1].player.Position }})
             </span> <br>
-                  Wins - Losses: {{ data.team.matchup[1].stats.stats.Wins['#text'] + ' - ' +  data.team.matchup[1].stats.stats.Losses['#text'] }} <span *ngIf="data.team.matchup[1].player.saves == null"><br> 
+                  Wins - Losses: {{ data.team.matchup[1].stats.stats.Wins['#text'] + ' - ' +  data.team.matchup[1].stats.stats.Losses['#text'] + ' - ' + data.team.matchup[1].stats.stats.OvertimeLosses['#text'] }} <span *ngIf="data.team.matchup[1].player.saves == null"><br> 
               {{data.team.matchup[1].stats.stats.GoalsAgainst['#text']}} Goals given up <br>
               Season GAA: {{data.team.matchup[1].stats.stats.GoalsAgainstAverage['#text']}}</span> <br>
             <span *ngIf="data.team.matchup[1].player.injured === true" style="color:red;">{{data.team.matchup[1].player.injury}}</span>
@@ -196,7 +196,7 @@
                       <span style="font-weight: bold;">{{ data.team.matchup[1].player.FirstName + ' ' + data.team.matchup[1].player.LastName }}</span> <span fxHide [fxHide.gt-xs]="isVisibleOnDesktop()">
               ({{ data.team.matchup[1].team.Name + ' - ' + data.team.matchup[1].player.Position }})
             </span> <br>
-                  Wins - Losses: {{ data.team.matchup[1].stats.stats.Wins['#text'] + ' - ' +  data.team.matchup[1].stats.stats.Losses['#text'] }} <span *ngIf="data.team.matchup[1].player.saves == null"><br> 
+                  Wins - Losses: {{ data.team.matchup[1].stats.stats.Wins['#text'] + ' - ' +  data.team.matchup[1].stats.stats.Losses['#text'] + ' - ' + data.team.matchup[1].stats.stats.OvertimeLosses['#text'] }} <span *ngIf="data.team.matchup[1].player.saves == null"><br> 
               {{data.team.matchup[1].stats.stats.GoalsAgainst['#text']}} Goals given up <br>
               Season GAA: {{data.team.matchup[1].stats.stats.GoalsAgainstAverage['#text']}}</span> <br>
             <span *ngIf="data.team.matchup[1].player.injured === true" style="color:red;">{{data.team.matchup[1].player.injury}}</span>
@@ -214,7 +214,7 @@
                   <span style="font-weight: bold;">{{ data.team.matchup[2].player.FirstName + ' ' + data.team.matchup[2].player.LastName }}</span> <span fxHide [fxHide.gt-xs]="isVisibleOnDesktop()">
               ({{ data.team.matchup[2].team.Name + ' - ' + data.team.matchup[2].player.Position }})
             </span> <br>
-                  Wins - Losses: {{ data.team.matchup[2].stats.stats.Wins['#text'] + ' - ' +  data.team.matchup[2].stats.stats.Losses['#text'] }} <span *ngIf="data.team.matchup[2].player.saves == null"><br> 
+                  Wins - Losses: {{ data.team.matchup[2].stats.stats.Wins['#text'] + ' - ' +  data.team.matchup[2].stats.stats.Losses['#text'] + ' - ' + data.team.matchup[2].stats.stats.OvertimeLosses['#text']}} <span *ngIf="data.team.matchup[2].player.saves == null"><br> 
               {{data.team.matchup[2].stats.stats.GoalsAgainst['#text']}} Goals given up <br>
               Season GAA: {{data.team.matchup[2].stats.stats.GoalsAgainstAverage['#text']}}</span> <br>
             <span *ngIf="data.team.matchup[2].player.injured === true" style="color:red;">{{data.team.matchup[2].player.injury}}</span>
@@ -240,7 +240,7 @@
               <span style="font-weight: bold;">{{ data.team.matchup[2].player.FirstName + ' ' + data.team.matchup[2].player.LastName }}</span> <span fxHide [fxHide.gt-xs]="isVisibleOnDesktop()">
               ({{ data.team.matchup[2].team.Name + ' - ' + data.team.matchup[2].player.Position }})
             </span> <br>
-                  Wins - Losses: {{ data.team.matchup[2].stats.stats.Wins['#text'] + ' - ' +  data.team.matchup[2].stats.stats.Losses['#text'] }} <span *ngIf="data.team.matchup[2].player.saves == null"><br> 
+                  Wins - Losses: {{ data.team.matchup[2].stats.stats.Wins['#text'] + ' - ' +  data.team.matchup[2].stats.stats.Losses['#text'] + ' - ' + data.team.matchup[2].stats.stats.OvertimeLosses['#text']}} <span *ngIf="data.team.matchup[2].player.saves == null"><br> 
               {{data.team.matchup[2].stats.stats.GoalsAgainst['#text']}} Goals given up <br>
               Season GAA: {{data.team.matchup[2].stats.stats.GoalsAgainstAverage['#text']}}</span> <br>
             <span *ngIf="data.team.matchup[2].player.injured === true" style="color:red;">{{data.team.matchup[2].player.injury}}</span>
@@ -266,7 +266,7 @@
                       <span style="font-weight: bold;">{{ data.team.matchup[2].player.FirstName + ' ' + data.team.matchup[2].player.LastName }}</span> <span fxHide [fxHide.gt-xs]="isVisibleOnDesktop()">
               ({{ data.team.matchup[2].team.Name + ' - ' + data.team.matchup[2].player.Position }})
             </span><br>
-                  Wins - Losses: {{ data.team.matchup[2].stats.stats.Wins['#text'] + ' - ' +  data.team.matchup[2].stats.stats.Losses['#text'] }} <span *ngIf="data.team.matchup[2].player.saves == null"><br> 
+                  Wins - Losses: {{ data.team.matchup[2].stats.stats.Wins['#text'] + ' - ' +  data.team.matchup[2].stats.stats.Losses['#text'] + ' - ' + data.team.matchup[2].stats.stats.OvertimeLosses['#text']}} <span *ngIf="data.team.matchup[2].player.saves == null"><br> 
               {{data.team.matchup[2].stats.stats.GoalsAgainst['#text']}} Goals given up <br>
               Season GAA: {{data.team.matchup[2].stats.stats.GoalsAgainstAverage['#text']}}</span> <br>
             <span *ngIf="data.team.matchup[2].player.injured === true" style="color:red;">{{data.team.matchup[2].player.injury}}</span>
@@ -284,7 +284,7 @@
                   <span style="font-weight: bold;">{{ data.team.matchup[3].player.FirstName + ' ' + data.team.matchup[3].player.LastName }}</span> <span fxHide [fxHide.gt-xs]="isVisibleOnDesktop()">
               ({{ data.team.matchup[3].team.Name + ' - ' + data.team.matchup[3].player.Position }})
             </span> <br>
-                  Wins - Losses: {{ data.team.matchup[3].stats.stats.Wins['#text'] + ' - ' +  data.team.matchup[3].stats.stats.Losses['#text'] }} <span *ngIf="data.team.matchup[3].player.saves == null"><br> 
+                  Wins - Losses: {{ data.team.matchup[3].stats.stats.Wins['#text'] + ' - ' +  data.team.matchup[3].stats.stats.Losses['#text']+ ' - ' + data.team.matchup[3].stats.stats.OvertimeLosses['#text'] }} <span *ngIf="data.team.matchup[3].player.saves == null"><br> 
               {{data.team.matchup[3].stats.stats.GoalsAgainst['#text']}} Goals given up <br>
               Season GAA: {{data.team.matchup[3].stats.stats.GoalsAgainstAverage['#text']}}</span> <br>
             <span *ngIf="data.team.matchup[3].player.injured === true" style="color:red;">{{data.team.matchup[3].player.injury}}</span>
@@ -326,7 +326,7 @@
           </span>
           <span *ngIf="data.player.startingToday === false && data.player.likelyStartingToday === true">
              <span *ngIf="data.team.matchup[3] != null && data.team.matchup[0].team.ID === data.team.matchup[1].team.ID && data.team.matchup[2].team.ID === data.team.matchup[3].team.ID">
-           <share-container direction="horizontal" addedText="" [properties]="{title: data.team.matchup[0].player.FirstName +' '+ data.team.matchup[0].player.LastName +'('+ data.team.matchup[0].stats.stats.Wins['#text'] + '-' + data.team.matchup[0].stats.stats.Losses['#text'] +')'+ data.team.matchup[0].player.injury +' or '+ data.team.matchup[1].player.FirstName +' '+ data.team.matchup[1].player.LastName +'('+ data.team.matchup[1].stats.stats.Wins['#text'] + '-' + data.team.matchup[1].stats.stats.Losses['#text'] +')'+ data.team.matchup[1].player.injury +' VS '+ data.team.matchup[2].player.FirstName +' '+ data.team.matchup[2].player.LastName +'('+ data.team.matchup[2].stats.stats.Wins['#text'] + '-' + data.team.matchup[2].stats.stats.Losses['#text'] +')'+ data.team.matchup[2].player.injury +' or '+ data.team.matchup[3].player.FirstName +' '+ data.team.matchup[3].player.LastName +'('+ data.team.matchup[3].stats.stats.Wins['#text'] + '-' + data.team.matchup[3].stats.stats.Losses['#text'] +')'+ data.team.matchup[3].player.injury +' '+ data.player.gameTime +' '+ data.team.day +' '+ data.team.matchup[0].team.secondBacktoBack+data.team.matchup[0].team.firstBacktoBack +'-'+ data.team.matchup[0].team.Abbreviation +' @ '+  data.team.Abbreviation +'-'+ data.team.matchup[1].team.firstBacktoBack+data.team.matchup[1].team.secondBacktoBack, description:'starting goalies', img:'img', via:'GoaliesStarting', hashtags:'ProjectedStarters #LikelyStarters #NHL #FantasyHockey '+data.team.matchup[0].player.twitterHandle +' '+data.team.matchup[2].player.twitterHandle}" [expandable]="false" [textEnabled]="true" [platforms]="['twitter']">
+           <share-container direction="horizontal" addedText="" [properties]="{title: data.team.matchup[0].player.FirstName +' '+ data.team.matchup[0].player.LastName +' ('+ data.team.matchup[0].stats.stats.Wins['#text'] + '-' + data.team.matchup[0].stats.stats.Losses['#text'] +'-'+ data.team.matchup[0].stats.stats.OvertimeLosses['#text'] +')'+ data.team.matchup[0].player.injury +' or '+ data.team.matchup[1].player.FirstName +' '+ data.team.matchup[1].player.LastName +' ('+ data.team.matchup[1].stats.stats.Wins['#text'] + '-' + data.team.matchup[1].stats.stats.Losses['#text'] +'-'+ data.team.matchup[1].stats.stats.OvertimeLosses['#text'] +')'+ data.team.matchup[1].player.injury +' VS '+ data.team.matchup[2].player.FirstName +' '+ data.team.matchup[2].player.LastName +' ('+ data.team.matchup[2].stats.stats.Wins['#text'] + '-' + data.team.matchup[2].stats.stats.Losses['#text'] +'-'+ data.team.matchup[2].stats.stats.OvertimeLosses['#text'] +')'+ data.team.matchup[2].player.injury +' or '+ data.team.matchup[3].player.FirstName +' '+ data.team.matchup[3].player.LastName +' ('+ data.team.matchup[3].stats.stats.Wins['#text'] + '-' + data.team.matchup[3].stats.stats.Losses['#text'] +'-'+ data.team.matchup[3].stats.stats.OvertimeLosses['#text'] +')'+ data.team.matchup[3].player.injury +' '+ data.player.gameTime +' '+ data.team.day +' '+ data.team.matchup[0].team.secondBacktoBack+data.team.matchup[0].team.firstBacktoBack +'-'+ data.team.matchup[0].team.Abbreviation +' @ '+  data.team.Abbreviation +'-'+ data.team.matchup[1].team.firstBacktoBack+data.team.matchup[1].team.secondBacktoBack, description:'starting goalies', img:'img', via:'GoaliesStarting', hashtags:'ProjectedStarters #LikelyStarters #NHL #FantasyHockey '+data.team.matchup[0].player.twitterHandle +' '+data.team.matchup[2].player.twitterHandle}" [expandable]="false" [textEnabled]="true" [platforms]="['twitter']">
           </share-container>
          </span>
           </span>

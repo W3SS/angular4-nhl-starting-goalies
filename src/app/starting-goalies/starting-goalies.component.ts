@@ -344,7 +344,7 @@ export class StartingGoaliesComponent implements OnInit {
               if (data.team.hadGameYesterday === true) {
                 //console.log(data, 'game yesterday');
                 if (data.team.haveGameToday === true) {
-                  data.team.secondBacktoBack = "2nd game of Back-to-Back";
+                  data.team.secondBacktoBack = "2nd game of a Back-to-Back";
                 } else {
                   data.team.secondBacktoBack = "";
                 }
@@ -355,7 +355,7 @@ export class StartingGoaliesComponent implements OnInit {
               if (data.team.haveGameToday === true) {
                 //console.log(data, 'game today');
                 if (data.team.haveGameTomorrow === true) {
-                  data.team.firstBacktoBack = "1st game of Back-to-Back";
+                  data.team.firstBacktoBack = "1st game of a Back-to-Back";
                 } else {
                   data.team.firstBacktoBack = "";
                 }

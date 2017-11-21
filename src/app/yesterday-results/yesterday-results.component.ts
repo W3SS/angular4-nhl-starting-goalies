@@ -313,6 +313,26 @@ export class YesterdayResultsComponent implements OnInit {
                 data.player.atHandle = '';
               }
 
+               if (data.team.hadGameYesterday === true) {
+                //console.log(data, 'game yesterday');
+                if (data.team.haveGameToday === true) {
+                  data.team.secondBacktoBack = " 2nd game of a Back-to-Back for the "+data.team.Name;
+                } else {
+                  data.team.secondBacktoBack = "";
+                }
+              } else {
+                data.team.secondBacktoBack = "";
+              }
+
+              if (data.team.haveGameToday === true) {
+                //console.log(data, 'game today');
+                if (data.team.haveGameTomorrow === true) {
+                  data.team.firstBacktoBack = " 1st game of a Back-to-Back for the "+data.team.Name;
+                } else {
+                  data.team.firstBacktoBack = "";
+                }
+              }
+
 
             }
 

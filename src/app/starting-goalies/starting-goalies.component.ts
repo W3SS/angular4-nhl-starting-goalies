@@ -48,6 +48,7 @@ export class StartingGoaliesComponent implements OnInit {
   test: any;
   startingGoaliesToday: Array < any > = [];
   tweetDay: any;
+  noGamesMsg: any;
 
 
 
@@ -86,14 +87,16 @@ export class StartingGoaliesComponent implements OnInit {
 
             console.log(res, "schedule...");
             //console.log(tomorrowDailyDate, "get tomorrows schedule to find back to back games");
-            this.dailySchedule = res['dailygameschedule'].gameentry;
+           
+            if (res['dailygameschedule'].gameentry == null) {
+              this.noGamesToday = true;
+              this.noGamesMsg = "There Are No Games Scheduled Today :( Happy ThanksGiving!!"
+              console.log('There are no games being played today.');
+            } else {
+               this.dailySchedule = res['dailygameschedule'].gameentry;
             this.gameDate = res['dailygameschedule'].gameentry[0].date;
             let dPipe = new DatePipe("en-US");
             this.tweetDay = dPipe.transform(this.gameDate, 'EEEE');
-            if (res['dailygameschedule'].gameentry == null) {
-              this.noGamesToday = true;
-              console.log('There are no games being played today.');
-            } else {
               this.gamesToday = true;
 
               Observable.forkJoin(
@@ -259,13 +262,13 @@ export class StartingGoaliesComponent implements OnInit {
                    mdata.player.GoalsAgainst = daily.stats.GoalsAgainst['#text']+ ' goals';
                  }
 
-                 if (daily.stats.Saves['#text'] >= '20' && daily.stats.GoalsAgainst['#text'] == '0') {
-                   mdata.player.twentySavesPlusShutout = true;
-                   mdata.player.twentySavesPlusResult = mdata.player.FirstName +' '+ mdata.player.LastName + ' has '+daily.stats.Saves['#text']+' and has not given up a goal! ';
-                 } else if (daily.stats.Saves['#text'] >= '20' && daily.stats.GoalsAgainst['#text'] > '0') {
+                 if (daily.stats.Saves['#text'] > '20' && daily.stats.GoalsAgainst['#text'] == '0') {
+                   mdata.player.twentySavesPlus = true;
+                   mdata.player.twentySavesPlusResult = mdata.player.FirstName +' '+ mdata.player.LastName + ' has '+daily.stats.Saves['#text']+' saves and has not given up a goal to the '+mdata.team.opponentName+'!';
+                 } else if (daily.stats.Saves['#text'] > '20' && daily.stats.GoalsAgainst['#text'] > '0') {
                    mdata.player.twentySavesPlus = true;
                    mdata.player.twentySavesPlusShutout = false;
-                   mdata.player.twentySavesPlusResult = mdata.player.FirstName +' '+ mdata.player.LastName + ' has '+daily.stats.Saves['#text']+'against '+ daily.stats.ShotsAgainst['#text'] +' shots and has let '+mdata.player.GoalsAgainst+' light the lamp!';
+                   mdata.player.twentySavesPlusResult = mdata.player.FirstName +' '+ mdata.player.LastName + ' has '+daily.stats.Saves['#text']+'against '+ daily.stats.ShotsAgainst['#text'] +' shots fired by '+mdata.team.opponentName+' and has let '+mdata.player.GoalsAgainst+' light the lamp!';
                  }
         
               
@@ -608,6 +611,15 @@ export class StartingGoaliesComponent implements OnInit {
     });
   }
 
+    public openLastweek() {
+    //this.selected = data;
+    //console.log(data, 'ok you clicked on player img...');
+    this.dialog.open(LastweekDialog, {
+   
+      width: '600px',
+    });
+  }
+
   openSnackBar() {
     this.snackBar.openFromComponent(Info, {
       // duration: 500,
@@ -622,6 +634,78 @@ export class StartingGoaliesComponent implements OnInit {
     this.router.navigateByUrl('starting-goalies/tomorrow');
   }
 
+}
+
+@Component({
+  selector: 'lastweek-dialog',
+  template: `<i (click)="dialogRef.close()" style="float:right; cursor:pointer;" class="material-icons">close</i>
+  <span style="color:#00aced;">Lastweek Updates!</span>`,
+})
+
+export class LastweekDialog implements OnInit {
+ lastweekData: Array <any> = [];
+  constructor(public dialogRef: MatDialogRef < LastweekDialog >, private http: Http,  private dataService: DataService) {}
+
+  loadLastweek() {
+    this.dataService
+          .getLastweekGameId().subscribe(res => {
+            console.log(res['fullgameschedule'].gameentry, "scheduled games for lastweek...");
+            //this.lastweekSchedule = res['fullgameschedule'].gameentry;
+
+
+              Observable.forkJoin(
+                  res['fullgameschedule'].gameentry.map(
+                    g =>
+                    this.http.get('https://api.mysportsfeeds.com/v1.1/pull/nhl/2017-2018-regular/game_boxscore.json?gameid=' + g.id + '&playerstats=Sv,GA,GAA,GS,SO,MIN,W,L,SA,OTL,OTW', options)
+                    .map(response => response.json())
+                  )
+                )
+                .subscribe(res => {
+                  console.log(res, 'making several calls by GAME ID for starting lineups...');
+
+                  let i;
+                  let i2;
+                  let res2;
+                  res.forEach((item, index) => {
+                    i = index;
+                    console.log(res[i], 'got starting lineups data for a whole week!');
+                    //res2 = res[i]['gamestartinglineup'].teamLineup;
+                    //this.gameTime =  res[i]['gamestartinglineup'].game.date;
+                    // res2.forEach((item, index) => {
+
+                    //   // i2 = index;
+                    //   // if (res2[i2].actual != null && res2[i2].expected != null) {
+                    //   //   //console.log(res2[i2].actual.starter[0].player.ID, 'got player ID for goalie actualy starting!');
+                    //   //   this.starterIdData.push(res2[i2].actual.starter[0].player.ID);
+
+                    //   // } else if (res2[i2].actual == null && res2[i2].expected != null) {
+                    //   //   //console.log(res2[i2].expected.starter[0].player.ID, 'got player ID for goalie expected to start!');
+                    //   //   this.starterIdData.push(res2[i2].expected.starter[0].player.ID);
+                    //   // } else {
+                    //   //   //console.log(res2[i2].team.City + " " + res2[i2].team.Name, 'no starters yet!');
+                    //   //   this.starterIdData.push(res2[i2].team.ID);
+                    //   //   //this.starterIdData.push(res2[i2].expected.starter[0].player.ID);
+                    //   //   //console.log(this.starterIdData, 'this array has ALL the IDs of todays starters');
+
+                    //   // }
+
+                    // });
+                  });
+
+                  //this.sortData();
+
+                });
+          })
+
+
+  }
+
+
+
+  ngOnInit() {
+    this.loadLastweek();
+  }
+  
 }
 
 @Component({
@@ -659,7 +743,7 @@ export class TodayDialog implements OnInit {
 
   searchCall() {
     console.log(this.data, 'data passed in')
-    let AND;
+  
     let headers = new Headers();
     let searchterm = 'query=#startingGoalies #nhl ' + this.data.player.FirstName + ' ' + this.data.player.LastName;
 

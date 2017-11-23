@@ -1,5 +1,7 @@
 <router-outlet></router-outlet>
-<h1 class="center date-header"> {{ gameDate | date:'fullDate' }}</h1>
+<h1 class="center no-game-header" *ngIf="noGamesToday === true">{{noGamesMsg}}</h1>
+<h1 class="center date-header" *ngIf="gamesToday === true"> {{ gameDate | date:'fullDate' }}</h1>
+<!-- <button (click)="openLastweek()" style="float:right;">Hot Tip</button> -->
 <br>
 <div class="matchup-layout">
    
@@ -971,6 +973,11 @@
 ['#text']+'sv% '+ data.player.gameTime +' '+ data.team.matchup[0].team.secondBacktoBack+data.team.matchup[0].team.firstBacktoBack +'-'+ data.team.matchup[0].team.Abbreviation +' @ '+  data.team.Abbreviation +'-'+ data.team.matchup[1].team.firstBacktoBack+data.team.matchup[1].team.secondBacktoBack, description:'starting goalies', img:'./assets/nhl-logos/41087.jpg', via:'GoaliesStarting', hashtags:'startingGoalies #NHL #FantasyHockey '+data.team.matchup[0].player.twitterHandle +' '+data.team.matchup[1].player.twitterHandle}" [expandable]="false" [textEnabled]="true" [platforms]="['twitter']">
           </share-container>
          </span>
+
+        <!--   <span *ngIf="data.player.startingToday === true && data.player.startingTodayNow === true &&  data.team.matchup[0].player.startingTodayNow === true && data.team.matchup[0].player.twentySavesPlus != null && data.team.matchup[1].player.twentySavesPlus != null">
+           <share-container direction="horizontal" addedText="" [properties]="{title: data.team.matchup[0].player.twentySavesPlusResult +' '+ data.team.matchup[1].player.twentySavesPlusResult, description:'starting goalies', img:'./assets/nhl-logos/41087.jpg', via:'GoaliesStarting', hashtags:'startingGoalies #NHL #FantasyHockey '+data.team.matchup[0].player.twitterHandle +' '+data.team.matchup[1].player.twitterHandle}" [expandable]="false" [textEnabled]="true" [platforms]="['twitter']">
+          </share-container>
+         </span> -->
 
              <span *ngIf="data.player.startingToday === true &&  data.team.matchup[0].player.Shutouts == '1' && (data.player.startingTodayNow === true || data.team.matchup[0].player.startingTodayNow === true)">
            <share-container direction="horizontal" addedText="" [properties]="{title: data.team.matchup[0].player.atHandle + data.team.matchup[0].team.City +' '+ data.team.matchup[0].team.Name +' '+ data.team.matchup[0].player.FirstName +' '+ data.team.matchup[0].player.LastName + ' had a '+ data.team.matchup[0].player.shotsFaced +' save SHUTOUT tonight against the '+ data.team.matchup[1].team.City + ' ' + data.team.matchup[1].team.Name +' @ '+  data.team.matchup[0].team.City, description:'starting goalies', img:'img', via:'GoaliesStarting', hashtags:'startingGoalies #SHUTOUT #LiveStats #NHL #FantasyHockey '+data.team.matchup[0].player.twitterHandle +' '+data.team.matchup[1].player.twitterHandle}" [expandable]="false" [textEnabled]="true" [platforms]="['twitter']">

@@ -21,7 +21,7 @@ import { RouterModule } from '@angular/router';
 import { FlexLayoutModule } from '@angular/flex-layout';
 
 import { AppComponent } from './app.component';
-import { StartingGoaliesComponent, Info, TodayDialog } from './starting-goalies/starting-goalies.component';
+import { StartingGoaliesComponent, Info, TodayDialog, LastweekDialog } from './starting-goalies/starting-goalies.component';
 import { YesterdayResultsComponent, InfoYesterday } from './yesterday-results/yesterday-results.component';
 import { TomorrowResultsComponent, InfoTomorrow } from './tomorrow-results/tomorrow-results.component';
 
@@ -34,7 +34,8 @@ import { TomorrowResultsComponent, InfoTomorrow } from './tomorrow-results/tomor
     StartingGoaliesComponent,
     YesterdayResultsComponent,
     TomorrowResultsComponent,
-    TodayDialog
+    TodayDialog,
+    LastweekDialog
   ],
   imports: [
     BrowserModule,
@@ -81,7 +82,7 @@ import { TomorrowResultsComponent, InfoTomorrow } from './tomorrow-results/tomor
   ],
   providers: [DataService, YesterdayService, TomorrowService],
   entryComponents: [
-    Info, InfoYesterday, InfoTomorrow, TodayDialog
+    Info, InfoYesterday, InfoTomorrow, TodayDialog, LastweekDialog
   ],
   bootstrap: [AppComponent]
 })

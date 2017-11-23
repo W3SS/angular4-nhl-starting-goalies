@@ -10,15 +10,13 @@ let thisDate = new Date(testDate.getTime() - (24 * 60 * 60 * 1000));
 let tomorrowDate = new Date(thisDate.getTime() + (24 * 60 * 60 * 1000));
 let yesterdayDate = new Date(thisDate.getTime() - (24 * 60 * 60 * 1000));
 
-
 let utcDate = new Date(thisDate.toUTCString());
 let tomorrowUtcDate = new Date(tomorrowDate.toUTCString());
 let yesterdayUtcDate = new Date(yesterdayDate.toUTCString());
 
 utcDate.setHours(utcDate.getHours() - 8);
 tomorrowUtcDate.setHours(tomorrowUtcDate.getHours() - 8);
-yesterdayUtcDate.setHours(tomorrowUtcDate.getHours() - 8);
-
+yesterdayUtcDate.setHours(yesterdayUtcDate.getHours() - 8);
 
 let myDate = new Date(utcDate);
 let tomorrowMyDate = new Date(tomorrowUtcDate);

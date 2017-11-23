@@ -19,29 +19,34 @@ import 'rxjs/add/operator/do';
 let thisDate = new Date();
 let tomorrowDate = new Date(thisDate.getTime() + (24 * 60 * 60 * 1000));
 let yesterdayDate = new Date(thisDate.getTime() - (24 * 60 * 60 * 1000));
+let lastweekDate = new Date(thisDate.getTime() - (192 * 60 * 60 * 1000));
 
 let utcDate = new Date(thisDate.toUTCString());
 let tomorrowUtcDate = new Date(tomorrowDate.toUTCString());
 let yesterdayUtcDate = new Date(yesterdayDate.toUTCString());
+let lastweekUtcDate = new Date(lastweekDate.toUTCString());
 
 utcDate.setHours(utcDate.getHours() - 8);
 tomorrowUtcDate.setHours(tomorrowUtcDate.getHours() - 8);
-yesterdayUtcDate.setHours(tomorrowUtcDate.getHours() - 8);
-
+yesterdayUtcDate.setHours(yesterdayUtcDate.getHours() - 8);
+lastweekUtcDate.setHours(lastweekUtcDate.getHours() - 8);
 
 let myDate = new Date(utcDate);
 let tomorrowMyDate = new Date(tomorrowUtcDate);
 let yesterdayMyDate = new Date(yesterdayUtcDate);
+let lastweekMyDate = new Date(lastweekUtcDate);
 
 //DATE FORMAT FOR DAILY SCHEDULE API
 let dailyDate = myDate.toISOString().slice(0, 10).replace(/-/g, "");
 let tomorrowDailyDate = tomorrowMyDate.toISOString().slice(0, 10).replace(/-/g, "");
 let yesterdayDailyDate = yesterdayMyDate.toISOString().slice(0, 10).replace(/-/g, "");
+let lastweekDailyDate = lastweekMyDate.toISOString().slice(0, 10).replace(/-/g, "");
 
 //DATE FORMAT FOR FULL SCHEDULE API COMPARE DATES FOR BACK TO BACK
 let today = myDate.toISOString().slice(0, 10);
 let tomorrow = tomorrowMyDate.toISOString().slice(0, 10);
 let yesterday = yesterdayMyDate.toISOString().slice(0, 10);
+let lastweek = lastweekMyDate.toISOString().slice(0, 10);
 
 let headers = null;
 let options = null;
@@ -57,6 +62,7 @@ export class DataService {
   stats: Observable < any > = null;
   env: Observable < any > = null;
   gameid: Observable < any > = null;
+  lastweekgameid: Observable < any > = null;
   daily: Observable < any > = null;
   schedule: Observable < any > = null;
   score: Observable < any > = null;
@@ -152,6 +158,18 @@ export class DataService {
         .map(response => response.json())
     }
     return this.gameid;
+  }
+
+   getLastweekGameId() {
+
+    if (!this.lastweekgameid) {
+      console.log('getting 1 week of games from API...');
+
+      let url8 = 'https://api.mysportsfeeds.com/v1.1/pull/nhl/2017-2018-regular/full_game_schedule.json?date=from-'+lastweekDailyDate+'-to-'+tomorrowDailyDate;
+      this.lastweekgameid = this.http.get(url8, options)
+        .map(response => response.json())
+    }
+    return this.lastweekgameid;
   }
 
    getDaily() {

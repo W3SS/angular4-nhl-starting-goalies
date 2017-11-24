@@ -90,7 +90,7 @@ export class StartingGoaliesComponent implements OnInit {
            
             if (res['dailygameschedule'].gameentry == null) {
               this.noGamesToday = true;
-              this.noGamesMsg = "There Are No Games Scheduled Today :( Happy ThanksGiving!!"
+              this.noGamesMsg = "There Are No Games Scheduled Today :("
               console.log('There are no games being played today.');
             } else {
                this.dailySchedule = res['dailygameschedule'].gameentry;
@@ -262,13 +262,13 @@ export class StartingGoaliesComponent implements OnInit {
                    mdata.player.GoalsAgainst = daily.stats.GoalsAgainst['#text']+ ' goals';
                  }
 
-                 if (daily.stats.Saves['#text'] > '20' && daily.stats.GoalsAgainst['#text'] == '0') {
+                 if (parseInt(daily.stats.Saves['#text']) > 20 && daily.stats.GoalsAgainst['#text'] == '0') {
                    mdata.player.twentySavesPlus = true;
-                   mdata.player.twentySavesPlusResult = mdata.player.FirstName +' '+ mdata.player.LastName + ' has '+daily.stats.Saves['#text']+' saves and has not given up a goal to the '+mdata.team.opponentName+'!';
-                 } else if (daily.stats.Saves['#text'] > '20' && daily.stats.GoalsAgainst['#text'] > '0') {
+                   mdata.player.twentySavesPlusResult = mdata.player.FirstName +' '+ mdata.player.LastName + ' has '+daily.stats.Saves['#text']+' saves and has not given up a goal to the '+mdata.team.opponentCity+' '+mdata.team.opponentName+'!';
+                 } else if (parseInt(daily.stats.Saves['#text']) > 20 && daily.stats.GoalsAgainst['#text'] > '0') {
                    mdata.player.twentySavesPlus = true;
                    mdata.player.twentySavesPlusShutout = false;
-                   mdata.player.twentySavesPlusResult = mdata.player.FirstName +' '+ mdata.player.LastName + ' has '+daily.stats.Saves['#text']+'against '+ daily.stats.ShotsAgainst['#text'] +' shots fired by '+mdata.team.opponentName+' and has let '+mdata.player.GoalsAgainst+' light the lamp!';
+                   mdata.player.twentySavesPlusResult = mdata.player.FirstName +' '+ mdata.player.LastName + ' has '+daily.stats.Saves['#text']+' saves against '+ daily.stats.ShotsAgainst['#text'] +' shots fired by '+mdata.team.opponentCity+' '+mdata.team.opponentName+' offense and let '+mdata.player.GoalsAgainst+' light the lamp!';
                  }
         
               

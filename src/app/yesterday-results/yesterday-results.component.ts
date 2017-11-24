@@ -41,6 +41,7 @@ export class YesterdayResultsComponent implements OnInit {
   gamesToday: boolean;
   twitterHandles: Array < any > ;
   tweetDay: any;
+  noGamesMsg: any;
 
 
   constructor(private http: Http, private yesterdayService: YesterdayService, public snackBar: MatSnackBar, public router: Router) {
@@ -80,15 +81,17 @@ export class YesterdayResultsComponent implements OnInit {
 
             console.log(res, "schedule...");
             //console.log(tomorrowDailyDate, "get tomorrows schedule to find back to back games");
-            this.dailySchedule = res['dailygameschedule'].gameentry;
-            this.gameDate = res['dailygameschedule'].gameentry[0].date;
-            let dPipe = new DatePipe("en-US");
-            this.tweetDay = dPipe.transform(this.gameDate, 'EEEE');
+           
             if (res['dailygameschedule'].gameentry == null) {
               this.noGamesToday = true;
+              this.noGamesMsg = "No Games Scheduled Yesterday :("
               console.log('There are no games being played today.');
             } else {
               this.gamesToday = true;
+               this.dailySchedule = res['dailygameschedule'].gameentry;
+            this.gameDate = res['dailygameschedule'].gameentry[0].date;
+            let dPipe = new DatePipe("en-US");
+            this.tweetDay = dPipe.transform(this.gameDate, 'EEEE');
 
               Observable.forkJoin(
                   res['dailygameschedule'].gameentry.map(

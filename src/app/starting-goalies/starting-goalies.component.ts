@@ -517,6 +517,13 @@ export class StartingGoaliesComponent implements OnInit {
           if (this.statData[data.team.gameId][0].team.ID === this.statData[data.team.gameId][1].team.ID) {
             this.statData[data.team.gameId][1].player.twoPossibleStarters = true;
             this.statData[data.team.gameId][1].twoPossibleStarters = true;
+              if (this.statData[data.team.gameId][0].player.saves == null && this.statData[data.team.gameId][1].player.saves > '0') {
+               console.log(this.statData[data.team.gameId][0].player, 'this is not a starter. api got it wrong');
+               this.statData[data.team.gameId][0].player.wrongStarter = true;
+            } else if ((this.statData[data.team.gameId][0].player.saves == '0' || this.statData[data.team.gameId][0].player.saves == '1') && this.statData[data.team.gameId][1].player.saves > '0') {
+               console.log(this.statData[data.team.gameId][0].player, 'this is not a starter. api got it wrong');
+               this.statData[data.team.gameId][0].player.wrongStarter = true;
+            }
           } else {
             this.statData[data.team.gameId][1].twoPossibleStarters = false;
           }

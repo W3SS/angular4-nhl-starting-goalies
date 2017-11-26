@@ -753,6 +753,7 @@ export class TodayDialog implements OnInit {
   
     let headers = new Headers();
     let searchterm = 'query=#startingGoalies #nhl ' + this.data.player.FirstName + ' ' + this.data.player.LastName;
+    //let searchterm = 'query=#FantasyHockey ' + this.data.player.twitterHandle;
 
     headers.append('Content-Type', 'application/X-www-form-urlencoded');
 
@@ -760,7 +761,7 @@ export class TodayDialog implements OnInit {
       console.log(res.json().data.statuses, 'twitter stuff');
       this.tweetsData = res.json().data.statuses;
       if (this.tweetsData.length === 0) {
-        this.noPosts = "No Posts Yet.";
+        this.noPosts = "No Tweets.";
       }
     });
   }

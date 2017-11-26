@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Inject } from '@angular/core';
 import { Http, Response, RequestOptions, Headers, Request, RequestMethod } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
+import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { ActivatedRoute, Router, ActivatedRouteSnapshot } from '@angular/router';
 import { DatePipe } from '@angular/common';
 import { TomorrowService } from '../tomorrow.service';
@@ -43,9 +44,9 @@ export class TomorrowResultsComponent implements OnInit {
   twitterHandles: Array < any > ;
   tweetDay: any;
   noGamesMsg: any;
+  selected: any;
 
-
-  constructor(private http: Http, private tomorrowService: TomorrowService, private todayService: DataService, public snackBar: MatSnackBar, public router: Router) {
+  constructor(private http: Http, private tomorrowService: TomorrowService, private todayService: DataService, public snackBar: MatSnackBar, public router: Router, public dialog: MatDialog) {
     this.getJSON();
     yesterday = this.tomorrowService.getYesterday();
     tomorrow = this.tomorrowService.getTomorrow();
@@ -521,14 +522,80 @@ export class TomorrowResultsComponent implements OnInit {
     this.router.navigateByUrl('starting-goalies');
   }
 
+   public open(event, data) {
+    this.selected = data;
+    console.log(data, 'ok you clicked on player img...');
+    this.dialog.open(TomorrowDialog, {
+      data: data,
+      width: '600px',
+    });
+  }
 
+
+}
+
+@Component({
+  selector: 'tomorrow-dialog',
+  template: `<i (click)="dialogRef.close()" style="float:right; cursor:pointer;" class="material-icons">close</i>
+  <span style="color:#00aced;">Twitter Updates!</span> 
+  <mat-dialog-content>
+  <span style="font-size: 26px; font-weight: light; color: #555; text-align: center;">{{ noPosts }}</span>
+  <ul *ngFor="let item of tweetsData" style="font-size:14px">
+    <li>{{item.text}} <span style="color:#6740B4; font-weight: bold;">{{item.created_at | date:'fullDate'}}</span></li>
+</ul>
+</mat-dialog-content>`,
+})
+
+export class TomorrowDialog implements OnInit {
+  test: any;
+  noPosts: any;
+  tweetsData: Array < any > ;
+  constructor(public dialogRef: MatDialogRef < TomorrowDialog > , @Inject(MAT_DIALOG_DATA) public data: any, private http: Http) {
+
+  }
+
+  loadStuff() {
+    let headers = new Headers();
+
+    headers.append('Content-Type', 'application/X-www-form-urlencoded');
+
+    this.http.post('/authorize', { headers: headers }).subscribe((res) => {
+      this.searchCall();
+    })
+
+
+  }
+
+
+  searchCall() {
+    console.log(this.data, 'data passed in')
+  
+    let headers = new Headers();
+    let searchterm = 'query=#startingGoalies #nhl ' + this.data.player.FirstName + ' ' + this.data.player.LastName;
+    //let searchterm = 'query=#FantasyHockey ' + this.data.player.twitterHandle;
+
+    headers.append('Content-Type', 'application/X-www-form-urlencoded');
+
+    this.http.post('/search', searchterm, { headers: headers }).subscribe((res) => {
+      console.log(res.json().data.statuses, 'twitter stuff');
+      this.tweetsData = res.json().data.statuses;
+      if (this.tweetsData.length === 0) {
+        this.noPosts = "No Tweets.";
+      }
+    });
+  }
+
+  ngOnInit() {
+    this.loadStuff();
+  }
 }
 
 @Component({
   selector: 'info-tomorrow',
   template: `<i (click)="close()" class="material-icons close">close</i><br />
 <span style="color: #e74c3c;">back</span><span style="color: #ccc;"> to back</span><span> = The first game of a back to back scheduled game.</span><br />
-<span style="color: #ccc;">back to </span><span style="color: #e74c3c;">back</span><span> = The second game of a back to back scheduled game.</span>`,
+<span style="color: #ccc;">back to </span><span style="color: #e74c3c;">back</span><span> = The second game of a back to back scheduled game.</span> <br />
+<span>Click on player image for twitter updates!</span>`,
   styles: [`.close { float:right; cursor:pointer; font-size: 20px;}`]
 })
 

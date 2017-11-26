@@ -71,6 +71,10 @@ mat-card p {
   margin: 0 5px 0 5px;
 }
 
+.player-img {
+  cursor: pointer;
+}
+
 
 
 @media only screen and (max-width: 600px) {

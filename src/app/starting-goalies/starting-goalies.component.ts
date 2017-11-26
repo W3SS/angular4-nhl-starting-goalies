@@ -121,7 +121,7 @@ export class StartingGoaliesComponent implements OnInit {
 
                       i2 = index;
                       if (res2[i2].actual != null && res2[i2].expected != null) {
-                        //console.log(res2[i2].actual.starter[0].player.ID, 'got player ID for goalie actualy starting!');
+                        //console.log(res2[i2].actual.starter[0].player, 'got player ID for goalie actualy starting!');
                         this.starterIdData.push(res2[i2].actual.starter[0].player.ID);
 
                       } else if (res2[i2].actual == null && res2[i2].expected != null) {
@@ -546,9 +546,9 @@ export class StartingGoaliesComponent implements OnInit {
             if (this.statData[data.team.gameId][2].player.saves == null && this.statData[data.team.gameId][1].player.saves > '0') {
                console.log(this.statData[data.team.gameId][2].player, 'this is not a starter. api got it wrong');
                this.statData[data.team.gameId][2].player.wrongStarter = true;
-            }  else if ((this.statData[data.team.gameId][1].player.saves == '0' || this.statData[data.team.gameId][1].player.saves == '1') && this.statData[data.team.gameId][2].player.saves > '0') {
+            }  else if ((this.statData[data.team.gameId][2].player.saves == '0' || this.statData[data.team.gameId][2].player.saves == '1') && this.statData[data.team.gameId][1].player.saves > '0') {
                console.log(this.statData[data.team.gameId][1].player, 'this is not a starter. api got it wrong');
-               this.statData[data.team.gameId][1].player.wrongStarter = true;
+               this.statData[data.team.gameId][2].player.wrongStarter = true;
             }
                if (this.statData[data.team.gameId][2].player.resultYesterday != null) {
               this.statData[data.team.gameId][2].player.finishedYesterday = true;

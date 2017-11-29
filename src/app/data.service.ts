@@ -52,6 +52,10 @@ let headers = null;
 let options = null;
 let sending;
 let sent;
+let sendingHot;
+let sentHot;
+let sendingAll;
+let sentAll;
 
 //console.log(dailyDate, 'today\'s date');
 
@@ -113,15 +117,33 @@ export class DataService {
     return tomorrow; 
   }
 
-  sendStats(statsArray) {
+  sendStats(statsArray, allStats) {
     console.log("sending stats to service...");
     sending = statsArray;
+    sendingAll = allStats;
+  }
+
+ sendHotStats(hotstatsArray) {
+    console.log("sending hot stats to service...");
+    sendingHot = hotstatsArray;
   }
 
   getSentStats() {
     console.log("stats sent to component...");
     sent = sending;
     return sent;
+  }
+
+   getSentAllStats() {
+    console.log("stats sent to component...");
+    sentAll = sendingAll;
+    return sentAll;
+  }
+
+  getSentHotStats() {
+    console.log("stats sent to component...");
+    sentHot = sendingHot;
+    return sentHot;
   }
 
 
@@ -165,7 +187,7 @@ export class DataService {
     if (!this.lastweekgameid) {
       console.log('getting 1 week of games from API...');
 
-      let url8 = 'https://api.mysportsfeeds.com/v1.1/pull/nhl/2017-2018-regular/full_game_schedule.json?date=from-'+lastweekDailyDate+'-to-'+tomorrowDailyDate;
+      let url8 = 'https://api.mysportsfeeds.com/v1.1/pull/nhl/2017-2018-regular/full_game_schedule.json?date=from-'+lastweekDailyDate+'-to-'+yesterdayDailyDate;
       this.lastweekgameid = this.http.get(url8, options)
         .map(response => response.json())
     }

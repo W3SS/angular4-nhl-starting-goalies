@@ -22,7 +22,7 @@
               Season GAA: {{data.team.matchup[0].stats.stats.GoalsAgainstAverage['#text'] }}</span> <br>
             <span *ngIf="data.team.matchup[0].player.injured === true" style="color:red;">{{data.team.matchup[0].player.injury}}</span>
             <br>
-             <span *ngIf="data.team.matchup[0].player.playedYesterday === true" style="color:#6740B4;">{{data.team.matchup[0].player.LastName}} played yesterday and {{ data.team.matchup[0].player.saYesterday - data.team.matchup[0].player.savesYesterday}} goals hit the back of the net. <span *ngIf="data.team.matchup[0].player.winsYesterday === '1'">And won the game.</span><span *ngIf="data.team.matchup[0].player.lossesYesterday === '1'">And lost the game.</span>
+             <span *ngIf="data.team.matchup[0].player.playedYesterday === true" style="color:#6740B4;">{{data.team.matchup[0].player.LastName}} played today and {{ data.team.matchup[0].player.saYesterday - data.team.matchup[0].player.savesYesterday}} goals hit the back of the net. <span *ngIf="data.team.matchup[0].player.winsYesterday === '1'">And won the game.</span><span *ngIf="data.team.matchup[0].player.lossesYesterday === '1'">And lost the game.</span>
           </span>
           </div>
           <div class="goalies-inline" *ngIf="data.player.startingToday === true">
@@ -41,7 +41,7 @@
               Season GAA: {{data.team.matchup[1].stats.stats.GoalsAgainstAverage['#text']}}</span> <br>
             <span *ngIf="data.team.matchup[1].player.injured === true" style="color:red;">{{data.team.matchup[1].player.injury}}</span>
             <br>
-             <span *ngIf="data.team.matchup[1].player.playedYesterday === true" style="color:#6740B4;">{{data.team.matchup[1].player.LastName}} played yesterday and {{ data.team.matchup[1].player.saYesterday - data.team.matchup[1].player.savesYesterday}} goals hit the back of the net. <span *ngIf="data.team.matchup[1].player.winsYesterday === '1'">And won the game.</span><span *ngIf="data.team.matchup[0].player.lossesYesterday === '1'">And lost the game.</span>
+             <span *ngIf="data.team.matchup[1].player.playedYesterday === true" style="color:#6740B4;">{{data.team.matchup[1].player.LastName}} played today and {{ data.team.matchup[1].player.saYesterday - data.team.matchup[1].player.savesYesterday}} goals hit the back of the net. <span *ngIf="data.team.matchup[1].player.winsYesterday === '1'">And won the game.</span><span *ngIf="data.team.matchup[0].player.lossesYesterday === '1'">And lost the game.</span>
           </span>
           </div>
           <div class="goalies-inline" *ngIf="data.player.startingToday === false && data.player.likelyStartingToday === true">
@@ -64,7 +64,7 @@
               Season GAA: {{data.team.matchup[0].stats.stats.GoalsAgainstAverage['#text']}}</span> <br>
             <span *ngIf="data.team.matchup[0].player.injured === true" style="color:red;">{{data.team.matchup[0].player.injury}}</span>
             <br>
-             <span *ngIf="data.team.matchup[0].player.playedYesterday === true" style="color:#6740B4;">{{data.team.matchup[0].player.LastName}} played yesterday and {{ data.team.matchup[0].player.saYesterday - data.team.matchup[0].player.savesYesterday}} goals hit the back of the net. <span *ngIf="data.team.matchup[0].player.winsYesterday === '1'">And won the game.</span><span *ngIf="data.team.matchup[0].player.lossesYesterday === '1'">And lost the game.</span>
+             <span *ngIf="data.team.matchup[0].player.playedYesterday === true" style="color:#6740B4;">{{data.team.matchup[0].player.LastName}} played today and {{ data.team.matchup[0].player.saYesterday - data.team.matchup[0].player.savesYesterday}} goals hit the back of the net. <span *ngIf="data.team.matchup[0].player.winsYesterday === '1'">And won the game.</span><span *ngIf="data.team.matchup[0].player.lossesYesterday === '1'">And lost the game.</span>
           </span>
           </span>
             <br> Not official starter.
@@ -83,7 +83,7 @@
               Season GAA: {{data.team.matchup[0].stats.stats.GoalsAgainstAverage['#text']}}</span> <br>
             <span *ngIf="data.team.matchup[0].player.injured === true" style="color:red;">{{data.team.matchup[0].player.injury}}</span>
             <br>
-             <span *ngIf="data.team.matchup[0].player.playedYesterday === true" style="color:#6740B4;">{{data.team.matchup[0].player.LastName}} played yesterday and {{ data.team.matchup[0].player.saYesterday - data.team.matchup[0].player.savesYesterday}} goals hit the back of the net. <span *ngIf="data.team.matchup[0].player.winsYesterday === '1'">And won the game.</span><span *ngIf="data.team.matchup[0].player.lossesYesterday === '1'">And lost the game.</span>
+             <span *ngIf="data.team.matchup[0].player.playedYesterday === true" style="color:#6740B4;">{{data.team.matchup[0].player.LastName}} played today and {{ data.team.matchup[0].player.saYesterday - data.team.matchup[0].player.savesYesterday}} goals hit the back of the net. <span *ngIf="data.team.matchup[0].player.winsYesterday === '1'">And won the game.</span><span *ngIf="data.team.matchup[0].player.lossesYesterday === '1'">And lost the game.</span>
           </span>
           </span>
             <br>
@@ -101,7 +101,7 @@
               Season GAA: {{data.team.matchup[1].stats.stats.GoalsAgainstAverage['#text']}}</span> <br>
             <span *ngIf="data.team.matchup[1].player.injured === true" style="color:red;">{{data.team.matchup[1].player.injury}}</span>
             <br>
-             <span *ngIf="data.team.matchup[1].player.playedYesterday === true" style="color:#6740B4;">{{data.team.matchup[1].player.LastName}} played yesterday and {{ data.team.matchup[1].player.saYesterday - data.team.matchup[1].player.savesYesterday}} goals hit the back of the net. <span *ngIf="data.team.matchup[1].player.winsYesterday === '1'">And won the game.</span><span *ngIf="data.team.matchup[1].player.lossesYesterday === '1'">And lost the game.</span>
+             <span *ngIf="data.team.matchup[1].player.playedYesterday === true" style="color:#6740B4;">{{data.team.matchup[1].player.LastName}} played today and {{ data.team.matchup[1].player.saYesterday - data.team.matchup[1].player.savesYesterday}} goals hit the back of the net. <span *ngIf="data.team.matchup[1].player.winsYesterday === '1'">And won the game.</span><span *ngIf="data.team.matchup[1].player.lossesYesterday === '1'">And lost the game.</span>
           </span>
           </span>
             <br> Not official starters.
@@ -120,7 +120,7 @@
               Season GAA: {{data.team.matchup[0].stats.stats.GoalsAgainstAverage['#text']}}</span> <br>
             <span *ngIf="data.team.matchup[0].player.injured === true" style="color:red;">{{data.team.matchup[0].player.injury}}</span>
             <br>
-             <span *ngIf="data.team.matchup[0].player.playedYesterday === true" style="color:#6740B4;">{{data.team.matchup[0].player.LastName}} played yesterday and {{ data.team.matchup[0].player.saYesterday - data.team.matchup[0].player.savesYesterday}} goals hit the back of the net. <span *ngIf="data.team.matchup[0].player.winsYesterday === '1'">And won the game.</span><span *ngIf="data.team.matchup[0].player.lossesYesterday === '1'">And lost the game.</span>
+             <span *ngIf="data.team.matchup[0].player.playedYesterday === true" style="color:#6740B4;">{{data.team.matchup[0].player.LastName}} played today and {{ data.team.matchup[0].player.saYesterday - data.team.matchup[0].player.savesYesterday}} goals hit the back of the net. <span *ngIf="data.team.matchup[0].player.winsYesterday === '1'">And won the game.</span><span *ngIf="data.team.matchup[0].player.lossesYesterday === '1'">And lost the game.</span>
           </span>
           </span>
             <br> Not official starter.
@@ -145,7 +145,7 @@
               Season GAA: {{data.team.matchup[1].stats.stats.GoalsAgainstAverage['#text']}}</span> <br>
             <span *ngIf="data.team.matchup[1].player.injured === true" style="color:red;">{{data.team.matchup[1].player.injury}}</span>
               <br>
-             <span *ngIf="data.team.matchup[1].player.playedYesterday === true" style="color:#6740B4;">{{data.team.matchup[1].player.LastName}} played yesterday and {{ data.team.matchup[1].player.saYesterday - data.team.matchup[1].player.savesYesterday}} goals hit the back of the net. <span *ngIf="data.team.matchup[1].player.winsYesterday === '1'">And won the game.</span><span *ngIf="data.team.matchup[1].player.lossesYesterday === '1'">And lost the game.</span>
+             <span *ngIf="data.team.matchup[1].player.playedYesterday === true" style="color:#6740B4;">{{data.team.matchup[1].player.LastName}} played today and {{ data.team.matchup[1].player.saYesterday - data.team.matchup[1].player.savesYesterday}} goals hit the back of the net. <span *ngIf="data.team.matchup[1].player.winsYesterday === '1'">And won the game.</span><span *ngIf="data.team.matchup[1].player.lossesYesterday === '1'">And lost the game.</span>
           </span>
 
           </span>
@@ -173,7 +173,7 @@
               <br>
              <span *ngIf="data.team.matchup[1].player.playedYesterday === true" style="color:#6740B4;">
               <strong>{{data.team.matchup[2].playerresultYesterday}}</strong>
-              <!-- {{data.team.matchup[1].player.LastName}} played yesterday and {{ data.team.matchup[1].player.saYesterday - data.team.matchup[1].player.savesYesterday}} goals hit the back of the net. <span *ngIf="data.team.matchup[1].player.winsYesterday === '1'">And won the game.</span><span *ngIf="data.team.matchup[1].player.lossesYesterday === '1'">And lost the game.</span> -->
+              <!-- {{data.team.matchup[1].player.LastName}} played today and {{ data.team.matchup[1].player.saYesterday - data.team.matchup[1].player.savesYesterday}} goals hit the back of the net. <span *ngIf="data.team.matchup[1].player.winsYesterday === '1'">And won the game.</span><span *ngIf="data.team.matchup[1].player.lossesYesterday === '1'">And lost the game.</span> -->
           </span>
 
           </span>
@@ -202,7 +202,7 @@
               Season GAA: {{data.team.matchup[1].stats.stats.GoalsAgainstAverage['#text']}}</span> <br>
             <span *ngIf="data.team.matchup[1].player.injured === true" style="color:red;">{{data.team.matchup[1].player.injury}}</span>
               <br>
-             <span *ngIf="data.team.matchup[1].player.playedYesterday === true" style="color:#6740B4;">{{data.team.matchup[1].player.LastName}} played yesterday and {{ data.team.matchup[1].player.saYesterday - data.team.matchup[1].player.savesYesterday}} goals hit the back of the net. <span *ngIf="data.team.matchup[1].player.winsYesterday === '1'">And won the game.</span><span *ngIf="data.team.matchup[1].player.lossesYesterday === '1'">And lost the game.</span>
+             <span *ngIf="data.team.matchup[1].player.playedYesterday === true" style="color:#6740B4;">{{data.team.matchup[1].player.LastName}} played today and {{ data.team.matchup[1].player.saYesterday - data.team.matchup[1].player.savesYesterday}} goals hit the back of the net. <span *ngIf="data.team.matchup[1].player.winsYesterday === '1'">And won the game.</span><span *ngIf="data.team.matchup[1].player.lossesYesterday === '1'">And lost the game.</span>
           </span>
           </span>
             <br>
@@ -220,7 +220,7 @@
               Season GAA: {{data.team.matchup[2].stats.stats.GoalsAgainstAverage['#text']}}</span> <br>
             <span *ngIf="data.team.matchup[2].player.injured === true" style="color:red;">{{data.team.matchup[2].player.injury}}</span>
               <br>
-             <span *ngIf="data.team.matchup[2].player.playedYesterday === true" style="color:#6740B4;">{{data.team.matchup[2].player.LastName}} played yesterday and {{ data.team.matchup[2].player.saYesterday - data.team.matchup[2].player.savesYesterday}} goals hit the back of the net. <span *ngIf="data.team.matchup[2].player.winsYesterday === '1'">And won the game.</span><span *ngIf="data.team.matchup[2].player.lossesYesterday === '1'">And lost the game.</span>
+             <span *ngIf="data.team.matchup[2].player.playedYesterday === true" style="color:#6740B4;">{{data.team.matchup[2].player.LastName}} played today and {{ data.team.matchup[2].player.saYesterday - data.team.matchup[2].player.savesYesterday}} goals hit the back of the net. <span *ngIf="data.team.matchup[2].player.winsYesterday === '1'">And won the game.</span><span *ngIf="data.team.matchup[2].player.lossesYesterday === '1'">And lost the game.</span>
           </span>
           </span>
             <br> Not official starters.
@@ -246,7 +246,7 @@
               Season GAA: {{data.team.matchup[2].stats.stats.GoalsAgainstAverage['#text']}}</span> <br>
             <span *ngIf="data.team.matchup[2].player.injured === true" style="color:red;">{{data.team.matchup[2].player.injury}}</span>
               <br>
-             <span *ngIf="data.team.matchup[2].player.playedYesterday === true" style="color:#6740B4;">{{data.team.matchup[2].player.LastName}} played yesterday and {{ data.team.matchup[2].player.saYesterday - data.team.matchup[2].player.savesYesterday}} goals hit the back of the net. <span *ngIf="data.team.matchup[2].player.winsYesterday === '1'">And won the game.</span><span *ngIf="data.team.matchup[2].player.lossesYesterday === '1'">And lost the game.</span>
+             <span *ngIf="data.team.matchup[2].player.playedYesterday === true" style="color:#6740B4;">{{data.team.matchup[2].player.LastName}} played today and {{ data.team.matchup[2].player.saYesterday - data.team.matchup[2].player.savesYesterday}} goals hit the back of the net. <span *ngIf="data.team.matchup[2].player.winsYesterday === '1'">And won the game.</span><span *ngIf="data.team.matchup[2].player.lossesYesterday === '1'">And lost the game.</span>
           </span>
           </span>
             <br> Not official starter.
@@ -272,7 +272,7 @@
               Season GAA: {{data.team.matchup[2].stats.stats.GoalsAgainstAverage['#text']}}</span> <br>
             <span *ngIf="data.team.matchup[2].player.injured === true" style="color:red;">{{data.team.matchup[2].player.injury}}</span>
               <br>
-             <span *ngIf="data.team.matchup[2].player.playedYesterday === true" style="color:#6740B4;">{{data.team.matchup[2].player.LastName}} played yesterday and {{ data.team.matchup[2].player.saYesterday - data.team.matchup[2].player.savesYesterday}} goals hit the back of the net. <span *ngIf="data.team.matchup[2].player.winsYesterday === '1'">And won the game.</span><span *ngIf="data.team.matchup[2].player.lossesYesterday === '1'">And lost the game.</span>
+             <span *ngIf="data.team.matchup[2].player.playedYesterday === true" style="color:#6740B4;">{{data.team.matchup[2].player.LastName}} played today and {{ data.team.matchup[2].player.saYesterday - data.team.matchup[2].player.savesYesterday}} goals hit the back of the net. <span *ngIf="data.team.matchup[2].player.winsYesterday === '1'">And won the game.</span><span *ngIf="data.team.matchup[2].player.lossesYesterday === '1'">And lost the game.</span>
           </span>
           </span>
             <br>
@@ -290,7 +290,7 @@
               Season GAA: {{data.team.matchup[3].stats.stats.GoalsAgainstAverage['#text']}}</span> <br>
             <span *ngIf="data.team.matchup[3].player.injured === true" style="color:red;">{{data.team.matchup[3].player.injury}}</span>
               <br>
-             <span *ngIf="data.team.matchup[3].player.playedYesterday === true" style="color:#6740B4;">{{data.team.matchup[3].player.LastName}} played yesterday and {{ data.team.matchup[3].player.saYesterday - data.team.matchup[3].player.savesYesterday}} goals hit the back of the net. <span *ngIf="data.team.matchup[3].player.winsYesterday === '1'">And won the game.</span><span *ngIf="data.team.matchup[3].player.lossesYesterday === '1'">And lost the game.</span>
+             <span *ngIf="data.team.matchup[3].player.playedYesterday === true" style="color:#6740B4;">{{data.team.matchup[3].player.LastName}} played today and {{ data.team.matchup[3].player.saYesterday - data.team.matchup[3].player.savesYesterday}} goals hit the back of the net. <span *ngIf="data.team.matchup[3].player.winsYesterday === '1'">And won the game.</span><span *ngIf="data.team.matchup[3].player.lossesYesterday === '1'">And lost the game.</span>
           </span>
           </span>
             <br> Not official starters.

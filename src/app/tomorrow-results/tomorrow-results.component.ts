@@ -356,10 +356,10 @@ export class TomorrowResultsComponent implements OnInit {
               for (let injdata of this.myData) {
 
                 if (inj.player.ID === injdata.player.ID) {
-                  
+                  //console.log(inj.injury, "injuries...");
 
                     injdata.player.injured = true;
-                    injdata.player.injury = +' '+inj.injury;
+                    injdata.player.injury = ' '+inj.injury;
                     
                     if (inj.injury.substr(inj.injury.length - 5) === '(Out)') {
                       console.log(inj.injury.substr(inj.injury.length - 5), 'injuries that say OUT!');

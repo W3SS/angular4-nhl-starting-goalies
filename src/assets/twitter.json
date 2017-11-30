@@ -103,8 +103,8 @@
     "twitterHashTag": "#GoStars",
     "City": "Dallas",
     "Name": "Stars",
-    "4561": "@Benbishop30",
-    "10074": "@ADell32"
+    "4561": "@Benbishop30"
+    
   },
   "18":
   {
@@ -149,7 +149,8 @@
   {
     "twitterHashTag": "#SJSharks",
     "City": "SanJose",
-    "Name": "Sharks"
+    "Name": "Sharks",
+    "10074": "@ADell32"
   },
   "15":
   {
@@ -203,7 +204,8 @@
     "twitterHashTag": "#Yotes",
     "City": "Arizona",
     "Name": "Coyotes",
-    "5296": "@ARaanta31"
+    "5296": "@ARaanta31",
+    "8952": "@wedgewall"
   },
   "4":
   {

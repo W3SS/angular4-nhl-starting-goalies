@@ -13,10 +13,13 @@
     font-size: 12px;
     background: #663fb4;
     color: rgba(255, 255, 255, 0.87);
+    display: flex;
 }
 
 .docs-footer div {
   display: inline-block;
+  flex-grow: 1;
+  width: 33%;   
 }
 
 .docs-footer-list[_ngcontent-c10] {

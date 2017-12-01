@@ -298,7 +298,7 @@ export class TomorrowResultsComponent implements OnInit {
               if (data.team.hadGameYesterday === true) {
                 //console.log(data, 'game yesterday');
                 if (data.team.haveGameToday === true) {
-                  data.team.secondBacktoBack = "2nd game of Back-to-Back";
+                  data.team.secondBacktoBack = " 2nd game of Back-to-Back ";
                 } else {
                   data.team.secondBacktoBack = "";
                 }
@@ -309,7 +309,7 @@ export class TomorrowResultsComponent implements OnInit {
               if (data.team.haveGameToday === true) {
                 //console.log(data, 'game today');
                 if (data.team.haveGameTomorrow === true) {
-                  data.team.firstBacktoBack = "1st game of Back-to-Back";
+                  data.team.firstBacktoBack = " 1st game of Back-to-Back ";
                 } else {
                   data.team.firstBacktoBack = "";
                 }
@@ -383,7 +383,7 @@ export class TomorrowResultsComponent implements OnInit {
               for (let startdata of this.myData) {
 
                 if (startid === startdata.team.ID) {
-                  if (startdata.stats.GamesPlayed['#text'] > 5 && startdata.player.injuryOut == null && startdata.player.ID != '9072' && startdata.player.ID != '5518' && startdata.player.ID != '5296') {
+                  if (startdata.stats.GamesPlayed['#text'] > 6 && startdata.player.injuryOut == null && startdata.player.ID != '9072' && startdata.player.ID != '5518' && startdata.player.ID != '5296' ||  startdata.player.ID == '10083') {
 //&&  startdata.player.winsYesterday == '0' && startdata.player.lossesYesterday == '0' && startdata.player.olYesterday == '0'
                     startdata.player.startingToday = false;
                     startdata.player.likelyStartingToday = true;

@@ -24,6 +24,11 @@
   color: #555;
 }
 
+  button.mat-raised-button {
+    float:right; 
+    margin: 21px 10px 0 0;
+}
+
 
 
 .material-icons.md-18 { font-size: 18px; }
@@ -34,7 +39,16 @@
 @media only screen and (max-width: 600px) {
 
 
-  .material-icons.md-48 { font-size: 38px; }
+  .material-icons.md-48 { 
+    font-size: 38px; 
+  }
+
+  button.mat-raised-button {
+    min-width: 50px;
+    padding: 0px 4px;
+    font-size: 11px;
+    
+}
 
 
 }

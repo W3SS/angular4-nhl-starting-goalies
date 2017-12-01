@@ -98,6 +98,11 @@ ul {
     font-size: 15px;
 }
 
+  button.mat-raised-button {
+    float:right; 
+    margin: 21px 10px 0 0;    
+}
+
 @media only screen and (max-width: 600px) {
 
   .card-wrap {
@@ -128,6 +133,12 @@ ul {
  .player img {
    width: 10.5%;
  }
+
+button.mat-raised-button {  
+    min-width: 50px;
+    padding: 0px 4px;
+    font-size: 11px;   
+}
 
 
 }

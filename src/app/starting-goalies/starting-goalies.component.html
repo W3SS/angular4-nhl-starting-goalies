@@ -1,5 +1,5 @@
 <router-outlet></router-outlet>
-<span><button mat-raised-button color="warn" (click)="openLastweek($event, showData)" style="float:right; margin: 21px 10px 0 0;">Hot List</button></span>
+<span><button mat-raised-button class="mat-raised-button" color="warn" (click)="openLastweek($event, showData)">Hot List</button></span>
 <h1 class="center date-header"> {{ gameDate | date:'fullDate' }}</h1>
 <h1 class="center no-game-header" *ngIf="noGamesToday === true">{{noGamesMsg}}</h1>
 

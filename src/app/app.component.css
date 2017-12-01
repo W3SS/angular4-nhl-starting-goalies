@@ -22,6 +22,24 @@
   width: 33%;   
 }
 
+.docs-footer .docs-footer-links {
+  text-align: center;
+}
+
+.docs-footer .docs-footer-links a {
+  color: #fff;
+  text-decoration: none;
+}
+
+.docs-footer .docs-footer-links li{
+  cursor: pointer;
+}
+
+.docs-footer .docs-footer-links a:hover {
+  opacity: 0.8;
+}
+
+
 .docs-footer-list[_ngcontent-c10] {
     -webkit-box-align: center;
     -ms-flex-align: center;
@@ -34,4 +52,5 @@
     -ms-flex-flow: row wrap;
     flex-flow: row wrap;
     padding: 8px;
+
 }

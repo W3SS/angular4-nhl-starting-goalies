@@ -12,6 +12,7 @@ import { MatCardModule,
         MatMenuModule,
         MatListModule,
         MatChipsModule,
+        MatTooltipModule,
         MatDialogModule } from '@angular/material';
 import { DataService } from './data.service';
 import { YesterdayService } from './yesterday.service';
@@ -52,6 +53,7 @@ import { TomorrowResultsComponent, InfoTomorrow, TomorrowDialog } from './tomorr
     MatDialogModule,
     MatListModule,
     MatChipsModule,
+    MatTooltipModule,
     BrowserAnimationsModule,
     ShareModule,
     FlexLayoutModule,

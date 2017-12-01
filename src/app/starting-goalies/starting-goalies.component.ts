@@ -198,7 +198,11 @@ export class StartingGoaliesComponent implements OnInit {
 
               if (schedule.awayTeam.Name === sdata.team.Name) {
                 sdata.player.gameTime = schedule.time;
-                sdata.team.gameIce = schedule.location;
+                if (schedule.location === 'Nassau Coliseum') {
+                  sdata.team.gameIce = 'Barclays Center';
+                } else {
+                  sdata.team.gameIce = schedule.location;
+                } 
                 sdata.team.gameId = schedule.id;
                 sdata.player.gameLocation = "away";
                 sdata.team.day = this.tweetDay;
@@ -217,7 +221,11 @@ export class StartingGoaliesComponent implements OnInit {
               }
               if (schedule.homeTeam.Name === sdata.team.Name) {
                 sdata.player.gameTime = schedule.time;
-                sdata.team.gameIce = schedule.location;
+                if (schedule.location === 'Nassau Coliseum') {
+                  sdata.team.gameIce = 'Barclays Center';
+                } else {
+                  sdata.team.gameIce = schedule.location;
+                } 
                 sdata.team.gameId = schedule.id;
                 sdata.player.gameLocation = "home";
                 sdata.team.day = this.tweetDay;
@@ -233,6 +241,10 @@ export class StartingGoaliesComponent implements OnInit {
                 sdata.player.injury = '';
 
 
+              }
+
+              if (schedule.location === 'Nassau Coliseum') {
+                  
               }
             }
           }

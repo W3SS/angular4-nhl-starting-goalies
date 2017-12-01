@@ -32,6 +32,9 @@ export class AppComponent implements OnInit {
     // console.log('width over 600px');
   }
 
+  //position for tooltip
+  position = 'above';
+
 
 }
 

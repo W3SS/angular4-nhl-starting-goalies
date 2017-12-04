@@ -1,0 +1,55 @@
+{"todayStarters": [
+{
+  "5176":
+  {
+    "confirmed": true,
+    "probable": true,
+    "date": "2017-12-04"
+  },
+  "5122":
+  {
+    "confirmed": true,
+    "probable": true,
+    "date": "2017-12-04"
+  },
+  "4235":
+  {
+    "confirmed": true,
+    "probable": true,
+    "date": "2017-12-04"
+  },
+  "272":
+  {
+    "confirmed": true,
+    "probable": true,
+    "date": "2017-12-04"
+  },
+  "4763":
+  {
+    "confirmed": true,
+    "probable": true,
+    "date": "2017-12-04"
+  },
+  "3810":
+  {
+    "confirmed": false,
+    "probable": true,
+    "date": "2017-12-04"
+  },
+  "4305":
+  {
+    "confirmed": true,
+    "probable": true,
+    "date": "2017-12-04"
+  },
+  "3486":
+  {
+    "confirmed": true,
+    "probable": true,
+    "date": "2017-12-04"
+  }
+
+ }
+]}
+
+

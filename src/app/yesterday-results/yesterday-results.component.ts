@@ -189,7 +189,15 @@ export class YesterdayResultsComponent implements OnInit {
 
               if (schedule.awayTeam.Name === sdata.team.Name) {
                 sdata.player.gameTime = schedule.time;
-                sdata.team.gameIce = schedule.location;
+                if (schedule.location === 'Nassau Coliseum') {
+                  sdata.team.gameIce = 'Barclays Center';
+                } else if (schedule.location === 'Verizon Center') {
+                  sdata.team.gameIce = 'Capital One Arena';
+                } else if (schedule.location === 'Joe Louis Arena') {
+                  sdata.team.gameIce = 'Little Caesars Arena';
+                } else {
+                  sdata.team.gameIce = schedule.location;
+                }
                 sdata.team.gameId = schedule.id;
                 sdata.player.gameLocation = "away";
                 sdata.team.day = this.tweetDay;
@@ -204,7 +212,15 @@ export class YesterdayResultsComponent implements OnInit {
               }
               if (schedule.homeTeam.Name === sdata.team.Name) {
                 sdata.player.gameTime = schedule.time;
-                sdata.team.gameIce = schedule.location;
+                if (schedule.location === 'Nassau Coliseum') {
+                  sdata.team.gameIce = 'Barclays Center';
+                } else if (schedule.location === 'Verizon Center') {
+                  sdata.team.gameIce = 'Capital One Arena';
+                } else if (schedule.location === 'Joe Louis Arena') {
+                  sdata.team.gameIce = 'Little Caesars Arena';
+                } else {
+                  sdata.team.gameIce = schedule.location;
+                }
                 sdata.team.gameId = schedule.id;
                 sdata.player.gameLocation = "home";
                 sdata.team.day = this.tweetDay;

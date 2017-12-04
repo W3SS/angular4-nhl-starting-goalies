@@ -44,6 +44,7 @@ export class StartingGoaliesComponent implements OnInit {
   noGamesToday: boolean;
   gamesToday: boolean;
   twitterHandles: Array < any > ;
+  todayStarters: Array < any > ;
   selected: any;
   test: any;
   startingGoaliesToday: Array < any > = [];
@@ -60,7 +61,7 @@ export class StartingGoaliesComponent implements OnInit {
     console.log(yesterday + ' yesterday, ' + today + ' today, ' + tomorrow + ' tomorrow, ');
     this.sentData = this.dataService.getSentStats();
     this.sentYesterdayData = this.yesterdayService.getSentStats();
-    
+
   }
 
   public getJSON() {
@@ -69,6 +70,13 @@ export class StartingGoaliesComponent implements OnInit {
       .subscribe(res => {
         console.log(res['twitterHandles']["0"], 'twitter handles');
         this.twitterHandles = res['twitterHandles']["0"];
+      })
+
+    this.http.get("./assets/todayStarters.json")
+      .map(response => response.json())
+      .subscribe(res => {
+        console.log(res['todayStarters']["0"], 'today starters...');
+        this.todayStarters = res['todayStarters']["0"];
       })
 
   }
@@ -198,11 +206,17 @@ export class StartingGoaliesComponent implements OnInit {
 
               if (schedule.awayTeam.Name === sdata.team.Name) {
                 sdata.player.gameTime = schedule.time;
+
                 if (schedule.location === 'Nassau Coliseum') {
                   sdata.team.gameIce = 'Barclays Center';
+                } else if (schedule.location === 'Verizon Center') {
+                  sdata.team.gameIce = 'Capital One Arena';
+                } else if (schedule.location === 'Joe Louis Arena') {
+                  sdata.team.gameIce = 'Little Caesars Arena';
                 } else {
                   sdata.team.gameIce = schedule.location;
-                } 
+                }
+
                 sdata.team.gameId = schedule.id;
                 sdata.player.gameLocation = "away";
                 sdata.team.day = this.tweetDay;
@@ -216,16 +230,25 @@ export class StartingGoaliesComponent implements OnInit {
                 sdata.team.yesterday = yesterday;
                 sdata.player.injured = false;
                 sdata.player.injury = '';
+                sdata.player.confirmed = false;
+                sdata.player.probable = false;
+                sdata.player.startstatus = '';
 
 
               }
               if (schedule.homeTeam.Name === sdata.team.Name) {
                 sdata.player.gameTime = schedule.time;
-                if (schedule.location === 'Nassau Coliseum') {
+
+               if (schedule.location === 'Nassau Coliseum') {
                   sdata.team.gameIce = 'Barclays Center';
+                } else if (schedule.location === 'Verizon Center') {
+                  sdata.team.gameIce = 'Capital One Arena';
+                } else if (schedule.location === 'Joe Louis Arena') {
+                  sdata.team.gameIce = 'Little Caesars Arena';
                 } else {
                   sdata.team.gameIce = schedule.location;
-                } 
+                }
+        
                 sdata.team.gameId = schedule.id;
                 sdata.player.gameLocation = "home";
                 sdata.team.day = this.tweetDay;
@@ -239,13 +262,12 @@ export class StartingGoaliesComponent implements OnInit {
                 sdata.team.yesterday = yesterday;
                 sdata.player.injured = false;
                 sdata.player.injury = '';
-
+                sdata.player.confirmed = false;
+                sdata.player.probable = false;
+                sdata.player.startstatus = '';
 
               }
 
-              if (schedule.location === 'Nassau Coliseum') {
-                  
-              }
             }
           }
         }
@@ -359,6 +381,20 @@ export class StartingGoaliesComponent implements OnInit {
                 data.player.atHandle = '';
               }
 
+              if (this.todayStarters[data.player.ID] != null && this.todayStarters[data.player.ID].date === data.team.today) {
+
+                if (this.todayStarters[data.player.ID] != null && data.player.saves == null || this.todayStarters[data.player.ID] != null && data.player.saves == '0') {
+                  data.player.startingToday = true;
+                  data.player.startingTodayNow = false;
+                  console.log(data.player, data.team, 'confirmed or probable');
+                  data.player.confirmed = this.todayStarters[data.player.ID].confirmed;
+                  data.player.probable = this.todayStarters[data.player.ID].probable;
+                  //this.starterIdData.push(data.player.ID);
+                
+                    this.startersData.push(data);
+                } 
+              }
+
 
               if (data.team.hadGameYesterday === true) {
                 //console.log(data, 'game yesterday');
@@ -470,7 +506,7 @@ export class StartingGoaliesComponent implements OnInit {
               for (let startdata of this.myData) {
 
                 if (startid === startdata.team.ID) {
-                  if (startdata.stats.GamesPlayed['#text'] > 6 && startdata.player.injuryOut == null) {
+                  if (startdata.stats.GamesPlayed['#text'] > 6 && startdata.player.injuryOut == null && this.todayStarters[startdata.player.ID] != null && this.todayStarters[startdata.player.ID].date != startdata.team.today) {
 
                     startdata.player.startingToday = false;
                     startdata.player.likelyStartingToday = true;
@@ -479,14 +515,14 @@ export class StartingGoaliesComponent implements OnInit {
 
 
                   }
-                } else if (startid === startdata.player.ID) {
+                } else if (startid === startdata.player.ID && this.todayStarters[startdata.player.ID] != null && this.todayStarters[startdata.player.ID].date != startdata.team.today) {
                   if (startdata.player.saves == null || startdata.player.saves == '0') {
                     console.log(startdata.player, 'start ids of games that have not started yet');
                     startdata.player.startingToday = true;
                     startdata.player.startingTodayNow = false;
                     console.log(startdata, 'player data');
                     this.startersData.push(startdata);
-                  }
+                  } 
 
                 }
 
@@ -729,7 +765,7 @@ export class LastweekDialog implements OnInit {
                   res2[i2].player.opponent = '(L) @ ' + res[i]['gameboxscore'].game.homeTeam.City + ' GA: ' + res2[i2].stats.GoalsAgainst['#text'];
                 }
 
-                if (res2[i2].stats != null && res2[i2].stats.Wins['#text'] > '0' && res2[i2].player.ID !=  '9072' || res2[i2].stats != null && res2[i2].stats.Losses['#text'] > '0' && res2[i2].player.ID !=  '9072' || res2[i2].stats != null && res2[i2].stats.OvertimeLosses['#text'] > '0' && res2[i2].player.ID !=  '9072') {
+                if (res2[i2].stats != null && res2[i2].stats.Wins['#text'] > '0' && res2[i2].player.ID != '9072' || res2[i2].stats != null && res2[i2].stats.Losses['#text'] > '0' && res2[i2].player.ID != '9072' || res2[i2].stats != null && res2[i2].stats.OvertimeLosses['#text'] > '0' && res2[i2].player.ID != '9072') {
                   this.starterStatData.push(res2[i2]);
                   //console.log(res2[i2], 'got player stats for away goalie stats!'); 
 
@@ -755,10 +791,10 @@ export class LastweekDialog implements OnInit {
                 }
 
                 //res3[i3].player.opponent = res[i]['gameboxscore'].game.awayTeam.Abbreviation;
-                if (res3[i3].stats != null && res3[i3].stats.Wins['#text'] > '0' && res3[i3].player.ID !=  '9072' || res3[i3].stats != null && res3[i3].stats.Losses['#text'] > '0' && res3[i3].player.ID !=  '9072' || res3[i3].stats != null && res3[i3].stats.OvertimeLosses['#text'] > '0' && res3[i3].player.ID !=  '9072') {
+                if (res3[i3].stats != null && res3[i3].stats.Wins['#text'] > '0' && res3[i3].player.ID != '9072' || res3[i3].stats != null && res3[i3].stats.Losses['#text'] > '0' && res3[i3].player.ID != '9072' || res3[i3].stats != null && res3[i3].stats.OvertimeLosses['#text'] > '0' && res3[i3].player.ID != '9072') {
                   this.starterStatData.push(res3[i3]);
                   //console.log(res3[i3], 'got player stats for home goalie!');
-                 
+
 
                 }
 
@@ -773,21 +809,21 @@ export class LastweekDialog implements OnInit {
   }
 
   sortData() {
-    
-     for (let info of this.sentAllData) {
 
-          for (let data of this.starterStatData) {
-            //console.log(info, 'looking for image');
+    for (let info of this.sentAllData) {
 
-            if (info.player.ID === data.player.ID) {
-                 //console.log(info, 'looking for image IDS Match!!')
-              data.player.image = info.player.image;
-            
+      for (let data of this.starterStatData) {
+        //console.log(info, 'looking for image');
 
-            }
+        if (info.player.ID === data.player.ID) {
+          //console.log(info, 'looking for image IDS Match!!')
+          data.player.image = info.player.image;
 
-          }
+
         }
+
+      }
+    }
     let opponents = [];
     this.showData = this.starterStatData.reduce(function(hash) {
       //console.log(hash, 'hash');
@@ -795,7 +831,7 @@ export class LastweekDialog implements OnInit {
         //console.log(a, 'this is a');
         let key = a.player.ID;
         if (!hash[key]) {
-          hash[key] = { wins: 0, losses: 0, otl: 0, name: a.player.FirstName + ' ' + a.player.LastName, id: a.player.ID, opponents: [], team: a.player.teamId, ga: 0, sa: 0, sv: 0, svpercent: 0, hot: false, image: a.player.image};
+          hash[key] = { wins: 0, losses: 0, otl: 0, name: a.player.FirstName + ' ' + a.player.LastName, id: a.player.ID, opponents: [], team: a.player.teamId, ga: 0, sa: 0, sv: 0, svpercent: 0, hot: false, image: a.player.image };
           r.push(hash[key]);
         }
         hash[key].wins += parseInt(a.stats.Wins['#text']);

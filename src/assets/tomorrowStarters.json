@@ -1,0 +1,41 @@
+{"tomorrowStarters": [
+{
+  "5835":
+  {
+    "confirmed": true,
+    "probable": true,
+    "date": "2017-12-03"
+  },
+  "5873":
+  {
+    "confirmed": true,
+    "probable": true,
+    "date": "2017-12-03"
+  },
+  "4333":
+  {
+    "confirmed": false,
+    "probable": true,
+    "date": "2017-12-03"
+  },
+  "994":
+  {
+    "confirmed": true,
+    "probable": true,
+    "date": "2017-12-03"
+  },
+  "4271":
+  {
+    "confirmed": true,
+    "probable": true,
+    "date": "2017-12-03"
+  },
+  "5528":
+  {
+    "confirmed": false,
+    "probable": true,
+    "date": "2017-12-03"
+  }
+
+ }
+]}

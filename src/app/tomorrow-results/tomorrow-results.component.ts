@@ -323,7 +323,7 @@ export class TomorrowResultsComponent implements OnInit {
               } else {
                 data.player.atHandle = '';
               }
-           if (this.tomorrowStarters[data.player.ID] != null && this.startersDate === data.team.today) {
+           if (this.tomorrowStarters[data.player.ID] != null && this.startersDate === data.team.today && this.tomorrowStarters[data.player.ID].probable === true) {
                
                   data.player.startingToday = false;
                   data.player.likelyStartingToday = true;

@@ -168,7 +168,7 @@
   },
     "5227":
   {
-    "confirmed": false,
+    "confirmed": true,
     "probable": true,
     "name": "John Gibson"
   },

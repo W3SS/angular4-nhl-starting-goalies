@@ -1,8 +1,18 @@
-// Martin Jones 5122
-// Grubauer 5176
-// Halak 4235
-// Luongo 272
-// Khudobin 4763
-// Rinne 3810
-// Elliot 4305
-// Mike Smith 3486
+Martin Jones 5122
+Grubauer 5176
+Halak 4235
+Luongo 272
+Khudobin 4763
+Rinne 3810
+Elliot 4305
+Mike Smith 3486
+Tristan Jarry 10083
+Henrik Lundqvist 3647
+Cory Schneider 4575
+Sergei Bobrovsky 4890
+Connor Hellebuyck 5873
+Jimmy Howard 3793
+Jake Allen 5107
+Carey Price 4294
+Thomas Greisse 4351
+Andrei Vasilevskiy 5420

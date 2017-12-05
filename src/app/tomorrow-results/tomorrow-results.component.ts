@@ -46,6 +46,7 @@ export class TomorrowResultsComponent implements OnInit {
   tweetDay: any;
   noGamesMsg: any;
   selected: any;
+  startersDate: any;
 
   constructor(private http: Http, private tomorrowService: TomorrowService, private todayService: DataService, public snackBar: MatSnackBar, public router: Router, public dialog: MatDialog) {
     this.getJSON();
@@ -68,8 +69,10 @@ export class TomorrowResultsComponent implements OnInit {
        this.http.get("./assets/tomorrowStarters.json")
       .map(response => response.json())
       .subscribe(res => {
-        console.log(res['tomorrowStarters']["0"], 'tomorrow starters...');
-        this.tomorrowStarters = res['tomorrowStarters']["0"];
+        console.log(res['tomorrowStarters']["0"]['date'], 'date...');
+        console.log(res['tomorrowStarters']["1"], 'tomorrow starters...');
+        this.startersDate = res['tomorrowStarters']["0"]['date'];
+        this.tomorrowStarters = res['tomorrowStarters']["1"];
       })
 
   }
@@ -198,7 +201,7 @@ export class TomorrowResultsComponent implements OnInit {
                 } else {
                   sdata.team.gameIce = schedule.location;
                 }
-                
+
                 sdata.team.gameId = schedule.id;
                 sdata.player.gameLocation = "away";
                 sdata.team.opponent = schedule.homeTeam.City + ' ' + schedule.homeTeam.Name;
@@ -320,11 +323,15 @@ export class TomorrowResultsComponent implements OnInit {
               } else {
                 data.player.atHandle = '';
               }
-
-              if (this.tomorrowStarters[data.player.ID] != null && this.tomorrowStarters[data.player.ID].date == data.team.today) {
-                console.log(data.player, 'confirmed or probable');
-                data.player.confirmed = this.tomorrowStarters[data.player.ID].confirmed;
-                data.player.probable = this.tomorrowStarters[data.player.ID].probable;
+           if (this.tomorrowStarters[data.player.ID] != null && this.startersDate === data.team.today) {
+               
+                  data.player.startingToday = false;
+                  data.player.likelyStartingToday = true;
+                  console.log(data.player, 'confirmed or probable');
+                  data.player.confirmed = this.tomorrowStarters[data.player.ID].confirmed;
+                  data.player.probable = this.tomorrowStarters[data.player.ID].probable;
+                  this.startersData.push(data);
+                
               } 
 
               if (data.team.hadGameYesterday === true) {
@@ -415,7 +422,7 @@ export class TomorrowResultsComponent implements OnInit {
               for (let startdata of this.myData) {
 
                 if (startid === startdata.team.ID) {
-                  if (startdata.stats.GamesPlayed['#text'] > 6 && startdata.player.injuryOut == null && startdata.player.ID != '9072' && startdata.player.ID != '5518' && startdata.player.ID != '5296' && startdata.player.confirmed == null || startdata.stats.GamesPlayed['#text'] > 6 && startdata.player.injuryOut == null && startdata.player.ID != '9072' && startdata.player.ID != '5518' && startdata.player.ID != '5296' &&  startid === startdata.team.ID && startdata.player.probable == null ||  startdata.player.ID == '10083') {
+                  if (this.startersDate != startdata.team.today && startdata.stats.GamesPlayed['#text'] > 6 && startdata.player.injuryOut == null && startdata.player.ID != '9072' && startdata.player.ID != '5518' && startdata.player.ID != '5296') {
 //&&  startdata.player.winsYesterday == '0' && startdata.player.lossesYesterday == '0' && startdata.player.olYesterday == '0'
                     startdata.player.startingToday = false;
                     startdata.player.likelyStartingToday = true;
@@ -429,11 +436,6 @@ export class TomorrowResultsComponent implements OnInit {
                   //console.log(startdata, 'player data');
                   this.startersData.push(startdata);
 
-                } else if (startdata.player.confirmed === true || startdata.player.probable === true) {
-                  startdata.player.startingToday = false;
-                  startdata.player.likelyStartingToday = true;
-                  //console.log(startdata.player.FirstName + " " + startdata.player.LastName, "this goalie is not starting yet. but he might start.");
-                  this.startersData.push(startdata);
                 }
 
               }

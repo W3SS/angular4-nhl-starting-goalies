@@ -50,8 +50,7 @@ export class StartingGoaliesComponent implements OnInit {
   startingGoaliesToday: Array < any > = [];
   tweetDay: any;
   noGamesMsg: any;
-
-
+  startersDate: any;
 
   constructor(private http: Http, private dataService: DataService, private yesterdayService: YesterdayService, public snackBar: MatSnackBar, public router: Router, public dialog: MatDialog) {
 
@@ -76,7 +75,8 @@ export class StartingGoaliesComponent implements OnInit {
       .map(response => response.json())
       .subscribe(res => {
         console.log(res['todayStarters']["0"], 'today starters...');
-        this.todayStarters = res['todayStarters']["0"];
+        this.startersDate = res['todayStarters']["0"]['date'];
+        this.todayStarters = res['todayStarters']["1"];
       })
 
   }
@@ -381,19 +381,20 @@ export class StartingGoaliesComponent implements OnInit {
                 data.player.atHandle = '';
               }
 
-              if (this.todayStarters[data.player.ID] != null && this.todayStarters[data.player.ID].date === data.team.today) {
+             
 
-                if (this.todayStarters[data.player.ID] != null && data.player.saves == null || this.todayStarters[data.player.ID] != null && data.player.saves == '0') {
-                  data.player.startingToday = true;
-                  data.player.startingTodayNow = false;
-                  console.log(data.player, data.team, 'confirmed or probable');
+                if (this.startersDate === data.team.today && this.todayStarters[data.player.ID] != null && data.player.saves == null && this.todayStarters[data.player.ID].probable === true || this.startersDate === data.team.today && this.todayStarters[data.player.ID] != null && data.player.saves == '0' && this.todayStarters[data.player.ID].probable === true) {
                   data.player.confirmed = this.todayStarters[data.player.ID].confirmed;
                   data.player.probable = this.todayStarters[data.player.ID].probable;
+                  data.player.startingToday = true;
+                  data.player.startingTodayNow = false;
+                  console.log(data.player, 'confirmed or probable');
+                  
                   //this.starterIdData.push(data.player.ID);
                 
                     this.startersData.push(data);
                 } 
-              }
+              
 
 
               if (data.team.hadGameYesterday === true) {
@@ -506,7 +507,7 @@ export class StartingGoaliesComponent implements OnInit {
               for (let startdata of this.myData) {
 
                 if (startid === startdata.team.ID) {
-                  if (startdata.stats.GamesPlayed['#text'] > 6 && startdata.player.injuryOut == null && this.todayStarters[startdata.player.ID] != null && this.todayStarters[startdata.player.ID].date != startdata.team.today) {
+                  if (this.startersDate != startdata.team.today && startdata.stats.GamesPlayed['#text'] > 6 && startdata.player.injuryOut == null) {
 
                     startdata.player.startingToday = false;
                     startdata.player.likelyStartingToday = true;
@@ -515,7 +516,7 @@ export class StartingGoaliesComponent implements OnInit {
 
 
                   }
-                } else if (startid === startdata.player.ID && this.todayStarters[startdata.player.ID] != null && this.todayStarters[startdata.player.ID].date != startdata.team.today) {
+                } else if (this.startersDate != startdata.team.today && startid === startdata.player.ID) {
                   if (startdata.player.saves == null || startdata.player.saves == '0') {
                     console.log(startdata.player, 'start ids of games that have not started yet');
                     startdata.player.startingToday = true;

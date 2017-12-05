@@ -1,52 +1,147 @@
 {"todayStarters": [
 {
+    "date": "2017-12-05"
+},
+{
   "5176":
   {
-    "confirmed": true,
-    "probable": true,
-    "date": "2017-12-04"
+    "confirmed": false,
+    "probable": false
   },
   "5122":
   {
-    "confirmed": true,
-    "probable": true,
-    "date": "2017-12-04"
+    "confirmed": false,
+    "probable": false
   },
   "4235":
   {
-    "confirmed": true,
-    "probable": true,
-    "date": "2017-12-04"
+    "confirmed": false,
+    "probable": false
   },
   "272":
   {
-    "confirmed": true,
-    "probable": true,
-    "date": "2017-12-04"
+    "confirmed": false,
+    "probable": false
   },
   "4763":
   {
-    "confirmed": true,
-    "probable": true,
-    "date": "2017-12-04"
+    "confirmed": false,
+    "probable": false
   },
   "3810":
   {
     "confirmed": false,
-    "probable": true,
-    "date": "2017-12-04"
+    "probable": false
   },
   "4305":
   {
-    "confirmed": true,
-    "probable": true,
-    "date": "2017-12-04"
+    "confirmed": false,
+    "probable": false
   },
   "3486":
   {
+    "confirmed": false,
+    "probable": false
+  },
+  "3647":
+  {
+    "confirmed": false,
+    "probable": true
+  },
+  "10083":
+  {
+    "confirmed": false,
+    "probable": true
+  },
+  "4575":
+  {
     "confirmed": true,
-    "probable": true,
-    "date": "2017-12-04"
+    "probable": true
+  },
+  "4890":
+  {
+    "confirmed": false,
+    "probable": true
+  },
+  "5873":
+  {
+    "confirmed": true,
+    "probable": true
+  },
+  "3793":
+  {
+    "confirmed": false,
+    "probable": true
+  },
+    "5107":
+  {
+    "confirmed": false,
+    "probable": true
+  },
+  "4294":
+  {
+    "confirmed": true,
+    "probable": true
+  },
+  "4351":
+  {
+    "confirmed": false,
+    "probable": true
+  },
+  "5420":
+  {
+    "confirmed": false,
+    "probable": true
+  },
+  "5877":
+  {
+    "confirmed": true,
+    "probable": true
+  },
+  "4561":
+  {
+    "confirmed": false,
+    "probable": true
+  },
+  "4867":
+  {
+    "confirmed": false,
+    "probable": true
+  },
+  "4592":
+  {
+    "confirmed": false,
+    "probable": true
+  },
+  "5475":
+  {
+    "confirmed": false,
+    "probable": true
+  },
+  "5033":
+  {
+    "confirmed": false,
+    "probable": true
+  },
+  "4666":
+  {
+    "confirmed": false,
+    "probable": true
+  },
+  "4333":
+  {
+    "confirmed": false,
+    "probable": true
+  },
+    "5227":
+  {
+    "confirmed": false,
+    "probable": true
+  },
+  "5528":
+  {
+    "confirmed": false,
+    "probable": true
   }
 
  }

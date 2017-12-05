@@ -53,9 +53,15 @@
   },
   "3647":
   {
+    "confirmed": false,
+    "probable": false,
+    "name": "Henrik Lundqvist"
+  },
+  "4321":
+  {
     "confirmed": true,
     "probable": true,
-    "name": "Henrik Lundqvist"
+    "name": "Ondrej Pavelec"
   },
   "10083":
   {
@@ -101,7 +107,7 @@
   },
   "4351":
   {
-    "confirmed": false,
+    "confirmed": true,
     "probable": true,
     "name": "Thomas Greisse"
   },

@@ -6,145 +6,176 @@
   "5176":
   {
     "confirmed": false,
-    "probable": false
+    "probable": false,
+    "name": "Philip Grubauer"
   },
   "5122":
   {
     "confirmed": false,
-    "probable": false
+    "probable": false,
+    "name": "Martin Jones"
   },
   "4235":
   {
     "confirmed": false,
-    "probable": false
+    "probable": false,
+    "name": "Halak"
   },
   "272":
   {
     "confirmed": false,
-    "probable": false
+    "probable": false,
+    "name": "Luongo"
   },
   "4763":
   {
     "confirmed": false,
-    "probable": false
+    "probable": false,
+    "name": "Khudobin"
   },
   "3810":
   {
     "confirmed": false,
-    "probable": false
+    "probable": false,
+    "name": "Rinne"
   },
   "4305":
   {
     "confirmed": false,
-    "probable": false
+    "probable": false,
+    "name": "Elliot"
   },
   "3486":
   {
     "confirmed": false,
-    "probable": false
+    "probable": false,
+    "name": "Mike Smith"
   },
   "3647":
   {
-    "confirmed": false,
-    "probable": true
+    "confirmed": true,
+    "probable": true,
+    "name": "Henrik Lundqvist"
   },
   "10083":
   {
     "confirmed": false,
-    "probable": true
+    "probable": true,
+    "name": "Tristan Jarry"
   },
   "4575":
   {
     "confirmed": true,
-    "probable": true
+    "probable": true,
+    "name": "Cory Schneider"
   },
   "4890":
   {
     "confirmed": false,
-    "probable": true
+    "probable": true,
+    "name": "Sergei Bobrovsky"
   },
   "5873":
   {
     "confirmed": true,
-    "probable": true
+    "probable": true,
+    "name": "Connor Hellebuyck"
   },
   "3793":
   {
-    "confirmed": false,
-    "probable": true
+    "confirmed": true,
+    "probable": true,
+    "name": "Jimmy Howard"
   },
     "5107":
   {
-    "confirmed": false,
-    "probable": true
+    "confirmed": true,
+    "probable": true,
+    "name": "Jake Allen"
   },
   "4294":
   {
     "confirmed": true,
-    "probable": true
+    "probable": true,
+    "name": "Carey Price"
   },
   "4351":
   {
     "confirmed": false,
-    "probable": true
+    "probable": true,
+    "name": "Thomas Greisse"
   },
   "5420":
   {
-    "confirmed": false,
-    "probable": true
+    "confirmed": true,
+    "probable": true,
+    "name": "Andrei Vasilevskiy"
   },
   "5877":
   {
     "confirmed": true,
-    "probable": true
+    "probable": true,
+    "name": "Juuse Saros"
   },
   "4561":
   {
-    "confirmed": false,
-    "probable": true
+    "confirmed": true,
+    "probable": true,
+    "name": "Ben Bishop"
   },
   "4867":
   {
     "confirmed": false,
-    "probable": true
+    "probable": true,
+    "name": "Robin Lehner"
   },
   "4592":
   {
-    "confirmed": false,
-    "probable": true
+    "confirmed": true,
+    "probable": true,
+    "name": "Semyon Varlamov"
+
   },
   "5475":
   {
     "confirmed": false,
-    "probable": true
+    "probable": true,
+    "name": "Scott Darling"
   },
   "5033":
   {
     "confirmed": false,
-    "probable": true
+    "probable": true,
+    "name": "Anders Nilsson"
   },
   "4666":
   {
     "confirmed": false,
-    "probable": true
+    "probable": true,
+    "name": "Devan Dubnyk"
   },
   "4333":
   {
     "confirmed": false,
-    "probable": true
+    "probable": true,
+    "name": "Jon Quick"
   },
     "5227":
   {
     "confirmed": false,
-    "probable": true
+    "probable": true,
+    "name": "John Gibson"
   },
   "5528":
   {
     "confirmed": false,
-    "probable": true
+    "probable": true,
+    "name": "Malcolm Subban"
   }
 
  }
 ]}
+
+
 
 

@@ -19,7 +19,8 @@
 .docs-footer div {
   display: inline-block;
   flex-grow: 1;
-  width: 33%;   
+  width: 33%;  
+  color: #fff; 
 }
 
 .docs-footer .docs-footer-links {

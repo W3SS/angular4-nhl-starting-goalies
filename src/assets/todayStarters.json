@@ -41,7 +41,7 @@
   },
   "4305":
   {
-    "confirmed": false,
+    "confirmed": true,
     "probable": true,
     "name": "Brian Elliott"
   },
@@ -228,7 +228,7 @@
   },
   "178":
   {
-    "confirmed": false,
+    "confirmed": true,
     "probable": true,
     "name": "Ryan Miller"
   }

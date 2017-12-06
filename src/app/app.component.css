@@ -27,7 +27,7 @@
   text-align: center;
 }
 
-.docs-footer .docs-footer-links a {
+.docs-footer a {
   color: #fff;
   text-decoration: none;
 }
@@ -68,8 +68,6 @@
 
 
 @media only screen and (max-width: 600px) {
-
- 
 
   .docs-footer div {
     width: 31%;  

@@ -1,7 +1,7 @@
 {"todayStarters": [
-{
-    "date": "2017-12-05"
-},
+ {
+    "date": "2017-12-06"
+ },
 {
   "5176":
   {
@@ -42,13 +42,13 @@
   "4305":
   {
     "confirmed": false,
-    "probable": false,
-    "name": "Elliot"
+    "probable": true,
+    "name": "Brian Elliott"
   },
   "3486":
   {
-    "confirmed": false,
-    "probable": false,
+    "confirmed": true,
+    "probable": true,
     "name": "Mike Smith"
   },
   "3647":
@@ -57,7 +57,7 @@
     "probable": false,
     "name": "Henrik Lundqvist"
   },
-  "4321":
+   "4321":
   {
     "confirmed": true,
     "probable": true,
@@ -65,87 +65,87 @@
   },
   "10083":
   {
-    "confirmed": true,
-    "probable": true,
+    "confirmed": false,
+    "probable": false,
     "name": "Tristan Jarry"
   },
   "4575":
   {
-    "confirmed": true,
-    "probable": true,
+    "confirmed": false,
+    "probable": false,
     "name": "Cory Schneider"
   },
   "4890":
   {
     "confirmed": false,
-    "probable": true,
+    "probable": false,
     "name": "Sergei Bobrovsky"
   },
   "5873":
   {
-    "confirmed": true,
-    "probable": true,
+    "confirmed": false,
+    "probable": false,
     "name": "Connor Hellebuyck"
   },
   "3793":
   {
-    "confirmed": true,
-    "probable": true,
+    "confirmed": false,
+    "probable": false,
     "name": "Jimmy Howard"
   },
     "5107":
   {
-    "confirmed": true,
-    "probable": true,
+    "confirmed": false,
+    "probable": false,
     "name": "Jake Allen"
   },
   "4294":
   {
-    "confirmed": true,
-    "probable": true,
+    "confirmed": false,
+    "probable": false,
     "name": "Carey Price"
   },
   "4351":
   {
-    "confirmed": true,
-    "probable": true,
+    "confirmed": false,
+    "probable": false,
     "name": "Thomas Greisse"
   },
   "5420":
   {
-    "confirmed": true,
-    "probable": true,
+    "confirmed": false,
+    "probable": false,
     "name": "Andrei Vasilevskiy"
   },
   "5877":
   {
-    "confirmed": true,
-    "probable": true,
+    "confirmed": false,
+    "probable": false,
     "name": "Juuse Saros"
   },
   "4561":
   {
-    "confirmed": true,
-    "probable": true,
+    "confirmed": false,
+    "probable": false,
     "name": "Ben Bishop"
   },
   "4867":
   {
-    "confirmed": true,
-    "probable": true,
+    "confirmed": false,
+    "probable": false,
     "name": "Robin Lehner"
   },
   "4592":
   {
-    "confirmed": true,
-    "probable": true,
+    "confirmed": false,
+    "probable": false,
     "name": "Semyon Varlamov"
 
   },
   "5475":
   {
-    "confirmed": true,
-    "probable": true,
+    "confirmed": false,
+    "probable": false,
     "name": "Scott Darling"
   },
   "5033":
@@ -156,38 +156,83 @@
   }, 
   "4874":
   {
-    "confirmed": true,
-    "probable": true,
+    "confirmed": false,
+    "probable": false,
     "name": "Jacob Markstrom"
   }, 
   "4666":
   {
     "confirmed": false,
-    "probable": true,
+    "probable": false,
     "name": "Devan Dubnyk"
   },
   "4333":
   {
-    "confirmed": true,
-    "probable": true,
+    "confirmed": false,
+    "probable": false,
     "name": "Jon Quick"
   },
     "5227":
   {
-    "confirmed": true,
-    "probable": true,
+    "confirmed": false,
+    "probable": false,
     "name": "John Gibson"
   },
   "5528":
   {
+    "confirmed": false,
+    "probable": false,
+    "name": "Malcolm Subban"
+  }, 
+  "5109":
+  {
     "confirmed": true,
     "probable": true,
-    "name": "Malcolm Subban"
+    "name": "Frederik Andersen"
+  },
+  "5481":
+  {
+    "confirmed": true,
+    "probable": true,
+    "name": "Anton Forsberg"
+  },
+    "4863":
+  {
+    "confirmed": true,
+    "probable": true,
+    "name": "Braden Holtby"
+  },
+  "5552":
+  {
+    "confirmed": true,
+    "probable": true,
+    "name": "Laurent Brossoit"
+  },
+    "757":
+  {
+    "confirmed": true,
+    "probable": true,
+    "name": "Craig Anderson"
+  },
+  "5835":
+  {
+    "confirmed": false,
+    "probable": false,
+    "name": "Mike Condon"
+  },
+    "4626":
+  {
+    "confirmed": false,
+    "probable": false,
+    "name": "Michal Neuvirth"
+  },
+  "178":
+  {
+    "confirmed": false,
+    "probable": true,
+    "name": "Ryan Miller"
   }
 
  }
+
 ]}
-
-
-
-

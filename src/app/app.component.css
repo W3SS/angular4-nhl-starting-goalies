@@ -40,7 +40,15 @@
   opacity: 0.8;
 }
 
+.logo-container {
+  max-width: 48px; 
+  text-align: center;
+}
 
+.logo-container .logo-initials {
+  border-bottom: 2px solid #fff; 
+  line-height: 1.5em;
+}
 
 
 .docs-footer-list[_ngcontent-c10] {
@@ -55,5 +63,20 @@
     -ms-flex-flow: row wrap;
     flex-flow: row wrap;
     padding: 8px;
+
+}
+
+
+@media only screen and (max-width: 600px) {
+
+ 
+
+  .docs-footer div {
+    width: 31%;  
+  }
+
+  .logo-container ul {
+    padding: 0 0 0 0;
+  }
 
 }

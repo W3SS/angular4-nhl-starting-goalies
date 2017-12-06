@@ -134,11 +134,18 @@ ul {
    width: 10.5%;
  }
 
-button.mat-raised-button {  
-    min-width: 50px;
-    padding: 0px 4px;
-    font-size: 11px;   
-}
+  button.mat-raised-button {  
+      min-width: 50px;
+      padding: 0px 4px;
+      font-size: 11px;   
+  }
 
+  .docs-footer div {
+    width: 31%;  
+  }
+
+  .logo-container ul {
+    padding: 0 0 0 0;
+  }
 
 }

@@ -169,8 +169,14 @@
   "5475":
   {
     "confirmed": false,
-    "probable": true,
+    "probable": false,
     "name": "Scott Darling"
+  },
+  "3500":
+  {
+    "confirmed": true,
+    "probable": true,
+    "name": "Cam Ward"
   },
   "5033":
   {
@@ -297,12 +303,6 @@
     "confirmed": false,
     "probable": false,
     "name": "Carter Hutton"
-  },
-  "3500":
-  {
-    "confirmed": false,
-    "probable": false,
-    "name": "Cam Ward"
   }
   
  }

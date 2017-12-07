@@ -126,7 +126,7 @@
   "4561":
   {
     "confirmed": false,
-    "probable": true,
+    "probable": false,
     "name": "Ben Bishop"
   },
   "4867":
@@ -258,8 +258,8 @@
   }, 
   "994":
   {
-    "confirmed": false,
-    "probable": false,
+    "confirmed": true,
+    "probable": true,
     "name": "Kari Lehtonen"
   },
   "5224":

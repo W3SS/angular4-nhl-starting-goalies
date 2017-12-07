@@ -12,7 +12,7 @@
   "5122":
   {
     "confirmed": false,
-    "probable": false,
+    "probable": true,
     "name": "Martin Jones"
   },
   "4235":
@@ -48,8 +48,14 @@
   "3486":
   {
     "confirmed": false,
-    "probable": true,
+    "probable": false,
     "name": "Mike Smith"
+  },
+  "11724":
+  {
+    "confirmed": false,
+    "probable": true,
+    "name": "David Rittich"
   },
   "3647":
   {
@@ -65,7 +71,7 @@
   },
   "10083":
   {
-    "confirmed": false,
+    "confirmed": true,
     "probable": true,
     "name": "Tristan Jarry"
   },
@@ -84,8 +90,14 @@
   "5873":
   {
     "confirmed": false,
-    "probable": true,
+    "probable": false,
     "name": "Connor Hellebuyck"
+  },
+  "12468":
+  {
+    "confirmed": true,
+    "probable": true,
+    "name": "Eric Comrie"
   },
   "3793":
   {
@@ -95,13 +107,13 @@
   },
     "5107":
   {
-    "confirmed": false,
+    "confirmed": true,
     "probable": true,
     "name": "Jake Allen"
   },
   "4294":
   {
-    "confirmed": false,
+    "confirmed": true,
     "probable": true,
     "name": "Carey Price"
   },
@@ -114,9 +126,15 @@
   "5420":
   {
     "confirmed": false,
-    "probable": true,
+    "probable": false,
     "name": "Andrei Vasilevskiy"
   },
+  "3635":
+  {
+    "confirmed": true,
+    "probable": true,
+    "name": "Peter Budaj"
+  }, 
   "5877":
   {
     "confirmed": false,
@@ -137,7 +155,7 @@
   },
   "4592":
   {
-    "confirmed": false,
+    "confirmed": true,
     "probable": true,
     "name": "Semyon Varlamov"
 
@@ -234,7 +252,7 @@
   },
   "8952":
   {
-    "confirmed": false,
+    "confirmed": true,
     "probable": true,
     "name": "Scott Wedgewood"
   },
@@ -277,7 +295,7 @@
   "10074":
   {
     "confirmed": false,
-    "probable": true,
+    "probable": false,
     "name": "Aaron Dell"
   }, 
   "5168":

@@ -234,7 +234,6 @@ export class StartingGoaliesComponent implements OnInit {
                 sdata.player.probable = false;
                 sdata.player.startstatus = '';
 
-
               }
               if (schedule.homeTeam.Name === sdata.team.Name) {
                 sdata.player.gameTime = schedule.time;
@@ -371,8 +370,9 @@ export class StartingGoaliesComponent implements OnInit {
 
 
             if (info.player.ID === data.player.ID) {
-
+              //console.log(data.stats.stats.SavePercentage['#text'], 'STATS!!!!')
               data.player.image = info.player.officialImageSrc;
+              data.player.savePercent = '.'+Math.round(data.stats.stats.SavePercentage['#text'] * 100);
               data.player.twitterHandle = this.twitterHandles[data.team.ID].twitterHashTag;
 
               if (this.twitterHandles[data.team.ID][data.player.ID] != null) {
@@ -699,7 +699,7 @@ export class StartingGoaliesComponent implements OnInit {
 @Component({
   selector: 'lastweek-dialog',
   template: `<i (click)="dialogRef.close()" style="float:right; cursor:pointer;" class="material-icons">close</i>
-  <span style="color:#f44336; font-size: 18px;">NHL Starting Goalies | The Hot List!</span>
+  <span style="color:#f44336; font-size: 18px;">NHL Starting Goalies | The Hot List! | {{sentLastweek | date:'shortDate'}} - {{sentYesterday | date:'shortDate'}}</span>
   <mat-dialog-content>
   <ul *ngFor="let data of showData"><li *ngIf="data.hot === true"><span class="player"><img src="{{ data.image}}" alt="" /></span><span style="font-weight: bold;" class="last-week"> {{ data.name }} <img src="../assets/nhl-logos/{{ data.team }}.jpg" alt="" /></span><span style="font-weight: bold;"> ({{ data.wins + '-' + data.losses + '-' + data.otl }})</span> <span *ngIf="data.opponents[0] != null"> - {{data.opponents[0]}}</span><span *ngIf="data.opponents[1] != null">, {{data.opponents[1]}}</span><span *ngIf="data.opponents[2] != null">, {{data.opponents[2]}}</span> - <span style="font-weight: bold;">Total Saves: {{data.sv}} Total Shots: {{data.sa}}</span></li></ul>
   </mat-dialog-content>`,
@@ -710,9 +710,13 @@ export class LastweekDialog implements OnInit {
   showData: Array < any > ;
   sentHotData: Array < any > ;
   sentAllData: Array < any > ;
+  sentYesterday: any;
+  sentLastweek: any;
   constructor(public dialogRef: MatDialogRef < LastweekDialog > , @Inject(MAT_DIALOG_DATA) public data: any, private http: Http, private dataService: DataService) {
     this.sentHotData = this.dataService.getSentHotStats();
     this.sentAllData = this.dataService.getSentAllStats();
+    this.sentYesterday = this.dataService.getYesterday();
+    this.sentLastweek = this.dataService.getLastweek();
 
   }
 
@@ -744,7 +748,7 @@ export class LastweekDialog implements OnInit {
             res.forEach((item, index) => {
               i = index;
               //console.log(res[i]['gameboxscore'].awayTeam.awayPlayers['playerEntry'], 'got box score data for away team!');
-              //console.log(res[i]['gameboxscore'].homeTeam.homePlayers['playerEntry'], 'got box score data for home team!');
+              console.log(res[i]['gameboxscore'].game.date, 'looking for date...');
 
               res2 = res[i]['gameboxscore'].awayTeam.awayPlayers['playerEntry'];
               res3 = res[i]['gameboxscore'].homeTeam.homePlayers['playerEntry'];

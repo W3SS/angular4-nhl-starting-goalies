@@ -316,6 +316,7 @@ export class TomorrowResultsComponent implements OnInit {
             if (info.player.ID === data.player.ID) {
 
               data.player.image = info.player.officialImageSrc;
+              data.player.savePercent = '.'+Math.round(data.stats.stats.SavePercentage['#text'] * 100);
               data.player.twitterHandle = this.twitterHandles[data.team.ID].twitterHashTag;
 
               if (this.twitterHandles[data.team.ID][data.player.ID] != null) {

@@ -19,7 +19,7 @@ import 'rxjs/add/operator/do';
 let thisDate = new Date();
 let tomorrowDate = new Date(thisDate.getTime() + (24 * 60 * 60 * 1000));
 let yesterdayDate = new Date(thisDate.getTime() - (24 * 60 * 60 * 1000));
-let lastweekDate = new Date(thisDate.getTime() - (192 * 60 * 60 * 1000));
+let lastweekDate = new Date(thisDate.getTime() - (96 * 60 * 60 * 1000));
 
 let utcDate = new Date(thisDate.toUTCString());
 let tomorrowUtcDate = new Date(tomorrowDate.toUTCString());
@@ -117,6 +117,11 @@ export class DataService {
     return tomorrow; 
   }
 
+  getLastweek() {
+    console.log("send lastweek..."); 
+    return lastweek;
+  }
+
   sendStats(statsArray, allStats) {
     console.log("sending stats to service...");
     sending = statsArray;
@@ -145,7 +150,6 @@ export class DataService {
     sentHot = sendingHot;
     return sentHot;
   }
-
 
   getInfo() {
 
@@ -181,6 +185,7 @@ export class DataService {
     }
     return this.gameid;
   }
+
 
    getLastweekGameId() {
 

@@ -161,7 +161,7 @@
   },
   "4867":
   {
-    "confirmed": false,
+    "confirmed": true,
     "probable": true,
     "name": "Robin Lehner"
   },
@@ -215,13 +215,13 @@
   },
     "5227":
   {
-    "confirmed": false,
+    "confirmed": true,
     "probable": true,
     "name": "John Gibson"
   },
   "5528":
   {
-    "confirmed": false,
+    "confirmed": true,
     "probable": true,
     "name": "Malcolm Subban"
   },
@@ -240,8 +240,14 @@
   "5481":
   {
     "confirmed": false,
-    "probable": true,
+    "probable": false,
     "name": "Anton Forsberg"
+  },
+   "3855":
+  {
+    "confirmed": true,
+    "probable": true,
+    "name": "Corey Crawford"
   },
   "5404":
   {

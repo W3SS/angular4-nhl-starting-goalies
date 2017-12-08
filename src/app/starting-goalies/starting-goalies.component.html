@@ -79,7 +79,7 @@
             <br> <span>Wins - Losses: {{ data.team.matchup[0].stats.stats.Wins['#text'] + ' - ' + data.team.matchup[0].stats.stats.Losses['#text'] + ' - ' + data.team.matchup[0].stats.stats.OvertimeLosses['#text'] }} </span> 
               <span *ngIf="data.team.matchup[0].player.saves == null"><br> {{data.team.matchup[0].stats.stats.GoalsAgainst['#text']}} Goals given up <br>
               Season GAA: {{data.team.matchup[0].stats.stats.GoalsAgainstAverage['#text']}}</span> <br>
-              <span *ngIf="data.team.matchup[0].player.injured === true && data.team.matchup[0].player.saves == null" style="color:red;">{{data.team.matchup[0].player.injury}}</span>
+             <!--  <span *ngIf="data.team.matchup[0].player.injured === true && data.team.matchup[0].player.saves == null" style="color:red;">{{data.team.matchup[0].player.injury}}</span> -->
               <br>
               <span *ngIf="data.team.matchup[0].player.confirmed === true" style="color: #2ecc71;"><i class="material-icons md-18">check_circle</i>confirmed</span><span *ngIf="data.team.matchup[0].player.confirmed === false && data.team.matchup[0].player.startingTodayNow === false" style="color: orange;"><i class="material-icons md-18">check_circle</i>probable</span>
             <br> <div *ngIf="data.team.matchup[0].player.saves != null" class="stat-block">
@@ -109,7 +109,7 @@
               {{data.team.matchup[1].stats.stats.GoalsAgainst['#text']}} Goals given up <br>
               Season GAA: {{data.team.matchup[1].stats.stats.GoalsAgainstAverage['#text']}}</span>
               <br>
-              <span *ngIf="data.team.matchup[1].player.injured === true && data.team.matchup[1].player.saves == null" style="color:red;">{{data.team.matchup[1].player.injury}}</span>
+            <!--   <span *ngIf="data.team.matchup[1].player.injured === true && data.team.matchup[1].player.saves == null" style="color:red;">{{data.team.matchup[1].player.injury}}</span> -->
               <br>
               <span *ngIf="data.team.matchup[1].player.confirmed === true" style="color: #2ecc71;"><i class="material-icons md-18">check_circle</i>confirmed</span><span *ngIf="data.team.matchup[1].player.confirmed === false && data.team.matchup[1].player.startingTodayNow === false" style="color: orange;"><i class="material-icons md-18">check_circle</i>probable</span>
              <br> <div *ngIf="data.team.matchup[1].player.saves != null" class="stat-block">
@@ -660,7 +660,7 @@
               {{data.team.matchup[0].stats.stats.GoalsAgainst['#text']}} Goals given up <br>
               Season GAA: {{data.team.matchup[0].stats.stats.GoalsAgainstAverage['#text']}}</span>
               <br>
-               <span *ngIf="data.team.matchup[0].player.injured === true && data.team.matchup[0].player.saves == null" style="color:red;">{{data.team.matchup[0].player.injury}}</span>
+            <!--    <span *ngIf="data.team.matchup[0].player.injured === true && data.team.matchup[0].player.saves == null" style="color:red;">{{data.team.matchup[0].player.injury}}</span> -->
                <br>
                 <span *ngIf="data.team.matchup[0].player.confirmed === true" style="color: #2ecc71;"><i class="material-icons md-18">check_circle</i>confirmed</span>
              <span *ngIf="data.team.matchup[0].player.confirmed === false && data.team.matchup[0].player.startingTodayNow === false" style="color: orange;"><i class="material-icons md-18">check_circle</i>probable</span>
@@ -780,7 +780,7 @@
               {{data.team.matchup[1].stats.stats.GoalsAgainst['#text']}} Goals given up <br>
               Season GAA: {{data.team.matchup[1].stats.stats.GoalsAgainstAverage['#text']}} </span>
               <br>
-               <span *ngIf="data.team.matchup[1].player.injured === true && data.team.matchup[1].player.saves == null" style="color:red;">{{data.team.matchup[1].player.injury}}</span>
+               <!-- <span *ngIf="data.team.matchup[1].player.injured === true && data.team.matchup[1].player.saves == null" style="color:red;">{{data.team.matchup[1].player.injury}}</span> -->
               <br>
                <span *ngIf="data.team.matchup[1].player.confirmed === true" style="color: #2ecc71;"><i class="material-icons md-18">check_circle</i>confirmed</span><span *ngIf="data.team.matchup[1].player.confirmed === false && data.team.matchup[1].player.startingTodayNow === false" style="color: orange;"><i class="material-icons md-18">check_circle</i>probable</span>
            

@@ -19,7 +19,7 @@ import 'rxjs/add/operator/do';
 let thisDate = new Date();
 let tomorrowDate = new Date(thisDate.getTime() + (24 * 60 * 60 * 1000));
 let yesterdayDate = new Date(thisDate.getTime() - (24 * 60 * 60 * 1000));
-let lastweekDate = new Date(thisDate.getTime() - (96 * 60 * 60 * 1000));
+let lastweekDate = new Date(thisDate.getTime() - (192 * 60 * 60 * 1000));
 
 let utcDate = new Date(thisDate.toUTCString());
 let tomorrowUtcDate = new Date(tomorrowDate.toUTCString());

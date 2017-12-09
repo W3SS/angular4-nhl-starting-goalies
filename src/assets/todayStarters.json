@@ -23,7 +23,7 @@
   },
   "4235":
   {
-    "confirmed": false,
+    "confirmed": true,
     "probable": true,
     "name": "Halak"
   },
@@ -83,7 +83,7 @@
   },
   "10083":
   {
-    "confirmed": false,
+    "confirmed": true,
     "probable": true,
     "name": "Tristan Jarry"
   },
@@ -287,7 +287,7 @@
   },
   "5109":
   {
-    "confirmed": false,
+    "confirmed": true,
     "probable": true,
     "name": "Frederik Andersen"
   },
@@ -300,7 +300,7 @@
   "3855":
   {
     "confirmed": false,
-    "probable": true,
+    "probable": false,
     "name": "Corey Crawford"
   },
   "5404":
@@ -317,7 +317,7 @@
   },
   "5552":
   {
-    "confirmed": false,
+    "confirmed": true,
     "probable": true,
     "name": "Laurent Brossoit"
   },
@@ -347,7 +347,7 @@
   },
   "4326":
   {
-    "confirmed": false,
+    "confirmed": true,
     "probable": true,
     "name": "Tuukka Rask"
   },

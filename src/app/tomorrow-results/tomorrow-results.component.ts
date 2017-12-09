@@ -198,6 +198,8 @@ export class TomorrowResultsComponent implements OnInit {
                   sdata.team.gameIce = 'Capital One Arena';
                 } else if (schedule.location === 'Joe Louis Arena') {
                   sdata.team.gameIce = 'Little Caesars Arena';
+                } else if (schedule.location === 'Consol Energy Center') {
+                  sdata.team.gameIce = 'PPG Paints Arena';
                 } else {
                   sdata.team.gameIce = schedule.location;
                 }
@@ -226,15 +228,19 @@ export class TomorrowResultsComponent implements OnInit {
               }
               if (schedule.homeTeam.Name === sdata.team.Name) {
                 sdata.player.gameTime = schedule.time;
-               if (schedule.location === 'Nassau Coliseum') {
+
+              if (schedule.location === 'Nassau Coliseum') {
                   sdata.team.gameIce = 'Barclays Center';
                 } else if (schedule.location === 'Verizon Center') {
                   sdata.team.gameIce = 'Capital One Arena';
                 } else if (schedule.location === 'Joe Louis Arena') {
                   sdata.team.gameIce = 'Little Caesars Arena';
+                } else if (schedule.location === 'Consol Energy Center') {
+                  sdata.team.gameIce = 'PPG Paints Arena';
                 } else {
                   sdata.team.gameIce = schedule.location;
                 }
+                
                 sdata.team.gameId = schedule.id;
                 sdata.player.gameLocation = "home";
                 sdata.team.opponent = schedule.awayTeam.City + ' ' + schedule.awayTeam.Name;

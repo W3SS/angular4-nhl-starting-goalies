@@ -213,6 +213,8 @@ export class StartingGoaliesComponent implements OnInit {
                   sdata.team.gameIce = 'Capital One Arena';
                 } else if (schedule.location === 'Joe Louis Arena') {
                   sdata.team.gameIce = 'Little Caesars Arena';
+                } else if (schedule.location === 'Consol Energy Center') {
+                  sdata.team.gameIce = 'PPG Paints Arena';
                 } else {
                   sdata.team.gameIce = schedule.location;
                 }
@@ -244,6 +246,8 @@ export class StartingGoaliesComponent implements OnInit {
                   sdata.team.gameIce = 'Capital One Arena';
                 } else if (schedule.location === 'Joe Louis Arena') {
                   sdata.team.gameIce = 'Little Caesars Arena';
+                } else if (schedule.location === 'Consol Energy Center') {
+                  sdata.team.gameIce = 'PPG Paints Arena';
                 } else {
                   sdata.team.gameIce = schedule.location;
                 }

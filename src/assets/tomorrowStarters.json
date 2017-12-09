@@ -33,6 +33,12 @@
     "probable": false,
     "name": "Luongo"
   },
+  "4862":
+  {
+    "confirmed": true,
+    "probable": true,
+    "name": "James Reimer"
+  },
   "3810":
   {
     "confirmed": false,
@@ -44,6 +50,12 @@
     "confirmed": false,
     "probable": false,
     "name": "Brian Elliott"
+  },
+   "4626":
+  {
+    "confirmed": false,
+    "probable": false,
+    "name": "Michal Neuvirth"
   },
   "3486":
   {
@@ -101,7 +113,7 @@
   },
   "5873":
   {
-    "confirmed": false,
+    "confirmed": true,
     "probable": true,
     "name": "Connor Hellebuyck"
   },
@@ -129,9 +141,15 @@
     "probable": true,
     "name": "Jake Allen"
   },
-  "4294":
+  "5224":
   {
     "confirmed": false,
+    "probable": false,
+    "name": "Carter Hutton"
+  },
+  "4294":
+  {
+    "confirmed": true,
     "probable": true,
     "name": "Carey Price"
   },
@@ -143,7 +161,7 @@
   },
   "5420":
   {
-    "confirmed": false,
+    "confirmed": true,
     "probable": true,
     "name": "Andrei Vasilevskiy"
   },
@@ -301,7 +319,7 @@
   {
     "confirmed": false,
     "probable": true,
-    "name": "Laurent Brossoi"
+    "name": "Laurent Brossoit"
   },
     "757":
   {
@@ -315,22 +333,16 @@
     "probable": false,
     "name": "Mike Condon"
   },
-    "4626":
+   "5296":
   {
-    "confirmed": false,
-    "probable": false,
-    "name": "Michal Neuvirth"
-  },
-  "178":
-  {
-    "confirmed": false,
-    "probable": false,
-    "name": "Ryan Miller"
+    "confirmed": true,
+    "probable": true,
+    "name": "Antti Raanta"
   },
   "8952":
   {
     "confirmed": false,
-    "probable": true,
+    "probable": false,
     "name": "Scott Wedgewood"
   },
   "4326":
@@ -344,18 +356,6 @@
     "confirmed": false,
     "probable": false,
     "name": "Khudobin"
-  },
-  "4862":
-  {
-    "confirmed": true,
-    "probable": true,
-    "name": "James Reimer"
-  }, 
-  "5224":
-  {
-    "confirmed": false,
-    "probable": false,
-    "name": "Carter Hutton"
   }
 
 

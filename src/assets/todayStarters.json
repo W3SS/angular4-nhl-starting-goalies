@@ -12,13 +12,13 @@
   "5122":
   {
     "confirmed": false,
-    "probable": true,
+    "probable": false,
     "name": "Martin Jones"
   },
   "10074":
   {
-    "confirmed": false,
-    "probable": false,
+    "confirmed": true,
+    "probable": true,
     "name": "Aaron Dell"
   },
   "4235":
@@ -59,7 +59,7 @@
   },
   "3486":
   {
-    "confirmed": false,
+    "confirmed": true,
     "probable": true,
     "name": "Mike Smith"
   },
@@ -179,14 +179,14 @@
   },
   "4561":
   {
-    "confirmed": false,
-    "probable": false,
+    "confirmed": true,
+    "probable": true,
     "name": "Ben Bishop"
   },
   "994":
   {
     "confirmed": false,
-    "probable": true,
+    "probable": false,
     "name": "Kari Lehtonen"
   },
   "4867":
@@ -203,7 +203,7 @@
   },
   "4592":
   {
-    "confirmed": false,
+    "confirmed": true,
     "probable": true,
     "name": "Semyon Varlamov"
   },
@@ -227,14 +227,14 @@
   },
   "5033":
   {
-    "confirmed": false,
-    "probable": false,
+    "confirmed": true,
+    "probable": true,
     "name": "Anders Nilsson"
   }, 
   "4874":
   {
     "confirmed": false,
-    "probable": true,
+    "probable": false,
     "name": "Jacob Markstrom"
   }, 
   "4666":
@@ -251,7 +251,7 @@
   },
   "4333":
   {
-    "confirmed": false,
+    "confirmed": true,
     "probable": true,
     "name": "Jon Quick"
   }, 

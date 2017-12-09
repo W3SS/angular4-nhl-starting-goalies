@@ -71,14 +71,14 @@
   },
   "3647":
   {
-    "confirmed": false,
-    "probable": false,
+    "confirmed": true,
+    "probable": true,
     "name": "Henrik Lundqvist"
   },
    "4321":
   {
     "confirmed": false,
-    "probable": true,
+    "probable": false,
     "name": "Ondrej Pavelec"
   },
   "10083":
@@ -101,14 +101,14 @@
   },
   "4890":
   {
-    "confirmed": false,
-    "probable": false,
+    "confirmed": true,
+    "probable": true,
     "name": "Sergei Bobrovsky"
   },
   "5887":
   {
     "confirmed": false,
-    "probable": true,
+    "probable": false,
     "name": "Joonas Korpisalo"
   },
   "5873":

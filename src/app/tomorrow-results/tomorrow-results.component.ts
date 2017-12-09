@@ -240,7 +240,7 @@ export class TomorrowResultsComponent implements OnInit {
                 } else {
                   sdata.team.gameIce = schedule.location;
                 }
-                
+
                 sdata.team.gameId = schedule.id;
                 sdata.player.gameLocation = "home";
                 sdata.team.opponent = schedule.awayTeam.City + ' ' + schedule.awayTeam.Name;

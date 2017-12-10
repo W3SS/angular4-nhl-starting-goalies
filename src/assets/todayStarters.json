@@ -11,7 +11,7 @@
   },
   "5122":
   {
-    "confirmed": false,
+    "confirmed": true,
     "probable": true,
     "name": "Martin Jones"
   },
@@ -251,7 +251,7 @@
   },
   "4947":
   {
-    "confirmed": false,
+    "confirmed": true,
     "probable": true,
     "name": "Alex Stalock"
   },
@@ -359,7 +359,7 @@
   },
   "8952":
   {
-    "confirmed": false,
+    "confirmed": true,
     "probable": true,
     "name": "Scott Wedgewood"
   },

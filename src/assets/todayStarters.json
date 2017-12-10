@@ -137,7 +137,7 @@
   },
   "5107":
   {
-    "confirmed": false,
+    "confirmed": true,
     "probable": true,
     "name": "Jake Allen"
   },
@@ -197,7 +197,7 @@
   },
   "4867":
   {
-    "confirmed": false,
+    "confirmed": true,
     "probable": true,
     "name": "Robin Lehner"
   },
@@ -299,7 +299,7 @@
   },
   "4310":
   {
-    "confirmed": false,
+    "confirmed": true,
     "probable": true,
     "name": "Curtis McElhinney"
   },
@@ -311,7 +311,7 @@
   },
   "3855":
   {
-    "confirmed": false,
+    "confirmed": true,
     "probable": true,
     "name": "Corey Crawford"
   },
@@ -329,7 +329,7 @@
   },
   "5552":
   {
-    "confirmed": false,
+    "confirmed": true,
     "probable": true,
     "name": "Laurent Brossoit"
   },

@@ -147,6 +147,12 @@
     "probable": false,
     "name": "Carter Hutton"
   },
+  "13661":
+  {
+    "confirmed": false,
+    "probable": false,
+    "name": "Husso"
+  },
   "4294":
   {
     "confirmed": false,
@@ -240,13 +246,13 @@
   "4666":
   {
     "confirmed": false,
-    "probable": true,
+    "probable": false,
     "name": "Devan Dubnyk"
   },
   "4947":
   {
     "confirmed": false,
-    "probable": false,
+    "probable": true,
     "name": "Alex Stalock"
   },
   "4333":
@@ -327,7 +333,13 @@
     "probable": true,
     "name": "Laurent Brossoit"
   },
-    "757":
+  "4687":
+  {
+    "confirmed": false,
+    "probable": false,
+    "name": "Jonas Gustavsso"
+  },
+  "757":
   {
     "confirmed": false,
     "probable": false,

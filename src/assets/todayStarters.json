@@ -23,7 +23,7 @@
   },
   "4235":
   {
-    "confirmed": false,
+    "confirmed": true,
     "probable": true,
     "name": "Halak"
   },
@@ -35,7 +35,7 @@
   },
   "4862":
   {
-    "confirmed": false,
+    "confirmed": true,
     "probable": true,
     "name": "James Reimer"
   },
@@ -72,18 +72,18 @@
   "3647":
   {
     "confirmed": false,
-    "probable": true,
+    "probable": false,
     "name": "Henrik Lundqvist"
   },
    "4321":
   {
-    "confirmed": false,
-    "probable": false,
+    "confirmed": true,
+    "probable": true,
     "name": "Ondrej Pavelec"
   },
   "10083":
   {
-    "confirmed": false,
+    "confirmed": true,
     "probable": true,
     "name": "Tristan Jarry"
   },
@@ -119,7 +119,7 @@
   },
   "5873":
   {
-    "confirmed": false,
+    "confirmed": true,
     "probable": true,
     "name": "Connor Hellebuyck"
   },
@@ -131,7 +131,7 @@
   },
   "3793":
   {
-    "confirmed": false,
+    "confirmed": true,
     "probable": true,
     "name": "Jimmy Howard"
   },
@@ -216,13 +216,13 @@
   "4592":
   {
     "confirmed": false,
-    "probable": true,
+    "probable": false,
     "name": "Semyon Varlamov"
   },
   "4271":
   {
-    "confirmed": false,
-    "probable": false,
+    "confirmed": true,
+    "probable": true,
     "name": "Jonathan Bernier"
   },
   "5475":
@@ -245,7 +245,7 @@
   }, 
   "4874":
   {
-    "confirmed": false,
+    "confirmed": true,
     "probable": true,
     "name": "Jacob Markstrom"
   }, 
@@ -275,7 +275,7 @@
   },
     "5227":
   {
-    "confirmed": false,
+    "confirmed": true,
     "probable": true,
     "name": "John Gibson"
   },

@@ -71,7 +71,7 @@
   },
   "3486":
   {
-    "confirmed": false,
+    "confirmed": true,
     "probable": true,
     "name": "Mike Smith"
   },
@@ -185,7 +185,7 @@
   },
   "5420":
   {
-    "confirmed": false,
+    "confirmed": true,
     "probable": true,
     "name": "Andrei Vasilevskiy"
   },
@@ -275,7 +275,7 @@
   },
   "4333":
   {
-    "confirmed": false,
+    "confirmed": true,
     "probable": true,
     "name": "Jon Quick"
   }, 
@@ -305,7 +305,7 @@
   },
   "483":
   {
-    "confirmed": false,
+    "confirmed": true,
     "probable": true,
     "name": "Marc-Andre Fleury"
   },

@@ -200,9 +200,9 @@
           </div>
 
           <div class="goalies-inline" *ngIf="data.team.matchup[2] != null">
-            <span *ngIf="data.team.matchup[1].team.haveGameToday === true && data.team.matchup[1].team.haveGameTomorrow === true;then y else n"></span>
+            <span *ngIf="data.team.matchup[2].team.haveGameToday === true && data.team.matchup[2].team.haveGameTomorrow === true;then y else n"></span>
             <ng-template #y><span style="color: #e74c3c;">back</span><span style="color: #ccc;"> to</span></ng-template>
-            <ng-template #n><span style="color: #ccc;">back</span><span style="color: #ccc;"> to</span></ng-template><span *ngIf="data.team.matchup[1].team.hadGameYesterday === true && data.team.matchup[1].team.haveGameToday === true;then yes else no"></span>
+            <ng-template #n><span style="color: #ccc;">back</span><span style="color: #ccc;"> to</span></ng-template><span *ngIf="data.team.matchup[2].team.hadGameYesterday === true && data.team.matchup[2].team.haveGameToday === true;then yes else no"></span>
             <ng-template #yes><span style="color: #e74c3c;">back</span></ng-template>
             <ng-template #no><span style="color: #ccc;">back</span></ng-template>
             <br>

@@ -6,6 +6,7 @@ import { ActivatedRoute, Router, ActivatedRouteSnapshot } from '@angular/router'
 import { DatePipe } from '@angular/common';
 import { TomorrowService } from '../tomorrow.service';
 import { DataService } from '../data.service';
+import { FirebaseService } from '../firebase.service';
 import { MatSnackBar } from '@angular/material';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/observable/forkJoin';
@@ -48,7 +49,7 @@ export class TomorrowResultsComponent implements OnInit {
   selected: any;
   startersDate: any;
 
-  constructor(private http: Http, private tomorrowService: TomorrowService, private todayService: DataService, public snackBar: MatSnackBar, public router: Router, public dialog: MatDialog) {
+  constructor(private http: Http, private tomorrowService: TomorrowService, private todayService: DataService, private fbService: FirebaseService, public snackBar: MatSnackBar, public router: Router, public dialog: MatDialog) {
     this.getJSON();
     yesterday = this.tomorrowService.getYesterday();
     tomorrow = this.tomorrowService.getTomorrow();
@@ -66,14 +67,22 @@ export class TomorrowResultsComponent implements OnInit {
         this.twitterHandles = res['twitterHandles']["0"];
       })
 
-       this.http.get("./assets/tomorrowStarters.json")
-      .map(response => response.json())
+      this.fbService
+      .getStarterData()
       .subscribe(res => {
-        console.log(res['tomorrowStarters']["0"]['date'], 'date...');
-        console.log(res['tomorrowStarters']["1"], 'tomorrow starters...');
-        this.startersDate = res['tomorrowStarters']["0"]['date'];
-        this.tomorrowStarters = res['tomorrowStarters']["1"];
-      })
+        console.log(res[1], 'got response from firebase...');
+        this.startersDate = res[2]['tomorrowDate'];
+        this.tomorrowStarters = res[3];
+      });
+
+      //  this.http.get("./assets/tomorrowStarters.json")
+      // .map(response => response.json())
+      // .subscribe(res => {
+      //   console.log(res['tomorrowStarters']["0"]['date'], 'date...');
+      //   console.log(res['tomorrowStarters']["1"], 'tomorrow starters...');
+      //   this.startersDate = res['tomorrowStarters']["0"]['date'];
+      //   this.tomorrowStarters = res['tomorrowStarters']["1"];
+      // })
 
   }
 

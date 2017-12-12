@@ -1,3 +1,4 @@
+import { masterFirebaseConfig } from './api-keys';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgModule } from '@angular/core';
@@ -26,6 +27,18 @@ import { StartingGoaliesComponent, Info, TodayDialog, LastweekDialog } from './s
 import { YesterdayResultsComponent, InfoYesterday } from './yesterday-results/yesterday-results.component';
 import { TomorrowResultsComponent, InfoTomorrow, TomorrowDialog } from './tomorrow-results/tomorrow-results.component';
 
+import { FirebaseService } from './firebase.service';
+import { AngularFireModule } from 'angularfire2';
+import { AngularFireDatabaseModule } from 'angularfire2/database';
+import { AngularFireAuthModule } from 'angularfire2/auth';
+
+
+export const firebaseConfig = {
+  apiKey: masterFirebaseConfig.apiKey,
+  authDomain: masterFirebaseConfig.authDomain,
+  databaseURL: masterFirebaseConfig.databaseURL
+};
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -41,6 +54,8 @@ import { TomorrowResultsComponent, InfoTomorrow, TomorrowDialog } from './tomorr
   ],
   imports: [
     BrowserModule,
+    AngularFireDatabaseModule,
+    AngularFireAuthModule,
     HttpModule,
     CommonModule,
     MatCardModule,
@@ -57,6 +72,7 @@ import { TomorrowResultsComponent, InfoTomorrow, TomorrowDialog } from './tomorr
     BrowserAnimationsModule,
     ShareModule,
     FlexLayoutModule,
+    AngularFireModule.initializeApp(firebaseConfig),
     RouterModule.forRoot([
         {
            path: '',
@@ -83,7 +99,7 @@ import { TomorrowResultsComponent, InfoTomorrow, TomorrowDialog } from './tomorr
         }
     ])
   ],
-  providers: [DataService, YesterdayService, TomorrowService],
+  providers: [DataService, YesterdayService, TomorrowService, FirebaseService],
   entryComponents: [
     Info, InfoYesterday, InfoTomorrow, TodayDialog, LastweekDialog, TomorrowDialog
   ],

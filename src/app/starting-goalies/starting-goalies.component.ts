@@ -5,6 +5,7 @@ import { Observable } from 'rxjs/Observable';
 import { ActivatedRoute, Router, ActivatedRouteSnapshot } from '@angular/router';
 import { DatePipe, PercentPipe } from '@angular/common';
 import { DataService } from '../data.service';
+import { FirebaseService } from '../firebase.service';
 import { YesterdayService } from '../yesterday.service';
 import { MatSnackBar } from '@angular/material';
 import 'rxjs/add/operator/map';
@@ -52,7 +53,7 @@ export class StartingGoaliesComponent implements OnInit {
   noGamesMsg: any;
   startersDate: any;
 
-  constructor(private http: Http, private dataService: DataService, private yesterdayService: YesterdayService, public snackBar: MatSnackBar, public router: Router, public dialog: MatDialog) {
+  constructor(private http: Http, private dataService: DataService, private fbService: FirebaseService, private yesterdayService: YesterdayService, public snackBar: MatSnackBar, public router: Router, public dialog: MatDialog) {
 
     yesterday = this.dataService.getYesterday();
     tomorrow = this.dataService.getTomorrow();
@@ -71,17 +72,25 @@ export class StartingGoaliesComponent implements OnInit {
         this.twitterHandles = res['twitterHandles']["0"];
       })
 
-    this.http.get("./assets/todayStarters.json")
-      .map(response => response.json())
+      this.fbService
+      .getStarterData()
       .subscribe(res => {
-        console.log(res['todayStarters']["0"], 'today starters...');
-        this.startersDate = res['todayStarters']["0"]['date'];
-        this.todayStarters = res['todayStarters']["1"];
-      })
+        console.log(res[1], 'got response from firebase...');
+        this.startersDate = res[0]['todayDate'];
+        this.todayStarters = res[1];
+      });
+
+    // this.http.get("./assets/todayStarters.json")
+    //   .map(response => response.json())
+    //   .subscribe(res => {
+    //     console.log(res['todayStarters']["0"], 'today starters...');
+    //     //this.startersDate = res['todayStarters']["0"]['date'];
+    //     //this.todayStarters = res['todayStarters']["1"];
+    //   })
 
   }
 
-  loadData() {
+  loadData() { 
 
     this.dataService
       .getEnv().subscribe(res => {

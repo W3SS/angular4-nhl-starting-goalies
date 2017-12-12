@@ -155,7 +155,7 @@
   },
   "5107":
   {
-    "confirmed": false,
+    "confirmed": true,
     "probable": true,
     "name": "Jake Allen"
   },
@@ -215,7 +215,7 @@
   },
   "4867":
   {
-    "confirmed": false,
+    "confirmed": true,
     "probable": true,
     "name": "Robin Lehner"
   },
@@ -227,7 +227,7 @@
   },
   "4592":
   {
-    "confirmed": false,
+    "confirmed": true,
     "probable": true,
     "name": "Semyon Varlamov"
   },
@@ -307,7 +307,7 @@
   {
     "confirmed": false,
     "probable": true,
-    "name": "Fleury"
+    "name": "Marc-Andre Fleury"
   },
   "11721":
   {
@@ -317,7 +317,7 @@
   },
   "5109":
   {
-    "confirmed": false,
+    "confirmed": true,
     "probable": true,
     "name": "Frederik Andersen"
   },
@@ -335,7 +335,7 @@
   },
   "3855":
   {
-    "confirmed": false,
+    "confirmed": true,
     "probable": true,
     "name": "Corey Crawford"
   },

@@ -42,8 +42,14 @@
   "4862":
   {
     "confirmed": false,
-    "probable": true,
+    "probable": false,
     "name": "James Reimer"
+  },
+  "13871":
+  {
+    "confirmed": false,
+    "probable": true,
+    "name": "Harri Sateri"
   },
   "3810":
   {
@@ -294,8 +300,14 @@
   "5528":
   {
     "confirmed": false,
-    "probable": true,
+    "probable": false,
     "name": "Malcolm Subban"
+  },
+  "483":
+  {
+    "confirmed": false,
+    "probable": true,
+    "name": "Fleury"
   },
   "11721":
   {
@@ -348,13 +360,13 @@
   "757":
   {
     "confirmed": false,
-    "probable": true,
+    "probable": false,
     "name": "Craig Anderson"
   },
   "5835":
   {
-    "confirmed": false,
-    "probable": false,
+    "confirmed": true,
+    "probable": true,
     "name": "Mike Condon"
   },
    "5296":

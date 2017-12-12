@@ -143,7 +143,7 @@
   },
   "3793":
   {
-    "confirmed": false,
+    "confirmed": true,
     "probable": true,
     "name": "Jimmy Howard"
   },
@@ -383,7 +383,7 @@
   },
   "4326":
   {
-    "confirmed": false,
+    "confirmed": true,
     "probable": true,
     "name": "Tuukka Rask"
   },

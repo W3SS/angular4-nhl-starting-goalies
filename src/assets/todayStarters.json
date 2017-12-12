@@ -59,7 +59,7 @@
   },
   "4305":
   {
-    "confirmed": false,
+    "confirmed": true,
     "probable": true,
     "name": "Brian Elliott"
   },
@@ -263,7 +263,7 @@
   }, 
   "4666":
   {
-    "confirmed": false,
+    "confirmed": true,
     "probable": true,
     "name": "Devan Dubnyk"
   },
@@ -347,7 +347,7 @@
   },
   "5552":
   {
-    "confirmed": false,
+    "confirmed": true,
     "probable": true,
     "name": "Laurent Brossoit"
   },

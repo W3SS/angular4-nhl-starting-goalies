@@ -328,7 +328,7 @@
 
         </div>
         <p class="game-info">
-          <img src="../assets/nhl-logos/{{ data.team.opponentId }}.jpg" alt="">Finale Score: {{data.team.opponentScore}} - {{data.team.teamScore}} <img src="./assets/nhl-logos/{{ data.team.ID }}.jpg" alt="">
+          <img src="../assets/nhl-logos/{{ data.team.opponentId }}.jpg" alt="">Final Score: {{data.team.opponentScore}} - {{data.team.teamScore}} <img src="./assets/nhl-logos/{{ data.team.ID }}.jpg" alt="">
           <br> The <span *ngIf="data.team.opponentScore < data.team.teamScore; then home else away"></span>
           <ng-template #home>{{data.team.Name}}</ng-template>
           <ng-template #away>{{data.team.opponentName}}</ng-template> Win!

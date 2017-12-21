@@ -933,8 +933,8 @@ export class TodayDialog implements OnInit {
     console.log(this.data, 'data passed in');
 
     let headers = new Headers();
-    let searchterm = 'query=#startingGoalies #nhl ' + this.data.player.FirstName + ' ' + this.data.player.LastName;
-    //let searchterm = 'query=#FantasyHockey ' + this.data.player.twitterHandle;
+    //let searchterm = 'query=#startingGoalies #nhl ' + this.data.player.FirstName + ' ' + this.data.player.LastName;
+    let searchterm = 'query='+ this.data.player.LastName +' '+ this.data.player.twitterHandle;
 
     headers.append('Content-Type', 'application/X-www-form-urlencoded');
 

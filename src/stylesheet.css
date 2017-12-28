@@ -1,0 +1,13 @@
+@font-face {
+    font-family: 'coinyregular';
+    src: url('coiny-regular-webfont.eot');
+    src: url('coiny-regular-webfont.eot?#iefix') format('embedded-opentype'),
+         url('coiny-regular-webfont.woff2') format('woff2'),
+         url('coiny-regular-webfont.woff') format('woff'),
+         url('coiny-regular-webfont.ttf') format('truetype'),
+         url('coiny-regular-webfont.svg#coinyregular') format('svg');
+    font-weight: normal;
+    font-style: normal;
+
+}
+

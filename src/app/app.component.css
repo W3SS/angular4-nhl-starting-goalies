@@ -16,6 +16,8 @@
     display: flex;
 }
 
+
+
 .docs-footer div {
   display: inline-block;
   flex-grow: 1;
@@ -41,13 +43,29 @@
 }
 
 .logo-container {
-  max-width: 48px; 
+  max-width: 54px; 
   text-align: center;
+  font-family: 'coinyregular';
 }
 
 .logo-container .logo-initials {
-  border-bottom: 2px solid #fff; 
-  line-height: 1.5em;
+  /*-webkit-mask-image: -webkit-gradient(linear, left top, left bottom, from(rgba(0,0,0,1)), color-stop(50%, rgba(0,0,0,0)), to(rgba(0,0,0,1)));*/
+        text-shadow: 0 1px 1px #111111;
+        box-shadow: 0 3px 2px -3px black;
+ /*background: -webkit-linear-gradient(#eee, #777);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;*/
+  border-bottom: 4px solid #fff; 
+  border-radius: 1.5px;
+  /*line-height: 1.5em;*/
+}
+
+.logo-initials-bottom {
+  /*-webkit-mask-image: -webkit-gradient(linear, left top, left bottom, from(rgba(0,0,0,1)), color-stop(50%, rgba(0,0,0,0)), to(rgba(0,0,0,1)));*/
+        text-shadow: 0 1px 1px #111111;
+  /*background: -webkit-linear-gradient(#eee, #777);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;*/
 }
 
 

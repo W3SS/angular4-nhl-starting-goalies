@@ -1,6 +1,6 @@
 {"Starters": [
  {
-    "todayDate": "2017-12-27"
+    "todayDate": "2018-01-01"
  },
  {
   "5176":
@@ -12,13 +12,13 @@
   "4863":
   {
     "confirmed": false,
-    "probable": true,
+    "probable": false,
     "name": "Braden Holtby"
   },
   "5122":
   {
-    "confirmed": false,
-    "probable": false,
+    "confirmed": true,
+    "probable": true,
     "name": "Martin Jones"
   },
   "10074":
@@ -29,7 +29,7 @@
   },
   "4235":
   {
-    "confirmed": false,
+    "confirmed": true,
     "probable": true,
     "name": "Jaro Halak"
   },
@@ -60,7 +60,7 @@
   "3810":
   {
     "confirmed": false,
-    "probable": true,
+    "probable": false,
     "name": "Pekka Rinne"
   },
   "5877":
@@ -83,8 +83,8 @@
   },
   "3486":
   {
-    "confirmed": false,
-    "probable": false,
+    "confirmed": true,
+    "probable": true,
     "name": "Mike Smith"
   },
   "11724":
@@ -95,7 +95,7 @@
   },
   "3647":
   {
-    "confirmed": false,
+    "confirmed": true,
     "probable": true,
     "name": "Henrik Lundqvist"
   },
@@ -119,14 +119,14 @@
   },
   "5894":
   {
-    "confirmed": false,
+    "confirmed": true,
     "probable": true,
     "name": "Matt Murray"
   },
   "4575":
   {
     "confirmed": false,
-    "probable": true,
+    "probable": false,
     "name": "Cory Schneider"
   },
   "5180":
@@ -138,7 +138,7 @@
   "4890":
   {
     "confirmed": false,
-    "probable": true,
+    "probable": false,
     "name": "Sergei Bobrovsky"
   },
   "5887":
@@ -149,7 +149,7 @@
   },
   "5873":
   {
-    "confirmed": false,
+    "confirmed": true,
     "probable": true,
     "name": "Connor Hellebuyck"
   },
@@ -167,7 +167,7 @@
   },
   "3793":
   {
-    "confirmed": false,
+    "confirmed": true,
     "probable": true,
     "name": "Jimmy Howard"
   },
@@ -180,7 +180,7 @@
   "5107":
   {
     "confirmed": false,
-    "probable": true,
+    "probable": false,
     "name": "Jake Allen"
   },
   "5224":
@@ -198,7 +198,7 @@
   "4294":
   {
     "confirmed": false,
-    "probable": true,
+    "probable": false,
     "name": "Carey Price"
   },
   "4493":
@@ -209,8 +209,8 @@
   },
   "5420":
   {
-    "confirmed": false,
-    "probable": false,
+    "confirmed": true,
+    "probable": true,
     "name": "Andrei Vasilevskiy"
   },
   "3635":
@@ -221,7 +221,7 @@
   }, 
   "4561":
   {
-    "confirmed": false,
+    "confirmed": true,
     "probable": true,
     "name": "Ben Bishop"
   },
@@ -234,7 +234,7 @@
   "4867":
   {
     "confirmed": false,
-    "probable": true,
+    "probable": false,
     "name": "Robin Lehner"
   },
   "4753":
@@ -246,13 +246,13 @@
   "4592":
   {
     "confirmed": false,
-    "probable": true,
+    "probable": false,
     "name": "Semyon Varlamov"
   },
   "4271":
   {
-    "confirmed": false,
-    "probable": false,
+    "confirmed": true,
+    "probable": true,
     "name": "Jonathan Bernier"
   },
   "5475":
@@ -264,7 +264,7 @@
   "3500":
   {
     "confirmed": false,
-    "probable": true,
+    "probable": false,
     "name": "Cam Ward"
   },
   "5033":
@@ -288,7 +288,7 @@
   "4947":
   {
     "confirmed": false,
-    "probable": true,
+    "probable": false,
     "name": "Alex Stalock"
   },
   "4333":
@@ -305,8 +305,8 @@
   },
     "5227":
   {
-    "confirmed": false,
-    "probable": false,
+    "confirmed": true,
+    "probable": true,
     "name": "John Gibson"
   },
   "178":
@@ -317,8 +317,8 @@
   },
   "5528":
   {
-    "confirmed": false,
-    "probable": false,
+    "confirmed": true,
+    "probable": true,
     "name": "Malcolm Subban"
   },
   "483":
@@ -335,8 +335,8 @@
   },
   "5109":
   {
-    "confirmed": false,
-    "probable": false,
+    "confirmed": true,
+    "probable": true,
     "name": "Frederik Andersen"
   },
   "4310":
@@ -356,6 +356,12 @@
     "confirmed": false,
     "probable": false,
     "name": "Corey Crawford"
+  },
+  "4449":
+  {
+    "confirmed": true,
+    "probable": true,
+    "name": "Jeff Glass"
   },
   "5404":
   {
@@ -390,25 +396,25 @@
   "5835":
   {
     "confirmed": false,
-    "probable": true,
+    "probable": false,
     "name": "Mike Condon"
   },
    "5296":
   {
-    "confirmed": false,
-    "probable": false,
+    "confirmed": true,
+    "probable": true,
     "name": "Antti Raanta"
   },
   "8952":
   {
     "confirmed": false,
-    "probable": true,
+    "probable": false,
     "name": "Scott Wedgewood"
   },
   "4326":
   {
     "confirmed": false,
-    "probable": true,
+    "probable": false,
     "name": "Tuukka Rask"
   },
   "4763":
@@ -421,7 +427,7 @@
 
  },
  {
-    "tomorrowDate": "2017-12-27"
+    "tomorrowDate": "2018-01-01"
  },
  {
   "5176":
@@ -433,7 +439,7 @@
   "4863":
   {
     "confirmed": false,
-    "probable": true,
+    "probable": false,
     "name": "Braden Holtby"
   },
   "5122":
@@ -451,7 +457,7 @@
   "4235":
   {
     "confirmed": false,
-    "probable": true,
+    "probable": false,
     "name": "Jaro Halak"
   },
   "4351":
@@ -481,7 +487,7 @@
   "3810":
   {
     "confirmed": false,
-    "probable": true,
+    "probable": false,
     "name": "Pekka Rinne"
   },
   "5877":
@@ -541,13 +547,13 @@
   "5894":
   {
     "confirmed": false,
-    "probable": true,
+    "probable": false,
     "name": "Matt Murray"
   },
   "4575":
   {
     "confirmed": false,
-    "probable": true,
+    "probable": false,
     "name": "Cory Schneider"
   },
   "5180":
@@ -559,7 +565,7 @@
   "4890":
   {
     "confirmed": false,
-    "probable": true,
+    "probable": false,
     "name": "Sergei Bobrovsky"
   },
   "5887":
@@ -571,7 +577,7 @@
   "5873":
   {
     "confirmed": false,
-    "probable": true,
+    "probable": false,
     "name": "Connor Hellebuyck"
   },
   "12468":
@@ -589,7 +595,7 @@
   "3793":
   {
     "confirmed": false,
-    "probable": true,
+    "probable": false,
     "name": "Jimmy Howard"
   },
   " 5163":
@@ -601,7 +607,7 @@
   "5107":
   {
     "confirmed": false,
-    "probable": true,
+    "probable": false,
     "name": "Jake Allen"
   },
   "5224":
@@ -619,7 +625,7 @@
   "4294":
   {
     "confirmed": false,
-    "probable": true,
+    "probable": false,
     "name": "Carey Price"
   },
   "4493":
@@ -643,7 +649,7 @@
   "4561":
   {
     "confirmed": false,
-    "probable": true,
+    "probable": false,
     "name": "Ben Bishop"
   },
   "994":
@@ -667,7 +673,7 @@
   "4592":
   {
     "confirmed": false,
-    "probable": true,
+    "probable": false,
     "name": "Semyon Varlamov"
   },
   "4271":
@@ -685,7 +691,7 @@
   "3500":
   {
     "confirmed": false,
-    "probable": true,
+    "probable": false,
     "name": "Cam Ward"
   },
   "5033":
@@ -709,7 +715,7 @@
   "4947":
   {
     "confirmed": false,
-    "probable": true,
+    "probable": false,
     "name": "Alex Stalock"
   },
   "4333":
@@ -793,7 +799,7 @@
   "5277":
   {
     "confirmed": false,
-    "probable": true,
+    "probable": false,
     "name": "Cam Talbot"
   },
   "4687":
@@ -811,7 +817,7 @@
   "5835":
   {
     "confirmed": false,
-    "probable": true,
+    "probable": false,
     "name": "Mike Condon"
   },
    "5296":
@@ -823,13 +829,13 @@
   "8952":
   {
     "confirmed": false,
-    "probable": true,
+    "probable": false,
     "name": "Scott Wedgewood"
   },
   "4326":
   {
     "confirmed": false,
-    "probable": true,
+    "probable": false,
     "name": "Tuukka Rask"
   },
   "4763":

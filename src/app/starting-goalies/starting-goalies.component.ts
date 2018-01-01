@@ -387,15 +387,22 @@ export class StartingGoaliesComponent implements OnInit {
               data.player.image = info.player.officialImageSrc;
               //data.player.savePercent = '.'+Math.round(data.stats.stats.SavePercentage['#text'] * 100);
               data.player.savePercent = data.stats.stats.SavePercentage['#text'].slice(1);
-              data.player.twitterHandle = this.twitterHandles[data.team.ID].twitterHashTag;
 
-              if (this.twitterHandles[data.team.ID][data.player.ID] != null) {
-                data.player.atHandle = this.twitterHandles[data.team.ID][data.player.ID] + ' ';
+              if(this.twitterHandles[data.team.ID] != null) {
+                console.log(this.twitterHandles[data.team.ID].twitterHashTag);
+                data.player.twitterHandle = this.twitterHandles[data.team.ID].twitterHashTag;
+
+                  //INCASE API CHANGES TEAM IDS AGAIN CATCH IT HERE
+                  if (this.twitterHandles[data.team.ID][data.player.ID] != null) {
+                    data.player.atHandle = this.twitterHandles[data.team.ID][data.player.ID] + ' ';
+                  } else {
+                    data.player.atHandle = '';
+                  }
+
               } else {
-                data.player.atHandle = '';
+                console.log(data, "Hi I am the DATA ID causing problems");
               }
-
-             
+              
 
                 if (this.startersDate === data.team.today && this.todayStarters[data.player.ID] != null && data.player.saves == null && this.todayStarters[data.player.ID].probable === true || this.startersDate === data.team.today && this.todayStarters[data.player.ID] != null && data.player.saves == '0' && this.todayStarters[data.player.ID].probable === true) {
                   data.player.confirmed = this.todayStarters[data.player.ID].confirmed;

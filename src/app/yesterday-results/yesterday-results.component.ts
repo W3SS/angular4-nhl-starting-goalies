@@ -324,12 +324,20 @@ export class YesterdayResultsComponent implements OnInit {
             if (info.player.ID === data.player.ID) {
 
               data.player.image = info.player.officialImageSrc;
-              data.player.twitterHandle = this.twitterHandles[data.team.ID].twitterHashTag;
+              
+                if(this.twitterHandles[data.team.ID] != null) {
+                console.log(this.twitterHandles[data.team.ID].twitterHashTag);
+                data.player.twitterHandle = this.twitterHandles[data.team.ID].twitterHashTag;
 
-              if (this.twitterHandles[data.team.ID][data.player.ID] != null) {
-                data.player.atHandle = this.twitterHandles[data.team.ID][data.player.ID]+' ';
+                  //INCASE API CHANGES TEAM IDS AGAIN CATCH IT HERE
+                  if (this.twitterHandles[data.team.ID][data.player.ID] != null) {
+                    data.player.atHandle = this.twitterHandles[data.team.ID][data.player.ID] + ' ';
+                  } else {
+                    data.player.atHandle = '';
+                  }
+
               } else {
-                data.player.atHandle = '';
+                console.log(data, "Hi I am the DATA ID causing problems");
               }
 
                if (data.team.hadGameYesterday === true) {

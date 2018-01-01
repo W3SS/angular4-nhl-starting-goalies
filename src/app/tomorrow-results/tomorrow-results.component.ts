@@ -333,13 +333,22 @@ export class TomorrowResultsComponent implements OnInit {
               data.player.image = info.player.officialImageSrc;
               //data.player.savePercent = '.'+Math.round(data.stats.stats.SavePercentage['#text'] * 100);
               data.player.savePercent = data.stats.stats.SavePercentage['#text'].slice(1);
-              data.player.twitterHandle = this.twitterHandles[data.team.ID].twitterHashTag;
+              
+               if(this.twitterHandles[data.team.ID] != null) {
+                console.log(this.twitterHandles[data.team.ID].twitterHashTag);
+                data.player.twitterHandle = this.twitterHandles[data.team.ID].twitterHashTag;
 
-              if (this.twitterHandles[data.team.ID][data.player.ID] != null) {
-                data.player.atHandle = this.twitterHandles[data.team.ID][data.player.ID]+' ';
+                  //INCASE API CHANGES TEAM IDS AGAIN CATCH IT HERE
+                  if (this.twitterHandles[data.team.ID][data.player.ID] != null) {
+                    data.player.atHandle = this.twitterHandles[data.team.ID][data.player.ID] + ' ';
+                  } else {
+                    data.player.atHandle = '';
+                  }
+
               } else {
-                data.player.atHandle = '';
+                console.log(data, "Hi I am the DATA ID causing problems");
               }
+
            if (this.tomorrowStarters[data.player.ID] != null && this.startersDate === data.team.today && this.tomorrowStarters[data.player.ID].probable === true) {
                
                   data.player.startingToday = false;

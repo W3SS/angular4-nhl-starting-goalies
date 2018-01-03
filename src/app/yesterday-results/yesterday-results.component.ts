@@ -324,9 +324,11 @@ export class YesterdayResultsComponent implements OnInit {
             if (info.player.ID === data.player.ID) {
 
               data.player.image = info.player.officialImageSrc;
-              
+
                 if(this.twitterHandles[data.team.ID] != null) {
-                console.log(this.twitterHandles[data.team.ID].twitterHashTag);
+
+                //console.log(this.twitterHandles[data.team.ID].twitterHashTag);
+                
                 data.player.twitterHandle = this.twitterHandles[data.team.ID].twitterHashTag;
 
                   //INCASE API CHANGES TEAM IDS AGAIN CATCH IT HERE

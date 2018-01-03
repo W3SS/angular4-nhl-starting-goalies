@@ -389,7 +389,7 @@ export class StartingGoaliesComponent implements OnInit {
               data.player.savePercent = data.stats.stats.SavePercentage['#text'].slice(1);
 
               if(this.twitterHandles[data.team.ID] != null) {
-                console.log(this.twitterHandles[data.team.ID].twitterHashTag);
+                //console.log(this.twitterHandles[data.team.ID].twitterHashTag);
                 data.player.twitterHandle = this.twitterHandles[data.team.ID].twitterHashTag;
 
                   //INCASE API CHANGES TEAM IDS AGAIN CATCH IT HERE

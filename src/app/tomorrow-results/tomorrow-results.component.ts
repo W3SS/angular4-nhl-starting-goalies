@@ -333,9 +333,11 @@ export class TomorrowResultsComponent implements OnInit {
               data.player.image = info.player.officialImageSrc;
               //data.player.savePercent = '.'+Math.round(data.stats.stats.SavePercentage['#text'] * 100);
               data.player.savePercent = data.stats.stats.SavePercentage['#text'].slice(1);
-              
+
                if(this.twitterHandles[data.team.ID] != null) {
-                console.log(this.twitterHandles[data.team.ID].twitterHashTag);
+
+                //console.log(this.twitterHandles[data.team.ID].twitterHashTag);
+
                 data.player.twitterHandle = this.twitterHandles[data.team.ID].twitterHashTag;
 
                   //INCASE API CHANGES TEAM IDS AGAIN CATCH IT HERE
@@ -448,7 +450,7 @@ export class TomorrowResultsComponent implements OnInit {
               for (let startdata of this.myData) {
 
                 if (startid === startdata.team.ID) {
-                  if (this.startersDate != startdata.team.today && startdata.stats.GamesPlayed['#text'] > 6 && startdata.player.injuryOut == null && startdata.player.ID != '9072' && startdata.player.ID != '5518') {
+                  if (this.startersDate != startdata.team.today && startdata.stats.GamesPlayed['#text'] > 6 && startdata.player.injuryOut == null && startdata.player.ID != '9072' && startdata.player.ID != '5518' && startdata.player.ID != '11721') {
 //&&  startdata.player.winsYesterday == '0' && startdata.player.lossesYesterday == '0' && startdata.player.olYesterday == '0'
                     startdata.player.startingToday = false;
                     startdata.player.likelyStartingToday = true;

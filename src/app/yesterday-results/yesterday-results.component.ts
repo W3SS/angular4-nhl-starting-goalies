@@ -78,6 +78,9 @@ export class YesterdayResultsComponent implements OnInit {
 
         this.yesterdayService
           .getDailySchedule().subscribe(res => {
+            
+            //this removed a postponed game from api to avoid errors
+            res['dailygameschedule'].gameentry.splice(3, 1);
 
             console.log(res, "schedule...");
             //console.log(tomorrowDailyDate, "get tomorrows schedule to find back to back games");
@@ -90,14 +93,18 @@ export class YesterdayResultsComponent implements OnInit {
               this.gamesToday = true;
                this.dailySchedule = res['dailygameschedule'].gameentry;
             this.gameDate = res['dailygameschedule'].gameentry[0].date;
+            
             let dPipe = new DatePipe("en-US");
             this.tweetDay = dPipe.transform(this.gameDate, 'EEEE');
 
               Observable.forkJoin(
                   res['dailygameschedule'].gameentry.map(
-                    g =>
-                    this.http.get('https://api.mysportsfeeds.com/v1.1/pull/nhl/2017-2018-regular/game_boxscore.json?gameid=' + g.id + '&playerstats=Sv,GA,GAA,GS,SO,MIN,W,L,SA,OTL,OTW', options)
-                    .map(response => response.json())
+
+                    g => 
+                          this.http.get('https://api.mysportsfeeds.com/v1.1/pull/nhl/2017-2018-regular/game_boxscore.json?gameid=' + g.id + '&playerstats=Sv,GA,GAA,GS,SO,MIN,W,L,SA,OTL,OTW', options)
+                          .map(response => response.json())
+                      
+                    
                   )
                 )
                 .subscribe(res => {
@@ -328,7 +335,7 @@ export class YesterdayResultsComponent implements OnInit {
                 if(this.twitterHandles[data.team.ID] != null) {
 
                 //console.log(this.twitterHandles[data.team.ID].twitterHashTag);
-                
+
                 data.player.twitterHandle = this.twitterHandles[data.team.ID].twitterHashTag;
 
                   //INCASE API CHANGES TEAM IDS AGAIN CATCH IT HERE

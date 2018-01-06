@@ -322,6 +322,7 @@ export class TomorrowResultsComponent implements OnInit {
           }
         }
 
+     
         console.log('start sorting data for starters...');
         for (let info of this.playerInfo) {
 

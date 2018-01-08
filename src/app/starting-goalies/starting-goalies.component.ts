@@ -106,6 +106,10 @@ export class StartingGoaliesComponent implements OnInit {
             console.log(res, "schedule...");
             //console.log(tomorrowDailyDate, "get tomorrows schedule to find back to back games");
 
+             //this removed a postponed game from api to avoid errors
+            
+            //res['dailygameschedule'].gameentry.splice(20, 1);
+
             if (res['dailygameschedule'].gameentry == null) {
               this.noGamesToday = true;
               this.noGamesMsg = "There Are No Games Scheduled Today :("
@@ -179,6 +183,11 @@ export class StartingGoaliesComponent implements OnInit {
         this.dataService
           .getGameId().subscribe(res => {
             console.log(res['fullgameschedule'].gameentry, "scheduled games for yesterday today and tomorrow...");
+            
+              //this removed a postponed game from api to avoid errors
+            
+            res['fullgameschedule'].gameentry.splice(20, 1);
+
             this.fullSchedule = res['fullgameschedule'].gameentry;
           })
 

@@ -49,23 +49,18 @@
 }
 
 .logo-container .logo-initials {
-  /*-webkit-mask-image: -webkit-gradient(linear, left top, left bottom, from(rgba(0,0,0,1)), color-stop(50%, rgba(0,0,0,0)), to(rgba(0,0,0,1)));*/
-        text-shadow: 0 1px 1px #111111;
-        box-shadow: 0 3px 2px -3px black;
- /*background: -webkit-linear-gradient(#eee, #777);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;*/
-  border-bottom: 4px solid #fff; 
-  border-radius: 1.5px;
-  /*line-height: 1.5em;*/
+  text-shadow: 0 1px 1px #111111;
+  font-size: 20px;
+  background: transparent;
+  border-radius: 10px;
+  height: 5px;
+  width: 50px;
+  box-shadow: 0 31px 0 0 #fff;
 }
 
 .logo-initials-bottom {
-  /*-webkit-mask-image: -webkit-gradient(linear, left top, left bottom, from(rgba(0,0,0,1)), color-stop(50%, rgba(0,0,0,0)), to(rgba(0,0,0,1)));*/
-        text-shadow: 0 1px 1px #111111;
-  /*background: -webkit-linear-gradient(#eee, #777);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;*/
+  font-size: 20px;
+  text-shadow: 0 1px 1px #111111; 
 }
 
 

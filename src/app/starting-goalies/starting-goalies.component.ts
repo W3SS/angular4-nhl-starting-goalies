@@ -187,7 +187,7 @@ export class StartingGoaliesComponent implements OnInit {
               //this removed a postponed game from api to avoid errors
 
             
-            res['fullgameschedule'].gameentry.splice(8, 1);
+            //res['fullgameschedule'].gameentry.splice(8, 1);
 
             this.fullSchedule = res['fullgameschedule'].gameentry;
           })
@@ -414,7 +414,7 @@ export class StartingGoaliesComponent implements OnInit {
               }
               
 
-                if (this.startersDate === data.team.today && this.todayStarters[data.player.ID] != null && data.player.saves == null && this.todayStarters[data.player.ID].probable === true || this.startersDate === data.team.today && this.todayStarters[data.player.ID] != null && data.player.saves == '0' && this.todayStarters[data.player.ID].probable === true) {
+                if (this.startersDate === data.team.today && this.todayStarters[data.player.ID] != null && data.player.saves == null && data.player.shotsFaced == null && this.todayStarters[data.player.ID].probable === true || this.startersDate === data.team.today && this.todayStarters[data.player.ID] != null && data.player.saves == '0' && data.player.shotsFaced == '0' && this.todayStarters[data.player.ID].probable === true) {
                   data.player.confirmed = this.todayStarters[data.player.ID].confirmed;
                   data.player.probable = this.todayStarters[data.player.ID].probable;
                   data.player.startingToday = true;

@@ -281,7 +281,7 @@
   }, 
   "4666":
   {
-    "confirmed": false,
+    "confirmed": true,
     "probable": true,
     "name": "Devan Dubnyk"
   },
@@ -303,7 +303,7 @@
     "probable": false,
     "name": "Darcy Kuemper"
   },
-    "5227":
+  "5227":
   {
     "confirmed": false,
     "probable": false,
@@ -335,7 +335,7 @@
   },
   "5109":
   {
-    "confirmed": false,
+    "confirmed": true,
     "probable": true,
     "name": "Frederik Andersen"
   },
@@ -347,8 +347,8 @@
   },
   "5481":
   {
-    "confirmed": false,
-    "probable": false,
+    "confirmed": true,
+    "probable": true,
     "name": "Anton Forsberg"
   },
   "3855":
@@ -360,7 +360,7 @@
    "4449":
   {
     "confirmed": false,
-    "probable": true,
+    "probable": false,
     "name": "Jeff Glass"
   },
   "5404":
@@ -389,14 +389,14 @@
   },
   "757":
   {
-    "confirmed": false,
-    "probable": false,
+    "confirmed": true,
+    "probable": true,
     "name": "Craig Anderson"
   },
   "5835":
   {
     "confirmed": false,
-    "probable": true,
+    "probable": false,
     "name": "Mike Condon"
   },
    "5296":
@@ -427,7 +427,7 @@
 
  },
  {
-    "tomorrowDate": "2018-01-10"
+    "tomorrowDate": "2018-01-11"
  },
  {
   "5176":
@@ -439,7 +439,7 @@
   "4863":
   {
     "confirmed": false,
-    "probable": false,
+    "probable": true,
     "name": "Braden Holtby"
   },
   "5122":
@@ -511,7 +511,7 @@
   "3486":
   {
     "confirmed": false,
-    "probable": false,
+    "probable": true,
     "name": "Mike Smith"
   },
   "11724":
@@ -565,7 +565,7 @@
   "4890":
   {
     "confirmed": false,
-    "probable": false,
+    "probable": true,
     "name": "Sergei Bobrovsky"
   },
   "5887":
@@ -637,7 +637,7 @@
   "5420":
   {
     "confirmed": false,
-    "probable": false,
+    "probable": true,
     "name": "Andrei Vasilevskiy"
   },
   "3635":
@@ -661,7 +661,7 @@
   "4867":
   {
     "confirmed": false,
-    "probable": false,
+    "probable": true,
     "name": "Robin Lehner"
   },
   "4753":
@@ -691,7 +691,7 @@
   "3500":
   {
     "confirmed": false,
-    "probable": false,
+    "probable": true,
     "name": "Cam Ward"
   },
   "5033":

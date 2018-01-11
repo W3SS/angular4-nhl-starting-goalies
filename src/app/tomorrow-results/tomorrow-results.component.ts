@@ -48,6 +48,7 @@ export class TomorrowResultsComponent implements OnInit {
   noGamesMsg: any;
   selected: any;
   startersDate: any;
+  loading: boolean = true;
 
   constructor(private http: Http, private tomorrowService: TomorrowService, private todayService: DataService, private fbService: FirebaseService, public snackBar: MatSnackBar, public router: Router, public dialog: MatDialog) {
     this.getJSON();
@@ -553,7 +554,7 @@ export class TomorrowResultsComponent implements OnInit {
         }
 
 
-
+        this.loading = false;
         this.showDataTomorrow = this.startersData;
 
 
@@ -573,6 +574,7 @@ export class TomorrowResultsComponent implements OnInit {
       setInterval(() => {
         this.showDataTomorrow = this.sentDataTomorrow;
         //console.log(this.showDataTomorrow["0"].team.today, "get the date");
+        this.loading = false;
         this.gameDate = this.showDataTomorrow["0"].team.today;
       }, 300)
 

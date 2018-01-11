@@ -52,6 +52,7 @@ export class StartingGoaliesComponent implements OnInit {
   tweetDay: any;
   noGamesMsg: any;
   startersDate: any;
+  loading: boolean = true;
 
   constructor(private http: Http, private dataService: DataService, private fbService: FirebaseService, private yesterdayService: YesterdayService, public snackBar: MatSnackBar, public router: Router, public dialog: MatDialog) {
 
@@ -657,7 +658,7 @@ export class StartingGoaliesComponent implements OnInit {
         }
 
 
-
+        this.loading = false;
         this.showData = this.startersData;
 
 
@@ -680,6 +681,7 @@ export class StartingGoaliesComponent implements OnInit {
     } else {
       this.getJSON();
       setInterval(() => {
+        this.loading = false;
         this.showData = this.sentData;
         //console.log(this.showData["0"].team.today, "get the date");
         this.gameDate = this.showData["0"].team.today;
@@ -732,17 +734,24 @@ export class StartingGoaliesComponent implements OnInit {
   template: `<i (click)="dialogRef.close()" style="float:right; cursor:pointer;" class="material-icons">close</i>
   <span style="color:#f44336; font-size: 18px;">NHL Starting Goalies | The Hot List! | {{sentLastweek | date:'shortDate'}} - {{sentYesterday | date:'shortDate'}}</span>
   <mat-dialog-content>
+  <div class="spinner-msg" *ngIf="loading" style="background: #fff;">
+  Fetching goalie stats...
+  <mat-spinner></mat-spinner>
+  </div>
   <ul *ngFor="let data of showData"><li *ngIf="data.hot === true"><span class="player"><img src="{{ data.image}}" alt="" /></span><span style="font-weight: bold;" class="last-week"> {{ data.name }} <img src="../assets/nhl-logos/{{ data.team }}.jpg" alt="" /></span><span style="font-weight: bold;"> ({{ data.wins + '-' + data.losses + '-' + data.otl }})</span> <span *ngIf="data.opponents[0] != null"> - {{data.opponents[0]}}</span><span *ngIf="data.opponents[1] != null">, {{data.opponents[1]}}</span><span *ngIf="data.opponents[2] != null">, {{data.opponents[2]}}</span> - <span style="font-weight: bold;">Total Saves: {{data.sv}} Total Shots: {{data.sa}}</span></li></ul>
   </mat-dialog-content>`,
 })
 
 export class LastweekDialog implements OnInit {
+
   starterStatData: Array < any > = [];
   showData: Array < any > ;
   sentHotData: Array < any > ;
   sentAllData: Array < any > ;
   sentYesterday: any;
   sentLastweek: any;
+  loading: boolean = true;
+
   constructor(public dialogRef: MatDialogRef < LastweekDialog > , @Inject(MAT_DIALOG_DATA) public data: any, private http: Http, private dataService: DataService) {
     this.sentHotData = this.dataService.getSentHotStats();
     this.sentAllData = this.dataService.getSentAllStats();
@@ -774,7 +783,6 @@ export class LastweekDialog implements OnInit {
             let i3;
             let res2;
             let res3;
-
 
             res.forEach((item, index) => {
               i = index;
@@ -883,11 +891,12 @@ export class LastweekDialog implements OnInit {
           hash[key].hot = true;
         }
         hash[key].opponents.push(a.player.opponent);
-
+        
         return r;
       };
-    }(Object.create(null)), []);
 
+    }(Object.create(null)), []);
+    this.loading = false;
     console.log(this.showData, 'show reduce array!');
     this.dataService
       .sendHotStats(this.showData);
@@ -903,6 +912,7 @@ export class LastweekDialog implements OnInit {
     } else {
       console.log('using saved hot list data :)')
       setInterval(() => {
+        this.loading = false;
         this.showData = this.sentHotData;
 
       }, 300)

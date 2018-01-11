@@ -42,7 +42,7 @@ export class YesterdayResultsComponent implements OnInit {
   twitterHandles: Array < any > ;
   tweetDay: any;
   noGamesMsg: any;
-
+  loading: boolean = true;
 
   constructor(private http: Http, private yesterdayService: YesterdayService, public snackBar: MatSnackBar, public router: Router) {
     this.getJSON();
@@ -518,7 +518,7 @@ export class YesterdayResultsComponent implements OnInit {
 
         }
 
-
+        this.loading = false;
         this.showDataYesterday = this.startersData;
 
 
@@ -536,6 +536,7 @@ export class YesterdayResultsComponent implements OnInit {
 
     } else {
       setInterval(() => {
+        this.loading = false;
         this.showDataYesterday = this.sentYesterdayData;
         //console.log(this.showDataYesterday["0"].team.today, "get the date");
         this.gameDate = this.showDataYesterday["0"].team.today;
@@ -545,7 +546,7 @@ export class YesterdayResultsComponent implements OnInit {
     }
   }
 
-   public isVisibleOnDesktop() {
+  public isVisibleOnDesktop() {
     // console.log('width over 600px');
   }
 

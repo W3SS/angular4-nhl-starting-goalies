@@ -14,7 +14,8 @@ import { MatCardModule,
         MatListModule,
         MatChipsModule,
         MatTooltipModule,
-        MatDialogModule } from '@angular/material';
+        MatDialogModule,
+        MatProgressSpinnerModule } from '@angular/material';
 import { DataService } from './data.service';
 import { YesterdayService } from './yesterday.service';
 import { TomorrowService } from './tomorrow.service';
@@ -69,6 +70,7 @@ export const firebaseConfig = {
     MatListModule,
     MatChipsModule,
     MatTooltipModule,
+    MatProgressSpinnerModule,
     BrowserAnimationsModule,
     ShareModule,
     FlexLayoutModule,

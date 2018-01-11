@@ -1,8 +1,8 @@
 {"Starters": [
  {
-    "todayDate": "2018-01-10"
+    "todayDate": "2018-01-11"
  },
- {
+{
   "5176":
   {
     "confirmed": false,
@@ -11,434 +11,7 @@
   },
   "4863":
   {
-    "confirmed": false,
-    "probable": false,
-    "name": "Braden Holtby"
-  },
-  "5122":
-  {
-    "confirmed": false,
-    "probable": false,
-    "name": "Martin Jones"
-  },
-  "10074":
-  {
-    "confirmed": false,
-    "probable": false,
-    "name": "Aaron Dell"
-  },
-  "4235":
-  {
-    "confirmed": false,
-    "probable": false,
-    "name": "Jaro Halak"
-  },
-  "4351":
-  {
-    "confirmed": false,
-    "probable": false,
-    "name": "Thomas Greisse"
-  },
-  "272":
-  {
-    "confirmed": false,
-    "probable": false,
-    "name": "Roberto Luongo"
-  },
-  "4862":
-  {
-    "confirmed": false,
-    "probable": false,
-    "name": "James Reimer"
-  },
-  "13871":
-  {
-    "confirmed": false,
-    "probable": false,
-    "name": "Harri Sateri"
-  },
-  "3810":
-  {
-    "confirmed": false,
-    "probable": false,
-    "name": "Pekka Rinne"
-  },
-  "5877":
-  {
-    "confirmed": false,
-    "probable": false,
-    "name": "Juuse Saros"
-  },
-  "4305":
-  {
-    "confirmed": false,
-    "probable": false,
-    "name": "Brian Elliott"
-  },
-   "4626":
-  {
-    "confirmed": false,
-    "probable": false,
-    "name": "Michal Neuvirth"
-  },
-  "3486":
-  {
-    "confirmed": false,
-    "probable": false,
-    "name": "Mike Smith"
-  },
-  "11724":
-  {
-    "confirmed": false,
-    "probable": false,
-    "name": "David Rittich"
-  },
-  "3647":
-  {
-    "confirmed": false,
-    "probable": false,
-    "name": "Henrik Lundqvist"
-  },
-   "4321":
-  {
-    "confirmed": false,
-    "probable": false,
-    "name": "Ondrej Pavelec"
-  },
-  "10083":
-  {
-    "confirmed": false,
-    "probable": false,
-    "name": "Tristan Jarry"
-  },
-  "13873":
-  {
-    "confirmed": false,
-    "probable": false,
-    "name": "Casey DeSmith"
-  },
-  "5894":
-  {
-    "confirmed": false,
-    "probable": false,
-    "name": "Matt Murray"
-  },
-  "4575":
-  {
-    "confirmed": false,
-    "probable": false,
-    "name": "Cory Schneider"
-  },
-  "5180":
-  {
-    "confirmed": false,
-    "probable": false,
-    "name": "Keith Kinkaid"
-  },
-  "4890":
-  {
-    "confirmed": false,
-    "probable": false,
-    "name": "Sergei Bobrovsky"
-  },
-  "5887":
-  {
-    "confirmed": false,
-    "probable": false,
-    "name": "Joonas Korpisalo"
-  },
-  "5873":
-  {
-    "confirmed": false,
-    "probable": false,
-    "name": "Connor Hellebuyck"
-  },
-  "12468":
-  {
-    "confirmed": false,
-    "probable": false,
-    "name": "Eric Comrie"
-  },
-  "4439":
-  {
-    "confirmed": false,
-    "probable": false,
-    "name": "Steve Mason"
-  },
-  "3793":
-  {
-    "confirmed": false,
-    "probable": false,
-    "name": "Jimmy Howard"
-  },
-  "5163":
-  {
-    "confirmed": false,
-    "probable": false,
-    "name": "Petr Mrazek"
-  },
-  "5107":
-  {
-    "confirmed": false,
-    "probable": false,
-    "name": "Jake Allen"
-  },
-  "5224":
-  {
-    "confirmed": false,
-    "probable": false,
-    "name": "Carter Hutton"
-  },
-  "13661":
-  {
-    "confirmed": false,
-    "probable": false,
-    "name": "Husso"
-  },
-  "4294":
-  {
-    "confirmed": false,
-    "probable": false,
-    "name": "Carey Price"
-  },
-  "4493":
-  {
-    "confirmed": false,
-    "probable": false,
-    "name": "Antti Niemi"
-  },
-  "5420":
-  {
-    "confirmed": false,
-    "probable": false,
-    "name": "Andrei Vasilevskiy"
-  },
-  "3635":
-  {
-    "confirmed": false,
-    "probable": false,
-    "name": "Peter Budaj"
-  }, 
-  "4561":
-  {
-    "confirmed": false,
-    "probable": false,
-    "name": "Ben Bishop"
-  },
-  "994":
-  {
-    "confirmed": false,
-    "probable": false,
-    "name": "Kari Lehtonen"
-  },
-  "4867":
-  {
-    "confirmed": false,
-    "probable": false,
-    "name": "Robin Lehner"
-  },
-  "4753":
-  {
-    "confirmed": false,
-    "probable": false,
-    "name": "Chad Johnson"
-  },
-  "4592":
-  {
-    "confirmed": false,
-    "probable": false,
-    "name": "Semyon Varlamov"
-  },
-  "4271":
-  {
-    "confirmed": false,
-    "probable": false,
-    "name": "Jonathan Bernier"
-  },
-  "5475":
-  {
-    "confirmed": false,
-    "probable": false,
-    "name": "Scott Darling"
-  },
-  "3500":
-  {
-    "confirmed": false,
-    "probable": false,
-    "name": "Cam Ward"
-  },
-  "5033":
-  {
-    "confirmed": false,
-    "probable": false,
-    "name": "Anders Nilsson"
-  }, 
-  "4874":
-  {
-    "confirmed": false,
-    "probable": false,
-    "name": "Jacob Markstrom"
-  }, 
-  "4666":
-  {
     "confirmed": true,
-    "probable": true,
-    "name": "Devan Dubnyk"
-  },
-  "4947":
-  {
-    "confirmed": false,
-    "probable": false,
-    "name": "Alex Stalock"
-  },
-  "4333":
-  {
-    "confirmed": false,
-    "probable": false,
-    "name": "Jon Quick"
-  }, 
-  "5168":
-  {
-    "confirmed": false,
-    "probable": false,
-    "name": "Darcy Kuemper"
-  },
-  "5227":
-  {
-    "confirmed": false,
-    "probable": false,
-    "name": "John Gibson"
-  },
-  "178":
-  {
-    "confirmed": false,
-    "probable": false,
-    "name": "Ryan Miller"
-  },
-  "5528":
-  {
-    "confirmed": false,
-    "probable": false,
-    "name": "Malcolm Subban"
-  },
-  "483":
-  {
-    "confirmed": false,
-    "probable": false,
-    "name": "Marc-Andre Fleury"
-  },
-  "11721":
-  {
-    "confirmed": false,
-    "probable": false,
-    "name": "Maxime Lagace"
-  },
-  "5109":
-  {
-    "confirmed": true,
-    "probable": true,
-    "name": "Frederik Andersen"
-  },
-  "4310":
-  {
-    "confirmed": false,
-    "probable": false,
-    "name": "Curtis McElhinney"
-  },
-  "5481":
-  {
-    "confirmed": true,
-    "probable": true,
-    "name": "Anton Forsberg"
-  },
-  "3855":
-  {
-    "confirmed": false,
-    "probable": false,
-    "name": "Corey Crawford"
-  },
-   "4449":
-  {
-    "confirmed": false,
-    "probable": false,
-    "name": "Jeff Glass"
-  },
-  "5404":
-  {
-    "confirmed": false,
-    "probable": false,
-    "name": "Jean-Francois Berube"
-  },
-  "5552":
-  {
-    "confirmed": false,
-    "probable": false,
-    "name": "Laurent Brossoit"
-  },
-  "5277":
-  {
-    "confirmed": false,
-    "probable": false,
-    "name": "Cam Talbot"
-  },
-  "4687":
-  {
-    "confirmed": false,
-    "probable": false,
-    "name": "Jonas Gustavsso"
-  },
-  "757":
-  {
-    "confirmed": true,
-    "probable": true,
-    "name": "Craig Anderson"
-  },
-  "5835":
-  {
-    "confirmed": false,
-    "probable": false,
-    "name": "Mike Condon"
-  },
-   "5296":
-  {
-    "confirmed": false,
-    "probable": false,
-    "name": "Antti Raanta"
-  },
-  "8952":
-  {
-    "confirmed": false,
-    "probable": false,
-    "name": "Scott Wedgewood"
-  },
-  "4326":
-  {
-    "confirmed": false,
-    "probable": false,
-    "name": "Tuukka Rask"
-  },
-  "4763":
-  {
-    "confirmed": false,
-    "probable": false,
-    "name": "Anton Khudobin"
-  }
-
-
- },
- {
-    "tomorrowDate": "2018-01-11"
- },
- {
-  "5176":
-  {
-    "confirmed": false,
-    "probable": false,
-    "name": "Philip Grubauer"
-  },
-  "4863":
-  {
-    "confirmed": false,
     "probable": true,
     "name": "Braden Holtby"
   },
@@ -510,7 +83,7 @@
   },
   "3486":
   {
-    "confirmed": false,
+    "confirmed": true,
     "probable": true,
     "name": "Mike Smith"
   },
@@ -636,7 +209,7 @@
   },
   "5420":
   {
-    "confirmed": false,
+    "confirmed": true,
     "probable": true,
     "name": "Andrei Vasilevskiy"
   },
@@ -661,7 +234,7 @@
   "4867":
   {
     "confirmed": false,
-    "probable": true,
+    "probable": false,
     "name": "Robin Lehner"
   },
   "4753":
@@ -684,14 +257,14 @@
   },
   "5475":
   {
-    "confirmed": false,
-    "probable": false,
+    "confirmed": true,
+    "probable": true,
     "name": "Scott Darling"
   },
   "3500":
   {
     "confirmed": false,
-    "probable": true,
+    "probable": false,
     "name": "Cam Ward"
   },
   "5033":
@@ -709,7 +282,7 @@
   "4666":
   {
     "confirmed": false,
-    "probable": true,
+    "probable": false,
     "name": "Devan Dubnyk"
   },
   "4947":
@@ -763,7 +336,7 @@
   "5109":
   {
     "confirmed": false,
-    "probable": true,
+    "probable": false,
     "name": "Frederik Andersen"
   },
   "4310":
@@ -787,7 +360,7 @@
    "4449":
   {
     "confirmed": false,
-    "probable": true,
+    "probable": false,
     "name": "Jeff Glass"
   },
   "5404":
@@ -823,7 +396,434 @@
   "5835":
   {
     "confirmed": false,
+    "probable": false,
+    "name": "Mike Condon"
+  },
+   "5296":
+  {
+    "confirmed": false,
+    "probable": false,
+    "name": "Antti Raanta"
+  },
+  "8952":
+  {
+    "confirmed": false,
+    "probable": false,
+    "name": "Scott Wedgewood"
+  },
+  "4326":
+  {
+    "confirmed": false,
+    "probable": false,
+    "name": "Tuukka Rask"
+  },
+  "4763":
+  {
+    "confirmed": false,
+    "probable": false,
+    "name": "Anton Khudobin"
+  }
+
+
+ },
+ {
+    "tomorrowDate": "2018-01-12"
+ },
+ {
+  "5176":
+  {
+    "confirmed": true,
     "probable": true,
+    "name": "Philip Grubauer"
+  },
+  "4863":
+  {
+    "confirmed": false,
+    "probable": false,
+    "name": "Braden Holtby"
+  },
+  "5122":
+  {
+    "confirmed": false,
+    "probable": false,
+    "name": "Martin Jones"
+  },
+  "10074":
+  {
+    "confirmed": false,
+    "probable": false,
+    "name": "Aaron Dell"
+  },
+  "4235":
+  {
+    "confirmed": false,
+    "probable": false,
+    "name": "Jaro Halak"
+  },
+  "4351":
+  {
+    "confirmed": false,
+    "probable": false,
+    "name": "Thomas Greisse"
+  },
+  "272":
+  {
+    "confirmed": false,
+    "probable": false,
+    "name": "Roberto Luongo"
+  },
+  "4862":
+  {
+    "confirmed": false,
+    "probable": false,
+    "name": "James Reimer"
+  },
+  "13871":
+  {
+    "confirmed": false,
+    "probable": false,
+    "name": "Harri Sateri"
+  },
+  "3810":
+  {
+    "confirmed": false,
+    "probable": false,
+    "name": "Pekka Rinne"
+  },
+  "5877":
+  {
+    "confirmed": false,
+    "probable": false,
+    "name": "Juuse Saros"
+  },
+  "4305":
+  {
+    "confirmed": false,
+    "probable": false,
+    "name": "Brian Elliott"
+  },
+   "4626":
+  {
+    "confirmed": false,
+    "probable": false,
+    "name": "Michal Neuvirth"
+  },
+  "3486":
+  {
+    "confirmed": false,
+    "probable": false,
+    "name": "Mike Smith"
+  },
+  "11724":
+  {
+    "confirmed": false,
+    "probable": false,
+    "name": "David Rittich"
+  },
+  "3647":
+  {
+    "confirmed": false,
+    "probable": false,
+    "name": "Henrik Lundqvist"
+  },
+   "4321":
+  {
+    "confirmed": false,
+    "probable": false,
+    "name": "Ondrej Pavelec"
+  },
+  "10083":
+  {
+    "confirmed": false,
+    "probable": false,
+    "name": "Tristan Jarry"
+  },
+  "13873":
+  {
+    "confirmed": false,
+    "probable": false,
+    "name": "Casey DeSmith"
+  },
+  "5894":
+  {
+    "confirmed": false,
+    "probable": false,
+    "name": "Matt Murray"
+  },
+  "4575":
+  {
+    "confirmed": false,
+    "probable": false,
+    "name": "Cory Schneider"
+  },
+  "5180":
+  {
+    "confirmed": false,
+    "probable": false,
+    "name": "Keith Kinkaid"
+  },
+  "4890":
+  {
+    "confirmed": false,
+    "probable": false,
+    "name": "Sergei Bobrovsky"
+  },
+  "5887":
+  {
+    "confirmed": false,
+    "probable": false,
+    "name": "Joonas Korpisalo"
+  },
+  "5873":
+  {
+    "confirmed": false,
+    "probable": false,
+    "name": "Connor Hellebuyck"
+  },
+  "12468":
+  {
+    "confirmed": false,
+    "probable": false,
+    "name": "Eric Comrie"
+  },
+  "4439":
+  {
+    "confirmed": false,
+    "probable": false,
+    "name": "Steve Mason"
+  },
+  "3793":
+  {
+    "confirmed": false,
+    "probable": false,
+    "name": "Jimmy Howard"
+  },
+  "5163":
+  {
+    "confirmed": false,
+    "probable": false,
+    "name": "Petr Mrazek"
+  },
+  "5107":
+  {
+    "confirmed": false,
+    "probable": false,
+    "name": "Jake Allen"
+  },
+  "5224":
+  {
+    "confirmed": false,
+    "probable": false,
+    "name": "Carter Hutton"
+  },
+  "13661":
+  {
+    "confirmed": false,
+    "probable": false,
+    "name": "Husso"
+  },
+  "4294":
+  {
+    "confirmed": false,
+    "probable": false,
+    "name": "Carey Price"
+  },
+  "4493":
+  {
+    "confirmed": false,
+    "probable": false,
+    "name": "Antti Niemi"
+  },
+  "5420":
+  {
+    "confirmed": false,
+    "probable": false,
+    "name": "Andrei Vasilevskiy"
+  },
+  "3635":
+  {
+    "confirmed": false,
+    "probable": false,
+    "name": "Peter Budaj"
+  }, 
+  "4561":
+  {
+    "confirmed": false,
+    "probable": false,
+    "name": "Ben Bishop"
+  },
+  "994":
+  {
+    "confirmed": false,
+    "probable": false,
+    "name": "Kari Lehtonen"
+  },
+  "4867":
+  {
+    "confirmed": false,
+    "probable": false,
+    "name": "Robin Lehner"
+  },
+  "4753":
+  {
+    "confirmed": false,
+    "probable": false,
+    "name": "Chad Johnson"
+  },
+  "4592":
+  {
+    "confirmed": false,
+    "probable": false,
+    "name": "Semyon Varlamov"
+  },
+  "4271":
+  {
+    "confirmed": false,
+    "probable": false,
+    "name": "Jonathan Bernier"
+  },
+  "5475":
+  {
+    "confirmed": false,
+    "probable": false,
+    "name": "Scott Darling"
+  },
+  "3500":
+  {
+    "confirmed": false,
+    "probable": false,
+    "name": "Cam Ward"
+  },
+  "5033":
+  {
+    "confirmed": false,
+    "probable": false,
+    "name": "Anders Nilsson"
+  }, 
+  "4874":
+  {
+    "confirmed": false,
+    "probable": false,
+    "name": "Jacob Markstrom"
+  }, 
+  "4666":
+  {
+    "confirmed": false,
+    "probable": false,
+    "name": "Devan Dubnyk"
+  },
+  "4947":
+  {
+    "confirmed": false,
+    "probable": false,
+    "name": "Alex Stalock"
+  },
+  "4333":
+  {
+    "confirmed": false,
+    "probable": false,
+    "name": "Jon Quick"
+  }, 
+  "5168":
+  {
+    "confirmed": false,
+    "probable": false,
+    "name": "Darcy Kuemper"
+  },
+    "5227":
+  {
+    "confirmed": false,
+    "probable": false,
+    "name": "John Gibson"
+  },
+  "178":
+  {
+    "confirmed": false,
+    "probable": false,
+    "name": "Ryan Miller"
+  },
+  "5528":
+  {
+    "confirmed": false,
+    "probable": false,
+    "name": "Malcolm Subban"
+  },
+  "483":
+  {
+    "confirmed": false,
+    "probable": false,
+    "name": "Marc-Andre Fleury"
+  },
+  "11721":
+  {
+    "confirmed": false,
+    "probable": false,
+    "name": "Maxime Lagace"
+  },
+  "5109":
+  {
+    "confirmed": false,
+    "probable": false,
+    "name": "Frederik Andersen"
+  },
+  "4310":
+  {
+    "confirmed": false,
+    "probable": false,
+    "name": "Curtis McElhinney"
+  },
+  "5481":
+  {
+    "confirmed": false,
+    "probable": false,
+    "name": "Anton Forsberg"
+  },
+  "3855":
+  {
+    "confirmed": false,
+    "probable": false,
+    "name": "Corey Crawford"
+  },
+   "4449":
+  {
+    "confirmed": false,
+    "probable": false,
+    "name": "Jeff Glass"
+  },
+  "5404":
+  {
+    "confirmed": false,
+    "probable": false,
+    "name": "Jean-Francois Berube"
+  },
+  "5552":
+  {
+    "confirmed": false,
+    "probable": false,
+    "name": "Laurent Brossoit"
+  },
+  "5277":
+  {
+    "confirmed": false,
+    "probable": false,
+    "name": "Cam Talbot"
+  },
+  "4687":
+  {
+    "confirmed": false,
+    "probable": false,
+    "name": "Jonas Gustavsso"
+  },
+  "757":
+  {
+    "confirmed": false,
+    "probable": false,
+    "name": "Craig Anderson"
+  },
+  "5835":
+  {
+    "confirmed": false,
+    "probable": false,
     "name": "Mike Condon"
   },
    "5296":

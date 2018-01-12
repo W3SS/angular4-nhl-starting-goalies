@@ -1,18 +1,18 @@
 {"Starters": [
  {
-    "todayDate": "2018-01-11"
+    "todayDate": "2018-01-12"
  },
-{
+ {
   "5176":
   {
-    "confirmed": false,
-    "probable": false,
+    "confirmed": true,
+    "probable": true,
     "name": "Philip Grubauer"
   },
   "4863":
   {
-    "confirmed": true,
-    "probable": true,
+    "confirmed": false,
+    "probable": false,
     "name": "Braden Holtby"
   },
   "5122":
@@ -48,7 +48,7 @@
   "4862":
   {
     "confirmed": false,
-    "probable": false,
+    "probable": true,
     "name": "James Reimer"
   },
   "13871":
@@ -83,14 +83,14 @@
   },
   "3486":
   {
-    "confirmed": true,
-    "probable": true,
+    "confirmed": false,
+    "probable": false,
     "name": "Mike Smith"
   },
   "11724":
   {
     "confirmed": false,
-    "probable": false,
+    "probable": true,
     "name": "David Rittich"
   },
   "3647":
@@ -149,8 +149,8 @@
   },
   "5873":
   {
-    "confirmed": false,
-    "probable": false,
+    "confirmed": true,
+    "probable": true,
     "name": "Connor Hellebuyck"
   },
   "12468":
@@ -209,8 +209,8 @@
   },
   "5420":
   {
-    "confirmed": true,
-    "probable": true,
+    "confirmed": false,
+    "probable": false,
     "name": "Andrei Vasilevskiy"
   },
   "3635":
@@ -243,6 +243,12 @@
     "probable": false,
     "name": "Chad Johnson"
   },
+  "5842": 
+   {
+    "confirmed": false,
+    "probable": false,
+    "name": "Linus Ullmark"
+  },
   "4592":
   {
     "confirmed": false,
@@ -257,14 +263,14 @@
   },
   "5475":
   {
-    "confirmed": true,
-    "probable": true,
+    "confirmed": false,
+    "probable": false,
     "name": "Scott Darling"
   },
   "3500":
   {
-    "confirmed": false,
-    "probable": false,
+    "confirmed": true,
+    "probable": true,
     "name": "Cam Ward"
   },
   "5033":
@@ -276,7 +282,7 @@
   "4874":
   {
     "confirmed": false,
-    "probable": false,
+    "probable": true,
     "name": "Jacob Markstrom"
   }, 
   "4666":
@@ -348,7 +354,7 @@
   "5481":
   {
     "confirmed": false,
-    "probable": false,
+    "probable": true,
     "name": "Anton Forsberg"
   },
   "3855":
@@ -378,7 +384,7 @@
   "5277":
   {
     "confirmed": false,
-    "probable": false,
+    "probable": true,
     "name": "Cam Talbot"
   },
   "4687":
@@ -402,7 +408,7 @@
    "5296":
   {
     "confirmed": false,
-    "probable": false,
+    "probable": true,
     "name": "Antti Raanta"
   },
   "8952":
@@ -475,7 +481,7 @@
   "4862":
   {
     "confirmed": false,
-    "probable": false,
+    "probable": true,
     "name": "James Reimer"
   },
   "13871":
@@ -517,7 +523,7 @@
   "11724":
   {
     "confirmed": false,
-    "probable": false,
+    "probable": true,
     "name": "David Rittich"
   },
   "3647":
@@ -565,7 +571,7 @@
   "4890":
   {
     "confirmed": false,
-    "probable": false,
+    "probable": true,
     "name": "Sergei Bobrovsky"
   },
   "5887":
@@ -576,8 +582,8 @@
   },
   "5873":
   {
-    "confirmed": false,
-    "probable": false,
+    "confirmed": true,
+    "probable": true,
     "name": "Connor Hellebuyck"
   },
   "12468":
@@ -670,6 +676,12 @@
     "probable": false,
     "name": "Chad Johnson"
   },
+  "5842": 
+   {
+    "confirmed": false,
+    "probable": false,
+    "name": "Linus Ullmark"
+  },
   "4592":
   {
     "confirmed": false,
@@ -690,8 +702,8 @@
   },
   "3500":
   {
-    "confirmed": false,
-    "probable": false,
+    "confirmed": true,
+    "probable": true,
     "name": "Cam Ward"
   },
   "5033":
@@ -703,7 +715,7 @@
   "4874":
   {
     "confirmed": false,
-    "probable": false,
+    "probable": true,
     "name": "Jacob Markstrom"
   }, 
   "4666":
@@ -775,7 +787,7 @@
   "5481":
   {
     "confirmed": false,
-    "probable": false,
+    "probable": true,
     "name": "Anton Forsberg"
   },
   "3855":
@@ -805,7 +817,7 @@
   "5277":
   {
     "confirmed": false,
-    "probable": false,
+    "probable": true,
     "name": "Cam Talbot"
   },
   "4687":
@@ -829,7 +841,7 @@
    "5296":
   {
     "confirmed": false,
-    "probable": false,
+    "probable": true,
     "name": "Antti Raanta"
   },
   "8952":

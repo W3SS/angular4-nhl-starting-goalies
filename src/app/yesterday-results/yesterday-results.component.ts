@@ -81,7 +81,7 @@ export class YesterdayResultsComponent implements OnInit {
 
             //this removed a postponed game from api to avoid errors
             
-            res['dailygameschedule'].gameentry.splice(0, 1);
+            //res['dailygameschedule'].gameentry.splice(0, 1);
 
             console.log(res, "schedule...");
             //console.log(tomorrowDailyDate, "get tomorrows schedule to find back to back games");

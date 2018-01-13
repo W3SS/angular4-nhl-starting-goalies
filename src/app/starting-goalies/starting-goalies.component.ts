@@ -188,7 +188,7 @@ export class StartingGoaliesComponent implements OnInit {
               //this removed a postponed game from api to avoid errors
 
             
-            //res['fullgameschedule'].gameentry.splice(8, 1);
+            res['fullgameschedule'].gameentry.splice(16, 1);
 
             this.fullSchedule = res['fullgameschedule'].gameentry;
           })

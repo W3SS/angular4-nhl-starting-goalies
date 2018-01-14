@@ -109,7 +109,7 @@ export class StartingGoaliesComponent implements OnInit {
 
              //this removed a postponed game from api to avoid errors
             
-            res['dailygameschedule'].gameentry.splice(2, 1);
+            //res['dailygameschedule'].gameentry.splice(2, 1);
 
             if (res['dailygameschedule'].gameentry == null) {
               this.noGamesToday = true;

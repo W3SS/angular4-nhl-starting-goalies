@@ -104,7 +104,7 @@ export class TomorrowResultsComponent implements OnInit {
             //console.log(tomorrowDailyDate, "get tomorrows schedule to find back to back games");
            //this removed a postponed game from api to avoid errors
             
-            res['dailygameschedule'].gameentry.splice(2, 1);
+            //res['dailygameschedule'].gameentry.splice(2, 1);
 
 
             if (res['dailygameschedule'].gameentry == null) {

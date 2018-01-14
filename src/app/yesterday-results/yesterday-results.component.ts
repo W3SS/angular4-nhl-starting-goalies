@@ -176,8 +176,14 @@ export class YesterdayResultsComponent implements OnInit {
 
              //this removed a postponed game from api to avoid errors
 
-            
-            res['fullgameschedule'].gameentry.splice(16, 1);
+              let postponed;
+             res['fullgameschedule'].gameentry.forEach((item, index) => {
+             postponed = index;
+             if (res['fullgameschedule'].gameentry[postponed].id === '41392') {
+               console.log(res['fullgameschedule'].gameentry[postponed], "hi, iam postponed and causing trouble...");
+                 res['fullgameschedule'].gameentry.splice(postponed, 1);
+               }
+            });
 
             this.fullSchedule = res['fullgameschedule'].gameentry;
           })

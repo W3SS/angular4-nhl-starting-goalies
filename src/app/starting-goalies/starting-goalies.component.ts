@@ -106,10 +106,14 @@ export class StartingGoaliesComponent implements OnInit {
 
             console.log(res, "schedule...");
             //console.log(tomorrowDailyDate, "get tomorrows schedule to find back to back games");
-
-             //this removed a postponed game from api to avoid errors
-            
-            //res['dailygameschedule'].gameentry.splice(2, 1);
+           let postponed;
+           res['dailygameschedule'].gameentry.forEach((item, index) => {
+             postponed = index;
+             if (res['dailygameschedule'].gameentry[postponed].id === '41392') {
+               console.log(res['dailygameschedule'].gameentry[postponed], "hi, iam postponed and causing trouble...");
+                 res['dailygameschedule'].gameentry.splice(postponed, 1);
+               }
+            })
 
             if (res['dailygameschedule'].gameentry == null) {
               this.noGamesToday = true;
@@ -185,8 +189,15 @@ export class StartingGoaliesComponent implements OnInit {
           .getGameId().subscribe(res => {
             console.log(res['fullgameschedule'].gameentry, "scheduled games for yesterday today and tomorrow...");
 
-              //this removed a postponed game from api to avoid errors
-
+             //this removed a postponed game from api to avoid errors
+             let postponed;
+             res['fullgameschedule'].gameentry.forEach((item, index) => {
+             postponed = index;
+             if (res['fullgameschedule'].gameentry[postponed].id === '41392') {
+               console.log(res['fullgameschedule'].gameentry[postponed], "hi, iam postponed and causing trouble...");
+                 res['fullgameschedule'].gameentry.splice(postponed, 1);
+               }
+            });
             
             //res['fullgameschedule'].gameentry.splice(16, 1);
 

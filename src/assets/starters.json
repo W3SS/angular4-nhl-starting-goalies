@@ -1,8 +1,8 @@
 {"Starters": [
  {
-    "todayDate": "2018-01-14"
+    "todayDate": "2018-01-16"
  },
- {
+  {
   "5176":
   {
     "confirmed": false,
@@ -24,13 +24,13 @@
   "10074":
   {
     "confirmed": false,
-    "probable": false,
+    "probable": true,
     "name": "Aaron Dell"
   },
   "4235":
   {
     "confirmed": false,
-    "probable": false,
+    "probable": true,
     "name": "Jaro Halak"
   },
   "4351":
@@ -60,7 +60,7 @@
   "3810":
   {
     "confirmed": false,
-    "probable": false,
+    "probable": true,
     "name": "Pekka Rinne"
   },
   "5877":
@@ -72,7 +72,7 @@
   "4305":
   {
     "confirmed": false,
-    "probable": false,
+    "probable": true,
     "name": "Brian Elliott"
   },
    "4626":
@@ -84,7 +84,7 @@
   "3486":
   {
     "confirmed": false,
-    "probable": true,
+    "probable": false,
     "name": "Mike Smith"
   },
   "11724":
@@ -108,7 +108,7 @@
   "10083":
   {
     "confirmed": false,
-    "probable": true,
+    "probable": false,
     "name": "Tristan Jarry"
   },
   "13873":
@@ -125,8 +125,8 @@
   },
   "4575":
   {
-    "confirmed": false,
-    "probable": false,
+    "confirmed": true,
+    "probable": true,
     "name": "Cory Schneider"
   },
   "5180":
@@ -167,20 +167,20 @@
   },
   "3793":
   {
-    "confirmed": false,
-    "probable": false,
+    "confirmed": true,
+    "probable": true,
     "name": "Jimmy Howard"
   },
   "5163":
   {
     "confirmed": false,
-    "probable": true,
+    "probable": false,
     "name": "Petr Mrazek"
   },
   "5107":
   {
     "confirmed": false,
-    "probable": false,
+    "probable": true,
     "name": "Jake Allen"
   },
   "5224":
@@ -221,8 +221,8 @@
   }, 
   "4561":
   {
-    "confirmed": false,
-    "probable": false,
+    "confirmed": true,
+    "probable": true,
     "name": "Ben Bishop"
   },
   "994":
@@ -264,7 +264,7 @@
   "5475":
   {
     "confirmed": false,
-    "probable": true,
+    "probable": false,
     "name": "Scott Darling"
   },
   "3500":
@@ -282,7 +282,7 @@
   "4874":
   {
     "confirmed": false,
-    "probable": true,
+    "probable": false,
     "name": "Jacob Markstrom"
   }, 
   "4666":
@@ -294,7 +294,7 @@
   "4947":
   {
     "confirmed": false,
-    "probable": true,
+    "probable": false,
     "name": "Alex Stalock"
   },
   "4333":
@@ -330,7 +330,7 @@
   "483":
   {
     "confirmed": false,
-    "probable": false,
+    "probable": true,
     "name": "Marc-Andre Fleury"
   },
   "11721":
@@ -341,8 +341,8 @@
   },
   "5109":
   {
-    "confirmed": false,
-    "probable": false,
+    "confirmed": true,
+    "probable": true,
     "name": "Frederik Andersen"
   },
   "4310":
@@ -365,8 +365,8 @@
   },
    "4449":
   {
-    "confirmed": true,
-    "probable": true,
+    "confirmed": false,
+    "probable": false,
     "name": "Jeff Glass"
   },
   "5404":
@@ -414,7 +414,7 @@
    "5296":
   {
     "confirmed": false,
-    "probable": false,
+    "probable": true,
     "name": "Antti Raanta"
   },
   "8952":
@@ -439,7 +439,7 @@
 
  },
  {
-    "tomorrowDate": "2018-01-14"
+    "tomorrowDate": "2018-01-16"
  },
  {
   "5176":
@@ -523,7 +523,7 @@
   "3486":
   {
     "confirmed": false,
-    "probable": true,
+    "probable": false,
     "name": "Mike Smith"
   },
   "11724":
@@ -535,7 +535,7 @@
   "3647":
   {
     "confirmed": false,
-    "probable": true,
+    "probable": false,
     "name": "Henrik Lundqvist"
   },
    "4321":
@@ -547,7 +547,7 @@
   "10083":
   {
     "confirmed": false,
-    "probable": true,
+    "probable": false,
     "name": "Tristan Jarry"
   },
   "13873":
@@ -613,7 +613,7 @@
   "5163":
   {
     "confirmed": false,
-    "probable": true,
+    "probable": false,
     "name": "Petr Mrazek"
   },
   "5107":
@@ -703,7 +703,7 @@
   "5475":
   {
     "confirmed": false,
-    "probable": true,
+    "probable": false,
     "name": "Scott Darling"
   },
   "3500":
@@ -721,7 +721,7 @@
   "4874":
   {
     "confirmed": false,
-    "probable": true,
+    "probable": false,
     "name": "Jacob Markstrom"
   }, 
   "4666":
@@ -733,7 +733,7 @@
   "4947":
   {
     "confirmed": false,
-    "probable": true,
+    "probable": false,
     "name": "Alex Stalock"
   },
   "4333":
@@ -804,8 +804,8 @@
   },
    "4449":
   {
-    "confirmed": true,
-    "probable": true,
+    "confirmed": false,
+    "probable": false,
     "name": "Jeff Glass"
   },
   "5404":

@@ -92,7 +92,7 @@ export class TomorrowResultsComponent implements OnInit {
     this.tomorrowService
       .getEnv().subscribe(res => {
         //this.defineToken = res._body;
-        headers = new Headers({ "Authorization": "Basic " + btoa('ianposton' + ":" + res._body) });
+        headers = new Headers({ "Authorization": "Basic " + btoa('ianposton' + ":" + res._body.replace(/\"/g, "")) });
         options = new RequestOptions({ headers: headers });
         this.tomorrowService
           .sendHeaderOptions(headers, options);

@@ -66,13 +66,11 @@ heroku.request({
   },
   parseJSON: true
 }).then(response => {
-  //console.log(response.API_KEY, "heroku api from server");
   TOKEN = response.TOKEN;
 })
 
 app.get('/heroku-env', (req, res) => {
-        res.write(TOKEN);
-        res.end();
+        res.json(TOKEN);
 });
 
 

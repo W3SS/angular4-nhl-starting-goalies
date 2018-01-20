@@ -72,6 +72,7 @@ export class DataService {
   score: Observable < any > = null;
   play: Observable <any> = null;
   injured: Observable <any> = null;
+  apiRoot: string = "https://api.mysportsfeeds.com/v1.1/pull/nhl/2017-2018-regular";
   
   constructor(private http: Http) {}
 
@@ -87,8 +88,8 @@ export class DataService {
     if (!this.schedule) {
       console.log('getting schedule data from API...');
 
-      let url5 = 'https://api.mysportsfeeds.com/v1.1/pull/nhl/2017-2018-regular/daily_game_schedule.json?fordate='+dailyDate;
-      this.schedule = this.http.get(url5, options)
+      let url = `${this.apiRoot}/daily_game_schedule.json?fordate=`+dailyDate;
+      this.schedule = this.http.get(url, options)
         .map(response => response.json())
     }
     return this.schedule;
@@ -155,9 +156,9 @@ export class DataService {
 
     if (!this.info) {
 
-      let url2 = 'https://api.mysportsfeeds.com/v1.1/pull/nhl/2017-2018-regular/active_players.json?position=G';
+      let url = `${this.apiRoot}/active_players.json?position=G`;
       console.log('getting active player data from API...');
-      this.info = this.http.get(url2, options)
+      this.info = this.http.get(url, options)
         .map(response => response.json())
     }
     return this.info;
@@ -167,7 +168,7 @@ export class DataService {
     if (!this.stats) {
       console.log('getting cumulative player stats from API...');
 
-      let url = 'https://api.mysportsfeeds.com/v1.1/pull/nhl/2017-2018-regular/cumulative_player_stats.json?position=G';
+      let url = `${this.apiRoot}/cumulative_player_stats.json?position=G`;
       this.stats = this.http.get(url, options)
         .map(response => response.json())
     }
@@ -179,8 +180,8 @@ export class DataService {
     if (!this.gameid) {
       console.log('getting yesterday, today, tomorrow from API...');
 
-      let url3 = 'https://api.mysportsfeeds.com/v1.1/pull/nhl/2017-2018-regular/full_game_schedule.json?date=from-'+yesterdayDailyDate+'-to-'+tomorrowDailyDate;
-      this.gameid = this.http.get(url3, options)
+      let url = `${this.apiRoot}/full_game_schedule.json?date=from-`+yesterdayDailyDate+`-to-`+tomorrowDailyDate;
+      this.gameid = this.http.get(url, options)
         .map(response => response.json())
     }
     return this.gameid;
@@ -192,8 +193,8 @@ export class DataService {
     if (!this.lastweekgameid) {
       console.log('getting 1 week of games from API...');
 
-      let url8 = 'https://api.mysportsfeeds.com/v1.1/pull/nhl/2017-2018-regular/full_game_schedule.json?date=from-'+lastweekDailyDate+'-to-'+yesterdayDailyDate;
-      this.lastweekgameid = this.http.get(url8, options)
+      let url = `${this.apiRoot}/full_game_schedule.json?date=from-`+lastweekDailyDate+`-to-`+yesterdayDailyDate;
+      this.lastweekgameid = this.http.get(url, options)
         .map(response => response.json())
     }
     return this.lastweekgameid;
@@ -202,9 +203,9 @@ export class DataService {
    getDaily() {
 
     if (!this.daily) {
-      let url4 = 'https://api.mysportsfeeds.com/v1.1/pull/nhl/2017-2018-regular/daily_player_stats.json?fordate='+dailyDate+'&position=G';
-      console.log('getting daily stats for pitchers from API...');
-      this.daily = this.http.get(url4, options)
+      let url = `${this.apiRoot}/daily_player_stats.json?fordate=`+dailyDate+`&position=G`;
+      console.log('getting daily stats for goalies from API...');
+      this.daily = this.http.get(url, options)
         .map(response => response.json())
     }
     return this.daily;
@@ -213,10 +214,10 @@ export class DataService {
    getInjured() {
 
     if (!this.injured) {
-      console.log('getting yesterday, today, tomorrow from API...');
+      console.log('getting goalie injuries from api...');
 
-      let url9 = 'https://api.mysportsfeeds.com/v1.1/pull/nhl/2017-2018-regular/player_injuries.json?position=G';
-      this.injured = this.http.get(url9, options)
+      let url = `${this.apiRoot}/player_injuries.json?position=G`;
+      this.injured = this.http.get(url, options)
         .map(response => response.json())
     }
     return this.injured;

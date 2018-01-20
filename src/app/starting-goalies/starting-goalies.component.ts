@@ -96,7 +96,7 @@ export class StartingGoaliesComponent implements OnInit {
     this.dataService
       .getEnv().subscribe(res => {
         //this.defineToken = res._body;
-        headers = new Headers({ "Authorization": "Basic " + btoa('ianposton' + ":" + res._body) });
+        headers = new Headers({ "Authorization": "Basic " + btoa('ianposton' + ":" + res._body.replace(/\"/g, "")) });
         options = new RequestOptions({ headers: headers });
         this.dataService
           .sendHeaderOptions(headers, options);
@@ -405,9 +405,9 @@ export class StartingGoaliesComponent implements OnInit {
 
 
             if (info.player.ID === data.player.ID) {
-              //console.log(data.stats.stats.SavePercentage['#text'], 'STATS!!!!')
+              
               data.player.image = info.player.officialImageSrc;
-              //data.player.savePercent = '.'+Math.round(data.stats.stats.SavePercentage['#text'] * 100);
+              
               data.player.savePercent = data.stats.stats.SavePercentage['#text'].slice(1);
 
               if(this.twitterHandles[data.team.ID] != null) {
@@ -431,11 +431,10 @@ export class StartingGoaliesComponent implements OnInit {
                   data.player.probable = this.todayStarters[data.player.ID].probable;
                   data.player.startingToday = true;
                   data.player.startingTodayNow = false;
-                  console.log(data.player, 'confirmed or probable');
-                  
-                  //this.starterIdData.push(data.player.ID);
-                
-                    this.startersData.push(data);
+
+                  //console.log(data.player, 'confirmed or probable');
+
+                  this.startersData.push(data);
                 } 
               
 
@@ -497,19 +496,18 @@ export class StartingGoaliesComponent implements OnInit {
         }
 
         if (this.playerInjuries.length > 0) {
-          console.log('start sorting data for starters matchups...');
+          console.log('start sorting data for injuries...');
           for (let inj of this.playerInjuries) {
 
             for (let injdata of this.myData) {
 
               if (inj.player.ID === injdata.player.ID) {
 
-
                 injdata.player.injured = true;
                 injdata.player.injury = ' ' + inj.injury;
 
                 if (inj.injury.substr(inj.injury.length - 5) === '(Out)') {
-                  console.log(inj.injury.substr(inj.injury.length - 5), 'injuries that say OUT!');
+                  //console.log(inj.injury.substr(inj.injury.length - 5), 'injuries that say OUT!');
                   injdata.player.injuryOut = true;
                 }
 
@@ -518,8 +516,6 @@ export class StartingGoaliesComponent implements OnInit {
             }
           }
         }
-
-
 
         if (this.myData && this.gamesToday === true) {
           if (this.startingGoaliesToday.length > 0) {

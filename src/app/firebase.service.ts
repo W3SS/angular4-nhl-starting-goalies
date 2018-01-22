@@ -14,7 +14,7 @@ export class FirebaseService {
   }
 
   getStarterData() {
-    //console.log('getting fastball data from firebase...', this.items);
+    console.log('getting starter data from firebase...');
     return this.items = this.af.list('/Starters');
   }
 }

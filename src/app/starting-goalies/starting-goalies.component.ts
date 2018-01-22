@@ -55,14 +55,19 @@ export class StartingGoaliesComponent implements OnInit {
   loading: boolean = true;
 
   constructor(private http: Http, private dataService: DataService, private fbService: FirebaseService, private yesterdayService: YesterdayService, public snackBar: MatSnackBar, public router: Router, public dialog: MatDialog) {
-
+    this.fbService
+      .getStarterData()
+      .subscribe(res => {
+        console.log(res[1], 'got response from firebase...');
+        this.startersDate = res[0]['todayDate'];
+        this.todayStarters = res[1];
+    });
     yesterday = this.dataService.getYesterday();
     tomorrow = this.dataService.getTomorrow();
     today = this.dataService.getToday();
     console.log(yesterday + ' yesterday, ' + today + ' today, ' + tomorrow + ' tomorrow, ');
     this.sentData = this.dataService.getSentStats();
     this.sentYesterdayData = this.yesterdayService.getSentStats();
-
   }
 
   public getJSON() {
@@ -73,13 +78,13 @@ export class StartingGoaliesComponent implements OnInit {
         this.twitterHandles = res['twitterHandles']["0"];
       })
 
-      this.fbService
-      .getStarterData()
-      .subscribe(res => {
-        console.log(res[1], 'got response from firebase...');
-        this.startersDate = res[0]['todayDate'];
-        this.todayStarters = res[1];
-      });
+      // this.fbService
+      // .getStarterData()
+      // .subscribe(res => {
+      //   console.log(res[1], 'got response from firebase...');
+      //   this.startersDate = res[0]['todayDate'];
+      //   this.todayStarters = res[1];
+      // });
 
     // this.http.get("./assets/todayStarters.json")
     //   .map(response => response.json())
@@ -425,7 +430,8 @@ export class StartingGoaliesComponent implements OnInit {
                 console.log(data, "Hi I am the DATA ID causing problems");
               }
               
-
+             // CHECK IF FIREBASE RES IS TOO SLOW FIREFOX ISSUE MAINLY 
+             if (this.todayStarters != null) {
                 if (this.startersDate === data.team.today && this.todayStarters[data.player.ID] != null && data.player.saves == null && data.player.shotsFaced == null && this.todayStarters[data.player.ID].probable === true || this.startersDate === data.team.today && this.todayStarters[data.player.ID] != null && data.player.saves == '0' && data.player.shotsFaced == '0' && this.todayStarters[data.player.ID].probable === true) {
                   data.player.confirmed = this.todayStarters[data.player.ID].confirmed;
                   data.player.probable = this.todayStarters[data.player.ID].probable;
@@ -435,9 +441,11 @@ export class StartingGoaliesComponent implements OnInit {
                   //console.log(data.player, 'confirmed or probable');
 
                   this.startersData.push(data);
-                } 
-              
-
+                }
+             } else {
+               console.log('firebase res not returned yet....');
+             }
+                
 
               if (data.team.hadGameYesterday === true) {
                 //console.log(data, 'game yesterday');

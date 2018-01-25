@@ -87,6 +87,7 @@ export class YesterdayResultsComponent implements OnInit {
             //console.log(tomorrowDailyDate, "get tomorrows schedule to find back to back games");
            
             if (res['dailygameschedule'].gameentry == null) {
+              this.loading = false;
               this.noGamesToday = true;
               this.noGamesMsg = "No Games Scheduled Yesterday :("
               console.log('There are no games being played today.');

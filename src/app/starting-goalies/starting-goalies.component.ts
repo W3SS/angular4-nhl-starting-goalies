@@ -110,21 +110,21 @@ export class StartingGoaliesComponent implements OnInit {
           .getDailySchedule().subscribe(res => {
 
             console.log(res, "schedule...");
-            //console.log(tomorrowDailyDate, "get tomorrows schedule to find back to back games");
-           let postponed;
-           res['dailygameschedule'].gameentry.forEach((item, index) => {
-             postponed = index;
-             if (res['dailygameschedule'].gameentry[postponed].id === '41392') {
-               console.log(res['dailygameschedule'].gameentry[postponed], "hi, iam postponed and causing trouble...");
-                 res['dailygameschedule'].gameentry.splice(postponed, 1);
-               }
-            })
-
+           
             if (res['dailygameschedule'].gameentry == null) {
+              this.loading = false;
               this.noGamesToday = true;
               this.noGamesMsg = "There Are No Games Scheduled Today :("
               console.log('There are no games being played today.');
             } else {
+              let postponed;
+              res['dailygameschedule'].gameentry.forEach((item, index) => {
+                postponed = index;
+                if (res['dailygameschedule'].gameentry[postponed].id === '41392') {
+                  console.log(res['dailygameschedule'].gameentry[postponed], "hi, iam postponed and causing trouble...");
+                  res['dailygameschedule'].gameentry.splice(postponed, 1);
+               }
+              });
               this.dailySchedule = res['dailygameschedule'].gameentry;
               this.gameDate = res['dailygameschedule'].gameentry[0].date;
               let dPipe = new DatePipe("en-US");

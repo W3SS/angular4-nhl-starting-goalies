@@ -68,7 +68,7 @@ export class TomorrowResultsComponent implements OnInit {
         this.twitterHandles = res['twitterHandles']["0"];
       })
 
-      this.fbService
+    this.fbService
       .getStarterData()
       .subscribe(res => {
         console.log(res[1], 'got response from firebase...');
@@ -76,14 +76,14 @@ export class TomorrowResultsComponent implements OnInit {
         this.tomorrowStarters = res[3];
       });
 
-      //  this.http.get("./assets/tomorrowStarters.json")
-      // .map(response => response.json())
-      // .subscribe(res => {
-      //   console.log(res['tomorrowStarters']["0"]['date'], 'date...');
-      //   console.log(res['tomorrowStarters']["1"], 'tomorrow starters...');
-      //   this.startersDate = res['tomorrowStarters']["0"]['date'];
-      //   this.tomorrowStarters = res['tomorrowStarters']["1"];
-      // })
+    //  this.http.get("./assets/tomorrowStarters.json")
+    // .map(response => response.json())
+    // .subscribe(res => {
+    //   console.log(res['tomorrowStarters']["0"]['date'], 'date...');
+    //   console.log(res['tomorrowStarters']["1"], 'tomorrow starters...');
+    //   this.startersDate = res['tomorrowStarters']["0"]['date'];
+    //   this.tomorrowStarters = res['tomorrowStarters']["1"];
+    // })
 
   }
 
@@ -101,32 +101,30 @@ export class TomorrowResultsComponent implements OnInit {
           .getDailySchedule().subscribe(res => {
 
             console.log(res, "schedule...");
-            //console.log(tomorrowDailyDate, "get tomorrows schedule to find back to back games");
-           //this removed a postponed game from api to avoid errors
-           let postponed;
-                 
-           res['dailygameschedule'].gameentry.forEach((item, index) => {
-             postponed = index;
-             if (res['dailygameschedule'].gameentry[postponed].id === '41392') {
-               console.log(res['dailygameschedule'].gameentry[postponed], "hi, iam postponed and causing trouble...");
-                 res['dailygameschedule'].gameentry.splice(postponed, 1);
-               }
-            });
-            
-            //res['dailygameschedule'].gameentry.splice(2, 1);
-
 
             if (res['dailygameschedule'].gameentry == null) {
+              this.loading = false;
               this.noGamesToday = true;
               this.noGamesMsg = "No Games Scheduled Tomorrow :("
               console.log('There are no games being played today.');
             } else {
-              this.gamesToday = true;
-               this.dailySchedule = res['dailygameschedule'].gameentry;
-            this.gameDate = res['dailygameschedule'].gameentry[0].date;
 
-            let dPipe = new DatePipe("en-US");
-            this.tweetDay = dPipe.transform(this.gameDate, 'EEEE');
+              let postponed;
+
+              res['dailygameschedule'].gameentry.forEach((item, index) => {
+                postponed = index;
+                if (res['dailygameschedule'].gameentry[postponed].id === '41392') {
+                  console.log(res['dailygameschedule'].gameentry[postponed], "hi, iam postponed and causing trouble...");
+                  res['dailygameschedule'].gameentry.splice(postponed, 1);
+                }
+              });
+
+              this.gamesToday = true;
+              this.dailySchedule = res['dailygameschedule'].gameentry;
+              this.gameDate = res['dailygameschedule'].gameentry[0].date;
+
+              let dPipe = new DatePipe("en-US");
+              this.tweetDay = dPipe.transform(this.gameDate, 'EEEE');
 
               Observable.forkJoin(
                   res['dailygameschedule'].gameentry.map(
@@ -175,10 +173,10 @@ export class TomorrowResultsComponent implements OnInit {
 
           })
 
-          this.tomorrowService
-            .getInjured().subscribe(res => {
-              console.log(res['playerinjuries'].playerentry, "injured players...");
-              this.playerInjuries = res['playerinjuries'].playerentry;
+        this.tomorrowService
+          .getInjured().subscribe(res => {
+            console.log(res['playerinjuries'].playerentry, "injured players...");
+            this.playerInjuries = res['playerinjuries'].playerentry;
           })
 
         this.tomorrowService
@@ -191,14 +189,14 @@ export class TomorrowResultsComponent implements OnInit {
           .getGameId().subscribe(res => {
             console.log(res['fullgameschedule'].gameentry, "scheduled games for yesterday today and tomorrow...");
 
-             //this removed a postponed game from api to avoid errors
-             let postponed;
-             res['fullgameschedule'].gameentry.forEach((item, index) => {
-             postponed = index;
-             if (res['fullgameschedule'].gameentry[postponed].id === '41392') {
-               console.log(res['fullgameschedule'].gameentry[postponed], "hi, iam postponed and causing trouble...");
-                 res['fullgameschedule'].gameentry.splice(postponed, 1);
-               }
+            //this removed a postponed game from api to avoid errors
+            let postponed;
+            res['fullgameschedule'].gameentry.forEach((item, index) => {
+              postponed = index;
+              if (res['fullgameschedule'].gameentry[postponed].id === '41392') {
+                console.log(res['fullgameschedule'].gameentry[postponed], "hi, iam postponed and causing trouble...");
+                res['fullgameschedule'].gameentry.splice(postponed, 1);
+              }
             });
 
             this.fullSchedule = res['fullgameschedule'].gameentry;
@@ -224,7 +222,7 @@ export class TomorrowResultsComponent implements OnInit {
               if (schedule.awayTeam.Name === sdata.team.Name) {
                 sdata.player.gameTime = schedule.time;
 
-               if (schedule.location === 'Nassau Coliseum') {
+                if (schedule.location === 'Nassau Coliseum') {
                   sdata.team.gameIce = 'Barclays Center';
                 } else if (schedule.location === 'Verizon Center') {
                   sdata.team.gameIce = 'Capital One Arena';
@@ -261,7 +259,7 @@ export class TomorrowResultsComponent implements OnInit {
               if (schedule.homeTeam.Name === sdata.team.Name) {
                 sdata.player.gameTime = schedule.time;
 
-              if (schedule.location === 'Nassau Coliseum') {
+                if (schedule.location === 'Nassau Coliseum') {
                   sdata.team.gameIce = 'Barclays Center';
                 } else if (schedule.location === 'Verizon Center') {
                   sdata.team.gameIce = 'Capital One Arena';
@@ -345,7 +343,7 @@ export class TomorrowResultsComponent implements OnInit {
           }
         }
 
-     
+
         console.log('start sorting data for starters...');
         for (let info of this.playerInfo) {
 
@@ -358,33 +356,33 @@ export class TomorrowResultsComponent implements OnInit {
               //data.player.savePercent = '.'+Math.round(data.stats.stats.SavePercentage['#text'] * 100);
               data.player.savePercent = data.stats.stats.SavePercentage['#text'].slice(1);
 
-               if(this.twitterHandles[data.team.ID] != null) {
+              if (this.twitterHandles[data.team.ID] != null) {
 
                 //console.log(this.twitterHandles[data.team.ID].twitterHashTag);
 
                 data.player.twitterHandle = this.twitterHandles[data.team.ID].twitterHashTag;
 
-                  //INCASE API CHANGES TEAM IDS AGAIN CATCH IT HERE
-                  if (this.twitterHandles[data.team.ID][data.player.ID] != null) {
-                    data.player.atHandle = this.twitterHandles[data.team.ID][data.player.ID] + ' ';
-                  } else {
-                    data.player.atHandle = '';
-                  }
+                //INCASE API CHANGES TEAM IDS AGAIN CATCH IT HERE
+                if (this.twitterHandles[data.team.ID][data.player.ID] != null) {
+                  data.player.atHandle = this.twitterHandles[data.team.ID][data.player.ID] + ' ';
+                } else {
+                  data.player.atHandle = '';
+                }
 
               } else {
                 console.log(data, "Hi I am the DATA ID causing problems");
               }
 
-           if (this.tomorrowStarters[data.player.ID] != null && this.startersDate === data.team.today && this.tomorrowStarters[data.player.ID].probable === true) {
-               
-                  data.player.startingToday = false;
-                  data.player.likelyStartingToday = true;
-                  console.log(data.player, 'confirmed or probable');
-                  data.player.confirmed = this.tomorrowStarters[data.player.ID].confirmed;
-                  data.player.probable = this.tomorrowStarters[data.player.ID].probable;
-                  this.startersData.push(data);
-                
-              } 
+              if (this.tomorrowStarters[data.player.ID] != null && this.startersDate === data.team.today && this.tomorrowStarters[data.player.ID].probable === true) {
+
+                data.player.startingToday = false;
+                data.player.likelyStartingToday = true;
+                console.log(data.player, 'confirmed or probable');
+                data.player.confirmed = this.tomorrowStarters[data.player.ID].confirmed;
+                data.player.probable = this.tomorrowStarters[data.player.ID].probable;
+                this.startersData.push(data);
+
+              }
 
               if (data.team.hadGameYesterday === true) {
                 //console.log(data, 'game yesterday');
@@ -413,55 +411,55 @@ export class TomorrowResultsComponent implements OnInit {
         }
 
         if (this.sentDataToday != null) {
-            console.log('start sorting data from yesterday...');
-            for (let today of this.sentDataToday) {
+          console.log('start sorting data from yesterday...');
+          for (let today of this.sentDataToday) {
 
-              for (let tomdata of this.myData) {
+            for (let tomdata of this.myData) {
 
-                if (today.player.saves > 1 && today.player.ID === tomdata.player.ID) {
-                  
-                    tomdata.player.finishedYesterday = false;
-                    tomdata.player.playedYesterday = true;
-                    tomdata.player.savesYesterday = today.player.saves;
-                    tomdata.player.winsYesterday = today.player.wins;
-                    tomdata.player.lossesYesterday = today.player.losses;
-                    tomdata.player.saYesterday = today.player.shotsFaced;
-                    tomdata.player.olYesterday = today.player.OvertimeLosses;
-                    tomdata.player.shYesterday = today.player.Shutouts;
-                  if (today.player.wins == '1') {
-                    tomdata.player.resultYesterday = today.player.FirstName +' '+ today.player.LastName + ' got the Win tonight with ' + today.player.saves + ' saves against ' + today.player.shotsFaced + ' shots.'
-                   } else if (today.player.losses == '1' || today.player.OvertimeLosses == '1') {
-                    tomdata.player.resultYesterday = today.player.FirstName +' '+ today.player.LastName + ' got the Loss tonight with ' + today.player.saves + ' saves against ' + today.player.shotsFaced + ' shots.'
-                   }
-                  
-                } 
+              if (today.player.saves > 1 && today.player.ID === tomdata.player.ID) {
+
+                tomdata.player.finishedYesterday = false;
+                tomdata.player.playedYesterday = true;
+                tomdata.player.savesYesterday = today.player.saves;
+                tomdata.player.winsYesterday = today.player.wins;
+                tomdata.player.lossesYesterday = today.player.losses;
+                tomdata.player.saYesterday = today.player.shotsFaced;
+                tomdata.player.olYesterday = today.player.OvertimeLosses;
+                tomdata.player.shYesterday = today.player.Shutouts;
+                if (today.player.wins == '1') {
+                  tomdata.player.resultYesterday = today.player.FirstName + ' ' + today.player.LastName + ' got the Win tonight with ' + today.player.saves + ' saves against ' + today.player.shotsFaced + ' shots.'
+                } else if (today.player.losses == '1' || today.player.OvertimeLosses == '1') {
+                  tomdata.player.resultYesterday = today.player.FirstName + ' ' + today.player.LastName + ' got the Loss tonight with ' + today.player.saves + ' saves against ' + today.player.shotsFaced + ' shots.'
+                }
 
               }
+
             }
           }
+        }
 
         if (this.playerInjuries.length > 0) {
-            console.log('start sorting data for starters matchups...');
-            for (let inj of this.playerInjuries) {
+          console.log('start sorting data for starters matchups...');
+          for (let inj of this.playerInjuries) {
 
-              for (let injdata of this.myData) {
+            for (let injdata of this.myData) {
 
-                if (inj.player.ID === injdata.player.ID) {
-                  //console.log(inj.injury, "injuries...");
+              if (inj.player.ID === injdata.player.ID) {
+                //console.log(inj.injury, "injuries...");
 
-                    injdata.player.injured = true;
-                    injdata.player.injury = ' '+inj.injury;
-                    
-                    if (inj.injury.substr(inj.injury.length - 5) === '(Out)') {
-                      console.log(inj.injury.substr(inj.injury.length - 5), 'injuries that say OUT!');
-                       injdata.player.injuryOut = true;
-                    } 
-                    
-                } 
+                injdata.player.injured = true;
+                injdata.player.injury = ' ' + inj.injury;
+
+                if (inj.injury.substr(inj.injury.length - 5) === '(Out)') {
+                  console.log(inj.injury.substr(inj.injury.length - 5), 'injuries that say OUT!');
+                  injdata.player.injuryOut = true;
+                }
 
               }
+
             }
           }
+        }
 
 
 
@@ -475,7 +473,7 @@ export class TomorrowResultsComponent implements OnInit {
 
                 if (startid === startdata.team.ID) {
                   if (this.startersDate != startdata.team.today && startdata.stats.GamesPlayed['#text'] > 6 && startdata.player.injuryOut == null && startdata.player.ID != '9072' && startdata.player.ID != '5518' && startdata.player.ID != '11721') {
-//&&  startdata.player.winsYesterday == '0' && startdata.player.lossesYesterday == '0' && startdata.player.olYesterday == '0'
+                    //&&  startdata.player.winsYesterday == '0' && startdata.player.lossesYesterday == '0' && startdata.player.olYesterday == '0'
                     startdata.player.startingToday = false;
                     startdata.player.likelyStartingToday = true;
                     //console.log(startdata.player.FirstName + " " + startdata.player.LastName, "this goalie is not starting yet. but he might start.");
@@ -483,7 +481,7 @@ export class TomorrowResultsComponent implements OnInit {
 
 
                   }
-                }  else if (startid === startdata.player.ID) {
+                } else if (startid === startdata.player.ID) {
                   startdata.player.startingToday = true;
                   //console.log(startdata, 'player data');
                   this.startersData.push(startdata);
@@ -533,7 +531,7 @@ export class TomorrowResultsComponent implements OnInit {
             this.statData[data.team.gameId][1].twoPossibleStarters = true;
             if (this.statData[data.team.gameId][0].player.resultYesterday != null) {
               this.statData[data.team.gameId][0].player.finishedYesterday = true;
-            } 
+            }
             if (this.statData[data.team.gameId][1].player.resultYesterday != null) {
               this.statData[data.team.gameId][1].player.finishedYesterday = true;
             }
@@ -542,12 +540,12 @@ export class TomorrowResultsComponent implements OnInit {
           }
           if (this.statData[data.team.gameId][1].team.ID === this.statData[data.team.gameId][2].team.ID) {
             this.statData[data.team.gameId][1].twoPossibleStarters = true;
-            
-            
+
+
             this.statData[data.team.gameId][2].player.twoPossibleStarters = true;
-              if (this.statData[data.team.gameId][2].player.resultYesterday != null) {
+            if (this.statData[data.team.gameId][2].player.resultYesterday != null) {
               this.statData[data.team.gameId][2].player.finishedYesterday = true;
-            } 
+            }
             if (this.statData[data.team.gameId][1].player.resultYesterday != null) {
               this.statData[data.team.gameId][1].player.finishedYesterday = true;
             }
@@ -559,12 +557,12 @@ export class TomorrowResultsComponent implements OnInit {
             if (this.statData[data.team.gameId][2].team.ID === this.statData[data.team.gameId][3].team.ID) {
               this.statData[data.team.gameId][2].twoPossibleStarters = true;
               this.statData[data.team.gameId][3].twoPossibleStarters = true;
-                if (this.statData[data.team.gameId][2].player.resultYesterday != null) {
-              this.statData[data.team.gameId][2].player.finishedYesterday = true;
-            } 
-            if (this.statData[data.team.gameId][3].player.resultYesterday != null) {
-              this.statData[data.team.gameId][3].player.finishedYesterday = true;
-            }
+              if (this.statData[data.team.gameId][2].player.resultYesterday != null) {
+                this.statData[data.team.gameId][2].player.finishedYesterday = true;
+              }
+              if (this.statData[data.team.gameId][3].player.resultYesterday != null) {
+                this.statData[data.team.gameId][3].player.finishedYesterday = true;
+              }
             } else {
               this.statData[data.team.gameId][2].twoPossibleStarters = false;
               this.statData[data.team.gameId][3].twoPossibleStarters = false;
@@ -602,7 +600,7 @@ export class TomorrowResultsComponent implements OnInit {
 
   }
 
-   public isVisibleOnDesktop() {
+  public isVisibleOnDesktop() {
     // console.log('width over 600px');
   }
 
@@ -616,7 +614,7 @@ export class TomorrowResultsComponent implements OnInit {
     this.router.navigateByUrl('starting-goalies');
   }
 
-   public open(event, data) {
+  public open(event, data) {
     this.selected = data;
     console.log(data, 'ok you clicked on player img...');
     this.dialog.open(TomorrowDialog, {
@@ -663,7 +661,7 @@ export class TomorrowDialog implements OnInit {
 
   searchCall() {
     console.log(this.data, 'data passed in')
-  
+
     let headers = new Headers();
     let searchterm = 'query=#startingGoalies #nhl ' + this.data.player.FirstName + ' ' + this.data.player.LastName;
     //let searchterm = 'query=#FantasyHockey ' + this.data.player.twitterHandle;

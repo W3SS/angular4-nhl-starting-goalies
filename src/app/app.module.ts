@@ -3,6 +3,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgModule } from '@angular/core';
 import { HttpModule } from '@angular/http';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { MatCardModule, 
         MatGridListModule, 
@@ -12,9 +13,11 @@ import { MatCardModule,
         MatTabsModule, 
         MatMenuModule,
         MatListModule,
+        MatInputModule,
         MatChipsModule,
         MatTooltipModule,
         MatDialogModule,
+        MatSelectModule,
         MatProgressSpinnerModule } from '@angular/material';
 import { DataService } from './data.service';
 import { YesterdayService } from './yesterday.service';
@@ -24,7 +27,7 @@ import { RouterModule } from '@angular/router';
 import { FlexLayoutModule } from '@angular/flex-layout';
 
 import { AppComponent } from './app.component';
-import { StartingGoaliesComponent, Info, TodayDialog, LastweekDialog } from './starting-goalies/starting-goalies.component';
+import { StartingGoaliesComponent, Info, TodayDialog, LastweekDialog, LoginDialog } from './starting-goalies/starting-goalies.component';
 import { YesterdayResultsComponent, InfoYesterday } from './yesterday-results/yesterday-results.component';
 import { TomorrowResultsComponent, InfoTomorrow, TomorrowDialog } from './tomorrow-results/tomorrow-results.component';
 
@@ -51,13 +54,16 @@ export const firebaseConfig = {
     TomorrowResultsComponent,
     TodayDialog,
     LastweekDialog,
-    TomorrowDialog
+    TomorrowDialog,
+    LoginDialog
   ],
   imports: [
     BrowserModule,
     AngularFireDatabaseModule,
     AngularFireAuthModule,
     HttpModule,
+    FormsModule,
+    ReactiveFormsModule,
     CommonModule,
     MatCardModule,
     MatGridListModule,
@@ -66,10 +72,12 @@ export const firebaseConfig = {
     MatButtonModule, 
     MatTabsModule,
     MatMenuModule,
+    MatSelectModule,
     MatDialogModule,
     MatListModule,
     MatChipsModule,
     MatTooltipModule,
+    MatInputModule,
     MatProgressSpinnerModule,
     BrowserAnimationsModule,
     ShareModule,
@@ -103,7 +111,7 @@ export const firebaseConfig = {
   ],
   providers: [DataService, YesterdayService, TomorrowService, FirebaseService],
   entryComponents: [
-    Info, InfoYesterday, InfoTomorrow, TodayDialog, LastweekDialog, TomorrowDialog
+    Info, InfoYesterday, InfoTomorrow, TodayDialog, LastweekDialog, TomorrowDialog, LoginDialog
   ],
   bootstrap: [AppComponent]
 })

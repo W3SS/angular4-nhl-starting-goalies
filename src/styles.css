@@ -123,6 +123,10 @@ mat-spinner {
   margin: 0 auto;
 }
 
+.login-container {
+  margin: 15px;
+}
+
 @media only screen and (max-width: 600px) {
 
   .card-wrap {

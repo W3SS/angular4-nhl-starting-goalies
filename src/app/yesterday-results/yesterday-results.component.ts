@@ -176,7 +176,7 @@ export class YesterdayResultsComponent implements OnInit {
             console.log(res['fullgameschedule'].gameentry, "scheduled games for yesterday today and tomorrow...");
 
              //this removed a postponed game from api to avoid errors
-
+if (res['fullgameschedule'].gameentry > 0) {
               let postponed;
              res['fullgameschedule'].gameentry.forEach((item, index) => {
              postponed = index;
@@ -185,6 +185,8 @@ export class YesterdayResultsComponent implements OnInit {
                  res['fullgameschedule'].gameentry.splice(postponed, 1);
                }
             });
+
+           }
 
             this.fullSchedule = res['fullgameschedule'].gameentry;
           })

@@ -11,7 +11,7 @@
   },
   "4863":
   {
-    "confirmed": false,
+    "confirmed": true,
     "probable": true,
     "name": "Braden Holtby"
   },
@@ -23,13 +23,13 @@
   },
   "10074":
   {
-    "confirmed": false,
+    "confirmed": true,
     "probable": true,
     "name": "Aaron Dell"
   },
   "4235":
   {
-    "confirmed": false,
+    "confirmed": true,
     "probable": true,
     "name": "Jaro Halak"
   },
@@ -59,7 +59,7 @@
   },
   "3810":
   {
-    "confirmed": false,
+    "confirmed": true,
     "probable": true,
     "name": "Pekka Rinne"
   },
@@ -89,20 +89,20 @@
   },
   "11724":
   {
-    "confirmed": false,
+    "confirmed": true,
     "probable": true,
     "name": "David Rittich"
   },
   "3647":
   {
     "confirmed": false,
-    "probable": true,
+    "probable": false,
     "name": "Henrik Lundqvist"
   },
    "4321":
   {
-    "confirmed": false,
-    "probable": false,
+    "confirmed": true,
+    "probable": true,
     "name": "Ondrej Pavelec"
   },
   "10083":
@@ -143,7 +143,7 @@
   }, 
   "4890":
   {
-    "confirmed": false,
+    "confirmed": true,
     "probable": true,
     "name": "Sergei Bobrovsky"
   },
@@ -203,7 +203,7 @@
   },
   "4294":
   {
-    "confirmed": false,
+    "confirmed": true,
     "probable": true,
     "name": "Carey Price"
   },
@@ -215,7 +215,7 @@
   },
   "5420":
   {
-    "confirmed": false,
+    "confirmed": true,
     "probable": true,
     "name": "Andrei Vasilevskiy"
   },
@@ -233,7 +233,7 @@
   }, 
   "4561":
   {
-    "confirmed": false,
+    "confirmed": true,
     "probable": true,
     "name": "Ben Bishop"
   },
@@ -245,7 +245,7 @@
   },
   "4867":
   {
-    "confirmed": false,
+    "confirmed": true,
     "probable": true,
     "name": "Robin Lehner"
   },
@@ -269,7 +269,7 @@
   },
   "4271":
   {
-    "confirmed": false,
+    "confirmed": true,
     "probable": true,
     "name": "Jonathan Bernier"
   },
@@ -281,7 +281,7 @@
   },
   "3500":
   {
-    "confirmed": false,
+    "confirmed": true,
     "probable": true,
     "name": "Cam Ward"
   },
@@ -293,13 +293,13 @@
   }, 
   "4874":
   {
-    "confirmed": false,
+    "confirmed": true,
     "probable": true,
     "name": "Jacob Markstrom"
   }, 
   "4666":
   {
-    "confirmed": false,
+    "confirmed": true,
     "probable": true,
     "name": "Devan Dubnyk"
   },
@@ -323,7 +323,7 @@
   },
     "5227":
   {
-    "confirmed": false,
+    "confirmed": true,
     "probable": true,
     "name": "John Gibson"
   },
@@ -341,7 +341,7 @@
   },
   "483":
   {
-    "confirmed": false,
+    "confirmed": true,
     "probable": true,
     "name": "Marc-Andre Fleury"
   },
@@ -365,7 +365,7 @@
   },
   "5481":
   {
-    "confirmed": false,
+    "confirmed": true,
     "probable": true,
     "name": "Anton Forsberg"
   },
@@ -395,7 +395,7 @@
   },
   "5277":
   {
-    "confirmed": false,
+    "confirmed": true,
     "probable": true,
     "name": "Cam Talbot"
   },
@@ -414,18 +414,18 @@
   "757":
   {
     "confirmed": false,
-    "probable": true,
+    "probable": false,
     "name": "Craig Anderson"
   },
   "5835":
   {
-    "confirmed": false,
-    "probable": false,
+    "confirmed": true,
+    "probable": true,
     "name": "Mike Condon"
   },
    "5296":
   {
-    "confirmed": false,
+    "confirmed": true,
     "probable": true,
     "name": "Antti Raanta"
   },
@@ -437,7 +437,7 @@
   },
   "4326":
   {
-    "confirmed": false,
+    "confirmed": true,
     "probable": true,
     "name": "Tuukka Rask"
   },

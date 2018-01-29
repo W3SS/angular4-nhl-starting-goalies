@@ -1,7 +1,46 @@
 <router-outlet></router-outlet>
 <span><button mat-raised-button class="mat-raised-button" color="warn" (click)="openLastweek($event, showData)">Hot List</button></span>
+<span class="admin-box" *ngIf="fbService.userDetails != null">Admin</span>
+<form (keydown)="openLogin($event)">
+     <input type="text">
+</form>
+
 <h1 class="center date-header"> {{ gameDate | date:'fullDate' }}</h1>
 <h1 class="center no-game-header" *ngIf="noGamesToday === true">{{noGamesMsg}}</h1>
+
+<!-- <mat-form-field *ngIf="allGoalies != null">
+  <mat-select placeholder="Goalies" [formControl]="goalies" multiple>
+    <mat-option *ngFor="let group of playerInfo" [value]="allGoalies[group.player.ID]">{{allGoalies[group.player.ID]}}</mat-option>
+  </mat-select>
+</mat-form-field> -->
+<div *ngIf="fbService.userDetails != null">
+  Edit Starting Goalies
+  <ul>
+  <li *ngFor="let group of playerInfo">
+   
+   <ul>
+    <li *ngFor="let goalies of allGoalies"><span *ngIf="goalies[group.player.ID] != null" (click)="goalies[group.player.ID].confirmed = !goalies[group.player.ID].confirmed" [(ngModel)]="allGoalies[0][group.player.ID].confirmed" ngDefaultControl>{{goalies[group.player.ID].name}} confirmed: {{goalies[group.player.ID].confirmed}}</span></li>
+  </ul>
+    
+  </li>
+</ul>
+<button (click)="saveStarts()">save</button>
+<!-- <ul>
+  <li *ngFor="let group of playerInfo">
+    <ul>
+      <li  *ngFor="let goalies of allGoalies">
+      <span *ngIf="goalies[group.player.ID] != null" style="color: red">{{goalies[group.player.ID].name}} confirmed: {{goalies[group.player.ID].confirmed}}</span>
+    
+  </li>
+    </ul>
+
+</ul> -->
+</div>
+
+
+  
+
+
  <div class="spinner-msg" *ngIf="loading">
   Fetching goalie stats for today...
   <mat-spinner></mat-spinner>

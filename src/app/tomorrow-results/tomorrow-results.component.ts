@@ -71,9 +71,9 @@ export class TomorrowResultsComponent implements OnInit {
     this.fbService
       .getStarterData()
       .subscribe(res => {
-        console.log(res[1], 'got response from firebase...');
-        this.startersDate = res[2]['tomorrowDate'];
-        this.tomorrowStarters = res[3];
+        console.log(res[0][1], 'got response from firebase...');
+        this.startersDate = res[0][2]['tomorrowDate'];
+        this.tomorrowStarters = res[0][3];
       });
 
     //  this.http.get("./assets/tomorrowStarters.json")
@@ -190,6 +190,7 @@ export class TomorrowResultsComponent implements OnInit {
             console.log(res['fullgameschedule'].gameentry, "scheduled games for yesterday today and tomorrow...");
 
             //this removed a postponed game from api to avoid errors
+            if (res['fullgameschedule'].gameentry > 0) {
             let postponed;
             res['fullgameschedule'].gameentry.forEach((item, index) => {
               postponed = index;
@@ -198,6 +199,7 @@ export class TomorrowResultsComponent implements OnInit {
                 res['fullgameschedule'].gameentry.splice(postponed, 1);
               }
             });
+          }
 
             this.fullSchedule = res['fullgameschedule'].gameentry;
           })

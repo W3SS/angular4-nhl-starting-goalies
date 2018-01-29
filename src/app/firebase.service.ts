@@ -8,9 +8,52 @@ import * as firebase from 'firebase/app';
 export class FirebaseService {
 
   items:FirebaseListObservable<any[]>;
+  private user: Observable<firebase.User>;
+  private userDetails: firebase.User = null;
 
-  constructor(public af: AngularFireDatabase) {
+  constructor(public af: AngularFireDatabase, private firebaseAuth: AngularFireAuth) {
     this.items = af.list('/Starters'); 
+    this.user = firebaseAuth.authState;
+
+      this.user.subscribe(
+          (user) => {
+            if (user) {
+              this.userDetails = user;
+              //console.log(this.userDetails);
+            }
+            else {
+              this.userDetails = null;
+            }
+          }
+        );
+    
+  }
+
+ signInRegular(email, password) {
+   const credential = firebase.auth.EmailAuthProvider.credential( email, password );
+   return this.firebaseAuth.auth.signInWithEmailAndPassword(email, password)
+ }
+
+ isLoggedIn() {
+  if (this.userDetails == null ) {
+      console.log("this.userDetails are null");
+      return false;
+    } else {
+      //console.log(this.userDetails, "this.userDetails is true and logged in...");
+      return true;
+    }
+  }
+
+  logout() {
+    this.firebaseAuth.auth.signOut();
+  }
+
+   addData(starters) {
+      console.log(starters, 'starters.json in fb service...');
+      console.log('deleting data from fb...');
+      this.items.remove();
+      console.log('saving new data to fb...');
+      this.items.push(starters); 
   }
 
   getStarterData() {

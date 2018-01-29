@@ -1,4 +1,5 @@
 import { Component, ViewChild, Inject, OnInit } from '@angular/core';
+import {FormControl} from '@angular/forms';
 import { Http, Response, RequestOptions, Headers, Request, RequestMethod } from '@angular/http';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { Observable } from 'rxjs/Observable';
@@ -27,6 +28,7 @@ let options = null;
 })
 export class StartingGoaliesComponent implements OnInit {
 
+  goalies = new FormControl();
   starters: Array < any > ;
   dailySchedule: Array < any > ;
   fullSchedule: Array < any > ;
@@ -46,21 +48,29 @@ export class StartingGoaliesComponent implements OnInit {
   gamesToday: boolean;
   twitterHandles: Array < any > ;
   todayStarters: Array < any > ;
+  allGoalies: Array < any >;
   selected: any;
   test: any;
   startingGoaliesToday: Array < any > = [];
   tweetDay: any;
   noGamesMsg: any;
   startersDate: any;
+  fullFirebaseResponse: any
   loading: boolean = true;
 
   constructor(private http: Http, private dataService: DataService, private fbService: FirebaseService, private yesterdayService: YesterdayService, public snackBar: MatSnackBar, public router: Router, public dialog: MatDialog) {
     this.fbService
       .getStarterData()
       .subscribe(res => {
-        console.log(res[1], 'got response from firebase...');
-        this.startersDate = res[0]['todayDate'];
-        this.todayStarters = res[1];
+
+        if (res != null) {
+          console.log(res[0], 'got response from firebase...');
+          this.fullFirebaseResponse = res[0];
+          this.startersDate = res[0][0]['todayDate'];
+          this.todayStarters = res[0][1];
+          this.allGoalies = Array.of(res[0][1]);
+        }
+        
     });
     yesterday = this.dataService.getYesterday();
     tomorrow = this.dataService.getTomorrow();
@@ -69,6 +79,19 @@ export class StartingGoaliesComponent implements OnInit {
     this.sentData = this.dataService.getSentStats();
     this.sentYesterdayData = this.yesterdayService.getSentStats();
   }
+
+  public saveStarts() {
+    //console.log(Object.assign({}, this.allGoalies), 'save these changes to firebase...');
+    //this.todayStarters = Object.assign({}, this.allGoalies);
+    console.log(this.fullFirebaseResponse, 'the full firebase response to send back to fb for update...');
+    this.fbService
+      .addData(this.fullFirebaseResponse);
+  }
+
+  // public trackByIndex(index: number, obj: any): any {
+  //   console.log(index, 'index returned...');
+  //   return index;
+  // }
 
   public getJSON() {
     this.http.get("./assets/twitter.json")
@@ -86,12 +109,14 @@ export class StartingGoaliesComponent implements OnInit {
       //   this.todayStarters = res[1];
       // });
 
-    // this.http.get("./assets/todayStarters.json")
+    // this.http.get("./assets/starters.json")
     //   .map(response => response.json())
     //   .subscribe(res => {
-    //     console.log(res['todayStarters']["0"], 'today starters...');
-    //     //this.startersDate = res['todayStarters']["0"]['date'];
-    //     //this.todayStarters = res['todayStarters']["1"];
+    //     console.log(res['Starters']["1"], 'today starters...');
+    //     this.fullFirebaseResponse = res['Starters'];
+    //     this.startersDate = res['Starters']["0"]['date'];
+    //     this.todayStarters = res['Starters']["1"];
+    //     this.allGoalies = Array.of(res['Starters']["1"]);
     //   })
 
   }
@@ -195,7 +220,8 @@ export class StartingGoaliesComponent implements OnInit {
             console.log(res['fullgameschedule'].gameentry, "scheduled games for yesterday today and tomorrow...");
 
              //this removed a postponed game from api to avoid errors
-             let postponed;
+             if (res['fullgameschedule'].gameentry > 0) {
+                  let postponed;
              res['fullgameschedule'].gameentry.forEach((item, index) => {
              postponed = index;
              if (res['fullgameschedule'].gameentry[postponed].id === '41392') {
@@ -203,6 +229,8 @@ export class StartingGoaliesComponent implements OnInit {
                  res['fullgameschedule'].gameentry.splice(postponed, 1);
                }
             });
+             }
+          
             
             //res['fullgameschedule'].gameentry.splice(16, 1);
 
@@ -728,6 +756,17 @@ export class StartingGoaliesComponent implements OnInit {
     });
   }
 
+   public openLogin(event) {
+     if (event.keyCode === 65 && event.ctrlKey) {
+        this.dialog.open(LoginDialog, {
+        width: '1025px'
+        });
+     } else {
+       //console.log('wrong key...');
+     }
+   
+  }
+
   openSnackBar() {
     this.snackBar.openFromComponent(Info, {
       // duration: 500,
@@ -740,6 +779,62 @@ export class StartingGoaliesComponent implements OnInit {
 
   public goTomorrow() {
     this.router.navigateByUrl('starting-goalies/tomorrow');
+  }
+
+}
+
+
+@Component({
+  selector: 'login-dialog',
+  template: `<i (click)="dialogRef.close()" style="float:right; cursor:pointer;" class="material-icons">close</i>
+  <span *ngIf="fbService.userDetails == null">Login to Edit</span>  <span *ngIf="fbService.userDetails != null">Logout after edit is saved</span>
+  <mat-dialog-content>
+  <div  *ngIf="fbService.userDetails == null">
+    <div class="login-container">
+      <mat-form-field>
+        <input matInput type="email" class="form-control" [(ngModel)]="user.email" placeholder="Email" required>
+      </mat-form-field>
+
+      <mat-form-field>
+        <input matInput type="password" class="form-control" [(ngModel)]="user.password" placeholder="Password" required>
+      </mat-form-field>
+
+      <button mat-raised-button class="mat-raised-button" (click)="signInWithEmail()">Login</button>
+    </div>  
+  </div>
+ 
+<div *ngIf="fbService.userDetails != null">
+ <button mat-raised-button class="mat-raised-button" color="warn"  (click)="fbService.logout()">Logout</button>
+</div>
+  </mat-dialog-content>`,
+})
+
+export class LoginDialog implements OnInit {
+
+  user = {
+   email: '',
+   password: ''
+  };
+
+  signedIn: any;
+
+  constructor(public dialogRef: MatDialogRef < LastweekDialog >, private fbService: FirebaseService) {}
+
+
+  signInWithEmail() {
+   this.fbService.signInRegular(this.user.email, this.user.password)
+      .then((res) => {
+         //console.log(res);
+         this.signedIn = res;
+      })
+      .catch((err) => console.log('error: ' + err));
+   }
+
+
+
+  ngOnInit() {
+    
+
   }
 
 }

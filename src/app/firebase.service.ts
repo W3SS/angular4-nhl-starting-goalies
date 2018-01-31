@@ -51,7 +51,10 @@ export class FirebaseService {
    addData(starters) {
       console.log(starters, 'starters.json in fb service...');
       console.log('deleting data from fb...');
-      this.items.remove();
+      this.items.remove().then(_ => {
+        console.log('deleted!');
+        this.getStarterData();
+      });
       console.log('saving new data to fb...');
       this.items.push(starters); 
   }

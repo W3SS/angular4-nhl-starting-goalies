@@ -8,33 +8,126 @@
 <h1 class="center date-header"> {{ gameDate | date:'fullDate' }}</h1>
 <h1 class="center no-game-header" *ngIf="noGamesToday === true">{{noGamesMsg}}</h1>
 
-<!-- <mat-form-field *ngIf="allGoalies != null">
-  <mat-select placeholder="Goalies" [formControl]="goalies" multiple>
-    <mat-option *ngFor="let group of playerInfo" [value]="allGoalies[group.player.ID]">{{allGoalies[group.player.ID]}}</mat-option>
-  </mat-select>
-</mat-form-field> -->
-<div *ngIf="fbService.userDetails != null">
-  Edit Starting Goalies
+<div *ngIf="fbService.userDetails != null" class="matchup-layout">
+    <div class="edit-list-container" *ngIf="fullFirebaseResponse != null">
+   
+      <mat-form-field>
+        <input matInput type="text" class="form-control" [(ngModel)]="fullFirebaseResponse[0]['todayDate']">
+      </mat-form-field>
+
   <ul>
   <li *ngFor="let group of playerInfo">
    
    <ul>
-    <li *ngFor="let goalies of allGoalies"><span *ngIf="goalies[group.player.ID] != null" (click)="goalies[group.player.ID].confirmed = !goalies[group.player.ID].confirmed" [(ngModel)]="allGoalies[0][group.player.ID].confirmed" ngDefaultControl>{{goalies[group.player.ID].name}} confirmed: {{goalies[group.player.ID].confirmed}}</span></li>
+    <li *ngFor="let goalie of allGoalies" class="goalie">
+     
+    <span *ngIf="goalie[group.player.ID] != null && allGoalies[0][group.player.ID].filterOutStarters == null" (click)="goalie[group.player.ID].probable = !goalie[group.player.ID].probable" [(ngModel)]="allGoalies[0][group.player.ID].probable" ngDefaultControl>
+      <img src="{{group.player.officialImageSrc}}" alt="" onError="this.src='https://nhl.bamcontent.com/images/headshots/current/168x168/goalie@2x.jpg'"> {{group.player.LastName}}
+    </span>
+
+    <span *ngIf="goalie[group.player.ID] != null && allGoalies[0][group.player.ID].filterOutStarters == null && goalie[group.player.ID].probable === false" style="color: red">X</span> 
+
+    <span *ngIf="goalie[group.player.ID] != null && allGoalies[0][group.player.ID].filterOutStarters == null && goalie[group.player.ID].probable === true && goalie[group.player.ID].confirmed === false" (click)="goalie[group.player.ID].confirmed = !goalie[group.player.ID].confirmed" [(ngModel)]="allGoalies[0][group.player.ID].confirmed" ngDefaultControl style="color: orange;"><i class="material-icons md-18" style="background: #fff; border-radius: 50%;">check_circle</i></span>
+
+   <span *ngIf="goalie[group.player.ID] != null && allGoalies[0][group.player.ID].filterOutStarters == null && goalie[group.player.ID].probable === true && goalie[group.player.ID].confirmed === true" style="color: #2ecc71;" (click)="goalie[group.player.ID].confirmed = !goalie[group.player.ID].confirmed" [(ngModel)]="allGoalies[0][group.player.ID].confirmed" ngDefaultControl><i class="material-icons md-18" style="background: #fff; border-radius: 50%;">check_circle</i></span> 
+
+   <!-- <span *ngIf="stats === true">
+     {{ group.stats.Wins['#text'] + ' - ' + group.stats.Losses['#text'] + ' - ' + group.stats.OvertimeLosses['#text'] }} {{group.stats.SavePercentage['#text']}} 
+   </span> -->
+
+  </li>
   </ul>
     
   </li>
 </ul>
-<button (click)="saveStarts()">save</button>
-<!-- <ul>
+
+      <div style="margin: 8px; padding: 8px;">
+        <button (click)="saveStarts()">Save Starts</button>
+      </div>
+      <div style="margin: 8px; padding: 8px;">
+        <button (click)="showTodayStarters()">Show Today's Starters</button>
+      </div>
+       
+      
+
+</div>
+
+  
+   <div class="edit-list-container" *ngIf="fullFirebaseResponse != null">
+      <mat-form-field>
+        <input matInput type="text" class="form-control" [(ngModel)]="fullFirebaseResponse[2]['tomorrowDate']">
+      </mat-form-field>
+
+  <ul>
   <li *ngFor="let group of playerInfo">
-    <ul>
-      <li  *ngFor="let goalies of allGoalies">
-      <span *ngIf="goalies[group.player.ID] != null" style="color: red">{{goalies[group.player.ID].name}} confirmed: {{goalies[group.player.ID].confirmed}}</span>
+   
+   <ul>
+    <li *ngFor="let goalie of allGoaliesTomorrow" class="goalie">
+     
+    <span *ngIf="goalie[group.player.ID] != null && allGoaliesTomorrow[0][group.player.ID].filterOutStarters == null" (click)="goalie[group.player.ID].probable = !goalie[group.player.ID].probable" [(ngModel)]="allGoalies[0][group.player.ID].probable" ngDefaultControl>
+      <img src="{{group.player.officialImageSrc}}" alt="" onError="this.src='https://nhl.bamcontent.com/images/headshots/current/168x168/goalie@2x.jpg'"> {{group.player.LastName}} 
+    </span>
+
+    <span *ngIf="goalie[group.player.ID] != null && allGoaliesTomorrow[0][group.player.ID].filterOutStarters == null && goalie[group.player.ID].probable === false" style="color: red">X</span> 
+
+    <span *ngIf="goalie[group.player.ID] != null && allGoaliesTomorrow[0][group.player.ID].filterOutStarters == null && goalie[group.player.ID].probable === true && goalie[group.player.ID].confirmed === false" (click)="goalie[group.player.ID].confirmed = !goalie[group.player.ID].confirmed" [(ngModel)]="allGoalies[0][group.player.ID].confirmed" ngDefaultControl style="color: orange;"><i class="material-icons md-18" style="background: #fff; border-radius: 50%;">check_circle</i></span>
+
+   <span *ngIf="goalie[group.player.ID] != null && allGoaliesTomorrow[0][group.player.ID].filterOutStarters == null && goalie[group.player.ID].probable === true && goalie[group.player.ID].confirmed === true" style="color: #2ecc71;" (click)="goalie[group.player.ID].confirmed = !goalie[group.player.ID].confirmed" [(ngModel)]="allGoalies[0][group.player.ID].confirmed" ngDefaultControl><i class="material-icons md-18" style="background: #fff; border-radius: 50%;">check_circle</i></span> 
+
+   <!-- <span *ngIf="stats === true">
+     {{ group.stats.Wins['#text'] + ' - ' + group.stats.Losses['#text'] + ' - ' + group.stats.OvertimeLosses['#text'] }} {{ group.stats.SavePercentage['#text'] }} 
+   </span> -->
+
+    </li>
+  </ul>
     
   </li>
-    </ul>
+</ul>
+        <div style="margin: 8px; padding: 8px;">
+          <button (click)="selectAll()">Reset Tomorrow All False</button>
+        </div>
+        <div style="margin: 8px; padding: 8px;">
+          <button (click)="updateTodayStarters()">Move Tomrrow Starts to Today Starts</button>
+        </div>
+        
+ 
 
-</ul> -->
+</div>
+<div class="edit-list-container" *ngIf="fullFirebaseResponse != null">
+  Add Goalie <br>
+ <!-- MAKE AN OBJECT THEN ADD TO MODEL OR ADD DIRECTLY TO FB -->
+ <div *ngIf="goalieIdSet === false">
+   <mat-form-field>
+        <input matInput type="text" class="form-control" placeholder="Goalie ID" [(ngModel)]="goalieID">
+  </mat-form-field>
+  <button (click)="setGoalieId()">set id</button>
+ </div>
+   
+  <!--   <mat-checkbox [(ngModel)]="goalieID.confirmed">Confirmed</mat-checkbox>
+    <mat-checkbox [(ngModel)]="goalieID.probable">Expected</mat-checkbox> -->
+
+    <div *ngIf="goalieIdSet === true">
+          <input type="checkbox" [(ngModel)]="newGoalie[goalieID].confirmed" name="confirmed" value="false"> Confirmed<br>
+          <input type="checkbox" [(ngModel)]="newGoalie[goalieID].probable" name="expected" value="false">Expected<br>
+    
+          <mat-form-field>
+                <input matInput type="text" class="form-control" placeholder="name" [(ngModel)]="newGoalie[goalieID].name">
+          </mat-form-field>
+        <div>
+           <button (click)="addGoalie()">Add New Goalie</button>
+        </div>
+        
+         
+    </div>
+
+  </div>
+  <div class="edit-list-container">
+    
+    <h3>Edit Goalies</h3>
+    
+   
+  </div>
+
 </div>
 
 
@@ -123,7 +216,13 @@
               Season GAA: {{data.team.matchup[0].stats.stats.GoalsAgainstAverage['#text']}}</span> <br>
              <!--  <span *ngIf="data.team.matchup[0].player.injured === true && data.team.matchup[0].player.saves == null" style="color:red;">{{data.team.matchup[0].player.injury}}</span> -->
               <br>
-              <span *ngIf="data.team.matchup[0].player.confirmed === true" style="color: #2ecc71;"><i class="material-icons md-18">check_circle</i>confirmed</span><span *ngIf="data.team.matchup[0].player.confirmed === false && data.team.matchup[0].player.startingTodayNow === false" style="color: orange;"><i class="material-icons md-18">check_circle</i>expected</span>
+
+              <span *ngIf="fullFirebaseResponse != null && allGoalies[0][data.team.matchup[0].player.ID] && allGoalies[0][data.team.matchup[0].player.ID].confirmed === true && data.team.matchup[0].player.saves == null" style="color: #2ecc71;"><i class="material-icons md-18">check_circle</i>confirmed</span>
+
+              <span *ngIf="fullFirebaseResponse != null && allGoalies[0][data.team.matchup[0].player.ID] != null && allGoalies[0][data.team.matchup[0].player.ID].confirmed === false && data.team.matchup[0].player.startingTodayNow === false && data.team.matchup[0].player.saves == null" style="color: orange;"><i class="material-icons md-18">check_circle</i>expected</span>
+
+              <!-- <span *ngIf="data.team.matchup[0].player.confirmed === true" style="color: #2ecc71;"><i class="material-icons md-18">check_circle</i>confirmed</span><span *ngIf="data.team.matchup[0].player.confirmed === false && data.team.matchup[0].player.startingTodayNow === false" style="color: orange;"><i class="material-icons md-18">check_circle</i>expected</span> -->
+
             <br> <div *ngIf="data.team.matchup[0].player.saves != null" class="stat-block">
               Saves: {{data.team.matchup[0].player.saves}} Shots Faced: {{data.team.matchup[0].player.shotsFaced}}<br>
               <span *ngIf="data.team.matchup[0].player.wins == '1' && data.team.matchup[0].player.Shutouts != '1'">
@@ -153,7 +252,13 @@
               <br>
             <!--   <span *ngIf="data.team.matchup[1].player.injured === true && data.team.matchup[1].player.saves == null" style="color:red;">{{data.team.matchup[1].player.injury}}</span> -->
               <br>
-              <span *ngIf="data.team.matchup[1].player.confirmed === true" style="color: #2ecc71;"><i class="material-icons md-18">check_circle</i>confirmed</span><span *ngIf="data.team.matchup[1].player.confirmed === false && data.team.matchup[1].player.startingTodayNow === false" style="color: orange;"><i class="material-icons md-18">check_circle</i>expected</span>
+
+              <span *ngIf="fullFirebaseResponse != null && allGoalies[0][data.team.matchup[1].player.ID] != null && allGoalies[0][data.team.matchup[1].player.ID].confirmed === true && data.team.matchup[1].player.saves == null" style="color: #2ecc71;"><i class="material-icons md-18">check_circle</i>confirmed</span>
+
+              <span *ngIf="fullFirebaseResponse != null && allGoalies[0][data.team.matchup[1].player.ID] != null && allGoalies[0][data.team.matchup[1].player.ID].confirmed === false && data.team.matchup[0].player.startingTodayNow === false && data.team.matchup[1].player.saves == null" style="color: orange;"><i class="material-icons md-18">check_circle</i>expected</span>
+
+              <!-- <span *ngIf="data.team.matchup[1].player.confirmed === true" style="color: #2ecc71;"><i class="material-icons md-18">check_circle</i>confirmed</span><span *ngIf="data.team.matchup[1].player.confirmed === false && data.team.matchup[1].player.startingTodayNow === false" style="color: orange;"><i class="material-icons md-18">check_circle</i>expected</span> -->
+
              <br> <div *ngIf="data.team.matchup[1].player.saves != null" class="stat-block">
               Saves: {{data.team.matchup[1].player.saves}} Shots Faced: {{data.team.matchup[1].player.shotsFaced}}<br>
               <span *ngIf="data.team.matchup[1].player.wins == '1' && data.team.matchup[1].player.Shutouts != '1'">
@@ -198,7 +303,7 @@
             <span *ngIf="data.team.matchup[2].player.OvertimeLosses == '1'">
               {{ data.team.matchup[2].player.LastName }} takes the Loss in OT!
             </span>
-             </div>
+             </div> 
             </span>
 
                 <span *ngIf="data.team.matchup[2] != null && data.team.matchup[0].player.gameLocation === 'away'  && data.team.matchup[0].team.ID != data.team.matchup[2].team.ID && data.team.matchup[1].team.ID == data.team.matchup[2].team.ID">
@@ -342,7 +447,7 @@
             <span *ngIf="data.team.matchup[2].player.OvertimeLosses == '1'">
               {{ data.team.matchup[2].player.LastName }} takes the Loss in OT!
             </span>
-             </div>
+             </div> 
             
             </span>
 
@@ -704,8 +809,14 @@
               <br>
             <!--    <span *ngIf="data.team.matchup[0].player.injured === true && data.team.matchup[0].player.saves == null" style="color:red;">{{data.team.matchup[0].player.injury}}</span> -->
                <br>
-                <span *ngIf="data.team.matchup[0].player.confirmed === true" style="color: #2ecc71;"><i class="material-icons md-18">check_circle</i>confirmed</span>
-             <span *ngIf="data.team.matchup[0].player.confirmed === false && data.team.matchup[0].player.startingTodayNow === false" style="color: orange;"><i class="material-icons md-18">check_circle</i>expected</span>
+
+               <span *ngIf="fullFirebaseResponse != null && allGoalies[0][data.team.matchup[0].player.ID] != null && allGoalies[0][data.team.matchup[0].player.ID].confirmed === true && data.team.matchup[0].player.saves == null" style="color: #2ecc71;"><i class="material-icons md-18">check_circle</i>confirmed</span>
+
+              <span *ngIf="fullFirebaseResponse != null && allGoalies[0][data.team.matchup[0].player.ID] != null && allGoalies[0][data.team.matchup[0].player.ID].confirmed === false && data.team.matchup[0].player.startingTodayNow === false && data.team.matchup[0].player.saves == null" style="color: orange;"><i class="material-icons md-18">check_circle</i>expected</span>
+
+                <!-- <span *ngIf="data.team.matchup[0].player.confirmed === true" style="color: #2ecc71;"><i class="material-icons md-18">check_circle</i>confirmed</span>
+             <span *ngIf="data.team.matchup[0].player.confirmed === false && data.team.matchup[0].player.startingTodayNow === false" style="color: orange;"><i class="material-icons md-18">check_circle</i>expected</span> -->
+
              <br> <div *ngIf="data.team.matchup[0].player.saves != null" class="stat-block">
               Saves: {{data.team.matchup[0].player.saves}} Shots Faced: {{data.team.matchup[0].player.shotsFaced}} <br>
               <span *ngIf="data.team.matchup[0].player.wins == '1' && data.team.matchup[0].player.Shutouts != '1'">
@@ -735,7 +846,12 @@
               <br>
                <span *ngIf="data.team.matchup[1].player.injured === true && data.team.matchup[1].player.saves == null" style="color:red;">{{data.team.matchup[1].player.injury}}</span>
                <br>
-                  <span *ngIf="data.team.matchup[1].player.confirmed === true" style="color: #2ecc71;"><i class="material-icons md-18">check_circle</i>confirmed</span><span *ngIf="data.team.matchup[1].player.confirmed === false && data.team.matchup[1].player.startingTodayNow === false" style="color: orange;"><i class="material-icons md-18">check_circle</i>expected</span>
+
+               <span *ngIf="fullFirebaseResponse != null && allGoalies[0][data.team.matchup[1].player.ID] != null && allGoalies[0][data.team.matchup[1].player.ID].confirmed === true && data.team.matchup[1].player.saves == null" style="color: #2ecc71;"><i class="material-icons md-18">check_circle</i>confirmed</span>
+
+              <span *ngIf="fullFirebaseResponse != null && allGoalies[0][data.team.matchup[1].player.ID] != null && allGoalies[0][data.team.matchup[1].player.ID].confirmed === false && data.team.matchup[0].player.startingTodayNow === false && data.team.matchup[1].player.saves == null" style="color: orange;"><i class="material-icons md-18">check_circle</i>expected</span>
+
+                 <!--  <span *ngIf="data.team.matchup[1].player.confirmed === true" style="color: #2ecc71;"><i class="material-icons md-18">check_circle</i>confirmed</span><span *ngIf="data.team.matchup[1].player.confirmed === false && data.team.matchup[1].player.startingTodayNow === false" style="color: orange;"><i class="material-icons md-18">check_circle</i>expected</span> -->
            
              <br> <div *ngIf="data.team.matchup[1].player.saves != null" class="stat-block">
               Saves: {{data.team.matchup[1].player.saves}} Shots Faced: {{data.team.matchup[1].player.shotsFaced}}<br>
@@ -824,7 +940,11 @@
               <br>
                <!-- <span *ngIf="data.team.matchup[1].player.injured === true && data.team.matchup[1].player.saves == null" style="color:red;">{{data.team.matchup[1].player.injury}}</span> -->
               <br>
-               <span *ngIf="data.team.matchup[1].player.confirmed === true" style="color: #2ecc71;"><i class="material-icons md-18">check_circle</i>confirmed</span><span *ngIf="data.team.matchup[1].player.confirmed === false && data.team.matchup[1].player.startingTodayNow === false" style="color: orange;"><i class="material-icons md-18">check_circle</i>expected</span>
+              <span *ngIf="fullFirebaseResponse != null && allGoalies[0][data.team.matchup[1].player.ID] != null && allGoalies[0][data.team.matchup[1].player.ID].confirmed === true && data.team.matchup[1].player.saves == null" style="color: #2ecc71;"><i class="material-icons md-18">check_circle</i>confirmed</span>
+
+              <span *ngIf="fullFirebaseResponse != null && allGoalies[0][data.team.matchup[1].player.ID] != null && allGoalies[0][data.team.matchup[1].player.ID].confirmed === false && data.team.matchup[0].player.startingTodayNow === false && data.team.matchup[1].player.saves == null" style="color: orange;"><i class="material-icons md-18">check_circle</i>expected</span>
+              
+             <!--   <span *ngIf="data.team.matchup[1].player.confirmed === true" style="color: #2ecc71;"><i class="material-icons md-18">check_circle</i>confirmed</span><span *ngIf="data.team.matchup[1].player.confirmed === false && data.team.matchup[1].player.startingTodayNow === false" style="color: orange;"><i class="material-icons md-18">check_circle</i>expected</span> -->
            
              <br> <div *ngIf="data.team.matchup[1].player.saves != null" class="stat-block">
               Saves: {{data.team.matchup[1].player.saves}} Shots Faced: {{data.team.matchup[1].player.shotsFaced}}<br>

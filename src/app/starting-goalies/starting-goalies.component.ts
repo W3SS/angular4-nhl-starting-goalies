@@ -49,6 +49,7 @@ export class StartingGoaliesComponent implements OnInit {
   twitterHandles: Array < any > ;
   todayStarters: Array < any > ;
   allGoalies: Array < any >;
+  allGoaliesTomorrow: Array < any >;
   selected: any;
   test: any;
   startingGoaliesToday: Array < any > = [];
@@ -57,19 +58,54 @@ export class StartingGoaliesComponent implements OnInit {
   startersDate: any;
   fullFirebaseResponse: any
   loading: boolean = true;
+  
+  stats: boolean = false;
+
+
+   goalieIdSet: boolean = false;
+   standIn: string = '';
+   goalieID: string = '';
+   newGoalie = { 
+          [this.standIn]: {
+            confirmed: false,
+            name: null,
+            probable: false
+          }
+        };
+
+
 
   constructor(private http: Http, private dataService: DataService, private fbService: FirebaseService, private yesterdayService: YesterdayService, public snackBar: MatSnackBar, public router: Router, public dialog: MatDialog) {
-    this.fbService
+      this.fbService
       .getStarterData()
       .subscribe(res => {
 
-        if (res != null) {
+        if (res[0] != null) {
           console.log(res[0], 'got response from firebase...');
           this.fullFirebaseResponse = res[0];
           this.startersDate = res[0][0]['todayDate'];
           this.todayStarters = res[0][1];
           this.allGoalies = Array.of(res[0][1]);
-        }
+          this.allGoaliesTomorrow = Array.of(res[0][3]);
+        } else {
+
+          console.log('removed db fb callback was undefined, go get goalie data again please...')
+
+           this.fbService
+            .getStarterData()
+            .subscribe(res => {
+
+              if (res[0] != null) {
+                console.log(res[0], 'got response from firebase...');
+                this.fullFirebaseResponse = res[0];
+                this.startersDate = res[0][0]['todayDate'];
+                this.todayStarters = res[0][1];
+                this.allGoalies = Array.of(res[0][1]);
+                this.allGoaliesTomorrow = Array.of(res[0][3]);
+              } 
+        
+           });
+        } 
         
     });
     yesterday = this.dataService.getYesterday();
@@ -78,20 +114,8 @@ export class StartingGoaliesComponent implements OnInit {
     console.log(yesterday + ' yesterday, ' + today + ' today, ' + tomorrow + ' tomorrow, ');
     this.sentData = this.dataService.getSentStats();
     this.sentYesterdayData = this.yesterdayService.getSentStats();
+       
   }
-
-  public saveStarts() {
-    //console.log(Object.assign({}, this.allGoalies), 'save these changes to firebase...');
-    //this.todayStarters = Object.assign({}, this.allGoalies);
-    console.log(this.fullFirebaseResponse, 'the full firebase response to send back to fb for update...');
-    this.fbService
-      .addData(this.fullFirebaseResponse);
-  }
-
-  // public trackByIndex(index: number, obj: any): any {
-  //   console.log(index, 'index returned...');
-  //   return index;
-  // }
 
   public getJSON() {
     this.http.get("./assets/twitter.json")
@@ -100,6 +124,8 @@ export class StartingGoaliesComponent implements OnInit {
         console.log(res['twitterHandles']["0"], 'twitter handles');
         this.twitterHandles = res['twitterHandles']["0"];
       })
+
+   
 
       // this.fbService
       // .getStarterData()
@@ -732,6 +758,69 @@ export class StartingGoaliesComponent implements OnInit {
 
     }
 
+  }
+
+  public saveStarts() {
+    console.log(this.fullFirebaseResponse, 'the full firebase response to send back to fb for update...');
+    this.fbService
+      .addData(this.fullFirebaseResponse);
+  }
+
+  public setGoalieId() {
+     this.newGoalie = { 
+          [this.goalieID]: {
+            confirmed: false,
+            name: null,
+            probable: false
+          }
+        }; 
+
+       console.log(this.newGoalie, 'save this goalie');
+       this.goalieIdSet = true;
+  }
+
+  public addGoalie() {
+     this.fullFirebaseResponse[1][this.goalieID] = this.newGoalie[this.goalieID];
+     this.fullFirebaseResponse[3][this.goalieID] = this.newGoalie[this.goalieID];
+     console.log(this.newGoalie, 'goalie updated');
+     //console.log(this.fullFirebaseResponse, 'added new goalie ready to save to fb....');   
+  }
+
+  public updateTodayStarters() {
+     this.fullFirebaseResponse[0] = this.fullFirebaseResponse[2]; 
+     this.fullFirebaseResponse[1] = this.fullFirebaseResponse[3]; 
+     console.log(this.fullFirebaseResponse, 'moved tomorrow starts to today...');   
+  }
+
+  public showTodayStarters() {
+    this.stats = true;
+       for (let info of this.playerInfo) {
+        if (this.fullFirebaseResponse[1][info.player.ID] != null) {
+            if (this.fullFirebaseResponse[1][info.player.ID].confirmed === false && this.fullFirebaseResponse[1][info.player.ID].probable === false) {
+             //this.filterOutStarters = true;
+             this.fullFirebaseResponse[1][info.player.ID].filterOutStarters = true;
+             console.log(this.fullFirebaseResponse[1][info.player.ID], "not starting today...");
+          } 
+       } 
+
+       if (this.fullFirebaseResponse[3][info.player.ID] != null) {
+            if (this.fullFirebaseResponse[3][info.player.ID].confirmed === false && this.fullFirebaseResponse[3][info.player.ID].probable === false) {
+             //this.filterOutStarters = true;
+             this.fullFirebaseResponse[3][info.player.ID].filterOutStarters = true;
+             console.log(this.fullFirebaseResponse[3][info.player.ID], "not starting tomorrow...");
+          } 
+       }
+    }  
+  }
+
+   public selectAll() {
+    for (let info of this.playerInfo) {
+      if (this.fullFirebaseResponse[3][info.player.ID] != null) {
+        this.fullFirebaseResponse[3][info.player.ID].confirmed = false;
+        this.fullFirebaseResponse[3][info.player.ID].probable = false;
+        console.log(this.fullFirebaseResponse, "make all starters false");
+      }
+    }
   }
 
   public isVisibleOnDesktop() {

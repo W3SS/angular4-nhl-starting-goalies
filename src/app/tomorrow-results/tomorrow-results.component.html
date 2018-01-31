@@ -1,5 +1,6 @@
 <h1 class="center no-game-header" *ngIf="noGamesToday === true">{{noGamesMsg}}</h1>
 <h1 class="center date-header" *ngIf="gamesToday === true"> {{ gameDate | date:'fullDate' }}</h1>
+
 <div class="spinner-msg" *ngIf="loading">
   Fetching goalie stats for tomorrow...
   <mat-spinner></mat-spinner>

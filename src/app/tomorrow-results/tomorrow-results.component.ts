@@ -60,6 +60,7 @@ export class TomorrowResultsComponent implements OnInit {
     this.sentDataToday = this.todayService.getSentStats();
   }
 
+
   public getJSON() {
     this.http.get("./assets/twitter.json")
       .map(response => response.json())
@@ -74,6 +75,7 @@ export class TomorrowResultsComponent implements OnInit {
         console.log(res[0][1], 'got response from firebase...');
         this.startersDate = res[0][2]['tomorrowDate'];
         this.tomorrowStarters = res[0][3];
+       
       });
 
     //  this.http.get("./assets/tomorrowStarters.json")

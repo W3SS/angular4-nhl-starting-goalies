@@ -40,7 +40,7 @@ let sentTomorrow;
 @Injectable()
 export class TomorrowService {
 
-   info: Observable < any > = null;
+  info: Observable < any > = null;
   stats: Observable < any > = null;
   env: Observable < any > = null;
   gameid: Observable < any > = null;
@@ -49,6 +49,8 @@ export class TomorrowService {
   score: Observable < any > = null;
   play: Observable <any> = null;
   injured: Observable <any> = null;
+
+  apiRoot: string = "https://api.mysportsfeeds.com/v1.2/pull/nhl/2017-2018-regular";
 
   constructor(private http: Http) {}
 
@@ -64,8 +66,8 @@ export class TomorrowService {
     if (!this.schedule) {
       console.log('getting schedule data from API...');
 
-      let url5 = 'https://api.mysportsfeeds.com/v1.1/pull/nhl/2017-2018-regular/daily_game_schedule.json?fordate='+dailyDate;
-      this.schedule = this.http.get(url5, options)
+      let url = `${this.apiRoot}/daily_game_schedule.json?fordate=`+dailyDate;
+      this.schedule = this.http.get(url, options)
         .map(response => response.json())
     }
     return this.schedule;
@@ -110,9 +112,9 @@ export class TomorrowService {
 
     if (!this.info) {
 
-      let url2 = 'https://api.mysportsfeeds.com/v1.1/pull/nhl/2017-2018-regular/active_players.json?position=G';
+      let url = `${this.apiRoot}/active_players.json?position=G`;
       console.log('getting active player data from API...');
-      this.info = this.http.get(url2, options)
+      this.info = this.http.get(url, options)
         .map(response => response.json())
     }
     return this.info;
@@ -122,7 +124,7 @@ export class TomorrowService {
     if (!this.stats) {
       console.log('getting cumulative player stats from API...');
 
-      let url = 'https://api.mysportsfeeds.com/v1.1/pull/nhl/2017-2018-regular/cumulative_player_stats.json?position=G';
+      let url = `${this.apiRoot}/cumulative_player_stats.json?position=G`;
       this.stats = this.http.get(url, options)
         .map(response => response.json())
     }
@@ -134,8 +136,8 @@ export class TomorrowService {
     if (!this.gameid) {
       console.log('getting yesterday, today, tomorrow from API...');
 
-      let url3 = 'https://api.mysportsfeeds.com/v1.1/pull/nhl/2017-2018-regular/full_game_schedule.json?date=from-'+yesterdayDailyDate+'-to-'+tomorrowDailyDate;
-      this.gameid = this.http.get(url3, options)
+      let url = `${this.apiRoot}/full_game_schedule.json?date=from-`+yesterdayDailyDate+`-to-`+tomorrowDailyDate;
+      this.gameid = this.http.get(url, options)
         .map(response => response.json())
     }
     return this.gameid;
@@ -146,8 +148,8 @@ export class TomorrowService {
     if (!this.injured) {
       console.log('getting yesterday, today, tomorrow from API...');
 
-      let url9 = 'https://api.mysportsfeeds.com/v1.1/pull/nhl/2017-2018-regular/player_injuries.json?position=G';
-      this.injured = this.http.get(url9, options)
+      let url = `${this.apiRoot}/player_injuries.json?position=G`;
+      this.injured = this.http.get(url, options)
         .map(response => response.json())
     }
     return this.injured;

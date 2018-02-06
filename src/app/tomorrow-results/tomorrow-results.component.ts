@@ -49,6 +49,7 @@ export class TomorrowResultsComponent implements OnInit {
   selected: any;
   startersDate: any;
   loading: boolean = true;
+  fullFirebaseResponse: any;
 
   constructor(private http: Http, private tomorrowService: TomorrowService, private todayService: DataService, private fbService: FirebaseService, public snackBar: MatSnackBar, public router: Router, public dialog: MatDialog) {
     this.getJSON();
@@ -72,11 +73,43 @@ export class TomorrowResultsComponent implements OnInit {
     this.fbService
       .getStarterData()
       .subscribe(res => {
+      if (res[0] != null) {
+        this.fullFirebaseResponse = res[0];
         console.log(res[0][1], 'got response from firebase...');
         this.startersDate = res[0][2]['tomorrowDate'];
         this.tomorrowStarters = res[0][3];
+         // This is to change a goalie in view without refresh
+         if(this.showDataTomorrow != null && this.myData != null) {
+
+             for (let show of this.showDataTomorrow) {
+              for (let rep of this.myData) {
+            
+                if (show.team.matchup != null && this.fullFirebaseResponse[3][show.team.matchup[0].player.ID] != null && this.fullFirebaseResponse[3][rep.player.ID] != null && rep.team.ID === show.team.matchup[0].team.ID && this.fullFirebaseResponse[3][show.team.matchup[0].player.ID].probable === false && this.fullFirebaseResponse[3][rep.player.ID].confirmed === true ) {
+                    // Found all confirmed goalies
+                    // if any of these confirmed goalies don't match ID's then check if same team id and swap 
+                   console.log(rep, 'update me into the view right now!');
+                   console.log(show.team.matchup[0], 'I have been changed, replace me with new goalie...');
+                   show.team.matchup[0] = rep; 
+                }
+                if (show.team.matchup != null && this.fullFirebaseResponse[3][show.team.matchup[1].player.ID] != null && this.fullFirebaseResponse[3][rep.player.ID] != null && rep.team.ID === show.team.matchup[1].team.ID && this.fullFirebaseResponse[3][show.team.matchup[1].player.ID].probable === false && this.fullFirebaseResponse[3][rep.player.ID].confirmed === true ) {
+                    // Found all confirmed goalies
+                    // if any of these confirmed goalies don't match ID's then check if same team id and swap 
+                   console.log(rep, 'update me into the view right now!');
+                   console.log(show.team.matchup[1], 'I have been changed, replace me with new goalie...');
+                   show.team.matchup[1] = rep; 
+                }
+              }
+             }
+
+         }   
+        
+      }
+
+
        
       });
+
+
 
     //  this.http.get("./assets/tomorrowStarters.json")
     // .map(response => response.json())
@@ -87,6 +120,29 @@ export class TomorrowResultsComponent implements OnInit {
     //   this.tomorrowStarters = res['tomorrowStarters']["1"];
     // })
 
+  }
+
+    public updateShowData() {
+    for (let show of this.showDataTomorrow) {
+      for (let rep of this.myData) {
+      
+
+        if (show.team.matchup != null && this.fullFirebaseResponse[3][show.team.matchup[0].player.ID] != null && this.fullFirebaseResponse[3][rep.player.ID] != null && rep.team.ID === show.team.matchup[0].team.ID && this.fullFirebaseResponse[3][show.team.matchup[0].player.ID].probable === false && this.fullFirebaseResponse[3][rep.player.ID].confirmed === true ) {
+            // Found all confirmed goalies
+            // if any of these confirmed goalies don't match ID's then check if same team id and swap 
+           console.log(rep, 'update me into the view right now!');
+           console.log(show.team.matchup[0], 'I have been changed, replace me with new goalie...');
+           show.team.matchup[0] = rep; 
+        }
+        if (show.team.matchup != null && this.fullFirebaseResponse[3][show.team.matchup[1].player.ID] != null && this.fullFirebaseResponse[3][rep.player.ID] != null && rep.team.ID === show.team.matchup[1].team.ID && this.fullFirebaseResponse[3][show.team.matchup[1].player.ID].probable === false && this.fullFirebaseResponse[3][rep.player.ID].confirmed === true ) {
+            // Found all confirmed goalies
+            // if any of these confirmed goalies don't match ID's then check if same team id and swap 
+           console.log(rep, 'update me into the view right now!');
+           console.log(show.team.matchup[1], 'I have been changed, replace me with new goalie...');
+           show.team.matchup[1] = rep; 
+        }
+      }
+    }
   }
 
   loadData() {
@@ -131,7 +187,7 @@ export class TomorrowResultsComponent implements OnInit {
               Observable.forkJoin(
                   res['dailygameschedule'].gameentry.map(
                     g =>
-                    this.http.get('https://api.mysportsfeeds.com/v1.1/pull/nhl/2017-2018-regular/game_startinglineup.json?gameid=' + g.id + '&position=Goalie-starter', options)
+                    this.http.get('https://api.mysportsfeeds.com/v1.2/pull/nhl/2017-2018-regular/game_startinglineup.json?gameid=' + g.id + '&position=Goalie-starter', options)
                     .map(response => response.json())
                   )
                 )
@@ -381,7 +437,6 @@ export class TomorrowResultsComponent implements OnInit {
 
                 data.player.startingToday = false;
                 data.player.likelyStartingToday = true;
-                console.log(data.player, 'confirmed or probable');
                 data.player.confirmed = this.tomorrowStarters[data.player.ID].confirmed;
                 data.player.probable = this.tomorrowStarters[data.player.ID].probable;
                 this.startersData.push(data);

@@ -1,8 +1,9 @@
 import { Component, ViewChild, Inject, OnInit } from '@angular/core';
-import {FormControl} from '@angular/forms';
+import { FormControl } from '@angular/forms';
 import { Http, Response, RequestOptions, Headers, Request, RequestMethod } from '@angular/http';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { Observable } from 'rxjs/Observable';
+import { IntervalObservable } from "rxjs/observable/IntervalObservable";
 import { ActivatedRoute, Router, ActivatedRouteSnapshot } from '@angular/router';
 import { DatePipe, PercentPipe } from '@angular/common';
 import { DataService } from '../data.service';
@@ -48,8 +49,8 @@ export class StartingGoaliesComponent implements OnInit {
   gamesToday: boolean;
   twitterHandles: Array < any > ;
   todayStarters: Array < any > ;
-  allGoalies: Array < any >;
-  allGoaliesTomorrow: Array < any >;
+  allGoalies: Array < any > ;
+  allGoaliesTomorrow: Array < any > ;
   selected: any;
   test: any;
   startingGoaliesToday: Array < any > = [];
@@ -58,25 +59,25 @@ export class StartingGoaliesComponent implements OnInit {
   startersDate: any;
   fullFirebaseResponse: any
   loading: boolean = true;
-  
+
   stats: boolean = false;
 
 
-   goalieIdSet: boolean = false;
-   standIn: string = '';
-   goalieID: string = '';
-   newGoalie = { 
-          [this.standIn]: {
-            confirmed: false,
-            name: null,
-            probable: false
-          }
-        };
+  goalieIdSet: boolean = false;
+  standIn: string = '';
+  goalieID: string = '';
+  newGoalie = {
+    [this.standIn]: {
+      confirmed: false,
+      name: null,
+      probable: false
+    }
+  };
 
 
 
   constructor(private http: Http, private dataService: DataService, private fbService: FirebaseService, private yesterdayService: YesterdayService, public snackBar: MatSnackBar, public router: Router, public dialog: MatDialog) {
-      this.fbService
+    this.fbService
       .getStarterData()
       .subscribe(res => {
 
@@ -88,36 +89,36 @@ export class StartingGoaliesComponent implements OnInit {
           this.allGoalies = Array.of(res[0][1]);
           this.allGoaliesTomorrow = Array.of(res[0][3]);
 
-         // This is to change a goalie in view without refresh
-         if(this.showData != null && this.myData != null) {
-           for (let show of this.showData) {
-                    for (let rep of this.myData) {
-                      //console.log(show, 'showData items...');
-                      if (show.team.matchup != null && this.fullFirebaseResponse[1][show.team.matchup[0].player.ID] != null && this.fullFirebaseResponse[1][rep.player.ID] != null && rep.team.ID === show.team.matchup[0].team.ID && this.fullFirebaseResponse[1][show.team.matchup[0].player.ID].probable === false && this.fullFirebaseResponse[1][rep.player.ID].confirmed === true ) {
-                          // Find goalies with the same team ID
-                          // if the view has a goalie that is probable false swap with goalie from firebase that is confirmed
-                         console.log(rep, 'update me into the view right now!');
-                         console.log(show.team.matchup[0], 'I have been changed, replace me with new goalie...');
-                         show.team.matchup[0] = rep; 
-                      }
-                      if (show.team.matchup != null && this.fullFirebaseResponse[1][show.team.matchup[1].player.ID] != null && this.fullFirebaseResponse[1][rep.player.ID] != null && rep.team.ID === show.team.matchup[1].team.ID && this.fullFirebaseResponse[1][show.team.matchup[1].player.ID].probable === false && this.fullFirebaseResponse[1][rep.player.ID].confirmed === true ) {
-                          // same thing
-                          // now check against the 2nd item in the view matchup array
-                         console.log(rep, 'update me into the view right now!');
-                         console.log(show.team.matchup[1], 'I have been changed, replace me with new goalie...');
-                         show.team.matchup[1] = rep; 
-                      }
+          // This is to change a goalie in view without refresh
+          if (this.showData != null && this.myData != null) {
+            for (let show of this.showData) {
+              for (let rep of this.myData) {
+                //console.log(show, 'showData items...');
+                if (show.team.matchup != null && this.fullFirebaseResponse[1][show.team.matchup[0].player.ID] != null && this.fullFirebaseResponse[1][rep.player.ID] != null && rep.team.ID === show.team.matchup[0].team.ID && this.fullFirebaseResponse[1][show.team.matchup[0].player.ID].probable === false && this.fullFirebaseResponse[1][rep.player.ID].confirmed === true) {
+                  // Find goalies with the same team ID
+                  // if the view has a goalie that is probable false swap with goalie from firebase that is confirmed
+                  console.log(rep, 'update me into the view right now!');
+                  console.log(show.team.matchup[0], 'I have been changed, replace me with new goalie...');
+                  show.team.matchup[0] = rep;
+                }
+                if (show.team.matchup != null && this.fullFirebaseResponse[1][show.team.matchup[1].player.ID] != null && this.fullFirebaseResponse[1][rep.player.ID] != null && rep.team.ID === show.team.matchup[1].team.ID && this.fullFirebaseResponse[1][show.team.matchup[1].player.ID].probable === false && this.fullFirebaseResponse[1][rep.player.ID].confirmed === true) {
+                  // same thing
+                  // now check against the 2nd item in the view matchup array
+                  console.log(rep, 'update me into the view right now!');
+                  console.log(show.team.matchup[1], 'I have been changed, replace me with new goalie...');
+                  show.team.matchup[1] = rep;
+                }
 
-                    }
-                 }
               }
-         
+            }
+          }
+
 
         } else {
 
           console.log('removed db fb callback was undefined, go get goalie data again please...')
 
-           this.fbService
+          this.fbService
             .getStarterData()
             .subscribe(res => {
 
@@ -128,53 +129,34 @@ export class StartingGoaliesComponent implements OnInit {
                 this.todayStarters = res[0][1];
                 this.allGoalies = Array.of(res[0][1]);
                 this.allGoaliesTomorrow = Array.of(res[0][3]);
-              } 
-        
-           });
-        } 
-        
-    });
+              }
+
+            });
+        }
+
+      });
     yesterday = this.dataService.getYesterday();
     tomorrow = this.dataService.getTomorrow();
     today = this.dataService.getToday();
     console.log(yesterday + ' yesterday, ' + today + ' today, ' + tomorrow + ' tomorrow, ');
     this.sentData = this.dataService.getSentStats();
     this.sentYesterdayData = this.yesterdayService.getSentStats();
-       
-  }
-
-  public getJSON() {
-    this.http.get("./assets/twitter.json")
-      .map(response => response.json())
-      .subscribe(res => {
-        console.log(res['twitterHandles']["0"], 'twitter handles');
-        this.twitterHandles = res['twitterHandles']["0"];
-      })
-
-   
-
-      // this.fbService
-      // .getStarterData()
-      // .subscribe(res => {
-      //   console.log(res[1], 'got response from firebase...');
-      //   this.startersDate = res[0]['todayDate'];
-      //   this.todayStarters = res[1];
-      // });
-
-    // this.http.get("./assets/starters.json")
-    //   .map(response => response.json())
-    //   .subscribe(res => {
-    //     console.log(res['Starters']["1"], 'today starters...');
-    //     this.fullFirebaseResponse = res['Starters'];
-    //     this.startersDate = res['Starters']["0"]['date'];
-    //     this.todayStarters = res['Starters']["1"];
-    //     this.allGoalies = Array.of(res['Starters']["1"]);
-    //     this.allGoaliesTomorrow = Array.of(res['Starters']["3"]);
-    //   })
 
   }
 
-  loadData() { 
+  // public getJSON() {
+  //   this.http.get("./assets/twitter.json")
+  //     .map(response => response.json())
+  //     .subscribe(res => {
+  //       console.log(res['twitterHandles']["0"], 'twitter handles');
+  //       this.twitterHandles = res['twitterHandles']["0"];
+  //     })
+
+
+
+  // }
+
+  loadData() {
 
     this.dataService
       .getEnv().subscribe(res => {
@@ -188,7 +170,7 @@ export class StartingGoaliesComponent implements OnInit {
           .getDailySchedule().subscribe(res => {
 
             console.log(res, "schedule...");
-           
+
             if (res['dailygameschedule'].gameentry == null) {
               this.loading = false;
               this.noGamesToday = true;
@@ -201,7 +183,7 @@ export class StartingGoaliesComponent implements OnInit {
                 if (res['dailygameschedule'].gameentry[postponed].id === '41392') {
                   console.log(res['dailygameschedule'].gameentry[postponed], "hi, iam postponed and causing trouble...");
                   res['dailygameschedule'].gameentry.splice(postponed, 1);
-               }
+                }
               });
               this.dailySchedule = res['dailygameschedule'].gameentry;
               this.gameDate = res['dailygameschedule'].gameentry[0].date;
@@ -262,29 +244,29 @@ export class StartingGoaliesComponent implements OnInit {
         //     this.playerInjuries = res['playerinjuries'].playerentry;
         //   })
 
-        this.dataService
-          .getInfo().subscribe(res => {
-            console.log(res['activeplayers'].playerentry, "active players stats...");
-            this.playerInfo = res['activeplayers'].playerentry;
-          })
+        // this.dataService
+        //   .getInfo().subscribe(res => {
+        //     console.log(res['activeplayers'].playerentry, "active players stats...");
+        //     this.playerInfo = res['activeplayers'].playerentry;
+        //   })
 
         this.dataService
           .getGameId().subscribe(res => {
             console.log(res['fullgameschedule'].gameentry, "scheduled games for yesterday today and tomorrow...");
 
-             //this removed a postponed game from api to avoid errors
-             if (res['fullgameschedule'].gameentry > 0) {
-                  let postponed;
-             res['fullgameschedule'].gameentry.forEach((item, index) => {
-             postponed = index;
-             if (res['fullgameschedule'].gameentry[postponed].id === '41392') {
-               console.log(res['fullgameschedule'].gameentry[postponed], "hi, iam postponed and causing trouble...");
-                 res['fullgameschedule'].gameentry.splice(postponed, 1);
-               }
-            });
-             }
-          
-            
+            //this removed a postponed game from api to avoid errors
+            if (res['fullgameschedule'].gameentry > 0) {
+              let postponed;
+              res['fullgameschedule'].gameentry.forEach((item, index) => {
+                postponed = index;
+                if (res['fullgameschedule'].gameentry[postponed].id === '41392') {
+                  console.log(res['fullgameschedule'].gameentry[postponed], "hi, iam postponed and causing trouble...");
+                  res['fullgameschedule'].gameentry.splice(postponed, 1);
+                }
+              });
+            }
+
+
             //res['fullgameschedule'].gameentry.splice(16, 1);
 
             this.fullSchedule = res['fullgameschedule'].gameentry;
@@ -293,6 +275,9 @@ export class StartingGoaliesComponent implements OnInit {
       })
 
   }
+
+
+
 
   sortData() {
 
@@ -357,7 +342,7 @@ export class StartingGoaliesComponent implements OnInit {
               if (schedule.homeTeam.Name === sdata.team.Name) {
                 sdata.player.gameTime = schedule.time;
 
-               if (schedule.location === 'Nassau Coliseum') {
+                if (schedule.location === 'Nassau Coliseum') {
                   sdata.team.gameIce = 'Barclays Center';
                 } else if (schedule.location === 'Verizon Center') {
                   sdata.team.gameIce = 'Capital One Arena';
@@ -368,7 +353,7 @@ export class StartingGoaliesComponent implements OnInit {
                 } else {
                   sdata.team.gameIce = schedule.location;
                 }
-        
+
                 sdata.team.gameId = schedule.id;
                 sdata.player.gameLocation = "home";
                 sdata.team.day = this.tweetDay;
@@ -391,8 +376,6 @@ export class StartingGoaliesComponent implements OnInit {
             }
           }
         }
-
-
 
         if (this.myData && this.dailyStats) {
           console.log('start sorting data for daily stats...');
@@ -484,81 +467,60 @@ export class StartingGoaliesComponent implements OnInit {
           }
         }
 
-        console.log('start sorting data for starters...');
-        for (let info of this.playerInfo) {
-
-          for (let data of this.myData) {
 
 
-            if (info.player.ID === data.player.ID) {
-              
-              data.player.image = info.player.officialImageSrc;
-              if (info.player.Twitter != null) {
-                data.player.atHandle = info.player.Twitter + ' ';
-              } else {
-                data.player.atHandle = '';
-              }
-              
-              
-              data.player.savePercent = data.stats.stats.SavePercentage['#text'].slice(1);
+        for (let data of this.myData) {
+          console.log('start sorting data for goalie images and back to back...');
 
-              if(this.twitterHandles[data.team.ID] != null) {
-                //console.log(this.twitterHandles[data.team.ID].twitterHashTag);
-                data.player.twitterHandle = this.twitterHandles[data.team.ID].twitterHashTag;
+          data.player.savePercent = data.stats.stats.SavePercentage['#text'].slice(1);
 
-                  // //INCASE API CHANGES TEAM IDS AGAIN CATCH IT HERE
-                  // if (this.twitterHandles[data.team.ID][data.player.ID] != null) {
-                  //   data.player.atHandle = this.twitterHandles[data.team.ID][data.player.ID] + ' ';
-                  // } else {
-                  //   data.player.atHandle = '';
-                  // }
+          if (this.todayStarters != null) {
 
-              } else {
-                console.log(data, "Hi I am the DATA ID causing problems");
-              }
-              
-             // CHECK IF FIREBASE RES IS TOO SLOW FIREFOX ISSUE MAINLY 
-             if (this.todayStarters != null) {
-                if (this.startersDate === data.team.today && this.todayStarters[data.player.ID] != null && data.player.saves == null && data.player.shotsFaced == null && this.todayStarters[data.player.ID].probable === true || this.startersDate === data.team.today && this.todayStarters[data.player.ID] != null && data.player.saves == '0' && data.player.shotsFaced == '0' && this.todayStarters[data.player.ID].probable === true) {
-                  data.player.confirmed = this.todayStarters[data.player.ID].confirmed;
-                  data.player.probable = this.todayStarters[data.player.ID].probable;
-                  data.player.startingToday = true;
-                  data.player.startingTodayNow = false;
-
-                  //console.log(data.player, 'confirmed or probable');
-
-                  this.startersData.push(data);
-                }
-             } else {
-               console.log('firebase res not returned yet....');
-             }
-                
-
-              if (data.team.hadGameYesterday === true) {
-                //console.log(data, 'game yesterday');
-                if (data.team.haveGameToday === true) {
-                  data.team.secondBacktoBack = " 2nd game of a Back-to-Back ";
-                } else {
-                  data.team.secondBacktoBack = "";
-                }
-              } else {
-                data.team.secondBacktoBack = "";
-              }
-
-              if (data.team.haveGameToday === true) {
-                //console.log(data, 'game today');
-                if (data.team.haveGameTomorrow === true) {
-                  data.team.firstBacktoBack = " 1st game of a Back-to-Back ";
-                } else {
-                  data.team.firstBacktoBack = "";
-                }
-              }
-
-
+            if (this.todayStarters[data.player.ID] != null) {
+              data.player.image = this.todayStarters[data.player.ID].image;
+              data.player.atHandle = this.todayStarters[data.player.ID].atHandle;
+              data.player.twitterHandle = this.todayStarters[data.player.ID].twitterHandle;
             }
 
+            if (this.startersDate === data.team.today && this.todayStarters[data.player.ID] != null && data.player.saves == null && data.player.shotsFaced == null && this.todayStarters[data.player.ID].probable === true || this.startersDate === data.team.today && this.todayStarters[data.player.ID] != null && data.player.saves == '0' && data.player.shotsFaced == '0' && this.todayStarters[data.player.ID].probable === true) {
+              data.player.confirmed = this.todayStarters[data.player.ID].confirmed;
+              data.player.probable = this.todayStarters[data.player.ID].probable;
+              data.player.startingToday = true;
+              data.player.startingTodayNow = false;
+
+              //console.log(data.player, 'confirmed or probable');
+
+              this.startersData.push(data);
+            }
+          } else {
+            console.log('firebase res not returned yet....');
           }
+
+
+          if (data.team.hadGameYesterday === true) {
+            //console.log(data, 'game yesterday');
+            if (data.team.haveGameToday === true) {
+              data.team.secondBacktoBack = " 2nd game of a Back-to-Back ";
+            } else {
+              data.team.secondBacktoBack = "";
+            }
+          } else {
+            data.team.secondBacktoBack = "";
+          }
+
+          if (data.team.haveGameToday === true) {
+            //console.log(data, 'game today');
+            if (data.team.haveGameTomorrow === true) {
+              data.team.firstBacktoBack = " 1st game of a Back-to-Back ";
+            } else {
+              data.team.firstBacktoBack = "";
+            }
+          }
+
+
+
         }
+
 
         if (this.sentYesterdayData != null) {
           console.log('start sorting data from yesterday...');
@@ -657,7 +619,7 @@ export class StartingGoaliesComponent implements OnInit {
                     startdata.player.startingTodayNow = false;
                     console.log(startdata, 'player data');
                     this.startersData.push(startdata);
-                  } 
+                  }
 
                 }
 
@@ -776,13 +738,74 @@ export class StartingGoaliesComponent implements OnInit {
 
 
   ngOnInit() {
+
     if (this.sentData === undefined) {
-      this.getJSON();
+
+      // this.getJSON();
+      // setInterval(() => this.updateDailyStats, 10000);
       this.loadData();
 
+      // get our data every subsequent 10 minutes
+      IntervalObservable.create(600000)
+        .subscribe(() => {
+          if (this.gamesToday === true) {
+            this.dataService
+              .getDaily().subscribe(res => {
+                console.log(res, "Daily stats updated, Now what...");
+                this.dailyStats = res['dailyplayerstats'].playerstatsentry;
+
+                if (this.myData && this.dailyStats) {
+                  console.log('start sorting data for daily stats...');
+                  for (let daily of this.dailyStats) {
+                    for (let mdata of this.myData) {
+
+                      if (daily.player.ID === mdata.player.ID) {
+
+                        mdata.player.saves = daily.stats.Saves['#text'];
+                        mdata.player.shotsFaced = daily.stats.ShotsAgainst['#text'];
+                        mdata.player.wins = daily.stats.Wins['#text'];
+                        mdata.player.losses = daily.stats.Losses['#text'];
+                        mdata.player.OvertimeLosses = daily.stats.OvertimeLosses['#text'];
+                        mdata.player.Shutouts = daily.stats.Shutouts['#text'];
+                        mdata.player.ga = daily.stats.GoalsAgainst['#text'];
+
+                        if (daily.stats.Saves['#text'] > 0 || daily.stats.Wins['#text'] == '1') {
+                          // this.starterIdData.push(daily.player.ID);
+                          this.startingGoaliesToday.push(daily.player.ID);
+                        }
+
+                        if (daily.stats.GoalsAgainst['#text'] == '1') {
+                          mdata.player.GoalsAgainst = daily.stats.GoalsAgainst['#text'] + ' goal';
+                        } else {
+                          mdata.player.GoalsAgainst = daily.stats.GoalsAgainst['#text'] + ' goals';
+                        }
+
+                        if (parseInt(daily.stats.Saves['#text']) > 20 && daily.stats.GoalsAgainst['#text'] == '0') {
+                          mdata.player.twentySavesPlus = true;
+                          mdata.player.twentySavesPlusResult = mdata.player.FirstName + ' ' + mdata.player.LastName + ' has ' + daily.stats.Saves['#text'] + ' saves and has not given up a goal to the ' + mdata.team.opponentCity + ' ' + mdata.team.opponentName + '!';
+                        } else if (parseInt(daily.stats.Saves['#text']) > 20 && daily.stats.GoalsAgainst['#text'] > '0') {
+                          mdata.player.twentySavesPlus = true;
+                          mdata.player.twentySavesPlusShutout = false;
+                          mdata.player.twentySavesPlusResult = mdata.player.FirstName + ' ' + mdata.player.LastName + ' has ' + daily.stats.Saves['#text'] + ' saves against ' + daily.stats.ShotsAgainst['#text'] + ' shots fired by ' + mdata.team.opponentCity + ' ' + mdata.team.opponentName + ' offense and let ' + mdata.player.GoalsAgainst + ' light the lamp!';
+                        }
+
+
+                      }
+
+                    }
+                  }
+                }
+              })
+          } else {
+            console.log('No games then no daily stats either. :(');
+          }
+        });
+
     } else {
-      this.getJSON();
+
+      // this.getJSON();
       setInterval(() => {
+        this.getSortDataHandler();
         this.loading = false;
         this.showData = this.sentData;
         //console.log(this.showData["0"].team.today, "get the date");
@@ -793,65 +816,70 @@ export class StartingGoaliesComponent implements OnInit {
 
   }
 
+  public getSortDataHandler() {
+    console.log('It has been 10 seconds I am refreshing sort data again...');
+
+  }
+
   public saveStarts() {
-     if (this.stats === false) {
+    if (this.stats === false) {
       console.log('This a good state to save!!');
       console.log(this.fullFirebaseResponse, 'the full firebase response to send back to fb for update...');
       this.fbService
         .addData(this.fullFirebaseResponse);
-     } else {
-       console.log('you need to refresh the goalies before saving... Important');
-     } 
+    } else {
+      console.log('you need to refresh the goalies before saving... Important');
+    }
   }
 
   public setGoalieId() {
-     this.newGoalie = { 
-          [this.goalieID]: {
-            confirmed: false,
-            name: null,
-            probable: false
-          }
-        }; 
+    this.newGoalie = {
+      [this.goalieID]: {
+        confirmed: false,
+        name: null,
+        probable: false
+      }
+    };
 
-       console.log(this.newGoalie, 'save this goalie');
-       this.goalieIdSet = true;
+    console.log(this.newGoalie, 'save this goalie');
+    this.goalieIdSet = true;
   }
 
   public addGoalie() {
-     this.fullFirebaseResponse[1][this.goalieID] = this.newGoalie[this.goalieID];
-     this.fullFirebaseResponse[3][this.goalieID] = this.newGoalie[this.goalieID];
-     console.log(this.newGoalie, 'goalie updated');
-     //console.log(this.fullFirebaseResponse, 'added new goalie ready to save to fb....');   
+    this.fullFirebaseResponse[1][this.goalieID] = this.newGoalie[this.goalieID];
+    this.fullFirebaseResponse[3][this.goalieID] = this.newGoalie[this.goalieID];
+    console.log(this.newGoalie, 'goalie updated');
+    //console.log(this.fullFirebaseResponse, 'added new goalie ready to save to fb....');   
   }
 
   public updateTodayStarters() {
-     this.fullFirebaseResponse[0]['todayDate'] = this.fullFirebaseResponse[2]['tomorrowDate']; 
-     this.fullFirebaseResponse[1] = this.fullFirebaseResponse[3]; 
-     console.log(this.fullFirebaseResponse, 'moved tomorrow starts to today...');   
+    this.fullFirebaseResponse[0]['todayDate'] = this.fullFirebaseResponse[2]['tomorrowDate'];
+    this.fullFirebaseResponse[1] = this.fullFirebaseResponse[3];
+    console.log(this.fullFirebaseResponse, 'moved tomorrow starts to today...');
   }
 
   public showTodayStarters() {
     this.stats = true;
-       for (let info of this.myData) {
-        if (this.fullFirebaseResponse[1][info.player.ID] != null) {
-            if (this.fullFirebaseResponse[1][info.player.ID].confirmed === false && this.fullFirebaseResponse[1][info.player.ID].probable === false) {
-             //this.filterOutStarters = true;
-             this.fullFirebaseResponse[1][info.player.ID].filterOutStarters = true;
-             //console.log(this.fullFirebaseResponse[1][info.player.ID], "not starting today...");
-          } 
-       } 
+    for (let info of this.myData) {
+      if (this.fullFirebaseResponse[1][info.player.ID] != null) {
+        if (this.fullFirebaseResponse[1][info.player.ID].confirmed === false && this.fullFirebaseResponse[1][info.player.ID].probable === false) {
 
-       if (this.fullFirebaseResponse[3][info.player.ID] != null) {
-            if (this.fullFirebaseResponse[3][info.player.ID].confirmed === false && this.fullFirebaseResponse[3][info.player.ID].probable === false) {
-             //this.filterOutStarters = true;
-             this.fullFirebaseResponse[3][info.player.ID].filterOutStarters = true;
-             //console.log(this.fullFirebaseResponse[3][info.player.ID], "not starting tomorrow...");
-          } 
-       }
-    }  
+          this.fullFirebaseResponse[1][info.player.ID].filterOutStarters = true;
+          //console.log(this.fullFirebaseResponse[1][info.player.ID], "not starting today...");
+        }
+      }
+
+      if (this.fullFirebaseResponse[3][info.player.ID] != null) {
+        if (this.fullFirebaseResponse[3][info.player.ID].confirmed === false && this.fullFirebaseResponse[3][info.player.ID].probable === false) {
+
+          this.fullFirebaseResponse[3][info.player.ID].filterOutStarters = true;
+          //console.log(this.fullFirebaseResponse[3][info.player.ID], "not starting tomorrow...");
+        }
+      }
+    }
   }
 
-   public selectAll() {
+  public selectAll() {
     for (let info of this.myData) {
       if (this.fullFirebaseResponse[3][info.player.ID] != null) {
         this.fullFirebaseResponse[3][info.player.ID].confirmed = false;
@@ -862,44 +890,51 @@ export class StartingGoaliesComponent implements OnInit {
   }
 
 
-   public addMoreData() {
-    this.stats = true;
-       for (let info of this.myData) {
-        if (this.fullFirebaseResponse[1][info.player.ID] != null) {
+  //  public addMoreData() {
 
-             // this.fullFirebaseResponse[1][info.player.ID].image = info.player.image;
-             // this.fullFirebaseResponse[1][info.player.ID].firstName = info.player.FirstName;
-             // this.fullFirebaseResponse[1][info.player.ID].lastName = info.player.LastName;
-             // this.fullFirebaseResponse[1][info.player.ID].teamName = info.team.Name;
-             // this.fullFirebaseResponse[1][info.player.ID].position = info.player.Position;
-             // this.fullFirebaseResponse[1][info.player.ID].wins = info.stats.stats.Wins['#text'];
-             // this.fullFirebaseResponse[1][info.player.ID].losses = info.stats.stats.Losses['#text'];
-             // this.fullFirebaseResponse[1][info.player.ID].otlosses = info.stats.stats.OvertimeLosses['#text'];
-             // this.fullFirebaseResponse[1][info.player.ID].goalsAgainst = info.stats.stats.GoalsAgainst['#text'];
-             // this.fullFirebaseResponse[1][info.player.ID].gaa = info.stats.stats.GoalsAgainstAverage['#text'];
+  //      for (let info of this.myData) {
 
-             console.log(this.fullFirebaseResponse[1][info.player.ID], "added data to today...");
-           
-       } 
+  //       if (this.fullFirebaseResponse[1][info.player.ID] != null) {
+  //         if (info.player.image == null) {
 
-       if (this.fullFirebaseResponse[3][info.player.ID] != null) {
-        
-             // this.fullFirebaseResponse[3][info.player.ID].image = info.player.image;
-             // this.fullFirebaseResponse[3][info.player.ID].firstName = info.player.FirstName;
-             // this.fullFirebaseResponse[3][info.player.ID].lastName = info.player.LastName;
-             // this.fullFirebaseResponse[3][info.player.ID].teamName = info.team.Name;
-             // this.fullFirebaseResponse[3][info.player.ID].position = info.player.Position;
-             // this.fullFirebaseResponse[3][info.player.ID].wins = info.stats.stats.Wins['#text'];
-             // this.fullFirebaseResponse[3][info.player.ID].losses = info.stats.stats.Losses['#text'];
-             // this.fullFirebaseResponse[3][info.player.ID].otlosses = info.stats.stats.OvertimeLosses['#text'];
-             // this.fullFirebaseResponse[3][info.player.ID].goalsAgainst = info.stats.stats.GoalsAgainst['#text'];
-             // this.fullFirebaseResponse[3][info.player.ID].gaa = info.stats.stats.GoalsAgainstAverage['#text'];
+  //           console.log(info, 'this goalie is missing an image');
+  //            this.fullFirebaseResponse[1][info.player.ID].image = 'https://nhl.bamcontent.com/images/headshots/current/168x168/goalie@2x.jpg';
 
-             console.log(this.fullFirebaseResponse[3][info.player.ID], "added data to tomorrow...");
-           
-       }
-    }  
-  }
+
+
+
+  //         } else {
+
+  //            this.fullFirebaseResponse[1][info.player.ID].image = info.player.image;
+  //            this.fullFirebaseResponse[1][info.player.ID].atHandle = info.player.atHandle;
+  //            this.fullFirebaseResponse[1][info.player.ID].twitterHandle = info.player.twitterHandle;
+  //            console.log(this.fullFirebaseResponse[1][info.player.ID], "added data to today...");
+  //         }
+
+
+  //       } 
+
+  //       if (this.fullFirebaseResponse[3][info.player.ID] != null) {
+  //         if (info.player.image == null) {
+
+  //              console.log(info, 'this goalie is missing an image');
+  //            this.fullFirebaseResponse[3][info.player.ID].image = 'https://nhl.bamcontent.com/images/headshots/current/168x168/goalie@2x.jpg';
+
+
+
+  //         } else {
+
+  //            this.fullFirebaseResponse[3][info.player.ID].image = info.player.image;
+  //            this.fullFirebaseResponse[3][info.player.ID].atHandle = info.player.atHandle;
+  //            this.fullFirebaseResponse[3][info.player.ID].twitterHandle = info.player.twitterHandle;
+  //            console.log(this.fullFirebaseResponse[3][info.player.ID], "added data to tomorrow...");
+
+  //         }
+
+
+  //       }
+  //   }  
+  // }
 
   public isVisibleOnDesktop() {
     // console.log('width over 600px');
@@ -923,15 +958,15 @@ export class StartingGoaliesComponent implements OnInit {
     });
   }
 
-   public openLogin(event) {
-     if (event.keyCode === 65 && event.ctrlKey) {
-        this.dialog.open(LoginDialog, {
+  public openLogin(event) {
+    if (event.keyCode === 65 && event.ctrlKey) {
+      this.dialog.open(LoginDialog, {
         width: '1025px'
-        });
-     } else {
-       //console.log('wrong key...');
-     }
-   
+      });
+    } else {
+      //console.log('wrong key...');
+    }
+
   }
 
   openSnackBar() {
@@ -979,28 +1014,28 @@ export class StartingGoaliesComponent implements OnInit {
 export class LoginDialog implements OnInit {
 
   user = {
-   email: '',
-   password: ''
+    email: '',
+    password: ''
   };
 
   signedIn: any;
 
-  constructor(public dialogRef: MatDialogRef < LastweekDialog >, private fbService: FirebaseService) {}
+  constructor(public dialogRef: MatDialogRef < LastweekDialog > , private fbService: FirebaseService) {}
 
 
   signInWithEmail() {
-   this.fbService.signInRegular(this.user.email, this.user.password)
+    this.fbService.signInRegular(this.user.email, this.user.password)
       .then((res) => {
-         //console.log(res);
-         this.signedIn = res;
+        //console.log(res);
+        this.signedIn = res;
       })
       .catch((err) => console.log('error: ' + err));
-   }
+  }
 
 
 
   ngOnInit() {
-    
+
 
   }
 
@@ -1168,7 +1203,7 @@ export class LastweekDialog implements OnInit {
           hash[key].hot = true;
         }
         hash[key].opponents.push(a.player.opponent);
-        
+
         return r;
       };
 
@@ -1238,7 +1273,7 @@ export class TodayDialog implements OnInit {
 
     let headers = new Headers();
     //let searchterm = 'query=#startingGoalies #nhl ' + this.data.player.FirstName + ' ' + this.data.player.LastName;
-    let searchterm = 'query='+ this.data.player.LastName +' '+ this.data.player.twitterHandle;
+    let searchterm = 'query=' + this.data.player.LastName + ' ' + this.data.player.twitterHandle;
 
     headers.append('Content-Type', 'application/X-www-form-urlencoded');
 

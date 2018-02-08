@@ -52,25 +52,8 @@ export class TomorrowResultsComponent implements OnInit {
   fullFirebaseResponse: any;
 
   constructor(private http: Http, private tomorrowService: TomorrowService, private todayService: DataService, private fbService: FirebaseService, public snackBar: MatSnackBar, public router: Router, public dialog: MatDialog) {
-    this.getJSON();
-    yesterday = this.tomorrowService.getYesterday();
-    tomorrow = this.tomorrowService.getTomorrow();
-    today = this.tomorrowService.getToday();
-    console.log(yesterday + ' yesterday, ' + today + ' today, ' + tomorrow + ' tomorrow, ');
-    this.sentDataTomorrow = this.tomorrowService.getSentStats();
-    this.sentDataToday = this.todayService.getSentStats();
-  }
 
-
-  public getJSON() {
-    this.http.get("./assets/twitter.json")
-      .map(response => response.json())
-      .subscribe(res => {
-        console.log(res['twitterHandles']["0"], 'twitter handles');
-        this.twitterHandles = res['twitterHandles']["0"];
-      })
-
-    this.fbService
+      this.fbService
       .getStarterData()
       .subscribe(res => {
       if (res[0] != null) {
@@ -108,19 +91,26 @@ export class TomorrowResultsComponent implements OnInit {
 
        
       });
-
-
-
-    //  this.http.get("./assets/tomorrowStarters.json")
-    // .map(response => response.json())
-    // .subscribe(res => {
-    //   console.log(res['tomorrowStarters']["0"]['date'], 'date...');
-    //   console.log(res['tomorrowStarters']["1"], 'tomorrow starters...');
-    //   this.startersDate = res['tomorrowStarters']["0"]['date'];
-    //   this.tomorrowStarters = res['tomorrowStarters']["1"];
-    // })
-
+    yesterday = this.tomorrowService.getYesterday();
+    tomorrow = this.tomorrowService.getTomorrow();
+    today = this.tomorrowService.getToday();
+    console.log(yesterday + ' yesterday, ' + today + ' today, ' + tomorrow + ' tomorrow, ');
+    this.sentDataTomorrow = this.tomorrowService.getSentStats();
+    this.sentDataToday = this.todayService.getSentStats();
   }
+
+
+  // public getJSON() {
+  //   this.http.get("./assets/twitter.json")
+  //     .map(response => response.json())
+  //     .subscribe(res => {
+  //       console.log(res['twitterHandles']["0"], 'twitter handles');
+  //       this.twitterHandles = res['twitterHandles']["0"];
+  //     })
+
+  
+
+ // }
 
     public updateShowData() {
     for (let show of this.showDataTomorrow) {
@@ -237,11 +227,11 @@ export class TomorrowResultsComponent implements OnInit {
             this.playerInjuries = res['playerinjuries'].playerentry;
           })
 
-        this.tomorrowService
-          .getInfo().subscribe(res => {
-            console.log(res['activeplayers'].playerentry, "active players stats...");
-            this.playerInfo = res['activeplayers'].playerentry;
-          })
+        // this.tomorrowService
+        //   .getInfo().subscribe(res => {
+        //     console.log(res['activeplayers'].playerentry, "active players stats...");
+        //     this.playerInfo = res['activeplayers'].playerentry;
+        //   })
 
         this.tomorrowService
           .getGameId().subscribe(res => {
@@ -404,36 +394,44 @@ export class TomorrowResultsComponent implements OnInit {
         }
 
 
-        console.log('start sorting data for starters...');
-        for (let info of this.playerInfo) {
-
+        
           for (let data of this.myData) {
+              console.log('start sorting data for goalie images...');
+
+             data.player.savePercent = data.stats.stats.SavePercentage['#text'].slice(1);
+
+              // data.player.image = info.player.officialImageSrc;
+              // //data.player.savePercent = '.'+Math.round(data.stats.stats.SavePercentage['#text'] * 100);
+              // data.player.savePercent = data.stats.stats.SavePercentage['#text'].slice(1);
+
+              // if (this.twitterHandles[data.team.ID] != null) {
+
+              //   //console.log(this.twitterHandles[data.team.ID].twitterHashTag);
+
+              //   data.player.twitterHandle = this.twitterHandles[data.team.ID].twitterHashTag;
+
+              //   //INCASE API CHANGES TEAM IDS AGAIN CATCH IT HERE
+              //   if (this.twitterHandles[data.team.ID][data.player.ID] != null) {
+              //     data.player.atHandle = this.twitterHandles[data.team.ID][data.player.ID] + ' ';
+              //   } else {
+              //     data.player.atHandle = '';
+              //   }
+
+              // } else {
+              //   console.log(data, "Hi I am the DATA ID causing problems");
 
 
-            if (info.player.ID === data.player.ID) {
+              // }
 
-              data.player.image = info.player.officialImageSrc;
-              //data.player.savePercent = '.'+Math.round(data.stats.stats.SavePercentage['#text'] * 100);
-              data.player.savePercent = data.stats.stats.SavePercentage['#text'].slice(1);
-
-              if (this.twitterHandles[data.team.ID] != null) {
-
-                //console.log(this.twitterHandles[data.team.ID].twitterHashTag);
-
-                data.player.twitterHandle = this.twitterHandles[data.team.ID].twitterHashTag;
-
-                //INCASE API CHANGES TEAM IDS AGAIN CATCH IT HERE
-                if (this.twitterHandles[data.team.ID][data.player.ID] != null) {
-                  data.player.atHandle = this.twitterHandles[data.team.ID][data.player.ID] + ' ';
-                } else {
-                  data.player.atHandle = '';
-                }
-
-              } else {
-                console.log(data, "Hi I am the DATA ID causing problems");
-              }
+              if ( this.tomorrowStarters[data.player.ID] != null) {
+                   data.player.image = this.tomorrowStarters[data.player.ID].image;
+                   data.player.atHandle = this.tomorrowStarters[data.player.ID].atHandle;
+                   data.player.twitterHandle = this.tomorrowStarters[data.player.ID].twitterHandle;
+                } 
 
               if (this.tomorrowStarters[data.player.ID] != null && this.startersDate === data.team.today && this.tomorrowStarters[data.player.ID].probable === true) {
+                 
+                
 
                 data.player.startingToday = false;
                 data.player.likelyStartingToday = true;
@@ -461,13 +459,10 @@ export class TomorrowResultsComponent implements OnInit {
                 } else {
                   data.team.firstBacktoBack = "";
                 }
-              }
-
-
-            }
+              }     
 
           }
-        }
+        
 
         if (this.sentDataToday != null) {
           console.log('start sorting data from yesterday...');

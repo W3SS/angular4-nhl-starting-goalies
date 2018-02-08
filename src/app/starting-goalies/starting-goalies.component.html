@@ -36,6 +36,9 @@
     <div style="margin: 8px; padding: 8px;">
       <button (click)="showTodayStarters()">Show Today's Starters</button>
     </div>
+    <!-- <div style="margin: 8px; padding: 8px;">
+      <button (click)="addMoreData()">Add Data</button>
+    </div> -->
   </div>
   <!-- edit-list-container -->
   <div class="edit-list-container" *ngIf="fullFirebaseResponse != null">
@@ -288,6 +291,15 @@
       <br>
       <mat-form-field>
         <input matInput type="text" class="form-control" placeholder="name" [(ngModel)]="newGoalie[goalieID].name">
+      </mat-form-field>
+      <mat-form-field>
+        <input matInput type="text" class="form-control" placeholder="image" [(ngModel)]="newGoalie[goalieID].image">
+      </mat-form-field>
+      <mat-form-field>
+        <input matInput type="text" class="form-control" placeholder="twitter name" [(ngModel)]="newGoalie[goalieID].atHandle">
+      </mat-form-field>
+      <mat-form-field>
+        <input matInput type="text" class="form-control" placeholder="twitter team name" [(ngModel)]="newGoalie[goalieID].twitterHandle">
       </mat-form-field>
       <div>
         <button (click)="addGoalie()">Add New Goalie</button>

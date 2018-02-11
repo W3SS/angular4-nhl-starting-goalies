@@ -603,7 +603,7 @@ export class StartingGoaliesComponent implements OnInit {
               for (let startdata of this.myData) {
 
                 if (startid === startdata.team.ID) {
-                  if (this.startersDate != startdata.team.today && startdata.stats.GamesPlayed['#text'] > 6 && startdata.player.injuryOut == null) {
+                  if (this.startersDate != startdata.team.today && startdata.stats.GamesPlayed['#text'] > 10 && startdata.player.injuryOut == null) {
 
                     startdata.player.startingToday = false;
                     startdata.player.likelyStartingToday = true;

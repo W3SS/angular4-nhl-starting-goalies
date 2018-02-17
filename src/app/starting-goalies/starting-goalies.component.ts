@@ -907,36 +907,6 @@ export class StartingGoaliesComponent implements OnInit {
             for (let sc of this.score) {
               for (let pdata of this.showData) {
 
-                // if (data.team.matchup[0] != null && sc.game.awayTeam.ID === pdata.team.matchup[0].team.ID) {
-
-                //   //console.log(sc, 'score items');
-
-                //   pdata.team.matchup[0].team.awayGoalie = pdata.player.FirstName + ' ' + pdata.player.LastName;
-                //   pdata.team.matchup[0].team.opponentAbbreviation = sc.game.homeTeam.Abbreviation;
-                //   pdata.team.matchup[0].team.teamScore = sc.awayScore;
-                //   pdata.team.matchup[0].team.opponentScore = sc.homeScore;
-
-                // }
-                // if (data.team.matchup[1] != null && sc.game.awayTeam.ID === pdata.team.matchup[1].team.ID) {
-
-                //   //console.log(sc, 'score items');
-                
-                //   pdata.team.matchup[1].team.awayGoalie = pdata.player.FirstName + ' ' + pdata.player.LastName;
-                //   pdata.team.matchup[1].team.opponentAbbreviation = sc.game.homeTeam.Abbreviation;
-                //   pdata.team.matchup[1].team.teamScore = sc.awayScore;
-                //   pdata.team.matchup[1].team.opponentScore = sc.homeScore;
-
-                // }
-                // if (data.team.matchup[2] != null && sc.game.awayTeam.ID === pdata.team.matchup[1].team.ID) {
-
-                //   //console.log(sc, 'score items');
-              
-                //   pdata.team.matchup[2].team.awayGoalie = pdata.player.FirstName + ' ' + pdata.player.LastName;
-                //   pdata.team.matchup[2].team.opponentAbbreviation = sc.game.homeTeam.Abbreviation;
-                //   pdata.team.matchup[2].team.teamScore = sc.awayScore;
-                //   pdata.team.matchup[2].team.opponentScore = sc.homeScore;
-
-                // }
                 if (sc.game.homeTeam.ID === pdata.team.ID) {
 
                   pdata.team.homeGoalie = pdata.player.FirstName + ' ' + pdata.player.LastName;

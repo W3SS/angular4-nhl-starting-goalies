@@ -381,12 +381,11 @@
             <span *ngIf="data.team.matchup[0].player.saves == null"><br> {{data.team.matchup[0].stats.stats.GoalsAgainst['#text']}} Goals given up <br>
               Season GAA: {{data.team.matchup[0].stats.stats.GoalsAgainstAverage['#text']}}</span>
             <br>
-             <!-- <span *ngIf="data.team.matchup[0].player.injured === true && data.team.matchup[0].player.saves == null" style="color:red;">{{data.team.matchup[0].player.injury}}</span> -->
             <br>
             <span *ngIf="fullFirebaseResponse != null && allGoalies[0][data.team.matchup[0].player.ID] && allGoalies[0][data.team.matchup[0].player.ID].confirmed === true && data.team.matchup[0].player.saves == null" style="color: #2ecc71;"><i class="material-icons md-18">check_circle</i>confirmed</span>
             <span *ngIf="fullFirebaseResponse != null && allGoalies[0][data.team.matchup[0].player.ID] != null && allGoalies[0][data.team.matchup[0].player.ID].confirmed === false && data.team.matchup[0].player.startingTodayNow === false && data.team.matchup[0].player.saves == null" style="color: orange;"><i class="material-icons md-18">check_circle</i>expected</span>
-            <!-- <span *ngIf="data.team.matchup[0].player.confirmed === true" style="color: #2ecc71;"><i class="material-icons md-18">check_circle</i>confirmed</span><span *ngIf="data.team.matchup[0].player.confirmed === false && data.team.matchup[0].player.startingTodayNow === false" style="color: orange;"><i class="material-icons md-18">check_circle</i>expected</span> -->
-            <br>
+            
+            
             <div *ngIf="data.team.matchup[0].player.saves != null" class="stat-block">
               Saves: {{data.team.matchup[0].player.saves}} Shots Faced: {{data.team.matchup[0].player.shotsFaced}}
               <br>
@@ -414,12 +413,10 @@
               {{data.team.matchup[1].stats.stats.GoalsAgainst['#text']}} Goals given up <br>
               Season GAA: {{data.team.matchup[1].stats.stats.GoalsAgainstAverage['#text']}}</span>
             <br>
-              <!-- <span *ngIf="data.team.matchup[1].player.injured === true && data.team.matchup[1].player.saves == null" style="color:red;">{{data.team.matchup[1].player.injury}}</span> -->
             <br>
             <span *ngIf="fullFirebaseResponse != null && allGoalies[0][data.team.matchup[1].player.ID] != null && allGoalies[0][data.team.matchup[1].player.ID].confirmed === true && data.team.matchup[1].player.saves == null" style="color: #2ecc71;"><i class="material-icons md-18">check_circle</i>confirmed</span>
             <span *ngIf="fullFirebaseResponse != null && allGoalies[0][data.team.matchup[1].player.ID] != null && allGoalies[0][data.team.matchup[1].player.ID].confirmed === false && data.team.matchup[0].player.startingTodayNow === false && data.team.matchup[1].player.saves == null" style="color: orange;"><i class="material-icons md-18">check_circle</i>expected</span>
-            <!-- <span *ngIf="data.team.matchup[1].player.confirmed === true" style="color: #2ecc71;"><i class="material-icons md-18">check_circle</i>confirmed</span><span *ngIf="data.team.matchup[1].player.confirmed === false && data.team.matchup[1].player.startingTodayNow === false" style="color: orange;"><i class="material-icons md-18">check_circle</i>expected</span> -->
-            <br>
+            
             <div *ngIf="data.team.matchup[1].player.saves != null" class="stat-block">
               Saves: {{data.team.matchup[1].player.saves}} Shots Faced: {{data.team.matchup[1].player.shotsFaced}}
               <br>
@@ -448,7 +445,7 @@
               {{data.team.matchup[2].stats.stats.GoalsAgainst['#text']}} Goals given up <br>
               Season GAA: {{data.team.matchup[2].stats.stats.GoalsAgainstAverage['#text']}}</span>
             <br>
-            <!-- <span *ngIf="data.team.matchup[2].player.injured === true && data.team.matchup[2].player.saves == null" style="color:red;">{{data.team.matchup[2].player.injury}}</span> -->
+            
             <br>
             <div *ngIf="data.team.matchup[2].player.saves != null" class="stat-block">
               Saves: {{data.team.matchup[2].player.saves}} Shots Faced: {{data.team.matchup[2].player.shotsFaced}}
@@ -909,7 +906,7 @@
               {{data.team.matchup[0].stats.stats.GoalsAgainst['#text']}} Goals given up <br>
               Season GAA: {{data.team.matchup[0].stats.stats.GoalsAgainstAverage['#text']}}</span>
             <br>
-            <!-- <span *ngIf="data.team.matchup[0].player.injured === true && data.team.matchup[0].player.saves == null" style="color:red;">{{data.team.matchup[0].player.injury}}</span> -->
+           
             <br>
             <div *ngIf="data.team.matchup[0].player.saves != null" class="stat-block">
               Saves: {{data.team.matchup[0].player.saves}} Shots Faced: {{data.team.matchup[0].player.shotsFaced}}
@@ -967,13 +964,10 @@
               {{data.team.matchup[0].stats.stats.GoalsAgainst['#text']}} Goals given up <br>
               Season GAA: {{data.team.matchup[0].stats.stats.GoalsAgainstAverage['#text']}}</span>
             <br>
-               <span *ngIf="data.team.matchup[0].player.injured === true && data.team.matchup[0].player.saves == null" style="color:red;">{{data.team.matchup[0].player.injury}}</span>
             <br>
             <span *ngIf="fullFirebaseResponse != null && allGoalies[0][data.team.matchup[0].player.ID] != null && allGoalies[0][data.team.matchup[0].player.ID].confirmed === true && data.team.matchup[0].player.saves == null" style="color: #2ecc71;"><i class="material-icons md-18">check_circle</i>confirmed</span>
             <span *ngIf="fullFirebaseResponse != null && allGoalies[0][data.team.matchup[0].player.ID] != null && allGoalies[0][data.team.matchup[0].player.ID].confirmed === false && data.team.matchup[0].player.startingTodayNow === false && data.team.matchup[0].player.saves == null" style="color: orange;"><i class="material-icons md-18">check_circle</i>expected</span>
-            <!-- <span *ngIf="data.team.matchup[0].player.confirmed === true" style="color: #2ecc71;"><i class="material-icons md-18">check_circle</i>confirmed</span>
-             <span *ngIf="data.team.matchup[0].player.confirmed === false && data.team.matchup[0].player.startingTodayNow === false" style="color: orange;"><i class="material-icons md-18">check_circle</i>expected</span> -->
-            <br>
+           
             <div *ngIf="data.team.matchup[0].player.saves != null" class="stat-block">
               Saves: {{data.team.matchup[0].player.saves}} Shots Faced: {{data.team.matchup[0].player.shotsFaced}}
               <br>
@@ -1001,12 +995,12 @@
               {{data.team.matchup[1].stats.stats.GoalsAgainst['#text']}} Goals given up <br>
               Season GAA: {{data.team.matchup[1].stats.stats.GoalsAgainstAverage['#text']}} </span>
             <br>
-            <!-- <span *ngIf="data.team.matchup[1].player.injured === true && data.team.matchup[1].player.saves == null" style="color:red;">{{data.team.matchup[1].player.injury}}</span> -->
+           
             <br>
             <span *ngIf="fullFirebaseResponse != null && allGoalies[0][data.team.matchup[1].player.ID] != null && allGoalies[0][data.team.matchup[1].player.ID].confirmed === true && data.team.matchup[1].player.saves == null" style="color: #2ecc71;"><i class="material-icons md-18">check_circle</i>confirmed</span>
             <span *ngIf="fullFirebaseResponse != null && allGoalies[0][data.team.matchup[1].player.ID] != null && allGoalies[0][data.team.matchup[1].player.ID].confirmed === false && data.team.matchup[0].player.startingTodayNow === false && data.team.matchup[1].player.saves == null" style="color: orange;"><i class="material-icons md-18">check_circle</i>expected</span>
-            <!--  <span *ngIf="data.team.matchup[1].player.confirmed === true" style="color: #2ecc71;"><i class="material-icons md-18">check_circle</i>confirmed</span><span *ngIf="data.team.matchup[1].player.confirmed === false && data.team.matchup[1].player.startingTodayNow === false" style="color: orange;"><i class="material-icons md-18">check_circle</i>expected</span> -->
-            <br>
+            
+            
             <div *ngIf="data.team.matchup[1].player.saves != null" class="stat-block">
               Saves: {{data.team.matchup[1].player.saves}} Shots Faced: {{data.team.matchup[1].player.shotsFaced}}
               <br>
@@ -1092,12 +1086,11 @@
               {{data.team.matchup[1].stats.stats.GoalsAgainst['#text']}} Goals given up <br>
               Season GAA: {{data.team.matchup[1].stats.stats.GoalsAgainstAverage['#text']}} </span>
             <br>
-            <span *ngIf="data.team.matchup[1].player.injured === true && data.team.matchup[1].player.saves == null" style="color:red;">{{data.team.matchup[1].player.injury}}</span>
             <br>
             <span *ngIf="fullFirebaseResponse != null && allGoalies[0][data.team.matchup[1].player.ID] != null && allGoalies[0][data.team.matchup[1].player.ID].confirmed === true && data.team.matchup[1].player.saves == null" style="color: #2ecc71;"><i class="material-icons md-18">check_circle</i>confirmed</span>
             <span *ngIf="fullFirebaseResponse != null && allGoalies[0][data.team.matchup[1].player.ID] != null && allGoalies[0][data.team.matchup[1].player.ID].confirmed === false && data.team.matchup[0].player.startingTodayNow === false && data.team.matchup[1].player.saves == null" style="color: orange;"><i class="material-icons md-18">check_circle</i>expected</span>
-            <!--   <span *ngIf="data.team.matchup[1].player.confirmed === true" style="color: #2ecc71;"><i class="material-icons md-18">check_circle</i>confirmed</span><span *ngIf="data.team.matchup[1].player.confirmed === false && data.team.matchup[1].player.startingTodayNow === false" style="color: orange;"><i class="material-icons md-18">check_circle</i>expected</span> -->
-            <br>
+            
+            
             <div *ngIf="data.team.matchup[1].player.saves != null" class="stat-block">
               Saves: {{data.team.matchup[1].player.saves}} Shots Faced: {{data.team.matchup[1].player.shotsFaced}}
               <br>
@@ -1634,7 +1627,10 @@
             <img src="./assets/nhl-logos/{{ data.team.ID }}.jpg" alt="">
             <h1>{{data.team.teamScore}}</h1>
           </div>
-          <p class="game-info"><a (click)="toggleFlip(data)">*click for stats</a></p>
+          <h1 class="game-info" *ngIf="data.player.wins == '1' || data.player.losses == '1' || data.player.OvertimeLosses == '1'">The <span *ngIf="data.team.opponentScore < data.team.teamScore; then home else away"></span>
+          <ng-template #home>{{data.team.Name}}</ng-template>
+          <ng-template #away>{{data.team.opponentName}}</ng-template> Win!</h1>
+         <p class="game-info"><a (click)="toggleFlip(data)">STATS</a></p>
         </div>
         <!-- SCORE BACK OF CARD  -->
 
@@ -1644,8 +1640,8 @@
           <br> {{data.team.opponent}} @ {{data.team.City + ' ' + data.team.Name}}
           <br>
           <span class="green-dot" *ngIf="data.player.startingTodayNow === true || data.team.matchup[0].player.startingTodayNow === true || data.team.matchup[1].player.startingTodayNow === true"></span> Puck drops: {{data.player.gameTime}} EST @ {{ data.team.gameIce }}
-          <br>
-          <a class="score-btn" (click)="toggleFlip(data)"  *ngIf="data.player.startingTodayNow === true || data.team.matchup[0].player.startingTodayNow === true || data.team.matchup[1].player.startingTodayNow === true">*click for score</a>
+          <br> <br>
+          <a class="score-btn" (click)="toggleFlip(data)"  *ngIf="data.player.startingTodayNow === true || data.team.matchup[0].player.startingTodayNow === true || data.team.matchup[1].player.startingTodayNow === true">SCORE</a>
           <!--   <span *ngIf="data.team.matchup[0].player.startingGoalieTruth != null && data.team.matchup[0].player.startingGoalieTruth.saves &gt; 0">Starting Goalie Away: {{ data.team.matchup[0].player.startingGoalieTruth.startingGoalie }}</span>
           <br>
           <span *ngIf="data.team.matchup[1].player.startingGoalieTruth != null && data.team.matchup[1].player.startingGoalieTruth.saves &gt; 0">Starting Goalie Home: {{ data.team.matchup[1].player.startingGoalieTruth.startingGoalie }}</span> -->

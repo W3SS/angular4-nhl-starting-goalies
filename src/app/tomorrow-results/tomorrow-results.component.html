@@ -72,7 +72,7 @@
              <span *ngIf="data.team.matchup[0].player.playedYesterday === true" style="color:#6740B4;">{{data.team.matchup[0].player.LastName}} gave up {{ data.team.matchup[0].player.saYesterday - data.team.matchup[0].player.savesYesterday}} goals today <span *ngIf="data.team.matchup[0].player.winsYesterday === '1'"> and won</span><span *ngIf="data.team.matchup[0].player.lossesYesterday === '1'"> and lost</span>.
           </span>
           </span>
-            <br> Likely To Start Tomorrow.    </span>
+            <br> Likely to start {{data.team.day}}.    </span>
             <span *ngIf="data.team.matchup[2] == null && data.team.matchup[1].player.gameLocation === 'away'">
    <span *ngIf="data.team.matchup[1].team.haveGameToday === true && data.team.matchup[1].team.haveGameTomorrow === true;then y else n"></span>
             <ng-template #y><span style="color: #e74c3c;">back</span><span style="color: #ccc;"> to</span></ng-template>
@@ -94,7 +94,7 @@
              <span *ngIf="data.team.matchup[1].player.playedYesterday === true" style="color:#6740B4;">{{data.team.matchup[1].player.LastName}} gave up {{ data.team.matchup[1].player.saYesterday - data.team.matchup[1].player.savesYesterday}} goals today <span *ngIf="data.team.matchup[1].player.winsYesterday === '1'"> and won</span><span *ngIf="data.team.matchup[1].player.lossesYesterday === '1'"> and lost</span>.
           </span>
           </span>
-            <br> Likely To Start Tomorrow.    </span>
+            <br> Likely to start {{data.team.day}}.    </span>
             <span *ngIf="data.team.matchup[2] != null && data.team.matchup[0].team.ID === data.team.matchup[1].team.ID && data.team.matchup[1].player.finishedYesterday === true">
               <span *ngIf="data.team.matchup[0].team.haveGameToday === true && data.team.matchup[0].team.haveGameTomorrow === true;then y else n"></span>
             <ng-template #y><span style="color: #e74c3c;">back</span><span style="color: #ccc;"> to</span></ng-template>
@@ -116,7 +116,7 @@
              <span *ngIf="data.team.matchup[1].player.playedYesterday === true" style="color:#6740B4;">{{data.team.matchup[1].player.LastName}} gave up {{ data.team.matchup[1].player.saYesterday - data.team.matchup[1].player.savesYesterday}} goals today <span *ngIf="data.team.matchup[1].player.winsYesterday === '1'"> and won</span><span *ngIf="data.team.matchup[1].player.lossesYesterday === '1'"> and lost</span>.
           </span>
           </span>
-            <br> Likely To Start Tomorrow.    </span>
+            <br> Likely to start {{data.team.day}}.    </span>
             <span *ngIf="data.team.matchup[2] != null && data.team.matchup[0].team.ID === data.team.matchup[1].team.ID && (data.team.matchup[1].player.finishedYesterday === false || data.team.matchup[1].player.finishedYesterday == null)">
               <span *ngIf="data.team.matchup[0].team.haveGameToday === true && data.team.matchup[0].team.haveGameTomorrow === true;then y else n"></span>
             <ng-template #y><span style="color: #e74c3c;">back</span><span style="color: #ccc;"> to</span></ng-template>
@@ -158,7 +158,7 @@
              <span *ngIf="data.team.matchup[1].player.playedYesterday === true" style="color:#6740B4;">{{data.team.matchup[1].player.LastName}} gave up {{ data.team.matchup[1].player.saYesterday - data.team.matchup[1].player.savesYesterday}} goals today <span *ngIf="data.team.matchup[1].player.winsYesterday === '1'"> and won</span><span *ngIf="data.team.matchup[1].player.lossesYesterday === '1'"> and lost</span>.
           </span>
           </span>
-            <br> Likely To Start Tomorrow.
+            <br> Likely to start {{data.team.day}}.
             </span>
             <span *ngIf="data.team.matchup[2] != null && data.team.matchup[0].team.ID != data.team.matchup[1].team.ID">
               <span *ngIf="data.team.matchup[0].team.haveGameToday === true && data.team.matchup[0].team.haveGameTomorrow === true;then y else n"></span>
@@ -183,7 +183,7 @@
              <span *ngIf="data.team.matchup[0].player.playedYesterday === true" style="color:#6740B4;">{{data.team.matchup[0].player.LastName}} gave up {{ data.team.matchup[0].player.saYesterday - data.team.matchup[0].player.savesYesterday}} goals today <span *ngIf="data.team.matchup[0].player.winsYesterday === '1'"> and won</span><span *ngIf="data.team.matchup[0].player.lossesYesterday === '1'"> and lost</span>.
           </span>
           </span>
-            <br> Likely To Start Tomorrow.    </span>
+            <br> Likely to start {{data.team.day}}.    </span>
           </div>
           <div class="goalies-inline" *ngIf="data.player.startingToday === false && data.player.likelyStartingToday === true ">
             <span *ngIf="data.team.matchup[2] == null && data.team.matchup[1].player.gameLocation === 'home'"> 
@@ -209,7 +209,7 @@
 
           </span>
         
-            <br> Likely To Start Tomorrow.    </span>
+            <br> Likely to start {{data.team.day}}.    </span>
              <span *ngIf="data.team.matchup[2] == null && data.team.matchup[0].player.gameLocation === 'home'"> 
 
                <span *ngIf="data.team.matchup[0].team.haveGameToday === true && data.team.matchup[0].team.haveGameTomorrow === true;then y else n"></span>
@@ -233,7 +233,7 @@
 
           </span>
         
-            <br> Likely To Start Tomorrow.    </span>
+            <br> Likely to start {{data.team.day}}.    </span>
 
   <span *ngIf="data.team.matchup[2] != null && data.team.matchup[1].team.ID === data.team.matchup[2].team.ID && data.team.matchup[2].player.finishedYesterday === true"> 
 
@@ -260,7 +260,7 @@
 
           </span>
         
-            <br> Likely To Start Tomorrow.    </span>
+            <br> Likely to start {{data.team.day}}.    </span>
 
             <span *ngIf="data.team.matchup[2] != null && data.team.matchup[1].team.ID === data.team.matchup[2].team.ID && data.team.matchup[2].player.finishedYesterday == null">
 
@@ -304,7 +304,7 @@
              <span *ngIf="data.team.matchup[2].player.playedYesterday === true" style="color:#6740B4;">{{data.team.matchup[2].player.LastName}} gave up {{ data.team.matchup[2].player.saYesterday - data.team.matchup[2].player.savesYesterday}} goals today <span *ngIf="data.team.matchup[2].player.winsYesterday === '1'"> and won</span><span *ngIf="data.team.matchup[2].player.lossesYesterday === '1'"> and lost</span>.
           </span>
           </span>
-            <br> Likely To Start Tomorrow.
+            <br> Likely to start {{data.team.day}}.
             </span>
             <span *ngIf="data.team.matchup[2] != null && data.team.matchup[3] == null && data.team.matchup[1].team.ID != data.team.matchup[2].team.ID">
 
@@ -330,7 +330,7 @@
              <span *ngIf="data.team.matchup[2].player.playedYesterday === true" style="color:#6740B4;">{{data.team.matchup[2].player.LastName}} gave up {{ data.team.matchup[2].player.saYesterday - data.team.matchup[2].player.savesYesterday}} goals today <span *ngIf="data.team.matchup[2].player.winsYesterday === '1'"> and won</span><span *ngIf="data.team.matchup[2].player.lossesYesterday === '1'"> and lost</span>.
           </span>
           </span>
-            <br> Likely To Start Tomorrow.
+            <br> Likely to start {{data.team.day}}.
             </span>
             <span *ngIf="data.team.matchup[3] != null"> 
                 <span *ngIf="data.team.matchup[2].team.haveGameToday === true && data.team.matchup[2].team.haveGameTomorrow === true;then y else n"></span>
@@ -374,7 +374,7 @@
              <span *ngIf="data.team.matchup[3].player.playedYesterday === true" style="color:#6740B4;">{{data.team.matchup[3].player.LastName}} gave up {{ data.team.matchup[3].player.saYesterday - data.team.matchup[3].player.savesYesterday}} goals today <span *ngIf="data.team.matchup[3].player.winsYesterday === '1'"> and won</span><span *ngIf="data.team.matchup[3].player.lossesYesterday === '1'"> and lost</span>.
           </span>
           </span>
-            <br> Likely To Start Tomorrow.
+            <br> Likely to start {{data.team.day}}.
             </span>
           </div>
         </div>

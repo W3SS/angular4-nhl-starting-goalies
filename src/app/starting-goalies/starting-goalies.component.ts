@@ -5,6 +5,7 @@ import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { Observable } from 'rxjs/Observable';
 import { IntervalObservable } from "rxjs/observable/IntervalObservable";
 import { ActivatedRoute, Router, ActivatedRouteSnapshot } from '@angular/router';
+import { trigger, state, style, transition, animate } from '@angular/animations';
 import { DatePipe, PercentPipe } from '@angular/common';
 import { DataService } from '../data.service';
 import { FirebaseService } from '../firebase.service';
@@ -25,7 +26,19 @@ let options = null;
 @Component({
   selector: 'app-starting-goalies',
   templateUrl: './starting-goalies.component.html',
-  styleUrls: ['./starting-goalies.component.css']
+  styleUrls: ['./starting-goalies.component.css'],
+   animations: [
+    trigger('flipState', [
+      state('active', style({
+        transform: 'rotateY(179deg)'
+      })),
+      state('inactive', style({
+        transform: 'rotateY(0)'
+      })),
+      transition('active => inactive', animate('500ms ease-out')),
+      transition('inactive => active', animate('500ms ease-in'))
+    ])
+  ]
 })
 export class StartingGoaliesComponent implements OnInit {
 
@@ -38,6 +51,7 @@ export class StartingGoaliesComponent implements OnInit {
   dailyStats: Array < any > = [];
   myData: Array < any > ;
   showData: Array < any > ;
+  score: Array < any > ;
   sentData: Array < any > ;
   sentYesterdayData: Array < any > ;
   gameDate: string = '';
@@ -56,6 +70,8 @@ export class StartingGoaliesComponent implements OnInit {
   startingGoaliesToday: Array < any > = [];
   tweetDay: any;
   noGamesMsg: any;
+  noScoresMsg: any;
+  noScores: any;
   startersDate: any;
   fullFirebaseResponse: any
   loading: boolean = true;
@@ -144,17 +160,6 @@ export class StartingGoaliesComponent implements OnInit {
 
   }
 
-  // public getJSON() {
-  //   this.http.get("./assets/twitter.json")
-  //     .map(response => response.json())
-  //     .subscribe(res => {
-  //       console.log(res['twitterHandles']["0"], 'twitter handles');
-  //       this.twitterHandles = res['twitterHandles']["0"];
-  //     })
-
-
-
-  // }
 
   loadData() {
 
@@ -266,17 +271,12 @@ export class StartingGoaliesComponent implements OnInit {
               });
             }
 
-
-            //res['fullgameschedule'].gameentry.splice(16, 1);
-
             this.fullSchedule = res['fullgameschedule'].gameentry;
           })
 
       })
 
   }
-
-
 
 
   sortData() {
@@ -337,6 +337,7 @@ export class StartingGoaliesComponent implements OnInit {
                 sdata.player.confirmed = false;
                 sdata.player.probable = false;
                 sdata.player.startstatus = '';
+                sdata.flip = 'inactive';
 
               }
               if (schedule.homeTeam.Name === sdata.team.Name) {
@@ -370,6 +371,7 @@ export class StartingGoaliesComponent implements OnInit {
                 sdata.player.confirmed = false;
                 sdata.player.probable = false;
                 sdata.player.startstatus = '';
+                sdata.flip = 'inactive';
 
               }
 
@@ -805,7 +807,6 @@ export class StartingGoaliesComponent implements OnInit {
 
       // this.getJSON();
       setInterval(() => {
-        this.getSortDataHandler();
         this.loading = false;
         this.showData = this.sentData;
         //console.log(this.showData["0"].team.today, "get the date");
@@ -816,10 +817,6 @@ export class StartingGoaliesComponent implements OnInit {
 
   }
 
-  public getSortDataHandler() {
-    console.log('It has been 10 seconds I am refreshing sort data again...');
-
-  }
 
   public saveStarts() {
     if (this.stats === false) {
@@ -887,6 +884,77 @@ export class StartingGoaliesComponent implements OnInit {
         //console.log(this.fullFirebaseResponse, "make all starters false");
       }
     }
+  }
+
+
+  public toggleFlip(data) {
+    
+    data.flip = (data.flip == 'inactive') ? 'active' : 'inactive';
+
+    this.dataService
+          .getScore().subscribe(res => {
+            console.log(res['scoreboard'].gameScore, "Score...");
+            this.score = res['scoreboard'].gameScore;
+
+            if (res['scoreboard'].gameScore == null) {
+              
+              this.noScores = true;
+              this.noScoresMsg = "The game is not live yet."
+              console.log('There are no games in progress at the moment.');
+            } else {
+
+            console.log('start sorting data for scoreboard stats...');
+            for (let sc of this.score) {
+              for (let pdata of this.showData) {
+
+                // if (data.team.matchup[0] != null && sc.game.awayTeam.ID === pdata.team.matchup[0].team.ID) {
+
+                //   //console.log(sc, 'score items');
+
+                //   pdata.team.matchup[0].team.awayGoalie = pdata.player.FirstName + ' ' + pdata.player.LastName;
+                //   pdata.team.matchup[0].team.opponentAbbreviation = sc.game.homeTeam.Abbreviation;
+                //   pdata.team.matchup[0].team.teamScore = sc.awayScore;
+                //   pdata.team.matchup[0].team.opponentScore = sc.homeScore;
+
+                // }
+                // if (data.team.matchup[1] != null && sc.game.awayTeam.ID === pdata.team.matchup[1].team.ID) {
+
+                //   //console.log(sc, 'score items');
+                
+                //   pdata.team.matchup[1].team.awayGoalie = pdata.player.FirstName + ' ' + pdata.player.LastName;
+                //   pdata.team.matchup[1].team.opponentAbbreviation = sc.game.homeTeam.Abbreviation;
+                //   pdata.team.matchup[1].team.teamScore = sc.awayScore;
+                //   pdata.team.matchup[1].team.opponentScore = sc.homeScore;
+
+                // }
+                // if (data.team.matchup[2] != null && sc.game.awayTeam.ID === pdata.team.matchup[1].team.ID) {
+
+                //   //console.log(sc, 'score items');
+              
+                //   pdata.team.matchup[2].team.awayGoalie = pdata.player.FirstName + ' ' + pdata.player.LastName;
+                //   pdata.team.matchup[2].team.opponentAbbreviation = sc.game.homeTeam.Abbreviation;
+                //   pdata.team.matchup[2].team.teamScore = sc.awayScore;
+                //   pdata.team.matchup[2].team.opponentScore = sc.homeScore;
+
+                // }
+                if (sc.game.homeTeam.ID === pdata.team.ID) {
+
+                  pdata.team.homeGoalie = pdata.player.FirstName + ' ' + pdata.player.LastName;
+                  pdata.team.opponentAbbreviation = sc.game.awayTeam.Abbreviation;
+                  pdata.team.opponentScore = sc.awayScore;
+                  pdata.team.teamScore = sc.homeScore;
+
+                }
+
+              }
+            }
+          }
+
+          })
+
+          
+          
+
   }
 
 

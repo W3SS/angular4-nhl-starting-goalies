@@ -223,6 +223,17 @@ export class DataService {
     return this.injured;
   }
 
+  getScore() {
+
+    if (!this.score) {
+      let url = `${this.apiRoot}/scoreboard.json?fordate=`+dailyDate;
+      console.log('getting daily scores of todays games from API...');
+      this.score = this.http.get(url, options)
+        .map(response => response.json())
+    }
+    return this.score;
+  }
+
   clearCache() {
     //this.info = null;
   }

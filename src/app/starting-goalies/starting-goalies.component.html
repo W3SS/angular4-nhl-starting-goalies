@@ -71,9 +71,10 @@
       <button (click)="updateTodayStarters()">Tomorrow Starts to Today Starts</button>
     </div>
 
-    <div style="margin: 8px; padding: 8px;">
+  <!--   <div style="margin: 8px; padding: 8px;">
       <button (click)="updateShowData()">Update View</button>
-    </div>
+    </div> -->
+
   </div>
   <!-- edit-list-container -->
   <div class="edit-list-container">
@@ -316,9 +317,10 @@
 <br>
 <div class="matchup-layout">
   <div *ngFor="let data of showData">
-    <div *ngIf="data.player.gameLocation === 'home' && data.player.twoPossibleStarters === false" class="card-wrap">
-      <mat-card class="center">
-        <div>
+  
+    <div *ngIf="data.player.gameLocation === 'home' && data.player.twoPossibleStarters === false" class="card-wrap tp-wrapper">
+      <mat-card class="center tp-box" [@flipState]="data.flip">
+        <div class="tp-box__side tp-box__front">
           <div class="goalies-inline" *ngIf="data.player.startingToday === true">
             <span *ngIf="data.team.matchup[2] == null && data.team.matchup[0].player.gameLocation === 'away'">
             <span *ngIf="data.team.matchup[0].team.haveGameToday === true && data.team.matchup[0].team.haveGameTomorrow === true;then y else n"></span>
@@ -435,6 +437,7 @@
             </span>
             </div>
             </span>
+            
             <span *ngIf="data.team.matchup[2] != null && data.team.matchup[2].player.gameLocation === 'away' && data.team.matchup[2].player.wrongStarter == null && data.team.matchup[0].team.ID != data.team.matchup[2].team.ID && data.team.matchup[1].team.ID != data.team.matchup[2].team.ID">
               <span (click)="open($event, data.team.matchup[2])" class="player-img"><img src="{{ data.team.matchup[2].player.image }}" onError="this.src='https://nhl.bamcontent.com/images/headshots/current/168x168/goalie@2x.jpg'"></span>
             <br> <span style="font-weight: bold;">{{ data.team.matchup[2].player.FirstName + ' ' + data.team.matchup[2].player.LastName }}</span> <span fxHide [fxHide.gt-xs]="isVisibleOnDesktop()">
@@ -858,6 +861,7 @@
             </span>
             </span>
           </div>
+          
           <div class="goalies-inline" *ngIf="data.player.startingToday === true">
             <span *ngIf="data.team.matchup[2] != null && data.team.matchup[0].team.ID != data.team.matchup[2].team.ID && data.team.matchup[0].player.gameLocation === 'home'">
             <span *ngIf="data.team.matchup[0].team.haveGameToday === true && data.team.matchup[0].team.haveGameTomorrow === true;then y else n"></span>
@@ -1619,12 +1623,29 @@
             </span>
           </div>
         </div>
+
+        <!-- SCORE BACK OF CARD -->
+        <div class="tp-box__side tp-box__back"> 
+          <div class="goalies-inline-score">
+            <img src="./assets/nhl-logos/{{ data.team.opponentId }}.jpg" alt="">
+            <h1>{{data.team.opponentScore}}</h1>
+          </div>
+          <div class="goalies-inline-score">
+            <img src="./assets/nhl-logos/{{ data.team.ID }}.jpg" alt="">
+            <h1>{{data.team.teamScore}}</h1>
+          </div>
+          <p class="game-info"><a (click)="toggleFlip(data)">*click for stats</a></p>
+        </div>
+        <!-- SCORE BACK OF CARD  -->
+
+        <div class="tp-box__side tp-box__front">
         <p class="game-info">
           <img src="../assets/nhl-logos/{{ data.team.opponentId }}.jpg" alt=""> VS <img src="./assets/nhl-logos/{{ data.team.ID }}.jpg" alt="">
           <br> {{data.team.opponent}} @ {{data.team.City + ' ' + data.team.Name}}
           <br>
           <span class="green-dot" *ngIf="data.player.startingTodayNow === true || data.team.matchup[0].player.startingTodayNow === true || data.team.matchup[1].player.startingTodayNow === true"></span> Puck drops: {{data.player.gameTime}} EST @ {{ data.team.gameIce }}
           <br>
+          <a class="score-btn" (click)="toggleFlip(data)"  *ngIf="data.player.startingTodayNow === true || data.team.matchup[0].player.startingTodayNow === true || data.team.matchup[1].player.startingTodayNow === true">*click for score</a>
           <!--   <span *ngIf="data.team.matchup[0].player.startingGoalieTruth != null && data.team.matchup[0].player.startingGoalieTruth.saves &gt; 0">Starting Goalie Away: {{ data.team.matchup[0].player.startingGoalieTruth.startingGoalie }}</span>
           <br>
           <span *ngIf="data.team.matchup[1].player.startingGoalieTruth != null && data.team.matchup[1].player.startingGoalieTruth.saves &gt; 0">Starting Goalie Home: {{ data.team.matchup[1].player.startingGoalieTruth.startingGoalie }}</span> -->
@@ -1719,6 +1740,7 @@
          </span>
           </span>
         </p>
+      </div>
       </mat-card>
     </div>
   </div>

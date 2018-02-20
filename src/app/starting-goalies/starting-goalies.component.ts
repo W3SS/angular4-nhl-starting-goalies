@@ -978,6 +978,10 @@ export class StartingGoaliesComponent implements OnInit {
     // console.log('width over 600px');
   }
 
+  public isVisibleOnMobile() {
+    // console.log('width under 600px');
+  }
+
   public open(event, data) {
     this.selected = data;
     console.log(data, 'ok you clicked on player img...');
@@ -1088,7 +1092,7 @@ export class LoginDialog implements OnInit {
   Fetching goalie stats...
   <mat-spinner></mat-spinner>
   </div>
-  <ul *ngFor="let data of showData"><li *ngIf="data.hot === true && data.wins &gt; 1"><span class="player"><img src="{{ data.image}}" alt="" /></span><span style="font-weight: bold;" class="last-week"> {{ data.name }} <img src="../assets/nhl-logos/{{ data.team }}.jpg" alt="" /></span><span style="font-weight: bold;"> ({{ data.wins + '-' + data.losses + '-' + data.otl }})</span> <span *ngIf="data.opponents[0] != null"> - {{data.opponents[0]}}</span><span *ngIf="data.opponents[1] != null">, {{data.opponents[1]}}</span><span *ngIf="data.opponents[2] != null">, {{data.opponents[2]}}</span> - <span style="font-weight: bold;">Total Saves: {{data.sv}} Total Shots: {{data.sa}}</span></li></ul>
+  <ul *ngFor="let data of showData"><li><span class="player"><img src="{{ data.image}}" alt="" /></span><span style="font-weight: bold;" class="last-week"> {{ data.name }} <img src="../assets/nhl-logos/{{ data.team }}.jpg" alt="" /></span><span style="font-weight: bold;"> ({{ data.wins + '-' + data.losses + '-' + data.otl }})</span> <span *ngIf="data.opponents[0] != null"> - <span style="color:#6740B4">{{data.opponents[0].date}}</span> {{data.opponents[0].desc}}</span><span *ngIf="data.opponents[1] != null">, <span style="color:#6740B4">{{data.opponents[1].date}}</span> {{data.opponents[1].desc}}</span><span *ngIf="data.opponents[2] != null">, <span style="color:#6740B4">{{data.opponents[2].date}}</span> {{data.opponents[2].desc}}</span> <span *ngIf="data.opponents[3] != null">, <span style="color:#6740B4">{{data.opponents[3].date}}</span> {{data.opponents[3].desc}}</span> - <span style="font-weight: bold;">Total Saves: {{data.sv}} Total Shots: {{data.sa}}</span></li></ul>
   </mat-dialog-content>`,
 })
 
@@ -1133,6 +1137,7 @@ export class LastweekDialog implements OnInit {
             let i3;
             let res2;
             let res3;
+            let myDate;
 
             res.forEach((item, index) => {
               i = index;
@@ -1149,14 +1154,24 @@ export class LastweekDialog implements OnInit {
                 res2[i2].player.city = res[i]['gameboxscore'].game.awayTeam.City;
                 res2[i2].player.team = res[i]['gameboxscore'].game.awayTeam.Name;
                 res2[i2].player.teamId = res[i]['gameboxscore'].game.awayTeam.ID;
+                //console.log(res[i]['gameboxscore'].game, 'game score data');
+                let dPipe = new DatePipe("en-US");
+                myDate = dPipe.transform(res[i]['gameboxscore'].game.date, 'MMM d');
+
                 if (res2[i2].stats != null && res2[i2].stats.Wins['#text'] == '1') {
-                  res2[i2].player.opponent = '(W) @ ' + res[i]['gameboxscore'].game.homeTeam.City + ' GA: ' + res2[i2].stats.GoalsAgainst['#text'];
+         
+                  res2[i2].player.opponent = {date: myDate, desc: '(W) @ ' + res[i]['gameboxscore'].game.homeTeam.City + ' GA: ' + res2[i2].stats.GoalsAgainst['#text']}
+                  
                 }
                 if (res2[i2].stats != null && res2[i2].stats.Losses['#text'] == '1') {
-                  res2[i2].player.opponent = '(L) @ ' + res[i]['gameboxscore'].game.homeTeam.City + ' GA: ' + res2[i2].stats.GoalsAgainst['#text'];
+                  
+                  res2[i2].player.opponent = {date: myDate, desc: '(L) @ ' + res[i]['gameboxscore'].game.homeTeam.City + ' GA: ' + res2[i2].stats.GoalsAgainst['#text']}
+               
                 }
                 if (res2[i2].stats != null && res2[i2].stats.OvertimeLosses['#text'] == '1') {
-                  res2[i2].player.opponent = '(L) @ ' + res[i]['gameboxscore'].game.homeTeam.City + ' GA: ' + res2[i2].stats.GoalsAgainst['#text'];
+                  
+                  res2[i2].player.opponent = {date: myDate, desc: '(L) @ ' + res[i]['gameboxscore'].game.homeTeam.City + ' GA: ' + res2[i2].stats.GoalsAgainst['#text']}
+                 
                 }
 
                 if (res2[i2].stats != null && res2[i2].stats.Wins['#text'] > '0' && res2[i2].player.ID != '9072' || res2[i2].stats != null && res2[i2].stats.Losses['#text'] > '0' && res2[i2].player.ID != '9072' || res2[i2].stats != null && res2[i2].stats.OvertimeLosses['#text'] > '0' && res2[i2].player.ID != '9072') {
@@ -1175,21 +1190,25 @@ export class LastweekDialog implements OnInit {
                 res3[i3].player.team = res[i]['gameboxscore'].game.homeTeam.Name;
                 res3[i3].player.teamId = res[i]['gameboxscore'].game.homeTeam.ID;
                 if (res3[i3].stats != null && res3[i3].stats.Wins['#text'] == '1') {
-                  res3[i3].player.opponent = '(W) ' + res[i]['gameboxscore'].game.awayTeam.City + ' GA: ' + res3[i3].stats.GoalsAgainst['#text'];
+                  
+                  res3[i3].player.opponent = {date: myDate, desc: '(W) ' + res[i]['gameboxscore'].game.awayTeam.City + ' GA: ' + res3[i3].stats.GoalsAgainst['#text']}
+                  
                 }
                 if (res3[i3].stats != null && res3[i3].stats.Losses['#text'] == '1') {
-                  res3[i3].player.opponent = '(L) ' + res[i]['gameboxscore'].game.awayTeam.City + ' GA: ' + res3[i3].stats.GoalsAgainst['#text'];
+                  
+                  res3[i3].player.opponent = {date: myDate, desc: '(L) ' + res[i]['gameboxscore'].game.awayTeam.City + ' GA: ' + res3[i3].stats.GoalsAgainst['#text']}
+                 
                 }
                 if (res3[i3].stats != null && res3[i3].stats.OvertimeLosses['#text'] == '1') {
-                  res3[i3].player.opponent = '(L) ' + res[i]['gameboxscore'].game.awayTeam.City + ' GA: ' + res3[i3].stats.GoalsAgainst['#text'];
+                  
+                  res3[i3].player.opponent = {date: myDate, desc: '(L) ' + res[i]['gameboxscore'].game.awayTeam.City + ' GA: ' + res3[i3].stats.GoalsAgainst['#text']}
+                  
                 }
 
                 //res3[i3].player.opponent = res[i]['gameboxscore'].game.awayTeam.Abbreviation;
                 if (res3[i3].stats != null && res3[i3].stats.Wins['#text'] > '0' && res3[i3].player.ID != '9072' || res3[i3].stats != null && res3[i3].stats.Losses['#text'] > '0' && res3[i3].player.ID != '9072' || res3[i3].stats != null && res3[i3].stats.OvertimeLosses['#text'] > '0' && res3[i3].player.ID != '9072') {
                   this.starterStatData.push(res3[i3]);
                   //console.log(res3[i3], 'got player stats for home goalie!');
-
-
                 }
 
               });
@@ -1235,11 +1254,13 @@ export class LastweekDialog implements OnInit {
         hash[key].sa += parseInt(a.stats.ShotsAgainst['#text']);
         hash[key].sv += parseInt(a.stats.Saves['#text']);
         hash[key].svpercent = Math.round((hash[key].sv * 100) / hash[key].sa);
-        if (hash[key].svpercent < 95) {
-          hash[key].hot = false;
-        } else {
-          hash[key].hot = true;
-        }
+
+        // if (hash[key].svpercent < 95) {
+        //   hash[key].hot = false;
+        // } else {
+        //   hash[key].hot = true;
+        // }
+
         hash[key].opponents.push(a.player.opponent);
 
         return r;

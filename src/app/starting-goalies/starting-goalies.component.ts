@@ -1065,7 +1065,7 @@ export class LoginDialog implements OnInit {
   constructor(public dialogRef: MatDialogRef < LastweekDialog > , private fbService: FirebaseService) {}
 
 
-  signInWithEmail() {
+   public signInWithEmail() {
     this.fbService.signInRegular(this.user.email, this.user.password)
       .then((res) => {
         //console.log(res);
@@ -1154,7 +1154,7 @@ export class LastweekDialog implements OnInit {
                 res2[i2].player.city = res[i]['gameboxscore'].game.awayTeam.City;
                 res2[i2].player.team = res[i]['gameboxscore'].game.awayTeam.Name;
                 res2[i2].player.teamId = res[i]['gameboxscore'].game.awayTeam.ID;
-                //console.log(res[i]['gameboxscore'].game, 'game score data');
+                //console.log(res[i]['gameboxscore'], 'game score data');
                 let dPipe = new DatePipe("en-US");
                 myDate = dPipe.transform(res[i]['gameboxscore'].game.date, 'MMM d');
 

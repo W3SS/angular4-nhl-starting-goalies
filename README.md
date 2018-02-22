@@ -70,7 +70,6 @@ export class FirebaseService {
           (user) => {
             if (user) {
               this.userDetails = user;
-              //console.log(this.userDetails);
             }
             else {
               this.userDetails = null;
@@ -141,7 +140,7 @@ export class AppComponent implements OnInit {
 
 ```html
 
-//app.component.html
+<!-- app.component.html -->
 
 <div class="login-container">
  
@@ -159,7 +158,7 @@ The key here is in the firebase service <code>this.firebaseAuth.auth.signInWithE
 
 ```html
 
-//app.component.html
+<!-- app.component.html -->
 
 <div class="login-container" *ngIf="fbService.userDetails == null">
  
@@ -201,6 +200,8 @@ I created a small cms to allow me to update the status of my data by clicking on
 
 ```html
 
+<!-- app.component.html -->
+
 <div *ngIf="fbService.userDetails != null">
   <div class="edit-list-container" *ngIf="fullFirebaseResponse != null">
    
@@ -217,9 +218,9 @@ I created a small cms to allow me to update the status of my data by clicking on
 
             <span *ngIf="goalie[group.player.ID] != null && goalie[group.player.ID].probable === false" style="color: red">X</span>
 
-            <span *ngIf="goalie[group.player.ID] != null && allGoalies[0][group.player.ID].filterOutStarters == null && goalie[group.player.ID].probable === true && goalie[group.player.ID].confirmed === false" (click)="goalie[group.player.ID].confirmed = !goalie[group.player.ID].confirmed" [(ngModel)]="allGoalies[0][group.player.ID].confirmed" ngDefaultControl style="color: orange;">Probable</span>
+            <span *ngIf="goalie[group.player.ID] != null && goalie[group.player.ID].probable === true && goalie[group.player.ID].confirmed === false" (click)="goalie[group.player.ID].confirmed = !goalie[group.player.ID].confirmed" [(ngModel)]="allGoalies[0][group.player.ID].confirmed" ngDefaultControl style="color: orange;">Probable</span>
 
-            <span *ngIf="goalie[group.player.ID] != null && goalie[group.player.ID].probable === true && goalie[group.player.ID].confirmed === true" style="color: #2ecc71;" (click)="goalie[group.player.ID].confirmed = !goalie[group.player.ID].confirmed" [(ngModel)]="allGoalies[0][group.player.ID].confirmed" ngDefaultControl>Confirmed</span>
+            <span *ngIf="goalie[group.player.ID] != null && goalie[group.player.ID].probable === true && goalie[group.player.ID].confirmed === true" (click)="goalie[group.player.ID].confirmed = !goalie[group.player.ID].confirmed" [(ngModel)]="allGoalies[0][group.player.ID].confirmed" ngDefaultControl style="color: green;">Confirmed</span>
 
             <span *ngIf="goalie[group.player.ID] != null">({{group.stats.stats.Wins['#text'] + '-' + group.stats.stats.Losses['#text'] + '-' + group.stats.stats.OvertimeLosses['#text']}})</span>
 
@@ -235,7 +236,178 @@ I created a small cms to allow me to update the status of my data by clicking on
 
 </div> <!-- END OF AUTHENTICATED ADIM AREA -->
 
+<div *ngFor="let data of showData"> <!-- LIVE VIEW -->
+  <span class="player-img"><img src="{{ data.player.image }}"></span> <br>
+  <span>{{ data.player.FirstName + ' ' + data.player.LastName }}</span> <br>
+
+  <span *ngIf="fullFirebaseResponse != null && allGoalies[0][data.player.ID] && allGoalies[0][data.player.ID].confirmed === true" style="color: green;">confirmed</span>
+
+   <span *ngIf="fullFirebaseResponse != null && allGoalies[0][data.player.ID] != null && allGoalies[0][data.player.ID].confirmed === false && data.player.startingTodayNow === false" style="color: orange;">expected</span>
+
+</div>
+ 
 ```
+
+The idea here is I am using nested `ngFor` loops to access the data by player ID's. The cms is designed to update the true/false values of the player's status by clicking on player image and then clicking the status to toggle its value. Once status is set click save to run a function to save and update firebase data. 
+
+```json
+
+//firebase data
+
+{"Starters": 
+  [
+
+    {
+
+      "5176":
+      {
+        "confirmed": false,
+        "probable": false,
+        "name": "Philip Grubauer"
+      },
+      "4863":
+      {
+        "confirmed": true,
+        "probable": true,
+        "name": "Braden Holtby"
+      },
+      "5122":
+      {
+        "confirmed": false,
+        "probable": false,
+        "name": "Martin Jones"
+      }
+
+    }
+
+  ]
+}
+
+```
+
+```ts
+
+//app.component.ts
+
+import { Component, OnInit } from '@angular/core';
+import { FirebaseService } from '../firebase.service';
+import { Http, Response, RequestOptions, Headers, Request, RequestMethod } from '@angular/http';
+import 'rxjs/add/operator/map';
+
+
+@Component({
+  selector: 'app-root',
+  templateUrl: './app.component.html',
+  styleUrls: ['./app.component.css']
+})
+
+export class AppComponent implements OnInit {
+
+  allGoalies: Array <any>;
+  fullFirebaseResponse: any;
+  
+  constructor(private http: Http, private fbService: FirebaseService){
+    this.fbService
+      .getStarterData()
+      .subscribe(res => {
+
+        if (res[0] != null) {
+          console.log(res[0], 'got response from firebase...');
+          this.fullFirebaseResponse = res[0];
+          this.allGoalies = Array.of(res[0][0]);
+        }
+
+      })
+
+   // USING MYDATA FROM API TO MATCH IDS WITH CUSTOM FIREBASE DATA
+  // USE WITH NESTED NGFOR IN HTML
+  this.http.get('https://some.fake.datafeed.com/v1/players)
+    .map(response => response.json())
+      .subscribe(res => {
+         this.myData = res['cumulativeplayerstats'].playerstatsentry;
+      })
+  }
+
+ 
+
+
+  ngOnInit() {
+     
+    
+  }
+
+  public save() {
+
+    this.fbService
+      .addData(this.fullFirebaseResponse);
+     
+  }
+
+}
+
+```
+
+I want to point out you may notice I am using brackets to locate my data from the firebase response. This is because this is the way I have designed my data. If your data happens to be different it is not a big deal just adjust where in the res your data lives. For example <code>this.allGoalies = Array.of(res[0][0]);</code> here I am taking the firebase response and asking for the first item in this array and then asking for the first item in that array which is a nested array. Then I am wrapping it in `Array.of` so that it can be processed by `ngFor` in the view.
+
+The `this.fullFirebaseResponse` will keep track of the player status updates as I am using `[(ngModel)]="allGoalies[0][group.player.ID].confirmed"` in the html. `ngModel` has a lengthy description but basically when you want to update data in realtime `ngModel` must exist on the input. In my case I am using a `<span>` tag to track clicks and changes to the data model, for this you will need to add `ngDefaultControl` to the input to avoid angular throwing errors. 
+
+```ts
+
+
+  //firebase.service.ts
+
+import { Injectable } from '@angular/core';
+import { AngularFireDatabase, FirebaseListObservable } from 'angularfire2/database';
+import { AngularFireAuth } from 'angularfire2/auth';
+import { Observable } from 'rxjs/Observable';
+import * as firebase from 'firebase/app';
+
+@Injectable()
+export class FirebaseService {
+
+  items:FirebaseListObservable<any[]>;
+  private user: Observable<firebase.User>;
+  private userDetails: firebase.User = null;
+
+  constructor(public af: AngularFireDatabase, private firebaseAuth: AngularFireAuth) {
+    this.items = af.list('/items'); 
+    
+    ...
+    
+  }
+
+...
+
+addData(starters) {
+    console.log(starters, 'starters.json in fb service...');
+    console.log('deleting data from fb...');
+    this.items.remove().then(_ => {
+      console.log('deleted!');
+      this.getStarterData();
+    });
+    console.log('saving new data to fb...');
+    this.items.push(starters); 
+}
+
+
+  getData() {
+    console.log('getting starter data from firebase...');
+    return this.items = this.af.list('/items');
+  }
+}
+
+``` 
+
+When click save and I call `this.fbService.addData(this.fullFirebaseResponse)` I am passing in the updated firebase response.
+
+**WARNING: First I ask firebase to delete my entire database before saving it again. This is why I am checking `if (res[0] != null)` in my app.component.ts to avoid errors if the new firebase response isn't ready for my view when I ask for it again. I say warning because if you have important data and you have not saved a copy for backup this approach could cause error and you might lose all your data.**
+
+A better approach is to update each item in your data one by one.
+
+For my app I am making updates all the time to a lot of players and this approach works for me by removing everything and making a new db. My data isn't that large so the process is quick. However, I saved backups of my data to my desktop by selecting the export feature from the firebase dropdown menu incase something goes wrong.  
+
+The best thing is as soon as I do this Firebase pulls in the new data to the view my angular component constructor function is hot and watches the change and anyone using this app will see the change without having to refresh the view like magic. I have an app live on heroku and I have made changes to my firebase db and seen the data change realtime on other devices to test this theory. It's a great user experience!
+
 
 
 

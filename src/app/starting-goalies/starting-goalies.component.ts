@@ -73,7 +73,7 @@ export class StartingGoaliesComponent implements OnInit {
   noScoresMsg: any;
   noScores: any;
   startersDate: any;
-  fullFirebaseResponse: any
+  fullFirebaseResponse: any;
   loading: boolean = true;
 
   stats: boolean = false;

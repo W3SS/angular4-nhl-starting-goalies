@@ -408,10 +408,7 @@ For my app I am making updates all the time to a lot of players and this approac
 
 The best thing is as soon as I do this Firebase pulls in the new data to the view my angular component constructor function is hot and watches the change and anyone using this app will see the change without having to refresh the view like magic. I have an app live on heroku and I have made changes to my firebase db and seen the data change realtime on other devices to test this theory. It's a great user experience!
 
-
-
-
- 
+I Angular5 and Angular6 have made changes to the http module and also changes to how angular works with the latest firebase modules. I hope to add these updates soon. 
 
 
 

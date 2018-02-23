@@ -144,11 +144,11 @@ export class AppComponent implements OnInit {
 
 <div class="login-container">
  
-  <input matInput type="email" class="form-control" [(ngModel)]="user.email" placeholder="Email" required>
+  <input type="email" class="form-control" [(ngModel)]="user.email" placeholder="Email" required>
   
-  <input matInput type="password" class="form-control" [(ngModel)]="user.password" placeholder="Password" required>
+  <input type="password" class="form-control" [(ngModel)]="user.password" placeholder="Password" required>
 
-  <button mat-raised-button class="mat-raised-button" (click)="signInWithEmail()">Login</button>
+  <button class="mat-raised-button" (click)="signInWithEmail()">Login</button>
 
 </div> 
 
@@ -162,17 +162,17 @@ The key here is in the firebase service <code>this.firebaseAuth.auth.signInWithE
 
 <div class="login-container" *ngIf="fbService.userDetails == null">
  
-  <input matInput type="email" class="form-control" [(ngModel)]="user.email" placeholder="Email" required>
+  <input type="email" class="form-control" [(ngModel)]="user.email" placeholder="Email" required>
   
-  <input matInput type="password" class="form-control" [(ngModel)]="user.password" placeholder="Password" required>
+  <input type="password" class="form-control" [(ngModel)]="user.password" placeholder="Password" required>
 
-  <button mat-raised-button class="mat-raised-button" (click)="signInWithEmail()">Login</button>
+  <button class="mat-raised-button" (click)="signInWithEmail()">Login</button>
 
 </div> 
 
  
 <div *ngIf="fbService.userDetails != null">
- <button mat-raised-button class="mat-raised-button" color="warn"  (click)="fbService.logout()">Logout</button>
+ <button (click)="fbService.logout()">Logout</button>
 </div>
 
 ```
@@ -321,7 +321,7 @@ export class AppComponent implements OnInit {
 
    // USING MYDATA FROM API TO MATCH IDS WITH CUSTOM FIREBASE DATA
   // USE WITH NESTED NGFOR IN HTML
-  this.http.get('https://some.fake.datafeed.com/v1/players)
+  this.http.get('https://some.fake.datafeed.com/v1/players')
     .map(response => response.json())
       .subscribe(res => {
          this.myData = res['cumulativeplayerstats'].playerstatsentry;
@@ -408,7 +408,7 @@ For my app I am making updates all the time to a lot of players and this approac
 
 The best thing is as soon as I do this Firebase pulls in the new data to the view my angular component constructor function is hot and watches the change and anyone using this app will see the change without having to refresh the view like magic. I have an app live on heroku and I have made changes to my firebase db and seen the data change realtime on other devices to test this theory. It's a great user experience!
 
-I Angular5 and Angular6 have made changes to the http module and also changes to how angular works with the latest firebase modules. I hope to add these updates soon. 
+Angular5 and Angular6 have made changes to the http module and also changes to how angular works with the latest firebase modules. I hope to add these updates soon. 
 
 
 

@@ -110,14 +110,14 @@ export class StartingGoaliesComponent implements OnInit {
             for (let show of this.showData) {
               for (let rep of this.myData) {
                 //console.log(show, 'showData items...');
-                if (show.team.matchup != null && this.fullFirebaseResponse[1][show.team.matchup[0].player.ID] != null && this.fullFirebaseResponse[1][rep.player.ID] != null && rep.team.ID === show.team.matchup[0].team.ID && this.fullFirebaseResponse[1][show.team.matchup[0].player.ID].probable === false && this.fullFirebaseResponse[1][rep.player.ID].confirmed === true) {
+                if (this.startersDate === show.team.today && show.team.matchup != null && this.fullFirebaseResponse[1][show.team.matchup[0].player.ID] != null && this.fullFirebaseResponse[1][rep.player.ID] != null && rep.team.ID === show.team.matchup[0].team.ID && this.fullFirebaseResponse[1][show.team.matchup[0].player.ID].probable === false && this.fullFirebaseResponse[1][rep.player.ID].confirmed === true) {
                   // Find goalies with the same team ID
                   // if the view has a goalie that is probable false swap with goalie from firebase that is confirmed
                   console.log(rep, 'update me into the view right now!');
                   console.log(show.team.matchup[0], 'I have been changed, replace me with new goalie...');
                   show.team.matchup[0] = rep;
                 }
-                if (show.team.matchup != null && this.fullFirebaseResponse[1][show.team.matchup[1].player.ID] != null && this.fullFirebaseResponse[1][rep.player.ID] != null && rep.team.ID === show.team.matchup[1].team.ID && this.fullFirebaseResponse[1][show.team.matchup[1].player.ID].probable === false && this.fullFirebaseResponse[1][rep.player.ID].confirmed === true) {
+                if (this.startersDate === show.team.today && show.team.matchup != null && this.fullFirebaseResponse[1][show.team.matchup[1].player.ID] != null && this.fullFirebaseResponse[1][rep.player.ID] != null && rep.team.ID === show.team.matchup[1].team.ID && this.fullFirebaseResponse[1][show.team.matchup[1].player.ID].probable === false && this.fullFirebaseResponse[1][rep.player.ID].confirmed === true) {
                   // same thing
                   // now check against the 2nd item in the view matchup array
                   console.log(rep, 'update me into the view right now!');

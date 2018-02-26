@@ -541,14 +541,11 @@ if (res['fullgameschedule'].gameentry > 0) {
       this.loadData();
 
     } else {
-      setInterval(() => {
+     
         this.loading = false;
         this.showDataYesterday = this.sentYesterdayData;
-        //console.log(this.showDataYesterday["0"].team.today, "get the date");
         this.gameDate = this.showDataYesterday["0"].team.today;
-      }, 300)
-
-
+      
     }
   }
 

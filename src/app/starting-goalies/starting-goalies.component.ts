@@ -10,6 +10,7 @@ import { DatePipe, PercentPipe } from '@angular/common';
 import { DataService } from '../data.service';
 import { FirebaseService } from '../firebase.service';
 import { YesterdayService } from '../yesterday.service';
+import { TomorrowService } from '../tomorrow.service';
 import { MatSnackBar } from '@angular/material';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/observable/forkJoin';
@@ -51,9 +52,11 @@ export class StartingGoaliesComponent implements OnInit {
   dailyStats: Array < any > = [];
   myData: Array < any > ;
   showData: Array < any > ;
+  showTomorrow: Array <any> ;
   score: Array < any > ;
   sentData: Array < any > ;
   sentYesterdayData: Array < any > ;
+  sentTomorrowData: Array < any > ;
   gameDate: string = '';
   defineToken: string = '';
   statData: Array < any > = [];
@@ -92,7 +95,7 @@ export class StartingGoaliesComponent implements OnInit {
 
 
 
-  constructor(private http: Http, private dataService: DataService, private fbService: FirebaseService, private yesterdayService: YesterdayService, public snackBar: MatSnackBar, public router: Router, public dialog: MatDialog) {
+  constructor(private http: Http, private dataService: DataService, private fbService: FirebaseService, private yesterdayService: YesterdayService, private tomorrowService: TomorrowService, public snackBar: MatSnackBar, public router: Router, public dialog: MatDialog) {
     this.fbService
       .getStarterData()
       .subscribe(res => {
@@ -157,6 +160,7 @@ export class StartingGoaliesComponent implements OnInit {
     console.log(yesterday + ' yesterday, ' + today + ' today, ' + tomorrow + ' tomorrow, ');
     this.sentData = this.dataService.getSentStats();
     this.sentYesterdayData = this.yesterdayService.getSentStats();
+    this.sentTomorrowData = this.tomorrowService.getSentStats();
 
   }
 
@@ -726,6 +730,7 @@ export class StartingGoaliesComponent implements OnInit {
 
         this.loading = false;
         this.showData = this.startersData;
+        //this.showTomorrow = this.startersData;
 
 
       }
@@ -805,13 +810,13 @@ export class StartingGoaliesComponent implements OnInit {
 
     } else {
 
-      // this.getJSON();
-      setInterval(() => {
+    
         this.loading = false;
+        this.showTomorrow = this.sentTomorrowData;
         this.showData = this.sentData;
-        //console.log(this.showData["0"].team.today, "get the date");
+        console.log(this.showTomorrow, "show tomorrow");
         this.gameDate = this.showData["0"].team.today;
-      }, 300)
+    
 
     }
 

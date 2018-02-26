@@ -643,13 +643,10 @@ export class TomorrowResultsComponent implements OnInit {
       this.loadData();
 
     } else {
-      setInterval(() => {
+        this.loading = false;  
         this.showDataTomorrow = this.sentDataTomorrow;
-        //console.log(this.showDataTomorrow["0"].team.today, "get the date");
-        this.loading = false;
         this.gameDate = this.showDataTomorrow["0"].team.today;
-      }, 300)
-
+        
     }
 
   }

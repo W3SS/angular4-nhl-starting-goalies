@@ -1,5 +1,5 @@
 <h1 class="center no-game-header" *ngIf="noGamesToday === true">{{noGamesMsg}}</h1>
-<h1 class="center date-header" *ngIf="gamesToday === true"> {{ gameDate | date:'fullDate' }}</h1>
+<h1 class="center date-header"> {{ gameDate | date:'fullDate' }}</h1>
 <div class="spinner-msg" *ngIf="loading">
   Fetching goalie stats from yesterday...
   <mat-spinner></mat-spinner>
@@ -27,16 +27,16 @@
                Saves: {{ data.team.matchup[0].player.saves +' Shots Faced: ' + data.team.matchup[0].player.ShotsAgainst }} <br>
 
              <span *ngIf="data.team.matchup[0].player.wins == '1' && data.team.matchup[0].player.Shutouts != '1'">
-              {{ data.team.matchup[0].player.LastName }} takes the Win!
+              {{ data.team.matchup[0].player.LastName }} Wins!
             </span>
             <span *ngIf="data.team.matchup[0].player.Shutouts == '1'">
-              {{ data.team.matchup[0].player.LastName }} had a SHUTOUT Victory!
+              {{ data.team.matchup[0].player.LastName }} gets a SHUTOUT!
             </span>
             <span *ngIf="data.team.matchup[0].player.losses == '1'">
-              {{ data.team.matchup[0].player.LastName }} takes the Loss!
+              {{ data.team.matchup[0].player.LastName }} Lost!
             </span>
             <span *ngIf="data.team.matchup[0].player.OvertimeLosses == '1'">
-              {{ data.team.matchup[0].player.LastName }} takes the Loss in OT!
+              {{ data.team.matchup[0].player.LastName }} Lost in OT!
             </span>
             </div>
           </div>
@@ -58,16 +58,16 @@
               Saves: {{ data.team.matchup[1].player.saves +' Shots Faced: ' + data.team.matchup[1].player.ShotsAgainst }} <br>
 
              <span *ngIf="data.team.matchup[1].player.wins == '1' && data.team.matchup[1].player.Shutouts != '1'">
-              {{ data.team.matchup[1].player.LastName }} takes the Win!
+              {{ data.team.matchup[1].player.LastName }} Wins!
             </span>
             <span *ngIf="data.team.matchup[1].player.Shutouts == '1'">
-              {{ data.team.matchup[1].player.LastName }} had a SHUTOUT Victory!
+              {{ data.team.matchup[1].player.LastName }} gets a SHUTOUT!
             </span>
             <span *ngIf="data.team.matchup[1].player.losses == '1'">
-              {{ data.team.matchup[1].player.LastName }} takes the Loss!
+              {{ data.team.matchup[1].player.LastName }} Lost!
             </span>
             <span *ngIf="data.team.matchup[1].player.OvertimeLosses == '1'">
-              {{ data.team.matchup[1].player.LastName }} takes the Loss in OT!
+              {{ data.team.matchup[1].player.LastName }} Lost in OT!
             </span>
             </div>
           </div>
@@ -94,16 +94,16 @@
                Saves: {{ data.team.matchup[0].player.saves +' Shots Faced: ' + data.team.matchup[0].player.ShotsAgainst }} <br>
 
              <span *ngIf="data.team.matchup[0].player.wins == '1' && data.team.matchup[0].player.Shutouts != '1'">
-              {{ data.team.matchup[0].player.LastName }} takes the Win!
+              {{ data.team.matchup[0].player.LastName }} Wins!
             </span>
             <span *ngIf="data.team.matchup[0].player.Shutouts == '1'">
-              {{ data.team.matchup[0].player.LastName }} had a SHUTOUT Victory!
+              {{ data.team.matchup[0].player.LastName }} gets a SHUTOUT!
             </span>
             <span *ngIf="data.team.matchup[0].player.losses == '1'">
-              {{ data.team.matchup[0].player.LastName }} takes the Loss!
+              {{ data.team.matchup[0].player.LastName }} Lost!
             </span>
             <span *ngIf="data.team.matchup[0].player.OvertimeLosses == '1'">
-              {{ data.team.matchup[0].player.LastName }} takes the Loss in OT!
+              {{ data.team.matchup[0].player.LastName }} Lost in OT!
             </span>
             </div>
               </span>
@@ -123,16 +123,16 @@
                Saves: {{ data.team.matchup[1].player.saves +' Shots Faced: ' + data.team.matchup[1].player.ShotsAgainst }} <br>
 
              <span *ngIf="data.team.matchup[1].player.wins == '1' && data.team.matchup[1].player.Shutouts != '1'">
-              {{ data.team.matchup[1].player.LastName }} takes the Win!
+              {{ data.team.matchup[1].player.LastName }} Wins!
             </span>
             <span *ngIf="data.team.matchup[1].player.Shutouts == '1'">
-              {{ data.team.matchup[1].player.LastName }} had a SHUTOUT Victory!
+              {{ data.team.matchup[1].player.LastName }} gets a SHUTOUT!
             </span>
             <span *ngIf="data.team.matchup[1].player.losses == '1'">
-              {{ data.team.matchup[1].player.LastName }} takes the Loss!
+              {{ data.team.matchup[1].player.LastName }} Lost!
             </span>
             <span *ngIf="data.team.matchup[1].player.OvertimeLosses == '1'">
-              {{ data.team.matchup[1].player.LastName }} takes the Loss in OT!
+              {{ data.team.matchup[1].player.LastName }} Lost in OT!
             </span>
             </div>
               </span>
@@ -153,16 +153,16 @@
                Saves: {{ data.team.matchup[0].player.saves +' Shots Faced: ' + data.team.matchup[0].player.ShotsAgainst }} <br>
 
              <span *ngIf="data.team.matchup[0].player.wins == '1' && data.team.matchup[0].player.Shutouts != '1'">
-              {{ data.team.matchup[0].player.LastName }} takes the Win!
+              {{ data.team.matchup[0].player.LastName }} Wins!
             </span>
             <span *ngIf="data.team.matchup[0].player.Shutouts == '1'">
-              {{ data.team.matchup[0].player.LastName }} had a SHUTOUT Victory!
+              {{ data.team.matchup[0].player.LastName }} gets a SHUTOUT!
             </span>
             <span *ngIf="data.team.matchup[0].player.losses == '1'">
-              {{ data.team.matchup[0].player.LastName }} takes the Loss!
+              {{ data.team.matchup[0].player.LastName }} Lost!
             </span>
             <span *ngIf="data.team.matchup[0].player.OvertimeLosses == '1'">
-              {{ data.team.matchup[0].player.LastName }} takes the Loss in OT!
+              {{ data.team.matchup[0].player.LastName }} Lost in OT!
             </span>
             </div>
                 </span>
@@ -183,16 +183,16 @@
                Saves: {{ data.team.matchup[1].player.saves +' Shots Faced: ' + data.team.matchup[1].player.ShotsAgainst }} <br>
 
              <span *ngIf="data.team.matchup[1].player.wins == '1' && data.team.matchup[1].player.Shutouts != '1'">
-              {{ data.team.matchup[1].player.LastName }} takes the Win!
+              {{ data.team.matchup[1].player.LastName }} Wins!
             </span>
             <span *ngIf="data.team.matchup[1].player.Shutouts == '1'">
-              {{ data.team.matchup[1].player.LastName }} had a SHUTOUT Victory!
+              {{ data.team.matchup[1].player.LastName }} gets a SHUTOUT!
             </span>
             <span *ngIf="data.team.matchup[1].player.losses == '1'">
-              {{ data.team.matchup[1].player.LastName }} takes the Loss!
+              {{ data.team.matchup[1].player.LastName }} Lost!
             </span>
             <span *ngIf="data.team.matchup[1].player.OvertimeLosses == '1'">
-              {{ data.team.matchup[1].player.LastName }} takes the Loss in OT!
+              {{ data.team.matchup[1].player.LastName }} Lost in OT!
             </span>
             </div>
 
@@ -224,16 +224,16 @@
                Saves: {{ data.team.matchup[2].player.saves +' Shots Faced: ' + data.team.matchup[2].player.ShotsAgainst }} <br>
 
              <span *ngIf="data.team.matchup[2].player.wins == '1' && data.team.matchup[2].player.Shutouts != '1'">
-              {{ data.team.matchup[2].player.LastName }} takes the Win!
+              {{ data.team.matchup[2].player.LastName }} Wins!
             </span>
             <span *ngIf="data.team.matchup[2].player.Shutouts == '1'">
-              {{ data.team.matchup[2].player.LastName }} had a SHUTOUT Victory!
+              {{ data.team.matchup[2].player.LastName }} gets a SHUTOUT!
             </span>
             <span *ngIf="data.team.matchup[2].player.losses == '1'">
-              {{ data.team.matchup[2].player.LastName }} takes the Loss!
+              {{ data.team.matchup[2].player.LastName }} Lost!
             </span>
             <span *ngIf="data.team.matchup[2].player.OvertimeLosses == '1'">
-              {{ data.team.matchup[2].player.LastName }} takes the Loss in OT!
+              {{ data.team.matchup[2].player.LastName }} Lost in OT!
             </span>
             </div>
               </span>
@@ -253,16 +253,16 @@
                Saves: {{ data.team.matchup[2].player.saves +' Shots Faced: ' + data.team.matchup[2].player.ShotsAgainst }} <br>
 
              <span *ngIf="data.team.matchup[2].player.wins == '1' && data.team.matchup[2].player.Shutouts != '1'">
-              {{ data.team.matchup[2].player.LastName }} takes the Win!
+              {{ data.team.matchup[2].player.LastName }} Wins!
             </span>
             <span *ngIf="data.team.matchup[2].player.Shutouts == '1'">
-              {{ data.team.matchup[2].player.LastName }} had a SHUTOUT Victory!
+              {{ data.team.matchup[2].player.LastName }} gets a SHUTOUT!
             </span>
             <span *ngIf="data.team.matchup[2].player.losses == '1'">
-              {{ data.team.matchup[2].player.LastName }} takes the Loss!
+              {{ data.team.matchup[2].player.LastName }} Lost!
             </span>
             <span *ngIf="data.team.matchup[2].player.OvertimeLosses == '1'">
-              {{ data.team.matchup[2].player.LastName }} takes the Loss in OT!
+              {{ data.team.matchup[2].player.LastName }} Lost in OT!
             </span>
             </div>
               </span>
@@ -283,16 +283,16 @@
                Saves: {{ data.team.matchup[1].player.saves +' Shots Faced: ' + data.team.matchup[1].player.ShotsAgainst }} <br>
 
              <span *ngIf="data.team.matchup[1].player.wins == '1' && data.team.matchup[1].player.Shutouts != '1'">
-              {{ data.team.matchup[1].player.LastName }} takes the Win!
+              {{ data.team.matchup[1].player.LastName }} Wins!
             </span>
             <span *ngIf="data.team.matchup[1].player.Shutouts == '1'">
-              {{ data.team.matchup[1].player.LastName }} had a SHUTOUT Victory!
+              {{ data.team.matchup[1].player.LastName }} gets a SHUTOUT!
             </span>
             <span *ngIf="data.team.matchup[1].player.losses == '1'">
-              {{ data.team.matchup[1].player.LastName }} takes the Loss!
+              {{ data.team.matchup[1].player.LastName }} Lost!
             </span>
             <span *ngIf="data.team.matchup[1].player.OvertimeLosses == '1'">
-              {{ data.team.matchup[1].player.LastName }} takes the Loss in OT!
+              {{ data.team.matchup[1].player.LastName }} Lost in OT!
             </span>
             </div>
                 </span>
@@ -312,16 +312,16 @@
                Saves: {{ data.team.matchup[2].player.saves +' Shots Faced: ' + data.team.matchup[2].player.ShotsAgainst }} <br>
 
              <span *ngIf="data.team.matchup[2].player.wins == '1' && data.team.matchup[2].player.Shutouts != '1'">
-              {{ data.team.matchup[2].player.LastName }} takes the Win!
+              {{ data.team.matchup[2].player.LastName }} Wins!
             </span>
             <span *ngIf="data.team.matchup[2].player.Shutouts == '1'">
-              {{ data.team.matchup[2].player.LastName }} had a SHUTOUT Victory!
+              {{ data.team.matchup[2].player.LastName }} gets a SHUTOUT!
             </span>
             <span *ngIf="data.team.matchup[2].player.losses == '1'">
-              {{ data.team.matchup[2].player.LastName }} takes the Loss!
+              {{ data.team.matchup[2].player.LastName }} Lost!
             </span>
             <span *ngIf="data.team.matchup[2].player.OvertimeLosses == '1'">
-              {{ data.team.matchup[2].player.LastName }} takes the Loss in OT!
+              {{ data.team.matchup[2].player.LastName }} Lost in OT!
             </span>
             </div>
                 </span>

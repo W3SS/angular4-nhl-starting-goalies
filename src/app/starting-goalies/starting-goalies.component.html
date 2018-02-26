@@ -330,6 +330,66 @@
 
       </li>
     </ul>
+     <ul>
+
+      <li *ngFor="let data of showTomorrow" class="goalie">
+        <span *ngIf="data.player.gameLocation === 'home' && data.player.twoPossibleStarters === false && data.team.matchup[2] == null && data.team.matchup[0].player.gameLocation === 'away'">
+          {{data.team.matchup[0].player.LastName +' '+ data.team.matchup[0].player.twitterHandle}}
+                 
+      
+        </span>
+        <span *ngIf="data.player.gameLocation === 'home' && data.player.twoPossibleStarters === false && data.team.matchup[2] == null && data.team.matchup[1].player.gameLocation === 'home'">
+          {{data.team.matchup[1].player.twitterHandle +' '+ data.team.matchup[1].player.LastName}}
+                 
+        </span>
+        <span *ngIf="data.player.gameLocation === 'home' && data.player.twoPossibleStarters === false && data.team.matchup[2] == null && data.team.matchup[1].player.gameLocation === 'away'">
+          {{data.team.matchup[1].player.LastName +' '+ data.team.matchup[1].player.twitterHandle}}
+                               
+        </span>
+        <span *ngIf="data.player.gameLocation === 'home' && data.player.twoPossibleStarters === false && data.team.matchup[2] == null && data.team.matchup[0].player.gameLocation === 'home'">
+          {{data.team.matchup[0].player.twitterHandle +' '+ data.team.matchup[0].player.LastName}}
+                
+            </span>
+        
+        <span *ngIf="data.player.gameLocation === 'home' && data.player.twoPossibleStarters === false && data.team.matchup[2] != null && data.team.matchup[0].player.gameLocation === 'home'">
+          {{data.team.matchup[0].player.twitterHandle +' '+ data.team.matchup[0].player.LastName}}
+             
+        </span>
+
+       
+
+      </li>
+    </ul>
+    <ul>
+      
+      <li *ngFor="let data of showTomorrow" class="goalie">
+        <span *ngIf="data.player.gameLocation === 'home' && data.player.twoPossibleStarters === false && data.team.matchup[2] == null && data.team.matchup[0].player.gameLocation === 'away'">
+          {{data.team.matchup[0].player.twitterHandle}}
+                 
+      
+        </span>
+        <span *ngIf="data.player.gameLocation === 'home' && data.player.twoPossibleStarters === false && data.team.matchup[2] == null && data.team.matchup[1].player.gameLocation === 'home'">
+          {{data.team.matchup[1].player.twitterHandle}}
+                 
+        </span>
+        <span *ngIf="data.player.gameLocation === 'home' && data.player.twoPossibleStarters === false && data.team.matchup[2] == null && data.team.matchup[1].player.gameLocation === 'away'">
+          {{data.team.matchup[1].player.twitterHandle}}
+                               
+        </span>
+        <span *ngIf="data.player.gameLocation === 'home' && data.player.twoPossibleStarters === false && data.team.matchup[2] == null && data.team.matchup[0].player.gameLocation === 'home'">
+          {{data.team.matchup[0].player.twitterHandle}}
+                
+            </span>
+        
+        <span *ngIf="data.player.gameLocation === 'home' && data.player.twoPossibleStarters === false && data.team.matchup[2] != null && data.team.matchup[0].player.gameLocation === 'home'">
+          {{data.team.matchup[0].player.twitterHandle}}
+             
+        </span>
+
+       
+
+      </li>
+    </ul>
     <!-- <div *ngIf="data.team.matchup[0].player.saves != null"> -->
     <!-- <span fxHide [fxHide.gt-xs]="isVisibleOnDesktop()">Saves: </span> <span fxHide [fxHide.xs]="isVisibleOnMobile()">SV </span> {{data.team.matchup[0].player.saves}} <span fxHide [fxHide.gt-xs]="isVisibleOnDesktop()">Shots Faced: </span> <span fxHide [fxHide.xs]="isVisibleOnMobile()">SA </span> {{data.team.matchup[0].player.shotsFaced}}<br> -->
     Add Goalie
@@ -448,13 +508,13 @@
               <span fxHide [fxHide.gt-xs]="isVisibleOnDesktop()">Saves: </span> <span fxHide [fxHide.xs]="isVisibleOnMobile()">SV </span> {{data.team.matchup[0].player.saves}} <span fxHide [fxHide.gt-xs]="isVisibleOnDesktop()">Shots Faced: </span> <span fxHide [fxHide.xs]="isVisibleOnMobile()">SA </span> {{data.team.matchup[0].player.shotsFaced}}
               <br>
               <span *ngIf="data.team.matchup[0].player.wins == '1' && data.team.matchup[0].player.Shutouts != '1'">
-              {{ data.team.matchup[0].player.LastName }} takes the Win!
+              {{ data.team.matchup[0].player.LastName }} Wins!
             </span>
               <span *ngIf="data.team.matchup[0].player.Shutouts == '1'">
-              {{ data.team.matchup[0].player.LastName }} provides a SHUTOUT!
+              {{ data.team.matchup[0].player.LastName }} gets a SHUTOUT!
             </span>
               <span *ngIf="data.team.matchup[0].player.losses == '1'">
-              {{ data.team.matchup[0].player.LastName }} takes the Loss!
+              {{ data.team.matchup[0].player.LastName }} Lost!
             </span>
               <span *ngIf="data.team.matchup[0].player.OvertimeLosses == '1'">
               {{ data.team.matchup[0].player.LastName }} lost in OT!
@@ -479,13 +539,13 @@
               <span fxHide [fxHide.gt-xs]="isVisibleOnDesktop()">Saves: </span> <span fxHide [fxHide.xs]="isVisibleOnMobile()">SV </span> {{data.team.matchup[1].player.saves}} <span fxHide [fxHide.gt-xs]="isVisibleOnDesktop()">Shots Faced: </span> <span fxHide [fxHide.xs]="isVisibleOnMobile()">SA </span> {{data.team.matchup[1].player.shotsFaced}}
               <br>
               <span *ngIf="data.team.matchup[1].player.wins == '1' && data.team.matchup[1].player.Shutouts != '1'">
-              {{ data.team.matchup[1].player.LastName }} takes the Win!
+              {{ data.team.matchup[1].player.LastName }} Wins!
             </span>
               <span *ngIf="data.team.matchup[1].player.Shutouts == '1'">
-              {{ data.team.matchup[1].player.LastName }} provides a SHUTOUT!
+              {{ data.team.matchup[1].player.LastName }} gets a SHUTOUT!
             </span>
               <span *ngIf="data.team.matchup[1].player.losses == '1'">
-              {{ data.team.matchup[1].player.LastName }} takes the Loss!
+              {{ data.team.matchup[1].player.LastName }} Lost!
             </span>
               <span *ngIf="data.team.matchup[1].player.OvertimeLosses == '1'">
               {{ data.team.matchup[1].player.LastName }} lost in OT!
@@ -509,13 +569,13 @@
               <span fxHide [fxHide.gt-xs]="isVisibleOnDesktop()">Saves: </span> <span fxHide [fxHide.xs]="isVisibleOnMobile()">SV </span> {{data.team.matchup[2].player.saves}} <span fxHide [fxHide.gt-xs]="isVisibleOnDesktop()">Shots Faced: </span> <span fxHide [fxHide.xs]="isVisibleOnMobile()">SA </span> {{data.team.matchup[2].player.shotsFaced}}
               <br>
               <span *ngIf="data.team.matchup[2].player.wins == '1' && data.team.matchup[2].player.Shutouts != '1'">
-              {{ data.team.matchup[2].player.LastName }} takes the Win!
+              {{ data.team.matchup[2].player.LastName }} Wins!
             </span>
               <span *ngIf="data.team.matchup[2].player.Shutouts == '1'">
-              {{ data.team.matchup[2].player.LastName }} provides a SHUTOUT!
+              {{ data.team.matchup[2].player.LastName }} gets a SHUTOUT!
             </span>
               <span *ngIf="data.team.matchup[2].player.losses == '1'">
-              {{ data.team.matchup[2].player.LastName }} takes the Loss!
+              {{ data.team.matchup[2].player.LastName }} Lost!
             </span>
               <span *ngIf="data.team.matchup[2].player.OvertimeLosses == '1'">
               {{ data.team.matchup[2].player.LastName }} lost in OT!
@@ -538,13 +598,13 @@
               <span fxHide [fxHide.gt-xs]="isVisibleOnDesktop()">Saves: </span> <span fxHide [fxHide.xs]="isVisibleOnMobile()">SV </span> {{data.team.matchup[0].player.saves}} <span fxHide [fxHide.gt-xs]="isVisibleOnDesktop()">Shots Faced: </span> <span fxHide [fxHide.xs]="isVisibleOnMobile()">SA </span> {{data.team.matchup[0].player.shotsFaced}}
               <br>
               <span *ngIf="data.team.matchup[0].player.wins == '1' && data.team.matchup[0].player.Shutouts != '1'">
-              {{ data.team.matchup[0].player.LastName }} takes the Win!
+              {{ data.team.matchup[0].player.LastName }} Wins!
             </span>
               <span *ngIf="data.team.matchup[0].player.Shutouts == '1'">
-              {{ data.team.matchup[0].player.LastName }} provides a SHUTOUT!
+              {{ data.team.matchup[0].player.LastName }} gets a SHUTOUT!
             </span>
               <span *ngIf="data.team.matchup[0].player.losses == '1'">
-              {{ data.team.matchup[0].player.LastName }} takes the Loss!
+              {{ data.team.matchup[0].player.LastName }} Lost!
             </span>
               <span *ngIf="data.team.matchup[0].player.OvertimeLosses == '1'">
               {{ data.team.matchup[0].player.LastName }} lost in OT!
@@ -567,13 +627,13 @@
               <span fxHide [fxHide.gt-xs]="isVisibleOnDesktop()">Saves: </span> <span fxHide [fxHide.xs]="isVisibleOnMobile()">SV </span> {{data.team.matchup[0].player.saves}} <span fxHide [fxHide.gt-xs]="isVisibleOnDesktop()">Shots Faced: </span> <span fxHide [fxHide.xs]="isVisibleOnMobile()">SA </span> {{data.team.matchup[0].player.shotsFaced}}
               <br>
               <span *ngIf="data.team.matchup[0].player.wins == '1' && data.team.matchup[0].player.Shutouts != '1'">
-              {{ data.team.matchup[0].player.LastName }} takes the Win!
+              {{ data.team.matchup[0].player.LastName }} Wins!
             </span>
               <span *ngIf="data.team.matchup[0].player.Shutouts == '1'">
-              {{ data.team.matchup[0].player.LastName }} provides a SHUTOUT!
+              {{ data.team.matchup[0].player.LastName }} gets a SHUTOUT!
             </span>
               <span *ngIf="data.team.matchup[0].player.losses == '1'">
-              {{ data.team.matchup[0].player.LastName }} takes the Loss!
+              {{ data.team.matchup[0].player.LastName }} Lost!
             </span>
               <span *ngIf="data.team.matchup[0].player.OvertimeLosses == '1'">
               {{ data.team.matchup[0].player.LastName }} lost in OT!
@@ -596,13 +656,13 @@
               <span fxHide [fxHide.gt-xs]="isVisibleOnDesktop()">Saves: </span> <span fxHide [fxHide.xs]="isVisibleOnMobile()">SV </span> {{data.team.matchup[1].player.saves}} <span fxHide [fxHide.gt-xs]="isVisibleOnDesktop()">Shots Faced: </span> <span fxHide [fxHide.xs]="isVisibleOnMobile()">SA </span> {{data.team.matchup[1].player.shotsFaced}}
               <br>
               <span *ngIf="data.team.matchup[1].player.wins == '1' && data.team.matchup[1].player.Shutouts != '1'">
-              {{ data.team.matchup[1].player.LastName }} takes the Win!
+              {{ data.team.matchup[1].player.LastName }} Wins!
             </span>
               <span *ngIf="data.team.matchup[1].player.Shutouts == '1'">
-              {{ data.team.matchup[1].player.LastName }} provides a SHUTOUT!
+              {{ data.team.matchup[1].player.LastName }} gets a SHUTOUT!
             </span>
               <span *ngIf="data.team.matchup[1].player.losses == '1'">
-              {{ data.team.matchup[1].player.LastName }} takes the Loss!
+              {{ data.team.matchup[1].player.LastName }} Lost!
             </span>
               <span *ngIf="data.team.matchup[1].player.OvertimeLosses == '1'">
               {{ data.team.matchup[1].player.LastName }} lost in OT!
@@ -626,13 +686,13 @@
               <span fxHide [fxHide.gt-xs]="isVisibleOnDesktop()">Saves: </span> <span fxHide [fxHide.xs]="isVisibleOnMobile()">SV </span> {{data.team.matchup[0].player.saves}} <span fxHide [fxHide.gt-xs]="isVisibleOnDesktop()">Shots Faced: </span> <span fxHide [fxHide.xs]="isVisibleOnMobile()">SA </span> {{data.team.matchup[0].player.shotsFaced}}
               <br>
               <span *ngIf="data.team.matchup[0].player.wins == '1' && data.team.matchup[0].player.Shutouts != '1'">
-              {{ data.team.matchup[0].player.LastName }} takes the Win!
+              {{ data.team.matchup[0].player.LastName }} Wins!
             </span>
               <span *ngIf="data.team.matchup[0].player.Shutouts == '1'">
-              {{ data.team.matchup[0].player.LastName }} provides a SHUTOUT!
+              {{ data.team.matchup[0].player.LastName }} gets a SHUTOUT!
             </span>
               <span *ngIf="data.team.matchup[0].player.losses == '1'">
-              {{ data.team.matchup[0].player.LastName }} takes the Loss!
+              {{ data.team.matchup[0].player.LastName }} Lost!
             </span>
               <span *ngIf="data.team.matchup[0].player.OvertimeLosses == '1'">
               {{ data.team.matchup[0].player.LastName }} lost in OT!
@@ -657,13 +717,13 @@
               <span fxHide [fxHide.gt-xs]="isVisibleOnDesktop()">Saves: </span> <span fxHide [fxHide.xs]="isVisibleOnMobile()">SV </span> {{data.team.matchup[2].player.saves}} <span fxHide [fxHide.gt-xs]="isVisibleOnDesktop()">Shots Faced: </span> <span fxHide [fxHide.xs]="isVisibleOnMobile()">SA </span> {{data.team.matchup[2].player.shotsFaced}}
               <br>
               <span *ngIf="data.team.matchup[2].player.wins == '1' && data.team.matchup[2].player.Shutouts != '1'">
-              {{ data.team.matchup[2].player.LastName }} takes the Win!
+              {{ data.team.matchup[2].player.LastName }} Wins!
             </span>
               <span *ngIf="data.team.matchup[2].player.Shutouts == '1'">
-              {{ data.team.matchup[2].player.LastName }} provides a SHUTOUT!
+              {{ data.team.matchup[2].player.LastName }} gets a SHUTOUT!
             </span>
               <span *ngIf="data.team.matchup[2].player.losses == '1'">
-              {{ data.team.matchup[2].player.LastName }} takes the Loss!
+              {{ data.team.matchup[2].player.LastName }} Lost!
             </span>
               <span *ngIf="data.team.matchup[2].player.OvertimeLosses == '1'">
               {{ data.team.matchup[2].player.LastName }} lost in OT!
@@ -688,13 +748,13 @@
               <span fxHide [fxHide.gt-xs]="isVisibleOnDesktop()">Saves: </span> <span fxHide [fxHide.xs]="isVisibleOnMobile()">SV </span> {{data.team.matchup[0].player.saves}} <span fxHide [fxHide.gt-xs]="isVisibleOnDesktop()">Shots Faced: </span> <span fxHide [fxHide.xs]="isVisibleOnMobile()">SA </span> {{data.team.matchup[0].player.shotsFaced}}
               <br>
               <span *ngIf="data.team.matchup[0].player.wins == '1' && data.team.matchup[0].player.Shutouts != '1'">
-              {{ data.team.matchup[0].player.LastName }} takes the Win!
+              {{ data.team.matchup[0].player.LastName }} Wins!
             </span>
               <span *ngIf="data.team.matchup[0].player.Shutouts == '1'">
-              {{ data.team.matchup[0].player.LastName }} provides a SHUTOUT!
+              {{ data.team.matchup[0].player.LastName }} gets a SHUTOUT!
             </span>
               <span *ngIf="data.team.matchup[0].player.losses == '1'">
-              {{ data.team.matchup[0].player.LastName }} takes the Loss!
+              {{ data.team.matchup[0].player.LastName }} Lost!
             </span>
               <span *ngIf="data.team.matchup[0].player.OvertimeLosses == '1'">
               {{ data.team.matchup[0].player.LastName }} lost in OT!
@@ -719,13 +779,13 @@
               <span fxHide [fxHide.gt-xs]="isVisibleOnDesktop()">Saves: </span> <span fxHide [fxHide.xs]="isVisibleOnMobile()">SV </span> {{data.team.matchup[1].player.saves}} <span fxHide [fxHide.gt-xs]="isVisibleOnDesktop()">Shots Faced: </span> <span fxHide [fxHide.xs]="isVisibleOnMobile()">SA </span> {{data.team.matchup[1].player.shotsFaced}}
               <br>
               <span *ngIf="data.team.matchup[1].player.wins == '1' && data.team.matchup[1].player.Shutouts != '1'">
-              {{ data.team.matchup[1].player.LastName }} takes the Win!
+              {{ data.team.matchup[1].player.LastName }} Wins!
             </span>
               <span *ngIf="data.team.matchup[1].player.Shutouts == '1'">
-              {{ data.team.matchup[1].player.LastName }} provides a SHUTOUT!
+              {{ data.team.matchup[1].player.LastName }} gets a SHUTOUT!
             </span>
               <span *ngIf="data.team.matchup[1].player.losses == '1'">
-              {{ data.team.matchup[1].player.LastName }} takes the Loss!
+              {{ data.team.matchup[1].player.LastName }} Lost!
             </span>
               <span *ngIf="data.team.matchup[1].player.OvertimeLosses == '1'">
               {{ data.team.matchup[1].player.LastName }} lost in OT!
@@ -749,13 +809,13 @@
               <span fxHide [fxHide.gt-xs]="isVisibleOnDesktop()">Saves: </span> <span fxHide [fxHide.xs]="isVisibleOnMobile()">SV </span> {{data.team.matchup[2].player.saves}} <span fxHide [fxHide.gt-xs]="isVisibleOnDesktop()">Shots Faced: </span> <span fxHide [fxHide.xs]="isVisibleOnMobile()">SA </span> {{data.team.matchup[2].player.shotsFaced}}
               <br>
               <span *ngIf="data.team.matchup[2].player.wins == '1' && data.team.matchup[2].player.Shutouts != '1'">
-              {{ data.team.matchup[2].player.LastName }} takes the Win!
+              {{ data.team.matchup[2].player.LastName }} Wins!
             </span>
               <span *ngIf="data.team.matchup[2].player.Shutouts == '1'">
-              {{ data.team.matchup[2].player.LastName }} provides a SHUTOUT!
+              {{ data.team.matchup[2].player.LastName }} gets a SHUTOUT!
             </span>
               <span *ngIf="data.team.matchup[2].player.losses == '1'">
-              {{ data.team.matchup[2].player.LastName }} takes the Loss!
+              {{ data.team.matchup[2].player.LastName }} Lost!
             </span>
               <span *ngIf="data.team.matchup[2].player.OvertimeLosses == '1'">
               {{ data.team.matchup[2].player.LastName }} lost in OT!
@@ -778,13 +838,13 @@
               <span fxHide [fxHide.gt-xs]="isVisibleOnDesktop()">Saves: </span> <span fxHide [fxHide.xs]="isVisibleOnMobile()">SV </span> {{data.team.matchup[1].player.saves}} <span fxHide [fxHide.gt-xs]="isVisibleOnDesktop()">Shots Faced: </span> <span fxHide [fxHide.xs]="isVisibleOnMobile()">SA </span> {{data.team.matchup[1].player.shotsFaced}}
               <br>
               <span *ngIf="data.team.matchup[1].player.wins == '1' && data.team.matchup[1].player.Shutouts != '1'">
-              {{ data.team.matchup[1].player.LastName }} takes the Win!
+              {{ data.team.matchup[1].player.LastName }} Wins!
             </span>
               <span *ngIf="data.team.matchup[1].player.Shutouts == '1'">
-              {{ data.team.matchup[1].player.LastName }} provides a SHUTOUT!
+              {{ data.team.matchup[1].player.LastName }} gets a SHUTOUT!
             </span>
               <span *ngIf="data.team.matchup[1].player.losses == '1'">
-              {{ data.team.matchup[1].player.LastName }} takes the Loss!
+              {{ data.team.matchup[1].player.LastName }} Lost!
             </span>
               <span *ngIf="data.team.matchup[1].player.OvertimeLosses == '1'">
               {{ data.team.matchup[1].player.LastName }} lost in OT!
@@ -808,13 +868,13 @@
               <span fxHide [fxHide.gt-xs]="isVisibleOnDesktop()">Saves: </span> <span fxHide [fxHide.xs]="isVisibleOnMobile()">SV </span> {{data.team.matchup[2].player.saves}} <span fxHide [fxHide.gt-xs]="isVisibleOnDesktop()">Shots Faced: </span> <span fxHide [fxHide.xs]="isVisibleOnMobile()">SA </span> {{data.team.matchup[2].player.shotsFaced}}
               <br>
               <span *ngIf="data.team.matchup[2].player.wins == '1' && data.team.matchup[2].player.Shutouts != '1'">
-              {{ data.team.matchup[2].player.LastName }} takes the Win!
+              {{ data.team.matchup[2].player.LastName }} Wins!
             </span>
               <span *ngIf="data.team.matchup[2].player.Shutouts == '1'">
-              {{ data.team.matchup[2].player.LastName }} provides a SHUTOUT!
+              {{ data.team.matchup[2].player.LastName }} gets a SHUTOUT!
             </span>
               <span *ngIf="data.team.matchup[2].player.losses == '1'">
-              {{ data.team.matchup[2].player.LastName }} takes the Loss!
+              {{ data.team.matchup[2].player.LastName }} Lost!
             </span>
               <span *ngIf="data.team.matchup[2].player.OvertimeLosses == '1'">
               {{ data.team.matchup[2].player.LastName }} lost in OT!
@@ -839,13 +899,13 @@
               <span fxHide [fxHide.gt-xs]="isVisibleOnDesktop()">Saves: </span> <span fxHide [fxHide.xs]="isVisibleOnMobile()">SV </span> {{data.team.matchup[1].player.saves}} <span fxHide [fxHide.gt-xs]="isVisibleOnDesktop()">Shots Faced: </span> <span fxHide [fxHide.xs]="isVisibleOnMobile()">SA </span> {{data.team.matchup[1].player.shotsFaced}}
               <br>
               <span *ngIf="data.team.matchup[1].player.wins == '1' && data.team.matchup[1].player.Shutouts != '1'">
-              {{ data.team.matchup[1].player.LastName }} takes the Win!
+              {{ data.team.matchup[1].player.LastName }} Wins!
             </span>
               <span *ngIf="data.team.matchup[1].player.Shutouts == '1'">
-              {{ data.team.matchup[1].player.LastName }} provides a SHUTOUT!
+              {{ data.team.matchup[1].player.LastName }} gets a SHUTOUT!
             </span>
               <span *ngIf="data.team.matchup[1].player.losses == '1'">
-              {{ data.team.matchup[1].player.LastName }} takes the Loss!
+              {{ data.team.matchup[1].player.LastName }} Lost!
             </span>
               <span *ngIf="data.team.matchup[1].player.OvertimeLosses == '1'">
               {{ data.team.matchup[1].player.LastName }} lost in OT!
@@ -870,13 +930,13 @@
               <span fxHide [fxHide.gt-xs]="isVisibleOnDesktop()">Saves: </span> <span fxHide [fxHide.xs]="isVisibleOnMobile()">SV </span> {{data.team.matchup[0].player.saves}} <span fxHide [fxHide.gt-xs]="isVisibleOnDesktop()">Shots Faced: </span> <span fxHide [fxHide.xs]="isVisibleOnMobile()">SA </span> {{data.team.matchup[0].player.shotsFaced}}
               <br>
               <span *ngIf="data.team.matchup[0].player.wins == '1' && data.team.matchup[0].player.Shutouts != '1'">
-              {{ data.team.matchup[0].player.LastName }} takes the Win!
+              {{ data.team.matchup[0].player.LastName }} Wins!
             </span>
               <span *ngIf="data.team.matchup[0].player.Shutouts == '1'">
-              {{ data.team.matchup[0].player.LastName }} provides a SHUTOUT!
+              {{ data.team.matchup[0].player.LastName }} gets a SHUTOUT!
             </span>
               <span *ngIf="data.team.matchup[0].player.losses == '1'">
-              {{ data.team.matchup[0].player.LastName }} takes the Loss!
+              {{ data.team.matchup[0].player.LastName }} Lost!
             </span>
               <span *ngIf="data.team.matchup[0].player.OvertimeLosses == '1'">
               {{ data.team.matchup[0].player.LastName }} lost in OT!
@@ -901,13 +961,13 @@
               <span fxHide [fxHide.gt-xs]="isVisibleOnDesktop()">Saves: </span> <span fxHide [fxHide.xs]="isVisibleOnMobile()">SV </span> {{data.team.matchup[1].player.saves}} <span fxHide [fxHide.gt-xs]="isVisibleOnDesktop()">Shots Faced: </span> <span fxHide [fxHide.xs]="isVisibleOnMobile()">SA </span> {{data.team.matchup[1].player.shotsFaced}}
               <br>
               <span *ngIf="data.team.matchup[1].player.wins == '1' && data.team.matchup[1].player.Shutouts != '1'">
-              {{ data.team.matchup[1].player.LastName }} takes the Win!
+              {{ data.team.matchup[1].player.LastName }} Wins!
             </span>
               <span *ngIf="data.team.matchup[1].player.Shutouts == '1'">
-              {{ data.team.matchup[1].player.LastName }} provides a SHUTOUT!
+              {{ data.team.matchup[1].player.LastName }} gets a SHUTOUT!
             </span>
               <span *ngIf="data.team.matchup[1].player.losses == '1'">
-              {{ data.team.matchup[1].player.LastName }} takes the Loss!
+              {{ data.team.matchup[1].player.LastName }} Lost!
             </span>
               <span *ngIf="data.team.matchup[1].player.OvertimeLosses == '1'">
               {{ data.team.matchup[1].player.LastName }} lost in OT!
@@ -970,13 +1030,13 @@
               <span fxHide [fxHide.gt-xs]="isVisibleOnDesktop()">Saves: </span> <span fxHide [fxHide.xs]="isVisibleOnMobile()">SV </span> {{data.team.matchup[0].player.saves}} <span fxHide [fxHide.gt-xs]="isVisibleOnDesktop()">Shots Faced: </span> <span fxHide [fxHide.xs]="isVisibleOnMobile()">SA </span> {{data.team.matchup[0].player.shotsFaced}}
               <br>
               <span *ngIf="data.team.matchup[0].player.wins == '1' && data.team.matchup[0].player.Shutouts != '1'">
-              {{ data.team.matchup[0].player.LastName }} takes the Win!
+              {{ data.team.matchup[0].player.LastName }} Wins!
             </span>
               <span *ngIf="data.team.matchup[0].player.Shutouts == '1'">
-              {{ data.team.matchup[0].player.LastName }} provides a SHUTOUT!
+              {{ data.team.matchup[0].player.LastName }} gets a SHUTOUT!
             </span>
               <span *ngIf="data.team.matchup[0].player.losses == '1'">
-              {{ data.team.matchup[0].player.LastName }} takes the Loss!
+              {{ data.team.matchup[0].player.LastName }} Lost!
             </span>
               <span *ngIf="data.team.matchup[0].player.OvertimeLosses == '1'">
               {{ data.team.matchup[0].player.LastName }} lost in OT!
@@ -999,13 +1059,13 @@
               <span fxHide [fxHide.gt-xs]="isVisibleOnDesktop()">Saves: </span> <span fxHide [fxHide.xs]="isVisibleOnMobile()">SV </span> {{data.team.matchup[2].player.saves}} <span fxHide [fxHide.gt-xs]="isVisibleOnDesktop()">Shots Faced: </span> <span fxHide [fxHide.xs]="isVisibleOnMobile()">SA </span> {{data.team.matchup[2].player.shotsFaced}}
               <br>
               <span *ngIf="data.team.matchup[2].player.wins == '1' && data.team.matchup[2].player.Shutouts != '1'">
-              {{ data.team.matchup[2].player.LastName }} takes the Win!
+              {{ data.team.matchup[2].player.LastName }} Wins!
             </span>
               <span *ngIf="data.team.matchup[2].player.Shutouts == '1'">
-              {{ data.team.matchup[2].player.LastName }} provides a SHUTOUT!
+              {{ data.team.matchup[2].player.LastName }} gets a SHUTOUT!
             </span>
               <span *ngIf="data.team.matchup[2].player.losses == '1'">
-              {{ data.team.matchup[2].player.LastName }} takes the Loss!
+              {{ data.team.matchup[2].player.LastName }} Lost!
             </span>
               <span *ngIf="data.team.matchup[2].player.OvertimeLosses == '1'">
               {{ data.team.matchup[2].player.LastName }} lost in OT!
@@ -1030,13 +1090,13 @@
               <span fxHide [fxHide.gt-xs]="isVisibleOnDesktop()">Saves: </span> <span fxHide [fxHide.xs]="isVisibleOnMobile()">SV </span> {{data.team.matchup[0].player.saves}} <span fxHide [fxHide.gt-xs]="isVisibleOnDesktop()">Shots Faced: </span> <span fxHide [fxHide.xs]="isVisibleOnMobile()">SA </span> {{data.team.matchup[0].player.shotsFaced}}
               <br>
               <span *ngIf="data.team.matchup[0].player.wins == '1' && data.team.matchup[0].player.Shutouts != '1'">
-              {{ data.team.matchup[0].player.LastName }} takes the Win!
+              {{ data.team.matchup[0].player.LastName }} Wins!
             </span>
               <span *ngIf="data.team.matchup[0].player.Shutouts == '1'">
-              {{ data.team.matchup[0].player.LastName }} provides a SHUTOUT!
+              {{ data.team.matchup[0].player.LastName }} gets a SHUTOUT!
             </span>
               <span *ngIf="data.team.matchup[0].player.losses == '1'">
-              {{ data.team.matchup[0].player.LastName }} takes the Loss!
+              {{ data.team.matchup[0].player.LastName }} Lost!
             </span>
               <span *ngIf="data.team.matchup[0].player.OvertimeLosses == '1'">
               {{ data.team.matchup[0].player.LastName }} lost in OT!
@@ -1063,13 +1123,13 @@
               <span fxHide [fxHide.gt-xs]="isVisibleOnDesktop()">Saves: </span> <span fxHide [fxHide.xs]="isVisibleOnMobile()">SV </span> {{data.team.matchup[1].player.saves}} <span fxHide [fxHide.gt-xs]="isVisibleOnDesktop()">Shots Faced: </span> <span fxHide [fxHide.xs]="isVisibleOnMobile()">SA </span> {{data.team.matchup[1].player.shotsFaced}}
               <br>
               <span *ngIf="data.team.matchup[1].player.wins == '1' && data.team.matchup[1].player.Shutouts != '1'">
-              {{ data.team.matchup[1].player.LastName }} takes the Win!
+              {{ data.team.matchup[1].player.LastName }} Wins!
             </span>
               <span *ngIf="data.team.matchup[1].player.Shutouts == '1'">
-              {{ data.team.matchup[1].player.LastName }} provides a SHUTOUT!
+              {{ data.team.matchup[1].player.LastName }} gets a SHUTOUT!
             </span>
               <span *ngIf="data.team.matchup[1].player.losses == '1'">
-              {{ data.team.matchup[1].player.LastName }} takes the Loss!
+              {{ data.team.matchup[1].player.LastName }} Lost!
             </span>
               <span *ngIf="data.team.matchup[1].player.OvertimeLosses == '1'">
               {{ data.team.matchup[1].player.LastName }} lost in OT!
@@ -1092,13 +1152,13 @@
               <span fxHide [fxHide.gt-xs]="isVisibleOnDesktop()">Saves: </span> <span fxHide [fxHide.xs]="isVisibleOnMobile()">SV </span> {{data.team.matchup[2].player.saves}} <span fxHide [fxHide.gt-xs]="isVisibleOnDesktop()">Shots Faced: </span> <span fxHide [fxHide.xs]="isVisibleOnMobile()">SA </span> {{data.team.matchup[2].player.shotsFaced}}
               <br>
               <span *ngIf="data.team.matchup[2].player.wins == '1' && data.team.matchup[2].player.Shutouts != '1'">
-              {{ data.team.matchup[2].player.LastName }} takes the Win!
+              {{ data.team.matchup[2].player.LastName }} Wins!
             </span>
               <span *ngIf="data.team.matchup[2].player.Shutouts == '1'">
-              {{ data.team.matchup[2].player.LastName }} provides a SHUTOUT!
+              {{ data.team.matchup[2].player.LastName }} gets a SHUTOUT!
             </span>
               <span *ngIf="data.team.matchup[2].player.losses == '1'">
-              {{ data.team.matchup[2].player.LastName }} takes the Loss!
+              {{ data.team.matchup[2].player.LastName }} Lost!
             </span>
               <span *ngIf="data.team.matchup[2].player.OvertimeLosses == '1'">
               {{ data.team.matchup[2].player.LastName }} lost in OT!
@@ -1121,13 +1181,13 @@
               <span fxHide [fxHide.gt-xs]="isVisibleOnDesktop()">Saves: </span> <span fxHide [fxHide.xs]="isVisibleOnMobile()">SV </span> {{data.team.matchup[1].player.saves}} <span fxHide [fxHide.gt-xs]="isVisibleOnDesktop()">Shots Faced: </span> <span fxHide [fxHide.xs]="isVisibleOnMobile()">SA </span> {{data.team.matchup[1].player.shotsFaced}}
               <br>
               <span *ngIf="data.team.matchup[1].player.wins == '1' && data.team.matchup[1].player.Shutouts != '1'">
-              {{ data.team.matchup[1].player.LastName }} takes the Win!
+              {{ data.team.matchup[1].player.LastName }} Wins!
             </span>
               <span *ngIf="data.team.matchup[1].player.Shutouts == '1'">
-              {{ data.team.matchup[1].player.LastName }} provides a SHUTOUT!
+              {{ data.team.matchup[1].player.LastName }} gets a SHUTOUT!
             </span>
               <span *ngIf="data.team.matchup[1].player.losses == '1'">
-              {{ data.team.matchup[1].player.LastName }} takes the Loss!
+              {{ data.team.matchup[1].player.LastName }} Lost!
             </span>
               <span *ngIf="data.team.matchup[1].player.OvertimeLosses == '1'">
               {{ data.team.matchup[1].player.LastName }} lost in OT!
@@ -1153,13 +1213,13 @@
               <span fxHide [fxHide.gt-xs]="isVisibleOnDesktop()">Saves: </span> <span fxHide [fxHide.xs]="isVisibleOnMobile()">SV </span> {{data.team.matchup[1].player.saves}} <span fxHide [fxHide.gt-xs]="isVisibleOnDesktop()">Shots Faced: </span> <span fxHide [fxHide.xs]="isVisibleOnMobile()">SA </span> {{data.team.matchup[1].player.shotsFaced}}
               <br>
               <span *ngIf="data.team.matchup[1].player.wins == '1' && data.team.matchup[1].player.Shutouts != '1'">
-              {{ data.team.matchup[1].player.LastName }} takes the Win!
+              {{ data.team.matchup[1].player.LastName }} Wins!
             </span>
               <span *ngIf="data.team.matchup[1].player.Shutouts == '1'">
-              {{ data.team.matchup[1].player.LastName }} provides a SHUTOUT!
+              {{ data.team.matchup[1].player.LastName }} gets a SHUTOUT!
             </span>
               <span *ngIf="data.team.matchup[1].player.losses == '1'">
-              {{ data.team.matchup[1].player.LastName }} takes the Loss!
+              {{ data.team.matchup[1].player.LastName }} Lost!
             </span>
               <span *ngIf="data.team.matchup[1].player.OvertimeLosses == '1'">
               {{ data.team.matchup[1].player.LastName }} lost in OT!
@@ -1183,13 +1243,13 @@
               <span fxHide [fxHide.gt-xs]="isVisibleOnDesktop()">Saves: </span> <span fxHide [fxHide.xs]="isVisibleOnMobile()">SV </span> {{data.team.matchup[0].player.saves}} <span fxHide [fxHide.gt-xs]="isVisibleOnDesktop()">Shots Faced: </span> <span fxHide [fxHide.xs]="isVisibleOnMobile()">SA </span> {{data.team.matchup[0].player.shotsFaced}}
               <br>
               <span *ngIf="data.team.matchup[0].player.wins == '1' && data.team.matchup[0].player.Shutouts != '1'">
-              {{ data.team.matchup[0].player.LastName }} takes the Win!
+              {{ data.team.matchup[0].player.LastName }} Wins!
             </span>
               <span *ngIf="data.team.matchup[0].player.Shutouts == '1'">
-              {{ data.team.matchup[0].player.LastName }} provides a SHUTOUT!
+              {{ data.team.matchup[0].player.LastName }} gets a SHUTOUT!
             </span>
               <span *ngIf="data.team.matchup[0].player.losses == '1'">
-              {{ data.team.matchup[0].player.LastName }} takes the Loss!
+              {{ data.team.matchup[0].player.LastName }} Lost!
             </span>
               <span *ngIf="data.team.matchup[0].player.OvertimeLosses == '1'">
               {{ data.team.matchup[0].player.LastName }} lost in OT!
@@ -1214,13 +1274,13 @@
               <span fxHide [fxHide.gt-xs]="isVisibleOnDesktop()">Saves: </span> <span fxHide [fxHide.xs]="isVisibleOnMobile()">SV </span> {{data.team.matchup[1].player.saves}} <span fxHide [fxHide.gt-xs]="isVisibleOnDesktop()">Shots Faced: </span> <span fxHide [fxHide.xs]="isVisibleOnMobile()">SA </span> {{data.team.matchup[1].player.shotsFaced}}
               <br>
               <span *ngIf="data.team.matchup[1].player.wins == '1' && data.team.matchup[1].player.Shutouts != '1'">
-              {{ data.team.matchup[1].player.LastName }} takes the Win!
+              {{ data.team.matchup[1].player.LastName }} Wins!
             </span>
               <span *ngIf="data.team.matchup[1].player.Shutouts == '1'">
-              {{ data.team.matchup[1].player.LastName }} provides a SHUTOUT!
+              {{ data.team.matchup[1].player.LastName }} gets a SHUTOUT!
             </span>
               <span *ngIf="data.team.matchup[1].player.losses == '1'">
-              {{ data.team.matchup[1].player.LastName }} takes the Loss!
+              {{ data.team.matchup[1].player.LastName }} Lost!
             </span>
               <span *ngIf="data.team.matchup[1].player.OvertimeLosses == '1'">
               {{ data.team.matchup[1].player.LastName }} lost in OT!
@@ -1245,13 +1305,13 @@
               <span fxHide [fxHide.gt-xs]="isVisibleOnDesktop()">Saves: </span> <span fxHide [fxHide.xs]="isVisibleOnMobile()">SV </span> {{data.team.matchup[2].player.saves}} <span fxHide [fxHide.gt-xs]="isVisibleOnDesktop()">Shots Faced: </span> <span fxHide [fxHide.xs]="isVisibleOnMobile()">SA </span> {{data.team.matchup[2].player.shotsFaced}}
               <br>
               <span *ngIf="data.team.matchup[2].player.wins == '1' && data.team.matchup[2].player.Shutouts != '1'">
-              {{ data.team.matchup[2].player.LastName }} takes the Win!
+              {{ data.team.matchup[2].player.LastName }} Wins!
             </span>
               <span *ngIf="data.team.matchup[2].player.Shutouts == '1'">
-              {{ data.team.matchup[2].player.LastName }} provides a SHUTOUT!
+              {{ data.team.matchup[2].player.LastName }} gets a SHUTOUT!
             </span>
               <span *ngIf="data.team.matchup[2].player.losses == '1'">
-              {{ data.team.matchup[2].player.LastName }} takes the Loss!
+              {{ data.team.matchup[2].player.LastName }} Lost!
             </span>
               <span *ngIf="data.team.matchup[2].player.OvertimeLosses == '1'">
               {{ data.team.matchup[2].player.LastName }} lost in OT!
@@ -1276,13 +1336,13 @@
               <span fxHide [fxHide.gt-xs]="isVisibleOnDesktop()">Saves: </span> <span fxHide [fxHide.xs]="isVisibleOnMobile()">SV </span> {{data.team.matchup[1].player.saves}} <span fxHide [fxHide.gt-xs]="isVisibleOnDesktop()">Shots Faced: </span> <span fxHide [fxHide.xs]="isVisibleOnMobile()">SA </span> {{data.team.matchup[1].player.shotsFaced}}
               <br>
               <span *ngIf="data.team.matchup[1].player.wins == '1' && data.team.matchup[1].player.Shutouts != '1'">
-              {{ data.team.matchup[1].player.LastName }} takes the Win!
+              {{ data.team.matchup[1].player.LastName }} Wins!
             </span>
               <span *ngIf="data.team.matchup[1].player.Shutouts == '1'">
-              {{ data.team.matchup[1].player.LastName }} provides a SHUTOUT!
+              {{ data.team.matchup[1].player.LastName }} gets a SHUTOUT!
             </span>
               <span *ngIf="data.team.matchup[1].player.losses == '1'">
-              {{ data.team.matchup[1].player.LastName }} takes the Loss!
+              {{ data.team.matchup[1].player.LastName }} Lost!
             </span>
               <span *ngIf="data.team.matchup[1].player.OvertimeLosses == '1'">
               {{ data.team.matchup[1].player.LastName }} lost in OT!
@@ -1307,13 +1367,13 @@
               <span fxHide [fxHide.gt-xs]="isVisibleOnDesktop()">Saves: </span> <span fxHide [fxHide.xs]="isVisibleOnMobile()">SV </span> {{data.team.matchup[0].player.saves}} <span fxHide [fxHide.gt-xs]="isVisibleOnDesktop()">Shots Faced: </span> <span fxHide [fxHide.xs]="isVisibleOnMobile()">SA </span> {{data.team.matchup[0].player.shotsFaced}}
               <br>
               <span *ngIf="data.team.matchup[0].player.wins == '1' && data.team.matchup[0].player.Shutouts != '1'">
-              {{ data.team.matchup[0].player.LastName }} takes the Win!
+              {{ data.team.matchup[0].player.LastName }} Wins!
             </span>
               <span *ngIf="data.team.matchup[0].player.Shutouts == '1'">
-              {{ data.team.matchup[0].player.LastName }} provides a SHUTOUT!
+              {{ data.team.matchup[0].player.LastName }} gets a SHUTOUT!
             </span>
               <span *ngIf="data.team.matchup[0].player.losses == '1'">
-              {{ data.team.matchup[0].player.LastName }} takes the Loss!
+              {{ data.team.matchup[0].player.LastName }} Lost!
             </span>
               <span *ngIf="data.team.matchup[0].player.OvertimeLosses == '1'">
               {{ data.team.matchup[0].player.LastName }} lost in OT!
@@ -1340,13 +1400,13 @@
               <span fxHide [fxHide.gt-xs]="isVisibleOnDesktop()">Saves: </span> <span fxHide [fxHide.xs]="isVisibleOnMobile()">SV </span> {{data.team.matchup[2].player.saves}} <span fxHide [fxHide.gt-xs]="isVisibleOnDesktop()">Shots Faced: </span> <span fxHide [fxHide.xs]="isVisibleOnMobile()">SA </span> {{data.team.matchup[2].player.shotsFaced}}
               <br>
               <span *ngIf="data.team.matchup[2].player.wins == '1' && data.team.matchup[2].player.Shutouts != '1'">
-              {{ data.team.matchup[2].player.LastName }} takes the Win!
+              {{ data.team.matchup[2].player.LastName }} Wins!
             </span>
               <span *ngIf="data.team.matchup[2].player.Shutouts == '1'">
-              {{ data.team.matchup[2].player.LastName }} provides a SHUTOUT!
+              {{ data.team.matchup[2].player.LastName }} gets a SHUTOUT!
             </span>
               <span *ngIf="data.team.matchup[2].player.losses == '1'">
-              {{ data.team.matchup[2].player.LastName }} takes the Loss!
+              {{ data.team.matchup[2].player.LastName }} Lost!
             </span>
               <span *ngIf="data.team.matchup[2].player.OvertimeLosses == '1'">
               {{ data.team.matchup[2].player.LastName }} lost in OT!
@@ -1371,13 +1431,13 @@
               <span fxHide [fxHide.gt-xs]="isVisibleOnDesktop()">Saves: </span> <span fxHide [fxHide.xs]="isVisibleOnMobile()">SV </span> {{data.team.matchup[3].player.saves}} <span fxHide [fxHide.gt-xs]="isVisibleOnDesktop()">Shots Faced: </span> <span fxHide [fxHide.xs]="isVisibleOnMobile()">SA </span> {{data.team.matchup[3].player.shotsFaced}}
               <br>
               <span *ngIf="data.team.matchup[3].player.wins == '1' && data.team.matchup[3].player.Shutouts != '1'">
-              {{ data.team.matchup[3].player.LastName }} takes the Win!
+              {{ data.team.matchup[3].player.LastName }} Wins!
             </span>
               <span *ngIf="data.team.matchup[3].player.Shutouts == '1'">
-              {{ data.team.matchup[3].player.LastName }} provides a SHUTOUT!
+              {{ data.team.matchup[3].player.LastName }} gets a SHUTOUT!
             </span>
               <span *ngIf="data.team.matchup[3].player.losses == '1'">
-              {{ data.team.matchup[3].player.LastName }} takes the Loss!
+              {{ data.team.matchup[3].player.LastName }} Lost!
             </span>
               <span *ngIf="data.team.matchup[3].player.OvertimeLosses == '1'">
               {{ data.team.matchup[3].player.LastName }} lost in OT!
@@ -1404,13 +1464,13 @@
               <span fxHide [fxHide.gt-xs]="isVisibleOnDesktop()">Saves: </span> <span fxHide [fxHide.xs]="isVisibleOnMobile()">SV </span> {{data.team.matchup[2].player.saves}} <span fxHide [fxHide.gt-xs]="isVisibleOnDesktop()">Shots Faced: </span> <span fxHide [fxHide.xs]="isVisibleOnMobile()">SA </span> {{data.team.matchup[2].player.shotsFaced}}
               <br>
               <span *ngIf="data.team.matchup[2].player.wins == '1' && data.team.matchup[2].player.Shutouts != '1'">
-              {{ data.team.matchup[2].player.LastName }} takes the Win!
+              {{ data.team.matchup[2].player.LastName }} Wins!
             </span>
               <span *ngIf="data.team.matchup[2].player.Shutouts == '1'">
-              {{ data.team.matchup[2].player.LastName }} provides a SHUTOUT!
+              {{ data.team.matchup[2].player.LastName }} gets a SHUTOUT!
             </span>
               <span *ngIf="data.team.matchup[2].player.losses == '1'">
-              {{ data.team.matchup[2].player.LastName }} takes the Loss!
+              {{ data.team.matchup[2].player.LastName }} Lost!
             </span>
               <span *ngIf="data.team.matchup[2].player.OvertimeLosses == '1'">
               {{ data.team.matchup[2].player.LastName }} lost in OT!
@@ -1435,13 +1495,13 @@
               <span fxHide [fxHide.gt-xs]="isVisibleOnDesktop()">Saves: </span> <span fxHide [fxHide.xs]="isVisibleOnMobile()">SV </span> {{data.team.matchup[0].player.saves}} <span fxHide [fxHide.gt-xs]="isVisibleOnDesktop()">Shots Faced: </span> <span fxHide [fxHide.xs]="isVisibleOnMobile()">SA </span> {{data.team.matchup[0].player.shotsFaced}}
               <br>
               <span *ngIf="data.team.matchup[0].player.wins == '1' && data.team.matchup[0].player.Shutouts != '1'">
-              {{ data.team.matchup[0].player.LastName }} takes the Win!
+              {{ data.team.matchup[0].player.LastName }} Wins!
             </span>
               <span *ngIf="data.team.matchup[0].player.Shutouts == '1'">
-              {{ data.team.matchup[0].player.LastName }} provides a SHUTOUT!
+              {{ data.team.matchup[0].player.LastName }} gets a SHUTOUT!
             </span>
               <span *ngIf="data.team.matchup[0].player.losses == '1'">
-              {{ data.team.matchup[0].player.LastName }} takes the Loss!
+              {{ data.team.matchup[0].player.LastName }} Lost!
             </span>
               <span *ngIf="data.team.matchup[0].player.OvertimeLosses == '1'">
               {{ data.team.matchup[0].player.LastName }} lost in OT!

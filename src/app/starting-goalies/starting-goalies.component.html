@@ -21,8 +21,11 @@
       <img src="{{group.player.image}}" alt="" onError="this.src='https://nhl.bamcontent.com/images/headshots/current/168x168/goalie@2x.jpg'"> {{group.player.LastName}}
     </span>
             <span *ngIf="goalie[group.player.ID] != null && allGoalies[0][group.player.ID].filterOutStarters == null && goalie[group.player.ID].probable === false" style="color: red">X</span>
+
             <span *ngIf="goalie[group.player.ID] != null && allGoalies[0][group.player.ID].filterOutStarters == null && goalie[group.player.ID].probable === true && goalie[group.player.ID].confirmed === false" (click)="goalie[group.player.ID].confirmed = !goalie[group.player.ID].confirmed" [(ngModel)]="allGoalies[0][group.player.ID].confirmed" ngDefaultControl style="color: orange;"><i class="material-icons md-18" style="background: #fff; border-radius: 50%;">check_circle</i></span>
+
             <span *ngIf="goalie[group.player.ID] != null && allGoalies[0][group.player.ID].filterOutStarters == null && goalie[group.player.ID].probable === true && goalie[group.player.ID].confirmed === true" style="color: #2ecc71;" (click)="goalie[group.player.ID].confirmed = !goalie[group.player.ID].confirmed" [(ngModel)]="allGoalies[0][group.player.ID].confirmed" ngDefaultControl><i class="material-icons md-18" style="background: #fff; border-radius: 50%;">check_circle</i></span>
+
             <span *ngIf="goalie[group.player.ID] != null && allGoalies[0][group.player.ID].filterOutStarters == null && stats === true">
      ({{group.stats.stats.Wins['#text'] + '-' + group.stats.stats.Losses['#text'] + '-' + group.stats.stats.OvertimeLosses['#text']}})
    </span>
@@ -501,7 +504,7 @@
             <br>
             <br>
             <span *ngIf="fullFirebaseResponse != null && allGoalies[0][data.team.matchup[0].player.ID] && allGoalies[0][data.team.matchup[0].player.ID].confirmed === true && data.team.matchup[0].player.saves == null" style="color: #2ecc71;"><i class="material-icons md-18">check_circle</i>confirmed</span>
-            <span *ngIf="fullFirebaseResponse != null && allGoalies[0][data.team.matchup[0].player.ID] != null && allGoalies[0][data.team.matchup[0].player.ID].confirmed === false && data.team.matchup[0].player.startingTodayNow === false && data.team.matchup[0].player.saves == null" style="color: orange;"><i class="material-icons md-18">check_circle</i>expected</span>
+            <span *ngIf="fullFirebaseResponse != null && allGoalies[0][data.team.matchup[0].player.ID] != null && allGoalies[0][data.team.matchup[0].player.ID].confirmed === false && data.team.matchup[0].player.saves == null" style="color: orange;"><i class="material-icons md-18">check_circle</i>expected</span>
             
             
             <div *ngIf="data.team.matchup[0].player.saves != null" class="stat-block">
@@ -533,7 +536,7 @@
             <br>
             <br>
             <span *ngIf="fullFirebaseResponse != null && allGoalies[0][data.team.matchup[1].player.ID] != null && allGoalies[0][data.team.matchup[1].player.ID].confirmed === true && data.team.matchup[1].player.saves == null" style="color: #2ecc71;"><i class="material-icons md-18">check_circle</i>confirmed</span>
-            <span *ngIf="fullFirebaseResponse != null && allGoalies[0][data.team.matchup[1].player.ID] != null && allGoalies[0][data.team.matchup[1].player.ID].confirmed === false && data.team.matchup[0].player.startingTodayNow === false && data.team.matchup[1].player.saves == null" style="color: orange;"><i class="material-icons md-18">check_circle</i>expected</span>
+            <span *ngIf="fullFirebaseResponse != null && allGoalies[0][data.team.matchup[1].player.ID] != null && allGoalies[0][data.team.matchup[1].player.ID].confirmed === false && data.team.matchup[1].player.saves == null" style="color: orange;"><i class="material-icons md-18">check_circle</i>expected</span>
             
             <div *ngIf="data.team.matchup[1].player.saves != null" class="stat-block">
               <span fxHide [fxHide.gt-xs]="isVisibleOnDesktop()">Saves: </span> <span fxHide [fxHide.xs]="isVisibleOnMobile()">SV </span> {{data.team.matchup[1].player.saves}} <span fxHide [fxHide.gt-xs]="isVisibleOnDesktop()">Shots Faced: </span> <span fxHide [fxHide.xs]="isVisibleOnMobile()">SA </span> {{data.team.matchup[1].player.shotsFaced}}
@@ -1084,7 +1087,7 @@
             <br>
             <br>
             <span *ngIf="fullFirebaseResponse != null && allGoalies[0][data.team.matchup[0].player.ID] != null && allGoalies[0][data.team.matchup[0].player.ID].confirmed === true && data.team.matchup[0].player.saves == null" style="color: #2ecc71;"><i class="material-icons md-18">check_circle</i>confirmed</span>
-            <span *ngIf="fullFirebaseResponse != null && allGoalies[0][data.team.matchup[0].player.ID] != null && allGoalies[0][data.team.matchup[0].player.ID].confirmed === false && data.team.matchup[0].player.startingTodayNow === false && data.team.matchup[0].player.saves == null" style="color: orange;"><i class="material-icons md-18">check_circle</i>expected</span>
+            <span *ngIf="fullFirebaseResponse != null && allGoalies[0][data.team.matchup[0].player.ID] != null && allGoalies[0][data.team.matchup[0].player.ID].confirmed === false && data.team.matchup[0].player.saves == null" style="color: orange;"><i class="material-icons md-18">check_circle</i>expected</span>
            
             <div *ngIf="data.team.matchup[0].player.saves != null" class="stat-block">
               <span fxHide [fxHide.gt-xs]="isVisibleOnDesktop()">Saves: </span> <span fxHide [fxHide.xs]="isVisibleOnMobile()">SV </span> {{data.team.matchup[0].player.saves}} <span fxHide [fxHide.gt-xs]="isVisibleOnDesktop()">Shots Faced: </span> <span fxHide [fxHide.xs]="isVisibleOnMobile()">SA </span> {{data.team.matchup[0].player.shotsFaced}}
@@ -1116,7 +1119,7 @@
            
             <br>
             <span *ngIf="fullFirebaseResponse != null && allGoalies[0][data.team.matchup[1].player.ID] != null && allGoalies[0][data.team.matchup[1].player.ID].confirmed === true && data.team.matchup[1].player.saves == null" style="color: #2ecc71;"><i class="material-icons md-18">check_circle</i>confirmed</span>
-            <span *ngIf="fullFirebaseResponse != null && allGoalies[0][data.team.matchup[1].player.ID] != null && allGoalies[0][data.team.matchup[1].player.ID].confirmed === false && data.team.matchup[0].player.startingTodayNow === false && data.team.matchup[1].player.saves == null" style="color: orange;"><i class="material-icons md-18">check_circle</i>expected</span>
+            <span *ngIf="fullFirebaseResponse != null && allGoalies[0][data.team.matchup[1].player.ID] != null && allGoalies[0][data.team.matchup[1].player.ID].confirmed === false && data.team.matchup[1].player.saves == null" style="color: orange;"><i class="material-icons md-18">check_circle</i>expected</span>
             
             
             <div *ngIf="data.team.matchup[1].player.saves != null" class="stat-block">
@@ -1206,7 +1209,7 @@
             <br>
             <br>
             <span *ngIf="fullFirebaseResponse != null && allGoalies[0][data.team.matchup[1].player.ID] != null && allGoalies[0][data.team.matchup[1].player.ID].confirmed === true && data.team.matchup[1].player.saves == null" style="color: #2ecc71;"><i class="material-icons md-18">check_circle</i>confirmed</span>
-            <span *ngIf="fullFirebaseResponse != null && allGoalies[0][data.team.matchup[1].player.ID] != null && allGoalies[0][data.team.matchup[1].player.ID].confirmed === false && data.team.matchup[0].player.startingTodayNow === false && data.team.matchup[1].player.saves == null" style="color: orange;"><i class="material-icons md-18">check_circle</i>expected</span>
+            <span *ngIf="fullFirebaseResponse != null && allGoalies[0][data.team.matchup[1].player.ID] != null && allGoalies[0][data.team.matchup[1].player.ID].confirmed === false && data.team.matchup[1].player.saves == null" style="color: orange;"><i class="material-icons md-18">check_circle</i>expected</span>
             
             
             <div *ngIf="data.team.matchup[1].player.saves != null" class="stat-block">

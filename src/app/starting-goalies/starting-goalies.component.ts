@@ -116,15 +116,25 @@ export class StartingGoaliesComponent implements OnInit {
                 if (this.startersDate === show.team.today && show.team.matchup != null && this.fullFirebaseResponse[1][show.team.matchup[0].player.ID] != null && this.fullFirebaseResponse[1][rep.player.ID] != null && rep.team.ID === show.team.matchup[0].team.ID && this.fullFirebaseResponse[1][show.team.matchup[0].player.ID].probable === false && this.fullFirebaseResponse[1][rep.player.ID].confirmed === true) {
                   // Find goalies with the same team ID
                   // if the view has a goalie that is probable false swap with goalie from firebase that is confirmed
-                  console.log(rep, 'update me into the view right now!');
-                  console.log(show.team.matchup[0], 'I have been changed, replace me with new goalie...');
+                  console.log(rep, 'update me into the view right now! I am confirmed to start.');
+                  console.log(show.team.matchup[0], 'I have been changed, replace me with confirmed goalie.');
+                  show.team.matchup[0] = rep;
+                } else if (this.startersDate === show.team.today && show.team.matchup != null && this.fullFirebaseResponse[1][show.team.matchup[0].player.ID] != null && this.fullFirebaseResponse[1][rep.player.ID] != null && rep.team.ID === show.team.matchup[0].team.ID && this.fullFirebaseResponse[1][show.team.matchup[0].player.ID].probable === false && this.fullFirebaseResponse[1][rep.player.ID].confirmed === false && this.fullFirebaseResponse[1][rep.player.ID].probable === true && rep.player.probable === false) {
+                  rep.player.probable = true;
+                  console.log(rep, 'update me into the view right now! I am probable to start.');
+                  console.log(show.team.matchup[0], 'I have been changed, replace me with probable goalie.');
                   show.team.matchup[0] = rep;
                 }
                 if (this.startersDate === show.team.today && show.team.matchup != null && this.fullFirebaseResponse[1][show.team.matchup[1].player.ID] != null && this.fullFirebaseResponse[1][rep.player.ID] != null && rep.team.ID === show.team.matchup[1].team.ID && this.fullFirebaseResponse[1][show.team.matchup[1].player.ID].probable === false && this.fullFirebaseResponse[1][rep.player.ID].confirmed === true) {
                   // same thing
                   // now check against the 2nd item in the view matchup array
-                  console.log(rep, 'update me into the view right now!');
+                  console.log(rep, 'update me into the view right now! I am confirmed to start.');
                   console.log(show.team.matchup[1], 'I have been changed, replace me with new goalie...');
+                  show.team.matchup[1] = rep;
+                } else if (this.startersDate === show.team.today && show.team.matchup != null && this.fullFirebaseResponse[1][show.team.matchup[1].player.ID] != null && this.fullFirebaseResponse[1][rep.player.ID] != null && rep.team.ID === show.team.matchup[1].team.ID && this.fullFirebaseResponse[1][show.team.matchup[1].player.ID].probable === false && this.fullFirebaseResponse[1][rep.player.ID].confirmed === false && this.fullFirebaseResponse[1][rep.player.ID].probable === true && rep.player.probable === false) {
+                  rep.player.probable = true;
+                  console.log(rep, 'update me into the view right now! I am probable to start.');
+                  console.log(show.team.matchup[1], 'I have been changed, replace me with probable goalie.');
                   show.team.matchup[1] = rep;
                 }
 
@@ -748,8 +758,6 @@ export class StartingGoaliesComponent implements OnInit {
 
     if (this.sentData === undefined) {
 
-      // this.getJSON();
-      // setInterval(() => this.updateDailyStats, 10000);
       this.loadData();
 
       // get our data every subsequent 10 minutes

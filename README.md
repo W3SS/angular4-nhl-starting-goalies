@@ -148,7 +148,7 @@ export class AppComponent implements OnInit {
   
   <input type="password" class="form-control" [(ngModel)]="user.password" placeholder="Password" required>
 
-  <button class="mat-raised-button" (click)="signInWithEmail()">Login</button>
+  <button (click)="signInWithEmail()">Login</button>
 
 </div> 
 
@@ -166,7 +166,7 @@ The key here is in the firebase service <code>this.firebaseAuth.auth.signInWithE
   
   <input type="password" class="form-control" [(ngModel)]="user.password" placeholder="Password" required>
 
-  <button class="mat-raised-button" (click)="signInWithEmail()">Login</button>
+  <button (click)="signInWithEmail()">Login</button>
 
 </div> 
 
@@ -205,7 +205,6 @@ I created a small cms to allow me to update the status of my data by clicking on
 <div *ngIf="fbService.userDetails != null">
   <div class="edit-list-container" *ngIf="fullFirebaseResponse != null">
    
-      <input matInput type="text" class="form-control" [(ngModel)]="fullFirebaseResponse[0]['todayDate']">
     
     <ul>
      

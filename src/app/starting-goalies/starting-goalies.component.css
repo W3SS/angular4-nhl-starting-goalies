@@ -144,10 +144,14 @@ form input[type="text"] {
 .tp-box__back {
   position: absolute;
   width: 90%;
-  top: 80px;
+  top: 50px;
   -webkit-transform: rotateY(-180deg);
   -ms-transform: rotateY(-180deg);
   transform: rotateY(-180deg);
+}
+
+.game-info a {
+  cursor: pointer;
 }
 
 @media only screen and (max-width: 600px) {

@@ -3,6 +3,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgModule } from '@angular/core';
 import { HttpModule } from '@angular/http';
+import { HttpClientModule } from "@angular/common/http";
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { MatCardModule, 
@@ -61,6 +62,7 @@ export const firebaseConfig = {
     BrowserModule,
     AngularFireDatabaseModule,
     AngularFireAuthModule,
+    HttpClientModule,
     HttpModule,
     FormsModule,
     ReactiveFormsModule,
@@ -116,3 +118,4 @@ export const firebaseConfig = {
   bootstrap: [AppComponent]
 })
 export class AppModule { }
+

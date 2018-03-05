@@ -1,5 +1,5 @@
 import { Component, OnInit, Inject } from '@angular/core';
-import { Http, Response, RequestOptions, Headers, Request, RequestMethod } from '@angular/http';
+import { HttpClient, HttpResponse, HttpHeaders, HttpRequest } from '@angular/common/http'
 import { Observable } from 'rxjs/Observable';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { ActivatedRoute, Router, ActivatedRouteSnapshot } from '@angular/router';
@@ -17,7 +17,7 @@ let tomorrow = null;
 let yesterday = null;
 
 let headers = null;
-let options = null;
+
 
 @Component({
   selector: 'app-tomorrow-results',
@@ -51,7 +51,7 @@ export class TomorrowResultsComponent implements OnInit {
   loading: boolean = true;
   fullFirebaseResponse: any;
 
-  constructor(private http: Http, private tomorrowService: TomorrowService, private todayService: DataService, private fbService: FirebaseService, public snackBar: MatSnackBar, public router: Router, public dialog: MatDialog) {
+  constructor(private http: HttpClient, private tomorrowService: TomorrowService, private todayService: DataService, private fbService: FirebaseService, public snackBar: MatSnackBar, public router: Router, public dialog: MatDialog) {
 
       this.fbService
       .getStarterData()
@@ -110,18 +110,6 @@ export class TomorrowResultsComponent implements OnInit {
   }
 
 
-  // public getJSON() {
-  //   this.http.get("./assets/twitter.json")
-  //     .map(response => response.json())
-  //     .subscribe(res => {
-  //       console.log(res['twitterHandles']["0"], 'twitter handles');
-  //       this.twitterHandles = res['twitterHandles']["0"];
-  //     })
-
-  
-
- // }
-
     public updateShowData() {
     for (let show of this.showDataTomorrow) {
       for (let rep of this.myData) {
@@ -149,11 +137,11 @@ export class TomorrowResultsComponent implements OnInit {
 
     this.tomorrowService
       .getEnv().subscribe(res => {
-        //this.defineToken = res._body;
-        headers = new Headers({ "Authorization": "Basic " + btoa('ianposton' + ":" + res._body.replace(/\"/g, "")) });
-        options = new RequestOptions({ headers: headers });
+        
+        headers = new HttpHeaders().set("Authorization", "Basic " + btoa('ianposton' + ":" + res));
+   
         this.tomorrowService
-          .sendHeaderOptions(headers, options);
+          .sendHeaderOptions(headers);
 
         this.tomorrowService
           .getDailySchedule().subscribe(res => {
@@ -187,8 +175,8 @@ export class TomorrowResultsComponent implements OnInit {
               Observable.forkJoin(
                   res['dailygameschedule'].gameentry.map(
                     g =>
-                    this.http.get('https://api.mysportsfeeds.com/v1.2/pull/nhl/2017-2018-regular/game_startinglineup.json?gameid=' + g.id + '&position=Goalie-starter', options)
-                    .map(response => response.json())
+                    this.http.get('https://api.mysportsfeeds.com/v1.2/pull/nhl/2017-2018-regular/game_startinglineup.json?gameid=' + g.id + '&position=Goalie-starter', {headers})
+                    
                   )
                 )
                 .subscribe(res => {
@@ -410,28 +398,6 @@ export class TomorrowResultsComponent implements OnInit {
 
              data.player.savePercent = data.stats.stats.SavePercentage['#text'].slice(1);
 
-              // data.player.image = info.player.officialImageSrc;
-              // //data.player.savePercent = '.'+Math.round(data.stats.stats.SavePercentage['#text'] * 100);
-              // data.player.savePercent = data.stats.stats.SavePercentage['#text'].slice(1);
-
-              // if (this.twitterHandles[data.team.ID] != null) {
-
-              //   //console.log(this.twitterHandles[data.team.ID].twitterHashTag);
-
-              //   data.player.twitterHandle = this.twitterHandles[data.team.ID].twitterHashTag;
-
-              //   //INCASE API CHANGES TEAM IDS AGAIN CATCH IT HERE
-              //   if (this.twitterHandles[data.team.ID][data.player.ID] != null) {
-              //     data.player.atHandle = this.twitterHandles[data.team.ID][data.player.ID] + ' ';
-              //   } else {
-              //     data.player.atHandle = '';
-              //   }
-
-              // } else {
-              //   console.log(data, "Hi I am the DATA ID causing problems");
-
-
-              // }
 
               if ( this.tomorrowStarters[data.player.ID] != null) {
                    data.player.image = this.tomorrowStarters[data.player.ID].image;
@@ -703,17 +669,15 @@ export class TomorrowResultsComponent implements OnInit {
 export class TomorrowDialog implements OnInit {
   test: any;
   noPosts: any;
-  tweetsData: Array < any > ;
-  constructor(public dialogRef: MatDialogRef < TomorrowDialog > , @Inject(MAT_DIALOG_DATA) public data: any, private http: Http) {
+  tweetsData: any;
+  constructor(public dialogRef: MatDialogRef < TomorrowDialog > , @Inject(MAT_DIALOG_DATA) public data: any, private http: HttpClient) {
 
   }
 
-  loadStuff() {
-    let headers = new Headers();
+ loadStuff() {
+    let headers = new HttpHeaders().set('Content-Type', 'application/X-www-form-urlencoded');
 
-    headers.append('Content-Type', 'application/X-www-form-urlencoded');
-
-    this.http.post('/authorize', { headers: headers }).subscribe((res) => {
+    this.http.post('/authorize', {headers}).subscribe((res) => {
       this.searchCall();
     })
 
@@ -722,23 +686,21 @@ export class TomorrowDialog implements OnInit {
 
 
   searchCall() {
-    console.log(this.data, 'data passed in')
+    console.log(this.data, 'data passed in');
 
-    let headers = new Headers();
-    let searchterm = 'query=#startingGoalies #nhl ' + this.data.player.FirstName + ' ' + this.data.player.LastName;
-    //let searchterm = 'query=#FantasyHockey ' + this.data.player.twitterHandle;
+    let headers = new HttpHeaders().set('Content-Type', 'application/X-www-form-urlencoded');
+    //let searchterm = 'query=#startingGoalies #nhl ' + this.data.player.FirstName + ' ' + this.data.player.LastName;
+    let searchterm = 'query=' + this.data.player.LastName + ' ' + this.data.player.twitterHandle;
 
-    headers.append('Content-Type', 'application/X-www-form-urlencoded');
 
-    this.http.post('/search', searchterm, { headers: headers }).subscribe((res) => {
-      console.log(res.json().data.statuses, 'twitter stuff');
-      this.tweetsData = res.json().data.statuses;
+    this.http.post('/search', searchterm, {headers}).subscribe((res) => {
+       console.log(res['data'].statuses, 'twitter stuff');
+      this.tweetsData = res['data'].statuses;
       if (this.tweetsData.length === 0) {
         this.noPosts = "No Tweets.";
       }
     });
   }
-
   ngOnInit() {
     this.loadStuff();
   }

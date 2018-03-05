@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Http, Response, RequestOptions, Headers, Request, RequestMethod } from '@angular/http';
+import { HttpClient, HttpResponse, HttpHeaders, HttpRequest } from '@angular/common/http'
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/do';
@@ -33,7 +33,7 @@ let tomorrow = tomorrowMyDate.toISOString().slice(0, 10);
 let yesterday = yesterdayMyDate.toISOString().slice(0, 10);
 
 let headers = null;
-let options = null;
+
 let sendingYesterday;
 let sentYesterday;
 
@@ -52,12 +52,11 @@ export class YesterdayService {
   play: Observable <any> = null;
   apiRoot: string = "https://api.mysportsfeeds.com/v1.2/pull/nhl/2017-2018-regular";
 
-  constructor(private http: Http) {}
+  constructor(private http: HttpClient) {}
 
-  sendHeaderOptions(h, o) {
+  sendHeaderOptions(h) {
     console.log('got headers & options in data service...')
     headers = h;
-    options = o;
   }
 
 
@@ -67,8 +66,8 @@ export class YesterdayService {
       console.log('getting schedule data from API...');
 
       let url = `${this.apiRoot}/daily_game_schedule.json?fordate=`+dailyDate;
-      this.schedule = this.http.get(url, options)
-        .map(response => response.json())
+      this.schedule = this.http.get(url, {headers})
+        
     }
     return this.schedule;
 
@@ -77,7 +76,7 @@ export class YesterdayService {
 
   getEnv() {
     console.log("trying to get heroku env...");
-    this.env = this.http.get('/heroku-env').map(response => response)
+    this.env = this.http.get('/heroku-env')
     return this.env;
   }
 
@@ -114,8 +113,8 @@ export class YesterdayService {
 
       let url = `${this.apiRoot}/active_players.json?position=G`;
       console.log('getting active player data from API...');
-      this.info = this.http.get(url, options)
-        .map(response => response.json())
+      this.info = this.http.get(url, {headers})
+        
     }
     return this.info;
   }
@@ -125,8 +124,8 @@ export class YesterdayService {
       console.log('getting cumulative player stats from API...');
 
       let url = `${this.apiRoot}/cumulative_player_stats.json?position=G`;
-      this.stats = this.http.get(url, options)
-        .map(response => response.json())
+      this.stats = this.http.get(url, {headers})
+        
     }
     return this.stats;
   }
@@ -137,8 +136,8 @@ export class YesterdayService {
       console.log('getting yesterday, today, tomorrow from API...');
 
       let url = `${this.apiRoot}/full_game_schedule.json?date=from-`+yesterdayDailyDate+`-to-`+tomorrowDailyDate;
-      this.gameid = this.http.get(url, options)
-        .map(response => response.json())
+      this.gameid = this.http.get(url, {headers})
+        
     }
     return this.gameid;
   }
@@ -148,8 +147,8 @@ export class YesterdayService {
     if (!this.score) {
       let url = `${this.apiRoot}/scoreboard.json?fordate=`+dailyDate;
       console.log('getting daily scores of todays games from API...');
-      this.score = this.http.get(url, options)
-        .map(response => response.json())
+      this.score = this.http.get(url, {headers})
+        
     }
     return this.score;
   }

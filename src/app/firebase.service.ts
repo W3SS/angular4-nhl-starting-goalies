@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { AngularFireDatabase, FirebaseListObservable } from 'angularfire2/database';
+import { AngularFireDatabase } from 'angularfire2/database';
 import { AngularFireAuth } from 'angularfire2/auth';
 import { Observable } from 'rxjs/Observable';
 import * as firebase from 'firebase/app';
@@ -7,12 +7,12 @@ import * as firebase from 'firebase/app';
 @Injectable()
 export class FirebaseService {
 
-  items:FirebaseListObservable<any[]>;
+  items: any;
   private user: Observable<firebase.User>;
   private userDetails: firebase.User = null;
 
   constructor(public af: AngularFireDatabase, private firebaseAuth: AngularFireAuth) {
-    this.items = af.list('/Starters'); 
+    this.items = af.list('/Starters').valueChanges(); 
     this.user = firebaseAuth.authState;
 
       this.user.subscribe(
@@ -51,17 +51,17 @@ export class FirebaseService {
    addData(starters) {
       console.log(starters, 'starters.json in fb service...');
       console.log('deleting data from fb...');
-      this.items.remove().then(_ => {
+      this.af.list('/Starters').remove().then(_ => {
         console.log('deleted!');
         this.getStarterData();
       });
       console.log('saving new data to fb...');
-      this.items.push(starters); 
+      this.af.list('/Starters').push(starters); 
   }
 
   getStarterData() {
     console.log('getting starter data from firebase...');
-    return this.items = this.af.list('/Starters');
+    return this.items = this.af.list('/Starters').valueChanges();
   }
 }
  

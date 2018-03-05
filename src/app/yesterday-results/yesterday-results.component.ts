@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Http, Response, RequestOptions, Headers, Request, RequestMethod } from '@angular/http';
+import { HttpClient, HttpResponse, HttpHeaders, HttpRequest } from '@angular/common/http'
 import { Observable } from 'rxjs/Observable';
 import { DatePipe } from '@angular/common';
 import { ActivatedRoute, Router, ActivatedRouteSnapshot } from '@angular/router';
@@ -14,7 +14,7 @@ let tomorrow = null;
 let yesterday = null;
 
 let headers = null;
-let options = null;
+
 
 @Component({
   selector: 'app-yesterday-results',
@@ -44,7 +44,7 @@ export class YesterdayResultsComponent implements OnInit {
   noGamesMsg: any;
   loading: boolean = true;
 
-  constructor(private http: Http, private yesterdayService: YesterdayService, public snackBar: MatSnackBar, public router: Router) {
+  constructor(private http: HttpClient, private yesterdayService: YesterdayService, public snackBar: MatSnackBar, public router: Router) {
     this.getJSON();
     yesterday = this.yesterdayService.getYesterday();
     tomorrow = this.yesterdayService.getTomorrow();
@@ -56,7 +56,7 @@ export class YesterdayResultsComponent implements OnInit {
 
   public getJSON() {
     this.http.get("./assets/twitter.json")
-      .map(response => response.json())
+     
       .subscribe(res => {
         console.log(res['twitterHandles']["0"], 'twitter handles');
         this.twitterHandles = res['twitterHandles']["0"];
@@ -70,11 +70,11 @@ export class YesterdayResultsComponent implements OnInit {
 
     this.yesterdayService
       .getEnv().subscribe(res => {
-        //this.defineToken = res._body;
-        headers = new Headers({ "Authorization": "Basic " + btoa('ianposton' + ":" + res._body.replace(/\"/g, "")) });
-        options = new RequestOptions({ headers: headers });
+        
+        headers = new HttpHeaders().set("Authorization", "Basic " + btoa('ianposton' + ":" + res));
+        
         this.yesterdayService
-          .sendHeaderOptions(headers, options);
+          .sendHeaderOptions(headers);
 
         this.yesterdayService
           .getDailySchedule().subscribe(res => {
@@ -100,8 +100,8 @@ export class YesterdayResultsComponent implements OnInit {
                   res['dailygameschedule'].gameentry.map(
 
                     g => 
-                          this.http.get('https://api.mysportsfeeds.com/v1.1/pull/nhl/2017-2018-regular/game_boxscore.json?gameid=' + g.id + '&playerstats=Sv,GA,GAA,GS,SO,MIN,W,L,SA,OTL,OTW', options)
-                          .map(response => response.json())
+                          this.http.get('https://api.mysportsfeeds.com/v1.1/pull/nhl/2017-2018-regular/game_boxscore.json?gameid=' + g.id + '&playerstats=Sv,GA,GAA,GS,SO,MIN,W,L,SA,OTL,OTW', {headers})
+                          //.map(response => response.json())
                       
                     
                   )

@@ -1,20 +1,9 @@
 import { Injectable } from '@angular/core';
-import { Http, Response, RequestOptions, Headers, Request, RequestMethod } from '@angular/http';
+import { HttpClient, HttpResponse, HttpHeaders, HttpRequest } from '@angular/common/http'
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/do';
 
-//FOR TESTING TOMORROW
-// let testDate = new Date();
-// let thisDate = new Date(testDate.getTime() + (24 * 60 * 60 * 1000));
-// let tomorrowDate = new Date(thisDate.getTime() + (24 * 60 * 60 * 1000));
-// let yesterdayDate = new Date(thisDate.getTime() - (24 * 60 * 60 * 1000));
-
-//FOR TESTING YESTERDAY
-// let testDate = new Date();
-// let thisDate = new Date(testDate.getTime() - (24 * 60 * 60 * 1000));
-// let tomorrowDate = new Date(thisDate.getTime() + (24 * 60 * 60 * 1000));
-// let yesterdayDate = new Date(thisDate.getTime() - (24 * 60 * 60 * 1000));
 
 let thisDate = new Date();
 let tomorrowDate = new Date(thisDate.getTime() + (24 * 60 * 60 * 1000));
@@ -49,7 +38,7 @@ let yesterday = yesterdayMyDate.toISOString().slice(0, 10);
 let lastweek = lastweekMyDate.toISOString().slice(0, 10);
 
 let headers = null;
-let options = null;
+
 let sending;
 let sent;
 let sendingHot;
@@ -74,12 +63,11 @@ export class DataService {
   injured: Observable <any> = null;
   apiRoot: string = "https://api.mysportsfeeds.com/v1.2/pull/nhl/2017-2018-regular";
   
-  constructor(private http: Http) {}
+  constructor(private http: HttpClient) {}
 
-  sendHeaderOptions(h, o) {
-    console.log('got headers & options in data service...')
+  sendHeaderOptions(h) {
+    console.log('got headers & options in data service...');
     headers = h;
-    options = o;
   }
 
 
@@ -89,8 +77,8 @@ export class DataService {
       console.log('getting schedule data from API...');
 
       let url = `${this.apiRoot}/daily_game_schedule.json?fordate=`+dailyDate;
-      this.schedule = this.http.get(url, options)
-        .map(response => response.json())
+      this.schedule = this.http.get(url, {headers})
+        
     }
     return this.schedule;
 
@@ -99,7 +87,7 @@ export class DataService {
 
   getEnv() {
     console.log("trying to get heroku env...");
-    this.env = this.http.get('/heroku-env').map(response => response)
+    this.env = this.http.get('/heroku-env')
     return this.env;
   }
 
@@ -158,8 +146,8 @@ export class DataService {
 
       let url = `${this.apiRoot}/active_players.json?position=G`;
       console.log('getting active player data from API...');
-      this.info = this.http.get(url, options)
-        .map(response => response.json())
+      this.info = this.http.get(url, {headers})
+        
     }
     return this.info;
   }
@@ -169,8 +157,8 @@ export class DataService {
       console.log('getting cumulative player stats from API...');
 
       let url = `${this.apiRoot}/cumulative_player_stats.json?position=G`;
-      this.stats = this.http.get(url, options)
-        .map(response => response.json())
+      this.stats = this.http.get(url, {headers})
+        
     }
     return this.stats;
   }
@@ -181,8 +169,8 @@ export class DataService {
       console.log('getting yesterday, today, tomorrow from API...');
 
       let url = `${this.apiRoot}/full_game_schedule.json?date=from-`+yesterdayDailyDate+`-to-`+tomorrowDailyDate;
-      this.gameid = this.http.get(url, options)
-        .map(response => response.json())
+      this.gameid = this.http.get(url, {headers})
+        
     }
     return this.gameid;
   }
@@ -194,8 +182,8 @@ export class DataService {
       console.log('getting 1 week of games from API...');
 
       let url = `${this.apiRoot}/full_game_schedule.json?date=from-`+lastweekDailyDate+`-to-`+yesterdayDailyDate;
-      this.lastweekgameid = this.http.get(url, options)
-        .map(response => response.json())
+      this.lastweekgameid = this.http.get(url, {headers})
+        
     }
     return this.lastweekgameid;
   }
@@ -205,8 +193,8 @@ export class DataService {
     if (!this.daily) {
       let url = `${this.apiRoot}/daily_player_stats.json?fordate=`+dailyDate+`&position=G`;
       console.log('getting daily stats for goalies from API...');
-      this.daily = this.http.get(url, options)
-        .map(response => response.json())
+      this.daily = this.http.get(url, {headers})
+        
     }
     return this.daily;
   }
@@ -217,8 +205,8 @@ export class DataService {
       console.log('getting goalie injuries from api...');
 
       let url = `${this.apiRoot}/player_injuries.json?position=G`;
-      this.injured = this.http.get(url, options)
-        .map(response => response.json())
+      this.injured = this.http.get(url, {headers})
+        
     }
     return this.injured;
   }
@@ -228,8 +216,8 @@ export class DataService {
     if (!this.score) {
       let url = `${this.apiRoot}/scoreboard.json?fordate=`+dailyDate;
       console.log('getting daily scores of todays games from API...');
-      this.score = this.http.get(url, options)
-        .map(response => response.json())
+      this.score = this.http.get(url, {headers})
+        
     }
     return this.score;
   }

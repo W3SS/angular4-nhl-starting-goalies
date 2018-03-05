@@ -1,6 +1,6 @@
 import { Component, ViewChild, Inject, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
-import { Http, Response, RequestOptions, Headers, Request, RequestMethod } from '@angular/http';
+import { HttpClient, HttpResponse, HttpHeaders, HttpRequest} from '@angular/common/http'
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { Observable } from 'rxjs/Observable';
 import { IntervalObservable } from "rxjs/observable/IntervalObservable";
@@ -21,7 +21,7 @@ let tomorrow = null;
 let yesterday = null;
 
 let headers = null;
-let options = null;
+
 
 
 @Component({
@@ -85,17 +85,21 @@ export class StartingGoaliesComponent implements OnInit {
   goalieIdSet: boolean = false;
   standIn: string = '';
   goalieID: string = '';
-  newGoalie = {
+
+    newGoalie = {
     [this.standIn]: {
       confirmed: false,
       name: null,
-      probable: false
+      probable: false,
+      image: null,
+      atHandle: null,
+      twitterHandle: null
     }
   };
 
 
 
-  constructor(private http: Http, private dataService: DataService, private fbService: FirebaseService, private yesterdayService: YesterdayService, private tomorrowService: TomorrowService, public snackBar: MatSnackBar, public router: Router, public dialog: MatDialog) {
+  constructor(private http: HttpClient, private dataService: DataService, private fbService: FirebaseService, private yesterdayService: YesterdayService, private tomorrowService: TomorrowService, public snackBar: MatSnackBar, public router: Router, public dialog: MatDialog) {
     this.fbService
       .getStarterData()
       .subscribe(res => {
@@ -179,11 +183,11 @@ export class StartingGoaliesComponent implements OnInit {
 
     this.dataService
       .getEnv().subscribe(res => {
-        //this.defineToken = res._body;
-        headers = new Headers({ "Authorization": "Basic " + btoa('ianposton' + ":" + res._body.replace(/\"/g, "")) });
-        options = new RequestOptions({ headers: headers });
+        
+        headers = new HttpHeaders().set("Authorization", "Basic " + btoa('ianposton' + ":" + res));
+       
         this.dataService
-          .sendHeaderOptions(headers, options);
+          .sendHeaderOptions(headers);
 
         this.dataService
           .getDailySchedule().subscribe(res => {
@@ -213,8 +217,8 @@ export class StartingGoaliesComponent implements OnInit {
               Observable.forkJoin(
                   res['dailygameschedule'].gameentry.map(
                     g =>
-                    this.http.get('https://api.mysportsfeeds.com/v1.2/pull/nhl/2017-2018-regular/game_startinglineup.json?gameid=' + g.id + '&position=Goalie-starter', options)
-                    .map(response => response.json())
+                    this.http.get('https://api.mysportsfeeds.com/v1.2/pull/nhl/2017-2018-regular/game_startinglineup.json?gameid=' + g.id + '&position=Goalie-starter', {headers})
+                 
                   )
                 )
                 .subscribe(res => {
@@ -568,27 +572,7 @@ export class StartingGoaliesComponent implements OnInit {
           }
         }
 
-        // if (this.playerInjuries.length > 0) {
-        //   console.log('start sorting data for injuries...');
-        //   for (let inj of this.playerInjuries) {
-
-        //     for (let injdata of this.myData) {
-
-        //       if (inj.player.ID === injdata.player.ID) {
-
-        //         injdata.player.injured = true;
-        //         injdata.player.injury = ' ' + inj.injury;
-
-        //         if (inj.injury.substr(inj.injury.length - 5) === '(Out)') {
-        //           //console.log(inj.injury.substr(inj.injury.length - 5), 'injuries that say OUT!');
-        //           injdata.player.injuryOut = true;
-        //         }
-
-        //       }
-
-        //     }
-        //   }
-        // }
+       
 
         if (this.myData && this.gamesToday === true) {
           if (this.startingGoaliesToday.length > 0) {
@@ -843,11 +827,14 @@ export class StartingGoaliesComponent implements OnInit {
   }
 
   public setGoalieId() {
-    this.newGoalie = {
+     this.newGoalie = {
       [this.goalieID]: {
         confirmed: false,
         name: null,
-        probable: false
+        probable: false,
+        image: null,
+        atHandle: null,
+        twitterHandle: null
       }
     };
 
@@ -941,52 +928,6 @@ export class StartingGoaliesComponent implements OnInit {
   }
 
 
-  //  public addMoreData() {
-
-  //      for (let info of this.myData) {
-
-  //       if (this.fullFirebaseResponse[1][info.player.ID] != null) {
-  //         if (info.player.image == null) {
-
-  //           console.log(info, 'this goalie is missing an image');
-  //            this.fullFirebaseResponse[1][info.player.ID].image = 'https://nhl.bamcontent.com/images/headshots/current/168x168/goalie@2x.jpg';
-
-
-
-
-  //         } else {
-
-  //            this.fullFirebaseResponse[1][info.player.ID].image = info.player.image;
-  //            this.fullFirebaseResponse[1][info.player.ID].atHandle = info.player.atHandle;
-  //            this.fullFirebaseResponse[1][info.player.ID].twitterHandle = info.player.twitterHandle;
-  //            console.log(this.fullFirebaseResponse[1][info.player.ID], "added data to today...");
-  //         }
-
-
-  //       } 
-
-  //       if (this.fullFirebaseResponse[3][info.player.ID] != null) {
-  //         if (info.player.image == null) {
-
-  //              console.log(info, 'this goalie is missing an image');
-  //            this.fullFirebaseResponse[3][info.player.ID].image = 'https://nhl.bamcontent.com/images/headshots/current/168x168/goalie@2x.jpg';
-
-
-
-  //         } else {
-
-  //            this.fullFirebaseResponse[3][info.player.ID].image = info.player.image;
-  //            this.fullFirebaseResponse[3][info.player.ID].atHandle = info.player.atHandle;
-  //            this.fullFirebaseResponse[3][info.player.ID].twitterHandle = info.player.twitterHandle;
-  //            console.log(this.fullFirebaseResponse[3][info.player.ID], "added data to tomorrow...");
-
-  //         }
-
-
-  //       }
-  //   }  
-  // }
-
   public isVisibleOnDesktop() {
     // console.log('width over 600px');
   }
@@ -1005,8 +946,7 @@ export class StartingGoaliesComponent implements OnInit {
   }
 
   public openLastweek(event, data) {
-    //this.selected = data;
-    //console.log(data, 'ok you clicked on player img...');
+    
     this.dialog.open(LastweekDialog, {
       data: data,
       width: '1025px',
@@ -1119,7 +1059,7 @@ export class LastweekDialog implements OnInit {
   sentLastweek: any;
   loading: boolean = true;
 
-  constructor(public dialogRef: MatDialogRef < LastweekDialog > , @Inject(MAT_DIALOG_DATA) public data: any, private http: Http, private dataService: DataService) {
+  constructor(public dialogRef: MatDialogRef < LastweekDialog > , @Inject(MAT_DIALOG_DATA) public data: any, private http: HttpClient, private dataService: DataService) {
     this.sentHotData = this.dataService.getSentHotStats();
     this.sentAllData = this.dataService.getSentAllStats();
     this.sentYesterday = this.dataService.getYesterday();
@@ -1138,8 +1078,8 @@ export class LastweekDialog implements OnInit {
         Observable.forkJoin(
             res['fullgameschedule'].gameentry.map(
               g =>
-              this.http.get('https://api.mysportsfeeds.com/v1.2/pull/nhl/2017-2018-regular/game_boxscore.json?gameid=' + g.id + '&playerstats=Sv,GA,GAA,GS,SO,MIN,W,L,SA,OTL,OTW', options)
-              .map(response => response.json())
+              this.http.get('https://api.mysportsfeeds.com/v1.2/pull/nhl/2017-2018-regular/game_boxscore.json?gameid=' + g.id + '&playerstats=Sv,GA,GAA,GS,SO,MIN,W,L,SA,OTL,OTW', {headers})
+              //.map(response => response.json())
             )
           )
           .subscribe(res => {
@@ -1322,17 +1262,15 @@ export class LastweekDialog implements OnInit {
 export class TodayDialog implements OnInit {
   test: any;
   noPosts: any;
-  tweetsData: Array < any > ;
-  constructor(public dialogRef: MatDialogRef < TodayDialog > , @Inject(MAT_DIALOG_DATA) public data: any, private http: Http) {
+  tweetsData: any;
+  constructor(public dialogRef: MatDialogRef < TodayDialog > , @Inject(MAT_DIALOG_DATA) public data: any, private http: HttpClient) {
 
   }
 
   loadStuff() {
-    let headers = new Headers();
+    let headers = new HttpHeaders().set('Content-Type', 'application/X-www-form-urlencoded');
 
-    headers.append('Content-Type', 'application/X-www-form-urlencoded');
-
-    this.http.post('/authorize', { headers: headers }).subscribe((res) => {
+    this.http.post('/authorize', {headers}).subscribe((res) => {
       this.searchCall();
     })
 
@@ -1343,15 +1281,14 @@ export class TodayDialog implements OnInit {
   searchCall() {
     console.log(this.data, 'data passed in');
 
-    let headers = new Headers();
+    let headers = new HttpHeaders().set('Content-Type', 'application/X-www-form-urlencoded');
     //let searchterm = 'query=#startingGoalies #nhl ' + this.data.player.FirstName + ' ' + this.data.player.LastName;
     let searchterm = 'query=' + this.data.player.LastName + ' ' + this.data.player.twitterHandle;
 
-    headers.append('Content-Type', 'application/X-www-form-urlencoded');
 
-    this.http.post('/search', searchterm, { headers: headers }).subscribe((res) => {
-      console.log(res.json().data.statuses, 'twitter stuff');
-      this.tweetsData = res.json().data.statuses;
+    this.http.post('/search', searchterm, {headers}).subscribe((res) => {
+       console.log(res['data'].statuses, 'twitter stuff');
+      this.tweetsData = res['data'].statuses;
       if (this.tweetsData.length === 0) {
         this.noPosts = "No Tweets.";
       }

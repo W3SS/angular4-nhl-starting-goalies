@@ -8,11 +8,13 @@ import * as firebase from 'firebase/app';
 export class FirebaseService {
 
   items: any;
+  hits: any;
   private user: Observable<firebase.User>;
-  private userDetails: firebase.User = null;
+  public userDetails: firebase.User = null;
 
   constructor(public af: AngularFireDatabase, private firebaseAuth: AngularFireAuth) {
     this.items = af.list('/Starters').valueChanges(); 
+    this.hits = this.af.list('/Hits').valueChanges();
     this.user = firebaseAuth.authState;
 
       this.user.subscribe(
@@ -63,5 +65,18 @@ export class FirebaseService {
     console.log('getting starter data from firebase...');
     return this.items = this.af.list('/Starters').valueChanges();
   }
+
+   getHits() {
+    console.log('getting starter data from firebase...');
+    return this.hits = this.af.list('/Hits').valueChanges();
+  }
+
+ updateCounter(count) {
+   console.log('update counter and exit... why are you calling me again?');
+   let newCount = (count || 0) + 1;
+   return this.af.list('/Hits').update('counter', {'hits': newCount});
+   
+ }
+
 }
  

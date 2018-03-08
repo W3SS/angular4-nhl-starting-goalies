@@ -114,11 +114,7 @@ form input[type="text"] {
 .tp-box__side {
   -webkit-backface-visibility: hidden;
   backface-visibility: hidden;
-  font-weight: 700;
-  -webkit-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
-  user-select: none;
+  font-weight: 700; 
 }
 
 .tp-box__front {

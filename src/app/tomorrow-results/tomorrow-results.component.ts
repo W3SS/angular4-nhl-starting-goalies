@@ -15,6 +15,8 @@ import 'rxjs/add/observable/forkJoin';
 let today = null;
 let tomorrow = null;
 let yesterday = null;
+let dailyTeams = [];
+let teamString = '';
 
 let headers = null;
 
@@ -158,6 +160,11 @@ export class TomorrowResultsComponent implements OnInit {
               let postponed;
 
               res['dailygameschedule'].gameentry.forEach((item, index) => {
+
+                 
+                dailyTeams.push(item.homeTeam.Abbreviation, item.awayTeam.Abbreviation); 
+                teamString = dailyTeams.join();
+                
                 postponed = index;
                 if (res['dailygameschedule'].gameentry[postponed].id === '41392') {
                   console.log(res['dailygameschedule'].gameentry[postponed], "hi, iam postponed and causing trouble...");
@@ -257,7 +264,7 @@ export class TomorrowResultsComponent implements OnInit {
   sortData() {
 
     this.tomorrowService
-      .getStats().subscribe(res => {
+      .getStats(teamString).subscribe(res => {
         console.log(res['cumulativeplayerstats'].playerstatsentry, "cumulative stats...");
         this.myData = res['cumulativeplayerstats'].playerstatsentry;
 

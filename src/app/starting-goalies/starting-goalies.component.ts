@@ -21,8 +21,8 @@ let tomorrow = null;
 let yesterday = null;
 
 let headers = null;
-
-
+let dailyTeams = [];
+let teamString = '';
 
 @Component({
   selector: 'app-starting-goalies',
@@ -69,17 +69,18 @@ export class StartingGoaliesComponent implements OnInit {
   allGoalies: Array < any > ;
   allGoaliesTomorrow: Array < any > ;
   selected: any;
-  test: any;
   startingGoaliesToday: Array < any > = [];
   tweetDay: any;
   noGamesMsg: any;
   noScoresMsg: any;
   noScores: any;
   startersDate: any;
+  tomorrowDate: any;
   fullFirebaseResponse: any;
   loading: boolean = true;
 
   stats: boolean = false;
+  hitCount: any;
 
 
   goalieIdSet: boolean = false;
@@ -105,12 +106,14 @@ export class StartingGoaliesComponent implements OnInit {
       .subscribe(res => {
 
         if (res[0] != null) {
-          console.log(res[0], 'got response from firebase...');
+          console.log(res, 'got response from firebase...');
+          //this.hitCount = res[1]['hits'];
           this.fullFirebaseResponse = res[0];
           this.startersDate = res[0][0]['todayDate'];
           this.todayStarters = res[0][1];
           this.allGoalies = Array.of(res[0][1]);
           this.allGoaliesTomorrow = Array.of(res[0][3]);
+      
 
           // This is to change a goalie in view without refresh
           if (this.showData != null && this.myData != null) {
@@ -156,7 +159,8 @@ export class StartingGoaliesComponent implements OnInit {
             .subscribe(res => {
 
               if (res[0] != null) {
-                console.log(res[0], 'got response from firebase...');
+                console.log(res, 'got response from firebase...');
+                //this.hitCount = res[1]['hits'];
                 this.fullFirebaseResponse = res[0];
                 this.startersDate = res[0][0]['todayDate'];
                 this.todayStarters = res[0][1];
@@ -171,6 +175,7 @@ export class StartingGoaliesComponent implements OnInit {
     yesterday = this.dataService.getYesterday();
     tomorrow = this.dataService.getTomorrow();
     today = this.dataService.getToday();
+    this.tomorrowDate = tomorrow;
     console.log(yesterday + ' yesterday, ' + today + ' today, ' + tomorrow + ' tomorrow, ');
     this.sentData = this.dataService.getSentStats();
     this.sentYesterdayData = this.yesterdayService.getSentStats();
@@ -180,6 +185,7 @@ export class StartingGoaliesComponent implements OnInit {
 
 
   loadData() {
+
 
     this.dataService
       .getEnv().subscribe(res => {
@@ -202,6 +208,13 @@ export class StartingGoaliesComponent implements OnInit {
             } else {
               let postponed;
               res['dailygameschedule'].gameentry.forEach((item, index) => {
+
+                if(this.fbService.userDetails === null) {
+                 
+                  dailyTeams.push(item.homeTeam.Abbreviation, item.awayTeam.Abbreviation); 
+                  teamString = dailyTeams.join();
+                }
+                
                 postponed = index;
                 if (res['dailygameschedule'].gameentry[postponed].id === '41392') {
                   console.log(res['dailygameschedule'].gameentry[postponed], "hi, iam postponed and causing trouble...");
@@ -216,9 +229,7 @@ export class StartingGoaliesComponent implements OnInit {
 
               Observable.forkJoin(
                   res['dailygameschedule'].gameentry.map(
-                    g =>
-                    this.http.get('https://api.mysportsfeeds.com/v1.2/pull/nhl/2017-2018-regular/game_startinglineup.json?gameid=' + g.id + '&position=Goalie-starter', {headers})
-                 
+                    g =>  this.http.get('https://api.mysportsfeeds.com/v1.2/pull/nhl/2017-2018-regular/game_startinglineup.json?gameid=' + g.id + '&position=Goalie-starter', {headers})
                   )
                 )
                 .subscribe(res => {
@@ -261,17 +272,6 @@ export class StartingGoaliesComponent implements OnInit {
 
           })
 
-        // this.dataService
-        //   .getInjured().subscribe(res => {
-        //     console.log(res['playerinjuries'].playerentry, "injured players...");
-        //     this.playerInjuries = res['playerinjuries'].playerentry;
-        //   })
-
-        // this.dataService
-        //   .getInfo().subscribe(res => {
-        //     console.log(res['activeplayers'].playerentry, "active players stats...");
-        //     this.playerInfo = res['activeplayers'].playerentry;
-        //   })
 
         this.dataService
           .getGameId().subscribe(res => {
@@ -299,6 +299,8 @@ export class StartingGoaliesComponent implements OnInit {
 
   sortData() {
 
+
+
     if (this.gamesToday === true) {
       this.dataService
         .getDaily().subscribe(res => {
@@ -310,13 +312,19 @@ export class StartingGoaliesComponent implements OnInit {
     }
 
     this.dataService
-      .getStats().subscribe(res => {
+      .getStats(teamString).subscribe(res => {
         console.log(res['cumulativeplayerstats'].playerstatsentry, "cumulative stats...");
+
+    
         this.myData = res['cumulativeplayerstats'].playerstatsentry;
+
+      
 
         if (this.myData && this.dailySchedule) {
           console.log('start sorting data for daily schedule...');
           for (let schedule of this.dailySchedule) {
+
+              //console.log(this.myData, 'filtered myData')
 
             for (let sdata of this.myData) {
 
@@ -350,8 +358,6 @@ export class StartingGoaliesComponent implements OnInit {
                 sdata.team.today = today;
                 sdata.team.tomorrow = tomorrow;
                 sdata.team.yesterday = yesterday;
-                sdata.player.injured = false;
-                sdata.player.injury = '';
                 sdata.player.confirmed = false;
                 sdata.player.probable = false;
                 sdata.player.startstatus = '';
@@ -384,8 +390,6 @@ export class StartingGoaliesComponent implements OnInit {
                 sdata.team.today = today;
                 sdata.team.tomorrow = tomorrow;
                 sdata.team.yesterday = yesterday;
-                sdata.player.injured = false;
-                sdata.player.injury = '';
                 sdata.player.confirmed = false;
                 sdata.player.probable = false;
                 sdata.player.startstatus = '';
@@ -724,25 +728,29 @@ export class StartingGoaliesComponent implements OnInit {
 
         this.loading = false;
         this.showData = this.startersData;
-        //this.showTomorrow = this.startersData;
-
-
+        
       }
 
     })
 
+     if (this.hitCount != null && this.fbService.userDetails === null) {
+        this.fbService.updateCounter(this.hitCount);
+     }
 
-
-    this.dataService
+     this.dataService
       .sendStats(this.showData, this.myData);
-  }
+     }
 
 
   ngOnInit() {
 
     if (this.sentData === undefined) {
-
       this.loadData();
+      this.fbService.getHits()
+        .subscribe(res => {
+            console.log(res[0]['hits'], 'ngOnInit hit count...');
+            this.hitCount = res[0]['hits'];
+        });
 
       // get our data every subsequent 10 minutes
       IntervalObservable.create(600000)
@@ -795,6 +803,9 @@ export class StartingGoaliesComponent implements OnInit {
                   }
                 }
               })
+
+              
+
           } else {
             console.log('No games then no daily stats either. :(');
           }
@@ -1260,7 +1271,6 @@ export class LastweekDialog implements OnInit {
 })
 
 export class TodayDialog implements OnInit {
-  test: any;
   noPosts: any;
   tweetsData: any;
   constructor(public dialogRef: MatDialogRef < TodayDialog > , @Inject(MAT_DIALOG_DATA) public data: any, private http: HttpClient) {

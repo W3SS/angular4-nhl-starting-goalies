@@ -276,6 +276,7 @@
       </li>
     </ul>
     <ul>
+      <li>NHL Goalies {{ gameDate | date:'fullDate' }}</li>
       <li *ngFor="let data of showData" class="goalie">
         <span *ngIf="data.player.gameLocation === 'home' && data.player.twoPossibleStarters === false && data.player.startingToday === true && data.team.matchup[2] == null && data.team.matchup[0].player.gameLocation === 'away'">
           {{data.team.matchup[0].player.twitterHandle}}
@@ -303,68 +304,45 @@
        
 
       </li>
+      <li>#ProjectedStarters #LikelyStarters #NHL #FantasyHockey</li>
     </ul>
      <ul>
+      <li>NHL Goalie Matchups <br> {{ gameDate | date:'fullDate' }}</li>
       <li *ngFor="let data of showData" class="goalie">
         <span *ngIf="data.player.gameLocation === 'home' && data.player.twoPossibleStarters === false && data.player.startingToday === true && data.team.matchup[2] == null && data.team.matchup[0].player.gameLocation === 'away'">
-          {{data.team.matchup[0].player.LastName +' '+ data.team.matchup[0].player.twitterHandle}}
+          {{data.team.matchup[0].player.twitterHandle +' '+ data.team.matchup[0].player.LastName}}
                  
-      
+      <br>
         </span>
+        
         <span *ngIf="data.player.gameLocation === 'home' && data.player.twoPossibleStarters === false && data.player.startingToday === true && data.team.matchup[2] == null && data.team.matchup[1].player.gameLocation === 'home'">
           {{data.team.matchup[1].player.twitterHandle +' '+ data.team.matchup[1].player.LastName}}
-                 
+           <br>      
         </span>
         <span *ngIf="data.player.gameLocation === 'home' && data.player.twoPossibleStarters === false && data.player.startingToday === true && data.team.matchup[2] == null && data.team.matchup[1].player.gameLocation === 'away'">
-          {{data.team.matchup[1].player.LastName +' '+ data.team.matchup[1].player.twitterHandle}}
-                               
+          {{data.team.matchup[1].player.twitterHandle +' '+ data.team.matchup[1].player.LastName }}
+             <br>                  
         </span>
+        
         <span *ngIf="data.player.gameLocation === 'home' && data.player.twoPossibleStarters === false && data.player.startingToday === true && data.team.matchup[2] == null && data.team.matchup[0].player.gameLocation === 'home'">
           {{data.team.matchup[0].player.twitterHandle +' '+ data.team.matchup[0].player.LastName}}
-                
+               <br> 
             </span>
+            
         
         <span *ngIf="data.player.gameLocation === 'home' && data.player.twoPossibleStarters === false && data.player.startingToday === true && data.team.matchup[2] != null && data.team.matchup[0].player.gameLocation === 'home'">
           {{data.team.matchup[0].player.twitterHandle +' '+ data.team.matchup[0].player.LastName}}
-             
+             <br>
         </span>
 
        
 
       </li>
+      <li>#StartingGoalies #NHL #FantasyHockey</li>
     </ul>
-     <ul>
-
-      <li *ngFor="let data of showTomorrow" class="goalie">
-        <span *ngIf="data.player.gameLocation === 'home' && data.player.twoPossibleStarters === false && data.team.matchup[2] == null && data.team.matchup[0].player.gameLocation === 'away'">
-          {{data.team.matchup[0].player.LastName +' '+ data.team.matchup[0].player.twitterHandle}}
-                 
-      
-        </span>
-        <span *ngIf="data.player.gameLocation === 'home' && data.player.twoPossibleStarters === false && data.team.matchup[2] == null && data.team.matchup[1].player.gameLocation === 'home'">
-          {{data.team.matchup[1].player.twitterHandle +' '+ data.team.matchup[1].player.LastName}}
-                 
-        </span>
-        <span *ngIf="data.player.gameLocation === 'home' && data.player.twoPossibleStarters === false && data.team.matchup[2] == null && data.team.matchup[1].player.gameLocation === 'away'">
-          {{data.team.matchup[1].player.LastName +' '+ data.team.matchup[1].player.twitterHandle}}
-                               
-        </span>
-        <span *ngIf="data.player.gameLocation === 'home' && data.player.twoPossibleStarters === false && data.team.matchup[2] == null && data.team.matchup[0].player.gameLocation === 'home'">
-          {{data.team.matchup[0].player.twitterHandle +' '+ data.team.matchup[0].player.LastName}}
-                
-            </span>
-        
-        <span *ngIf="data.player.gameLocation === 'home' && data.player.twoPossibleStarters === false && data.team.matchup[2] != null && data.team.matchup[0].player.gameLocation === 'home'">
-          {{data.team.matchup[0].player.twitterHandle +' '+ data.team.matchup[0].player.LastName}}
-             
-        </span>
-
-       
-
-      </li>
-    </ul>
+    
     <ul>
-      
+      <li>NHL Goalies {{ tomorrowDate | date:'fullDate' }}</li>
       <li *ngFor="let data of showTomorrow" class="goalie">
         <span *ngIf="data.player.gameLocation === 'home' && data.player.twoPossibleStarters === false && data.team.matchup[2] == null && data.team.matchup[0].player.gameLocation === 'away'">
           {{data.team.matchup[0].player.twitterHandle}}
@@ -389,9 +367,10 @@
              
         </span>
 
-       
+      
 
       </li>
+       <li>#ProjectedStarters #LikelyStarters #NHL #FantasyHockey</li>
     </ul>
     <!-- <div *ngIf="data.team.matchup[0].player.saves != null"> -->
     <!-- <span fxHide [fxHide.gt-xs]="isVisibleOnDesktop()">Saves: </span> <span fxHide [fxHide.xs]="isVisibleOnMobile()">SV </span> {{data.team.matchup[0].player.saves}} <span fxHide [fxHide.gt-xs]="isVisibleOnDesktop()">Shots Faced: </span> <span fxHide [fxHide.xs]="isVisibleOnMobile()">SA </span> {{data.team.matchup[0].player.shotsFaced}}<br> -->

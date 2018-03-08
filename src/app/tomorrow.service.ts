@@ -119,11 +119,11 @@ export class TomorrowService {
     return this.info;
   }
 
-  getStats() {
+  getStats(teams) {
     if (!this.stats) {
       console.log('getting cumulative player stats from API...');
 
-      let url = `${this.apiRoot}/cumulative_player_stats.json?position=G`;
+      let url = `${this.apiRoot}/cumulative_player_stats.json?position=G&team=`+teams;
       this.stats = this.http.get(url, {headers})
         
     }

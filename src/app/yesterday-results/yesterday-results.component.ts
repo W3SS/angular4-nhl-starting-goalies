@@ -403,12 +403,6 @@ if (res['fullgameschedule'].gameentry > 0) {
 
                 }
 
-                // else if (startid === startdata.player.ID && startdata.player.GamesStarted == '0') {
-                //   startdata.player.subedInToday = true;
-                //   startdata.player.startingToday = false;
-                //   this.startersData.push(startdata);
-
-                // }
 
               }
             }
@@ -465,12 +459,13 @@ if (res['fullgameschedule'].gameentry > 0) {
 
   showMatchups() {
 
+   console.log(this.statData, 'show this');
 
     //THIS FOR LOOP GETS HOME STARTING HOCKEY GOALIES AND THERE STARTING OPPONENT 
     this.startersData.forEach((data) => {
       if (data.player.gameLocation === 'home') {
         data.team.matchup = this.statData[data.team.gameId];
-        console.log(this.statData[data.team.gameId], 'show this');
+        
         this.statData[data.team.gameId][0].player.twoPossibleStarters = false;
         this.statData[data.team.gameId][1].player.twoPossibleStarters = false;
 
@@ -553,9 +548,6 @@ if (res['fullgameschedule'].gameentry > 0) {
     // console.log('width over 600px');
   }
 
-  public goToday() {
-    this.router.navigateByUrl('starting-goalies');
-  }
 
   openSnackBar() {
     this.snackBar.openFromComponent(InfoYesterday, {

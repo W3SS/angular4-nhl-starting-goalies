@@ -107,7 +107,6 @@ export class StartingGoaliesComponent implements OnInit {
 
         if (res[0] != null) {
           console.log(res, 'got response from firebase...');
-          //this.hitCount = res[1]['hits'];
           this.fullFirebaseResponse = res[0];
           this.startersDate = res[0][0]['todayDate'];
           this.todayStarters = res[0][1];
@@ -160,7 +159,6 @@ export class StartingGoaliesComponent implements OnInit {
 
               if (res[0] != null) {
                 console.log(res, 'got response from firebase...');
-                //this.hitCount = res[1]['hits'];
                 this.fullFirebaseResponse = res[0];
                 this.startersDate = res[0][0]['todayDate'];
                 this.todayStarters = res[0][1];
@@ -242,7 +240,7 @@ export class StartingGoaliesComponent implements OnInit {
                     i = index;
                     //console.log(res[i]['gamestartinglineup'].teamLineup, 'got starting lineups data!');
                     res2 = res[i]['gamestartinglineup'].teamLineup;
-                    //this.gameTime =  res[i]['gamestartinglineup'].game.date;
+                    
                     res2.forEach((item, index) => {
 
                       i2 = index;
@@ -256,8 +254,8 @@ export class StartingGoaliesComponent implements OnInit {
                       } else {
                         //console.log(res2[i2].team.City + " " + res2[i2].team.Name, 'no starters yet!');
                         this.starterIdData.push(res2[i2].team.ID);
-                        //this.starterIdData.push(res2[i2].expected.starter[0].player.ID);
-                        //console.log(this.starterIdData, 'this array has ALL the IDs of todays starters');
+                      
+                        //console.log(this.starterIdData, 'this array has ALL the team IDs of todays starters');
 
                       }
 
@@ -554,6 +552,8 @@ export class StartingGoaliesComponent implements OnInit {
 
               if (yesterday.player.saves > 1 && yesterday.player.ID === tomdata.player.ID) {
 
+                console.log(yesterday.player, "played yesterday...");
+
                 tomdata.player.finishedYesterday = false;
                 tomdata.player.playedYesterday = true;
                 tomdata.player.savesYesterday = yesterday.player.saves;
@@ -618,10 +618,10 @@ export class StartingGoaliesComponent implements OnInit {
                   }
                 } else if (this.startersDate != startdata.team.today && startid === startdata.player.ID) {
                   if (startdata.player.saves == null || startdata.player.saves == '0') {
-                    console.log(startdata.player, 'start ids of games that have not started yet');
+                    console.log(startdata.player, 'expected goalies from api');
                     startdata.player.startingToday = true;
                     startdata.player.startingTodayNow = false;
-                    console.log(startdata, 'player data');
+                    
                     this.startersData.push(startdata);
                   }
 
@@ -636,11 +636,15 @@ export class StartingGoaliesComponent implements OnInit {
 
           if (this.startersData.length > 0) {
             this.statData = this.startersData.reduce(function(r, a) {
+              // I need to store game ID for home player on team
+              // Store game ID for away team somewhere else if away push but dont make a
+
               r[a.team.gameId] = r[a.team.gameId] || [];
-
+   
               r[a.team.gameId].push(a);
-              return r
-
+              
+         
+return r
             }, Object.create(null));
 
             //console.log(this.statData, 'made matchups of starting goalies by game ID...');
@@ -656,12 +660,12 @@ export class StartingGoaliesComponent implements OnInit {
 
   showMatchups() {
 
-
+ console.log(this.statData, 'show this');
     //THIS FOR LOOP GETS HOME STARTING HOCKEY GOALIES AND THERE STARTING OPPONENT 
     this.startersData.forEach((data) => {
       if (data.player.gameLocation === 'home') {
         data.team.matchup = this.statData[data.team.gameId];
-        console.log(this.statData[data.team.gameId], 'show this');
+       
         this.statData[data.team.gameId][0].player.twoPossibleStarters = false;
         this.statData[data.team.gameId][1].player.twoPossibleStarters = false;
 
@@ -758,7 +762,7 @@ export class StartingGoaliesComponent implements OnInit {
           if (this.gamesToday === true) {
             this.dataService
               .getDaily().subscribe(res => {
-                console.log(res, "Daily stats updated, Now what...");
+                console.log(res, "Daily stats updated!");
                 this.dailyStats = res['dailyplayerstats'].playerstatsentry;
 
                 if (this.myData && this.dailyStats) {

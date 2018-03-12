@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Http, Response, RequestOptions, Headers, Request, RequestMethod } from '@angular/http';
+import { HttpClient } from '@angular/common/http'
 
 @Component({
   selector: 'app-root',
@@ -9,10 +9,9 @@ import { Http, Response, RequestOptions, Headers, Request, RequestMethod } from 
 
 export class AppComponent implements OnInit {
   navLinks: Array < any > ;
-  constructor(public http: Http){}
+  constructor(public http: HttpClient){}
   public getJSON() {
          this.http.get("./assets/routerlinks.json")
-           .map(response => response.json())
            .subscribe(res => {
       console.log(res['navLinks'], 'nav links');
       this.navLinks = res['navLinks'];

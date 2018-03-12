@@ -1,4 +1,4 @@
-# Starting NHL Goalies Angular4 MySportsFeeds API, Heroku - <a href="https://nhl-starting-goalies-angular.herokuapp.com/">Demo</a> 
+# Starting NHL Goalies Angular5 MySportsFeeds API, Heroku - <a href="https://nhl-starting-goalies-angular.herokuapp.com/">Demo</a> 
 This is a single page app which uses the [MySportsFeeds API](https://www.mysportsfeeds.com/data-feeds/api-docs/#) to get starting NHL goalie data. 
 
 ### Description
@@ -14,18 +14,18 @@ This app can help explain how to fetch data using [Angular's HttpClient Module](
 * [Deploy an Angular4 app to Heroku.](https://www.ianposton.com/angular4-deploy-to-heroku/) 
 
 ### Software used for this application
-* Angular (version 4.2.4) 
-* Angular CLI (version 1.4.5)
-* Angular http (version 4.2.4)
+* Angular (version 5.2.0) 
+* Angular CLI (version 1.7.1)
+* HttpClientModule (version 5.2.0)
 * Node.js (version 6.10.3)     
-* [angular material2](https://github.com/angular/material2) (version 2.0.0-beta.12)
+* [angular material2](https://github.com/angular/material2) (version 5.2.3)
 * Heroku [Set up a free account ](https://www.heroku.com/)
-* [Firebase](https://firebase.google.com/) (version 4.2.0) 
-* AngularFire2 (version 4.0.0-rc.1)
+* [Firebase](https://firebase.google.com/) (version 4.10.1) 
+* AngularFire2 (version 5.0.0-rc.6)
 * [ng2share](https://github.com/cedvdb/ng2share) (version 1.3.6) 
-* NPM (version 5.2.0)
+* NPM (version 5.6.0)
 * Heroku Client (version 3.0.3)
-* rxjs (version 5.4.2)
+* rxjs (version 5.5.6)
 * [MySportsFeeds API](https://www.mysportsfeeds.com/data-feeds/api-docs/#)
 
 ### Clone and serve this app
@@ -50,7 +50,7 @@ I created a small cms to allow me to update the goalies status by clicking on th
   //firebase.service.ts
 
 import { Injectable } from '@angular/core';
-import { AngularFireDatabase, FirebaseListObservable } from 'angularfire2/database';
+import { AngularFireDatabase } from 'angularfire2/database';
 import { AngularFireAuth } from 'angularfire2/auth';
 import { Observable } from 'rxjs/Observable';
 import * as firebase from 'firebase/app';
@@ -58,12 +58,12 @@ import * as firebase from 'firebase/app';
 @Injectable()
 export class FirebaseService {
 
-  items:FirebaseListObservable<any[]>;
+  items: any;
   private user: Observable<firebase.User>;
   private userDetails: firebase.User = null;
 
   constructor(public af: AngularFireDatabase, private firebaseAuth: AngularFireAuth) {
-    this.items = af.list('/items'); 
+    this.items = af.list('/items').valueChanges(); 
     this.user = firebaseAuth.authState;
 
       this.user.subscribe(
@@ -92,7 +92,7 @@ export class FirebaseService {
 
   getData() {
     console.log('getting starter data from firebase...');
-    return this.items = this.af.list('/items');
+    return this.items = this.af.list('/items').valueChanges();
   }
 }
 
@@ -117,6 +117,12 @@ import { FirebaseService } from '../firebase.service';
 })
 
 export class AppComponent implements OnInit {
+
+  //User Model
+  user = {
+    email: '',
+    password: ''
+  };
   
   constructor(private fbService: FirebaseService){}
 
@@ -290,7 +296,7 @@ The idea here is I am using nested `ngFor` loops to access the data by player ID
 
 import { Component, OnInit } from '@angular/core';
 import { FirebaseService } from '../firebase.service';
-import { Http, Response, RequestOptions, Headers, Request, RequestMethod } from '@angular/http';
+import { HttpClient, HttpResponse, HttpHeaders, HttpRequest} from '@angular/common/http'
 import 'rxjs/add/operator/map';
 
 
@@ -305,7 +311,7 @@ export class AppComponent implements OnInit {
   allGoalies: Array <any>;
   fullFirebaseResponse: any;
   
-  constructor(private http: Http, private fbService: FirebaseService){
+  constructor(private http: HttpClient, private fbService: FirebaseService){
     this.fbService
       .getStarterData()
       .subscribe(res => {
@@ -321,7 +327,6 @@ export class AppComponent implements OnInit {
    // USING MYDATA FROM API TO MATCH IDS WITH CUSTOM FIREBASE DATA
   // USE WITH NESTED NGFOR IN HTML
   this.http.get('https://some.fake.datafeed.com/v1/players')
-    .map(response => response.json())
       .subscribe(res => {
          this.myData = res['cumulativeplayerstats'].playerstatsentry;
       })
@@ -356,7 +361,7 @@ The `this.fullFirebaseResponse` will keep track of the player status updates as 
   //firebase.service.ts
 
 import { Injectable } from '@angular/core';
-import { AngularFireDatabase, FirebaseListObservable } from 'angularfire2/database';
+import { AngularFireDatabase } from 'angularfire2/database';
 import { AngularFireAuth } from 'angularfire2/auth';
 import { Observable } from 'rxjs/Observable';
 import * as firebase from 'firebase/app';
@@ -364,12 +369,12 @@ import * as firebase from 'firebase/app';
 @Injectable()
 export class FirebaseService {
 
-  items:FirebaseListObservable<any[]>;
+  items: any;
   private user: Observable<firebase.User>;
   private userDetails: firebase.User = null;
 
   constructor(public af: AngularFireDatabase, private firebaseAuth: AngularFireAuth) {
-    this.items = af.list('/items'); 
+    this.items = af.list('/items').valueChanges(); 
     
     ...
     
@@ -380,18 +385,18 @@ export class FirebaseService {
 addData(starters) {
     console.log(starters, 'starters.json in fb service...');
     console.log('deleting data from fb...');
-    this.items.remove().then(_ => {
+    this.af.list('/items').remove().then(_ => {
       console.log('deleted!');
       this.getStarterData();
     });
     console.log('saving new data to fb...');
-    this.items.push(starters); 
+    this.af.list('/items').push(starters); 
 }
 
 
   getData() {
     console.log('getting starter data from firebase...');
-    return this.items = this.af.list('/items');
+    return this.items = this.af.list('/items').valueChanges();
   }
 }
 

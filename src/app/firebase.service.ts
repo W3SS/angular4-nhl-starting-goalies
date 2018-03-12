@@ -14,7 +14,7 @@ export class FirebaseService {
 
   constructor(public af: AngularFireDatabase, private firebaseAuth: AngularFireAuth) {
     this.items = af.list('/Starters').valueChanges(); 
-    this.hits = this.af.list('/Hits').valueChanges();
+    this.hits = af.list('/Hits').valueChanges();
     this.user = firebaseAuth.authState;
 
       this.user.subscribe(
@@ -72,7 +72,7 @@ export class FirebaseService {
   }
 
  updateCounter(count) {
-   console.log('update counter and exit... why are you calling me again?');
+   //console.log('update counter and exit...');
    let newCount = (count || 0) + 1;
    return this.af.list('/Hits').update('counter', {'hits': newCount});
    

@@ -554,12 +554,12 @@ export class TomorrowResultsComponent implements OnInit {
 
   showMatchups() {
 
-
+   console.log(this.statData, 'show this');
     //THIS FOR LOOP GETS HOME STARTING HOCKEY GOALIES AND THERE STARTING OPPONENT 
     this.startersData.forEach((data) => {
       if (data.player.gameLocation === 'home') {
         data.team.matchup = this.statData[data.team.gameId];
-        console.log(this.statData[data.team.gameId], 'show this');
+        
         this.statData[data.team.gameId][0].player.twoPossibleStarters = false;
         this.statData[data.team.gameId][1].player.twoPossibleStarters = false;
 
@@ -645,9 +645,6 @@ export class TomorrowResultsComponent implements OnInit {
     });
   }
 
-  public goToday() {
-    this.router.navigateByUrl('starting-goalies');
-  }
 
   public open(event, data) {
     this.selected = data;

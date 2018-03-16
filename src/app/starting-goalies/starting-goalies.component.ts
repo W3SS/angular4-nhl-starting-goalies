@@ -757,7 +757,8 @@ return r
         });
 
       // get our data every subsequent 10 minutes
-      IntervalObservable.create(600000)
+      const MILLISECONDS_IN_TEN_MINUTES = 600000;
+      IntervalObservable.create(MILLISECONDS_IN_TEN_MINUTES)
         .subscribe(() => {
           if (this.gamesToday === true) {
             this.dataService

@@ -509,8 +509,8 @@ export class TomorrowResultsComponent implements OnInit {
               for (let startdata of this.myData) {
 
                 if (startid === startdata.team.ID) {
-                  //4449 Jeff Glass is blocked //9072 Lindgren //11721 Lagace //Sateri 13871 //Brossoit 5552 //8952 Wedgewood //9072 Lindgren //13873 DeSmith
-                  if (this.startersDate != startdata.team.today && startdata.stats.GamesPlayed['#text'] > 10 && startdata.player.injuryOut == null && startdata.player.ID != '11721' && startdata.player.ID != '13871' && startdata.player.ID != '4449' && startdata.player.ID != '5552' && startdata.player.ID != '8952' && startdata.player.ID != '9072' && startdata.player.ID != '13873') {
+                  //4449 Jeff Glass is blocked //9072 Lindgren //11721 Lagace //Sateri 13871 //Brossoit 5552 //8952 Wedgewood //9072 Lindgren //13873 DeSmith //10083 Jarry //Lyon 13662
+                  if (this.startersDate != startdata.team.today && startdata.stats.GamesPlayed['#text'] > 10 && startdata.player.injuryOut == null && startdata.player.ID != '11721' && startdata.player.ID != '13871' && startdata.player.ID != '4449' && startdata.player.ID != '5552' && startdata.player.ID != '8952' && startdata.player.ID != '9072' && startdata.player.ID != '10083' && startdata.player.ID != '13662') {
               
                     startdata.player.startingToday = false;
                     startdata.player.likelyStartingToday = true;

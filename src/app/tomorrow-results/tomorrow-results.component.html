@@ -1,6 +1,6 @@
 <h1 class="center no-game-header" *ngIf="noGamesToday === true">{{noGamesMsg}}</h1>
 <h1 class="center date-header"> {{ gameDate | date:'fullDate' }}</h1>
-<h3>Final NHL Game of the Regular Season</h3>
+<h3 class="center date-header">Final NHL Game of the Regular Season</h3>
 
 <div class="spinner-msg" *ngIf="loading">
   Fetching goalie stats for tomorrow...

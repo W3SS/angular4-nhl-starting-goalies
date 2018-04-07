@@ -165,11 +165,11 @@ export class TomorrowResultsComponent implements OnInit {
                 dailyTeams.push(item.homeTeam.Abbreviation, item.awayTeam.Abbreviation); 
                 teamString = dailyTeams.join();
                 
-                postponed = index;
-                if (res['dailygameschedule'].gameentry[postponed].id === '41392') {
-                  console.log(res['dailygameschedule'].gameentry[postponed], "hi, iam postponed and causing trouble...");
-                  res['dailygameschedule'].gameentry.splice(postponed, 1);
-                }
+                // postponed = index;
+                // if (res['dailygameschedule'].gameentry[postponed].id === '41392') {
+                //   console.log(res['dailygameschedule'].gameentry[postponed], "hi, iam postponed and causing trouble...");
+                //   res['dailygameschedule'].gameentry.splice(postponed, 1);
+                // }
               });
 
               this.gamesToday = true;

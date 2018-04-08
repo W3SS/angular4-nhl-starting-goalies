@@ -213,11 +213,11 @@ export class StartingGoaliesComponent implements OnInit {
                   teamString = dailyTeams.join();
                 }
                 
-                postponed = index;
-                if (res['dailygameschedule'].gameentry[postponed].id === '41392') {
-                  console.log(res['dailygameschedule'].gameentry[postponed], "hi, iam postponed and causing trouble...");
-                  res['dailygameschedule'].gameentry.splice(postponed, 1);
-                }
+                // postponed = index;
+                // if (res['dailygameschedule'].gameentry[postponed].id === '41392') {
+                //   console.log(res['dailygameschedule'].gameentry[postponed], "hi, iam postponed and causing trouble...");
+                //   res['dailygameschedule'].gameentry.splice(postponed, 1);
+                // }
               });
               this.dailySchedule = res['dailygameschedule'].gameentry;
               this.gameDate = res['dailygameschedule'].gameentry[0].date;
@@ -276,16 +276,16 @@ export class StartingGoaliesComponent implements OnInit {
             console.log(res['fullgameschedule'].gameentry, "scheduled games for yesterday today and tomorrow...");
 
             //this removed a postponed game from api to avoid errors
-            if (res['fullgameschedule'].gameentry > 0) {
-              let postponed;
-              res['fullgameschedule'].gameentry.forEach((item, index) => {
-                postponed = index;
-                if (res['fullgameschedule'].gameentry[postponed].id === '41392') {
-                  console.log(res['fullgameschedule'].gameentry[postponed], "hi, iam postponed and causing trouble...");
-                  res['fullgameschedule'].gameentry.splice(postponed, 1);
-                }
-              });
-            }
+            // if (res['fullgameschedule'].gameentry > 0) {
+            //   let postponed;
+            //   res['fullgameschedule'].gameentry.forEach((item, index) => {
+            //     postponed = index;
+            //     if (res['fullgameschedule'].gameentry[postponed].id === '41392') {
+            //       console.log(res['fullgameschedule'].gameentry[postponed], "hi, iam postponed and causing trouble...");
+            //       res['fullgameschedule'].gameentry.splice(postponed, 1);
+            //     }
+            //   });
+            // }
 
             this.fullSchedule = res['fullgameschedule'].gameentry;
           })

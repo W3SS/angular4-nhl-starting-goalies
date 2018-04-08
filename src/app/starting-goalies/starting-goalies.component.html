@@ -5,6 +5,7 @@
   <input type="text">
 </form>
 <h1 class="center date-header"> {{ gameDate | date:'fullDate' }}</h1>
+<h3 class="center date-header">Final NHL Game of the Regular Season</h3>
 <h1 class="center no-game-header" *ngIf="noGamesToday === true">{{noGamesMsg}}</h1>
 <div class="matchup-layout" *ngIf="fbService.userDetails != null">
   <div class="edit-list-container" *ngIf="fullFirebaseResponse != null">

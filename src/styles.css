@@ -127,6 +127,10 @@ mat-spinner {
   margin: 15px;
 }
 
+.nhl-playoff img {
+  width: 7%;
+}
+
 @media only screen and (max-width: 600px) {
 
   .card-wrap {

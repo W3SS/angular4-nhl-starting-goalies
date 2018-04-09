@@ -5,7 +5,10 @@
   <input type="text">
 </form>
 <h1 class="center date-header"> {{ gameDate | date:'fullDate' }}</h1>
-<h3 class="center date-header">Final NHL Game of the Regular Season</h3>
+<div class="nhl-playoff">
+  <h3 class="center date-header"><img src="../assets/nhl-logos/nhl-playoff.jpg" alt="nhl playoff image"></h3>
+</div>
+
 <h1 class="center no-game-header" *ngIf="noGamesToday === true">{{noGamesMsg}}</h1>
 <div class="matchup-layout" *ngIf="fbService.userDetails != null">
   <div class="edit-list-container" *ngIf="fullFirebaseResponse != null">
@@ -277,7 +280,7 @@
       </li>
     </ul>
     <ul>
-      <li>NHL Goalies {{ gameDate | date:'fullDate' }}</li>
+      <li>#NHL Goalies {{ gameDate | date:'fullDate' }}</li>
       <li *ngFor="let data of showData" class="goalie">
         <span *ngIf="data.player.gameLocation === 'home' && data.player.twoPossibleStarters === false && data.player.startingToday === true && data.team.matchup[2] == null && data.team.matchup[0].player.gameLocation === 'away'">
           {{data.team.matchup[0].player.twitterHandle}}
@@ -305,10 +308,10 @@
        
 
       </li>
-      <li>#ProjectedStarters #LikelyStarters #NHL #FantasyHockey</li>
+      <li>#ProjectedStarters #StartingGoalies #FantasyHockey</li>
     </ul>
      <ul>
-      <li>NHL Goalie Matchups <br> {{ gameDate | date:'fullDate' }}</li>
+      <li>#NHL Goalie Matchups <br> {{ gameDate | date:'fullDate' }}</li>
       <li *ngFor="let data of showData" class="goalie">
         <span *ngIf="data.player.gameLocation === 'home' && data.player.twoPossibleStarters === false && data.player.startingToday === true && data.team.matchup[2] == null && data.team.matchup[0].player.gameLocation === 'away'">
           {{data.team.matchup[0].player.twitterHandle +' '+ data.team.matchup[0].player.LastName}}
@@ -339,11 +342,11 @@
        
 
       </li>
-      <li>#StartingGoalies #NHL #FantasyHockey</li>
+      <li>#StartingGoalies #FantasyHockey</li>
     </ul>
     
     <ul>
-      <li>NHL Goalies {{ tomorrowDate | date:'fullDate' }}</li>
+      <li>#NHL Goalies {{ tomorrowDate | date:'fullDate' }}</li>
       <li *ngFor="let data of showTomorrow" class="goalie">
         <span *ngIf="data.player.gameLocation === 'home' && data.player.twoPossibleStarters === false && data.team.matchup[2] == null && data.team.matchup[0].player.gameLocation === 'away'">
           {{data.team.matchup[0].player.twitterHandle}}
@@ -371,7 +374,7 @@
       
 
       </li>
-       <li>#ProjectedStarters #LikelyStarters #NHL #FantasyHockey</li>
+       <li>#ProjectedStarters #StartingGoalies #FantasyHockey</li>
     </ul>
     <!-- <div *ngIf="data.team.matchup[0].player.saves != null"> -->
     <!-- <span fxHide [fxHide.gt-xs]="isVisibleOnDesktop()">Saves: </span> <span fxHide [fxHide.xs]="isVisibleOnMobile()">SV </span> {{data.team.matchup[0].player.saves}} <span fxHide [fxHide.gt-xs]="isVisibleOnDesktop()">Shots Faced: </span> <span fxHide [fxHide.xs]="isVisibleOnMobile()">SA </span> {{data.team.matchup[0].player.shotsFaced}}<br> -->

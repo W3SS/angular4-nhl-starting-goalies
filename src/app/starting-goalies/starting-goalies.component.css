@@ -150,6 +150,10 @@ form input[type="text"] {
   cursor: pointer;
 }
 
+.date-header image {
+  width: 12%;
+}
+
 @media only screen and (max-width: 600px) {
 
 

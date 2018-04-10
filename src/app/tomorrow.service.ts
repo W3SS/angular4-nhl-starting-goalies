@@ -5,7 +5,7 @@ import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/do';
 
 let testDate = new Date();
-let thisDate = new Date(testDate.getTime() + (48 * 60 * 60 * 1000));
+let thisDate = new Date(testDate.getTime() + (24 * 60 * 60 * 1000));
 let tomorrowDate = new Date(thisDate.getTime() + (24 * 60 * 60 * 1000));
 let yesterdayDate = new Date(thisDate.getTime() - (24 * 60 * 60 * 1000));
 
@@ -123,7 +123,7 @@ export class TomorrowService {
     if (!this.stats) {
       console.log('getting cumulative player stats from API...');
 
-      let url = `https://api.mysportsfeeds.com/v1.2/pull/nhl/2017-2018-regular/cumulative_player_stats.json?position=G&team=`+teams;
+      let url = `${this.apiRoot}/cumulative_player_stats.json?position=G&team=`+teams;
       this.stats = this.http.get(url, {headers})
         
     }

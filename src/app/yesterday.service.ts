@@ -50,7 +50,7 @@ export class YesterdayService {
   schedule: Observable < any > = null;
   score: Observable < any > = null;
   play: Observable <any> = null;
-  apiRoot: string = "https://api.mysportsfeeds.com/v1.2/pull/nhl/2017-2018-regular";
+  apiRoot: string = "https://api.mysportsfeeds.com/v1.2/pull/nhl/2018-playoff";
 
   constructor(private http: HttpClient) {}
 

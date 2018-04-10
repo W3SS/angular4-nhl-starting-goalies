@@ -58,7 +58,7 @@ export class DataService {
   score: Observable < any > = null;
   play: Observable <any> = null;
   injured: Observable <any> = null;
-  apiRoot: string = "https://api.mysportsfeeds.com/v1.2/pull/nhl/2017-2018-regular";
+  apiRoot: string = "https://api.mysportsfeeds.com/v1.2/pull/nhl/2018-playoff";
   headers: any;
   
   constructor(private http: HttpClient) {}

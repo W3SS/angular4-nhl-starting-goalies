@@ -78,6 +78,7 @@ export class StartingGoaliesComponent implements OnInit {
   tomorrowDate: any;
   fullFirebaseResponse: any;
   loading: boolean = true;
+  apiRoot: string = "https://api.mysportsfeeds.com/v1.2/pull/nhl/2018-playoff";
 
   stats: boolean = false;
   hitCount: any;
@@ -227,7 +228,7 @@ export class StartingGoaliesComponent implements OnInit {
 
               Observable.forkJoin(
                   res['dailygameschedule'].gameentry.map(
-                    g =>  this.http.get('https://api.mysportsfeeds.com/v1.2/pull/nhl/2017-2018-regular/game_startinglineup.json?gameid=' + g.id + '&position=Goalie-starter', {headers})
+                    g =>  this.http.get(`${this.apiRoot}/game_startinglineup.json?gameid=` + g.id + `&position=Goalie-starter`, {headers})
                   )
                 )
                 .subscribe(res => {

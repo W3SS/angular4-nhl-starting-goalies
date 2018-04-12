@@ -52,6 +52,7 @@ export class TomorrowResultsComponent implements OnInit {
   startersDate: any;
   loading: boolean = true;
   fullFirebaseResponse: any;
+  apiRoot: string = "https://api.mysportsfeeds.com/v1.2/pull/nhl/2018-playoff";
 
   constructor(private http: HttpClient, private tomorrowService: TomorrowService, private todayService: DataService, private fbService: FirebaseService, public snackBar: MatSnackBar, public router: Router, public dialog: MatDialog) {
 
@@ -182,7 +183,7 @@ export class TomorrowResultsComponent implements OnInit {
               Observable.forkJoin(
                   res['dailygameschedule'].gameentry.map(
                     g =>
-                    this.http.get('https://api.mysportsfeeds.com/v1.2/pull/nhl/2017-2018-regular/game_startinglineup.json?gameid=' + g.id + '&position=Goalie-starter', {headers})
+                    this.http.get(`${this.apiRoot}/game_startinglineup.json?gameid=` + g.id + `&position=Goalie-starter`, {headers})
                     
                   )
                 )

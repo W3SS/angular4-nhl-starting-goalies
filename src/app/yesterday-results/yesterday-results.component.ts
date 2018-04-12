@@ -43,6 +43,7 @@ export class YesterdayResultsComponent implements OnInit {
   tweetDay: any;
   noGamesMsg: any;
   loading: boolean = true;
+  apiRoot: string = "https://api.mysportsfeeds.com/v1.2/pull/nhl/2018-playoff";
 
   constructor(private http: HttpClient, private yesterdayService: YesterdayService, public snackBar: MatSnackBar, public router: Router) {
     this.getJSON();
@@ -100,7 +101,7 @@ export class YesterdayResultsComponent implements OnInit {
                   res['dailygameschedule'].gameentry.map(
 
                     g => 
-                          this.http.get('https://api.mysportsfeeds.com/v1.1/pull/nhl/2017-2018-regular/game_boxscore.json?gameid=' + g.id + '&playerstats=Sv,GA,GAA,GS,SO,MIN,W,L,SA,OTL,OTW', {headers})
+                          this.http.get(`${this.apiRoot}/game_boxscore.json?gameid=` + g.id + `&playerstats=Sv,GA,GAA,GS,SO,MIN,W,L,SA,OTL,OTW`, {headers})
                           //.map(response => response.json())
                       
                     

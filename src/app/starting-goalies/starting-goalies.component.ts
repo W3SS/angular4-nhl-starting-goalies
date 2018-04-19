@@ -607,7 +607,7 @@ export class StartingGoaliesComponent implements OnInit {
 
               for (let startdata of this.myData) {
 
-                if (startid === startdata.team.ID) {
+                if (startid === startdata.team.ID && startdata.stats.GamesPlayed['#text'] > 1) {
                   if (this.startersDate != startdata.team.today) {
 
                     startdata.player.startingToday = false;
@@ -809,8 +809,6 @@ return r
                   }
                 }
               })
-
-              
 
           } else {
             console.log('No games then no daily stats either. :(');

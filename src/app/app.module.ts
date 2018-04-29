@@ -22,7 +22,7 @@ import { MatCardModule,
 import { DataService } from './data.service';
 import { YesterdayService } from './yesterday.service';
 import { TomorrowService } from './tomorrow.service';
-import { ShareModule } from 'ng2share/share.module'
+import { ShareModule } from 'ng2share/share.module';
 import { RouterModule } from '@angular/router';
 import { FlexLayoutModule } from '@angular/flex-layout';
 

@@ -179,7 +179,7 @@ export class StartingGoaliesComponent implements OnInit {
     this.sentData = this.dataService.getSentStats();
     this.sentYesterdayData = this.yesterdayService.getSentStats();
     this.sentTomorrowData = this.tomorrowService.getSentStats();
-
+    
   }
 
 

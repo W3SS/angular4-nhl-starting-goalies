@@ -229,8 +229,14 @@ export class TomorrowResultsComponent implements OnInit {
 
         this.tomorrowService
           .getInjured().subscribe(res => {
-            console.log(res['playerinjuries'].playerentry, "injured players...");
-            this.playerInjuries = res['playerinjuries'].playerentry;
+            
+            if (res['playerinjuries'].playerentry != null) {
+              console.log(res['playerinjuries'].playerentry, "injured players...");
+              this.playerInjuries = res['playerinjuries'].playerentry;
+            } else {
+              console.log('no goalie injuries');
+            }
+            
           })
 
         // this.tomorrowService
@@ -476,7 +482,7 @@ export class TomorrowResultsComponent implements OnInit {
           }
         }
 
-        if (this.playerInjuries.length > 0) {
+        if (this.playerInjuries && this.myData) {
           console.log('start sorting data for starters matchups...');
           for (let inj of this.playerInjuries) {
 

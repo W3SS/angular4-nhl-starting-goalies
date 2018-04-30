@@ -43,6 +43,9 @@ img {
   -ms-flex-wrap: wrap;
   flex-wrap: wrap;
   padding: 20px;
+  align-items: center;
+  flex-direction: row;
+  justify-content: center;
 }
 
 .card-wrap {
@@ -107,7 +110,7 @@ ul {
     font-size: 13px;
 }
 
-  button.mat-raised-button {
+button.mat-raised-button {
     float:right; 
     margin: 21px 10px 0 0;    
 }

@@ -305,6 +305,7 @@ export class YesterdayResultsComponent implements OnInit {
           }
         }
 
+if (this.starterStatData && this.myData) {
         console.log('start sorting data for starters stats Saves...');
         for (let statinfo of this.starterStatData) {
 
@@ -335,7 +336,9 @@ export class YesterdayResultsComponent implements OnInit {
           }
         }
 
+      }
 
+if (this.playerInfo && this.myData) {
         console.log('start sorting data for starters...');
         for (let info of this.playerInfo) {
 
@@ -388,6 +391,7 @@ export class YesterdayResultsComponent implements OnInit {
 
           }
         }
+      }
 
 
         if (this.myData && this.gamesToday === true) {
